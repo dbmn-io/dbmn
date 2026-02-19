@@ -65,16 +65,16 @@ When you click Share, the clipboard contains structured JSONC like this:
 // Method: POST
 // Path: /api/orders
 // Description: Create a new order
-// Header: Authorization: Bearer {%raw%}{{ENV:API_TOKEN}}{%endraw%} [enabled]
+// Header: Authorization: Bearer {{ENV:API_TOKEN}} [enabled]
 // Header: Content-Type: application/json [enabled]
 // QueryParam: sendEmail: true [enabled]
 
 {
-  "customerId": "{%raw%}{{customerId:string}}{%endraw%}",
+  "customerId": "{{customerId:string}}",
   "items": [
     {
-      "sku": "{%raw%}{{sku:string|upper}}{%endraw%}",
-      "quantity": "{%raw%}{{quantity:number|int}}{%endraw%}"
+      "sku": "{{sku:string|upper}}",
+      "quantity": "{{quantity:number|int}}"
     }
   ]
 }
