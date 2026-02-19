@@ -17,6 +17,7 @@ Welcome to the Dobermann documentation. Dobermann bridges the gap between spread
 | [Environments](environments) | Configure API connections and authentication |
 | [↳ OAuth Setup Guide](oauth-setup) | OAuth and Google Service Account configuration |
 | [Endpoints](endpoints) | Configure API requests, share with your team |
+| [↳ Sharing Endpoints](sharing-endpoints) | Share an endpoint, paste it on the other side |
 | [↳ Template Variables](template-variables) | Variable syntax, types, modifiers, and editing |
 | [Batch Preparation](batch-preparation) | Load data and map columns |
 | [Console](console) | Run requests, monitor progress, analyse results |

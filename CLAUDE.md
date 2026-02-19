@@ -71,11 +71,19 @@ inside table cells that contain pipes. Regular text pipes use `\|` as normal.
 - Use `javascript` for JSONC blocks (with `//` comments or trailing commas)
 - Use plain ` ``` ` for non-code content (error messages, plain text examples)
 
+## Changelog
+The **extension repo** (`vs_active_8/CHANGELOG.md`) is the single source of truth for the changelog.
+`docs/changelog.md` here is a **copy** with YAML front matter added for Jekyll.
+
+- **Never edit `docs/changelog.md` directly** — always update `vs_active_8/CHANGELOG.md` first
+- At release time, the extension changelog content is copied here with YAML front matter added
+- Both files must stay in sync
+
 ## Key Rules
 - This is the single source of truth for user-facing documentation
 - The private repo (vs_active_8) contains internal dev docs only
 - Docs should be updated DURING feature development, not after
-- Changelog entries go in `docs/changelog.md`
+- Changelog source of truth is `vs_active_8/CHANGELOG.md` — `docs/changelog.md` is a copy
 - Do not add internal development documentation here (devNotes, requirements, bugFixes)
 - Blog posts go in `_posts/` — use for release announcements, tips, use cases
 - Write `{{variable}}` naturally in docs — `render_with_liquid: false` handles it

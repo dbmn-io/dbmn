@@ -53,10 +53,15 @@ The environment will appear in the sidebar tree view, grouped by type.
 
 The currently active environment is shown with a checkmark in the tree view.
 
-## Environment Details
+## General
+{: #general }
+
+The General tab contains environment identity, type classification, and execution settings.
+
+### Environment Details
 {: #environment-details }
 
-### Environment Name
+#### Environment Name
 
 A descriptive name for the environment (e.g., "Production US", "Staging Europe", "Dev Sandbox").
 
@@ -65,7 +70,7 @@ A descriptive name for the environment (e.g., "Production US", "Staging Europe",
 - Include region or tenant if managing multiple instances
 - Avoid special characters that might cause issues
 
-### Base URL
+#### Base URL
 
 The primary API endpoint for this environment.
 
@@ -81,7 +86,7 @@ The primary API endpoint for this environment.
 - This URL is prepended to all endpoint paths
 - **URL is immutable after creation** — Once an environment is saved, the Base URL cannot be changed. This ensures batch executions always target the correct server. If you need a different URL, create a new environment.
 
-### Description
+#### Description
 
 Optional field for notes about the environment:
 - Purpose and use cases
@@ -89,7 +94,7 @@ Optional field for notes about the environment:
 - Tenant or customer information
 - Maintenance windows
 
-### Mock Requests
+#### Mock Requests
 
 When enabled, API requests use mock responses instead of calling real endpoints.
 
@@ -102,6 +107,70 @@ When enabled, API requests use mock responses instead of calling real endpoints.
 - Mock responses are simplified and may not reflect actual API behavior
 - Only basic success scenarios are mocked
 - Not suitable for integration testing
+
+### Environment Type
+{: #environment-type }
+
+Environment type categorises environments for visual organisation in the tree view. This is purely for display purposes — it doesn't affect functionality.
+
+- **Production** — Live production systems
+- **Staging** — Pre-production testing
+- **UAT** — User acceptance testing
+- **QA/Testing** — Quality assurance
+- **Development** — Active development (default)
+- **Sandbox** — Experimental/demo
+- **Training** — Training environment
+- **Integration** — Integration testing
+- **Performance** — Performance testing
+- **Local** — Local development
+
+Environments are grouped and sorted by type in the sidebar.
+
+### Execution Settings
+
+#### Target Timezone
+{: #target-timezone }
+
+Set the timezone used for all datetime operations in this environment. This affects how `A8:date`, `A8:datetime`, and date math modifiers resolve.
+
+**Configuration:**
+- Select a timezone from the dropdown (e.g., `America/New_York`, `Europe/London`, `Asia/Tokyo`)
+- Default: **UTC**
+
+**How it works:**
+- All `A8:datetime` values are generated in the selected timezone
+- Date math modifiers (`+2d`, `-1d`, `+4h`, `+30m`) operate relative to the target timezone
+- Useful when your API expects timestamps in a specific timezone
+
+**Example:**
+With timezone set to `America/New_York`:
+- `{{A8:datetime}}` → `2026-02-18T09:30:00` (Eastern Time, not UTC)
+
+#### Parallel Processing
+{: #parallel-processing }
+
+Configure concurrency for batch execution — how many API requests Dobermann sends simultaneously.
+
+**Concurrency levels:**
+
+| Level | Threads | Description |
+|-------|---------|-------------|
+| **Sequential** | 1 | One request at a time — safest, slowest |
+| **Light** | 2 | Gentle parallelism for sensitive APIs |
+| **Moderate** | 4 | Good balance of speed and safety |
+| **Heavy** | 8 | Fast execution for robust APIs |
+| **Extreme** | 16 | Maximum throughput — use with caution |
+
+**Choosing a level:**
+- Start with **Sequential** when testing a new API
+- Increase gradually while monitoring for rate limit errors (429 responses)
+- APIs with strict rate limits may need Sequential or Light
+- APIs designed for bulk operations can typically handle Heavy or Extreme
+
+**Impact:**
+- Higher concurrency = faster batch completion
+- Higher concurrency = more load on the target API
+- If you see 429 errors, reduce the concurrency level
 
 ## Authentication
 {: #authentication }
@@ -212,58 +281,34 @@ Authenticate using a Google Cloud service account for Google APIs (Cloud Platfor
 - Rotate service account keys periodically
 - Never commit service account JSON to source control
 
-## Target Timezone
-{: #target-timezone }
+### Token Details
 
-Set the timezone used for all datetime operations in this environment. This affects how `A8:date`, `A8:datetime`, and date math modifiers resolve.
+After authenticating, the Token Details section appears below the authentication method. It provides a read-only view of your current token.
 
-**Configuration:**
-- Select a timezone from the dropdown (e.g., `America/New_York`, `Europe/London`, `Asia/Tokyo`)
-- Default: **UTC**
+**Features:**
+- **Decoded view** — Shows the decoded JWT payload (claims, expiration, issuer)
+- **Encoded view** — Shows the raw encoded token string
+- **Copy button** — Copy the full token to clipboard
+- **Status pill** — Visual indicator showing token validity:
+  - **Valid** — Token is current and usable
+  - **Expiring soon** — Token will expire shortly
+  - **Expired** — Token has expired and needs refreshing
 
-**How it works:**
-- All `A8:datetime` values are generated in the selected timezone
-- Date math modifiers (`+1d`, `+4h`, etc.) operate relative to the target timezone
-- Useful when your API expects timestamps in a specific timezone
+Token Details is shared across all authentication methods — whichever method provides the active token, its details appear here.
 
-**Example:**
-With timezone set to `America/New_York`:
-- `{{A8:datetime}}` → `2026-02-18T09:30:00` (Eastern Time, not UTC)
+## Headers & Variables
+{: #headers-variables }
 
-## Parallel Processing
-{: #parallel-processing }
+The Headers & Variables tab manages environment-level request headers and reusable template variables.
 
-Configure concurrency for batch execution — how many API requests Dobermann sends simultaneously.
-
-**Concurrency levels:**
-
-| Level | Threads | Description |
-|-------|---------|-------------|
-| **Sequential** | 1 | One request at a time — safest, slowest |
-| **Light** | 2 | Gentle parallelism for sensitive APIs |
-| **Moderate** | 4 | Good balance of speed and safety |
-| **Heavy** | 8 | Fast execution for robust APIs |
-| **Extreme** | 16 | Maximum throughput — use with caution |
-
-**Choosing a level:**
-- Start with **Sequential** when testing a new API
-- Increase gradually while monitoring for rate limit errors (429 responses)
-- APIs with strict rate limits may need Sequential or Light
-- APIs designed for bulk operations can typically handle Heavy or Extreme
-
-**Impact:**
-- Higher concurrency = faster batch completion
-- Higher concurrency = more load on the target API
-- If you see 429 errors, reduce the concurrency level
-
-## Headers
+### Headers
 {: #headers }
 
 Environment-level headers are automatically included in every request. Toggle **Include environment-level headers** on any endpoint to inherit them.
 
 Add custom headers in the environment's header configuration for values that should apply across all endpoints (e.g., API keys, content types, custom identifiers).
 
-## Variables
+### Variables
 {: #variables }
 
 Environment variables are key-value pairs accessible in templates via the `ENV:` prefix (e.g. `{{ENV:warehouse}}`). Set them in the Variables section of your environment configuration.
@@ -303,24 +348,6 @@ Manhattan Active APIs require organization headers. Dobermann automatically dete
 **Visual indicators:**
 - Green checkmark — Organization selected
 - Warning icon — No organization selected (required for Manhattan Active)
-
-## Environment Type
-{: #environment-type }
-
-Environment type categorises environments for visual organisation in the tree view. This is purely for display purposes — it doesn't affect functionality.
-
-- **Production** — Live production systems
-- **Staging** — Pre-production testing
-- **UAT** — User acceptance testing
-- **QA/Testing** — Quality assurance
-- **Development** — Active development (default)
-- **Sandbox** — Experimental/demo
-- **Training** — Training environment
-- **Integration** — Integration testing
-- **Performance** — Performance testing
-- **Local** — Local development
-
-Environments are grouped and sorted by type in the sidebar.
 
 ## Environment Tree View
 
