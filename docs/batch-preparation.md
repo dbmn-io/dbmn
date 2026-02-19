@@ -7,74 +7,97 @@ parent: Documentation
 
 # Batch Preparation
 
-Batch execution allows you to run the same API endpoint multiple times with different data. Enter values directly in the data grid, or load an Excel/CSV file. This is essential for bulk operations like creating multiple items, updating locations, or processing large datasets.
+Batch execution allows you to run the same API endpoint multiple times with different data. Load an Excel/CSV file, paste tabular data, or type values directly into the grid. Dobermann walks you through a 5-step flow — from data loading to execution.
 
 ## Overview
+{: #overview }
 
-Batch preparation involves:
-- **Data loading** — Enter data in the grid or load an Excel/CSV file
-- **Column mapping** — Map source data columns to template variables
-- **Configuration** — Set batch parameters and error tolerance
-- **Validation** — Verify mapping and data before execution
+Batch preparation follows five steps:
 
-## Loading Data
-{: #loading-csv-data }
+| Step | Name | Purpose |
+|------|------|---------|
+| 1 | **Load Data** | Choose how to get data in — upload a file, paste text, or enter data manually |
+| 2 | **Map & Transform** | Map source columns to template variables and configure data formats |
+| 3 | **Review & Edit Data** | Review, edit, add, and validate rows before generating JSON |
+| 4 | **Review JSON** | Preview the generated JSON payloads and configure batch parameters |
+| 5 | **Execute Batch** | Review execution settings and run the batch |
 
-### Selecting a Data File
+### Two Entry Paths
 
-**Method 1: File Browser**
-1. Click **Load File** button in endpoint webview
-2. Navigate to your CSV file
-3. Click **Open**
+There are two ways into the batch flow, and they converge at Step 3:
 
-**Method 2: Drag & Drop**
-1. Drag your data file from the file explorer
-2. Drop onto the upload area
-3. File loads automatically
+**File / Paste path** (all 5 steps):
 
-**Supported formats:**
+```
+Step 1 → Step 2 → Step 3 → Step 4 → Step 5
+Load     Map &     Review    Review   Execute
+Data     Transform & Edit    JSON     Batch
+                   Data
+```
+
+**Enter Data path** (skips file loading and mapping):
+
+```
+Step 1 → Step 3 → Step 4 → Step 5
+Load     Review    Review   Execute
+Data     & Edit    JSON     Batch
+         Data
+```
+
+- **File / Paste**: Upload a file or paste tabular data, then map columns to template variables. The grid in Step 3 is pre-populated with your mapped data.
+- **Enter Data**: Click the **Enter Data** button on Step 1 to jump straight to an empty grid with columns matching your template variables. Type values directly — no file needed.
+
+Both paths merge at Step 3, where you can review and edit the data before generating JSON.
+
+---
+
+## Step 1 — Load Data
+{: #step-1-load-data }
+
+Step 1 is where you choose how to get data into the batch flow. There are three options:
+
+### Upload File
+
+Drag a file onto the upload area or click to browse. Supported formats:
+
 - `.xlsx` / `.xls` — Excel workbooks
 - `.csv` — Comma-separated values
 - `.txt` — Tab or comma-separated
 - Character encoding: UTF-8 (recommended), ASCII
 
-### Manual Data Entry (Grid)
+After loading, Dobermann displays:
+- **Row count** — Total data rows (excludes header)
+- **Column list** — All column names detected
+- **Preview table** — First rows of data
 
-For quick data entry without creating a file, use the built-in data entry grid:
+**Review checklist:**
+- Correct number of columns
+- Data appears in correct columns
+- No missing delimiters
+- Special characters display properly
 
-1. Click **Run Batch** on an endpoint with template variables
-2. Select the **Manual Entry** tab
-3. Enter data directly into the grid
-4. Use keyboard shortcuts for fast entry (see below)
+### Paste Text
 
-**Grid Keyboard Shortcuts:**
+Switch to the **Paste Text** tab and paste CSV, TSV, or tab-delimited data directly. This is useful when copying a few rows from Excel or another tool.
 
-| Shortcut | Action |
-|----------|--------|
-| `Tab` | Move to next cell. From last cell, adds a new row |
-| `Shift+Tab` | Move to previous cell |
-| `Enter` | Move down to same column in next row |
-| `Ctrl+D` | Copy value from cell above (fill-down) |
-| `Escape` | Clear current cell |
+Dobermann auto-detects tab-delimited data (common when pasting from Excel) and converts it to CSV format internally.
 
-**Progressive Tab Copy (Nested Templates):**
+### Enter Data (Manual Entry)
 
-For templates with nested structures, the grid supports progressive copy:
-1. Fill first row completely
-2. Tab from last cell - adds new row
-3. Tab again (without typing) - copies root-level values
-4. Tab again - copies next level values
-5. Type to cancel and enter unique values
+Click the **Enter Data** button to skip file loading and column mapping entirely. Dobermann creates an empty grid with columns matching your endpoint's template variables. You type values directly into the grid in Step 3.
 
-A hint appears to guide you through the progressive copy levels.
+**When to use Enter Data:**
+- Quick ad-hoc requests with a few rows
+- Testing an endpoint with specific values
+- No file to upload — you know the values
 
-See [Keyboard Shortcuts](shortcuts#grid-data-entry-shortcuts) for detailed information.
+Clicking **Enter Data** jumps directly from Step 1 to Step 3.
 
 ### File Requirements
 
 **Header row:**
 - First row must contain column names
-- Column names should match template variables (or be mapped manually)
+- Column names should match template variables (or be mapped manually in Step 2)
 - Avoid special characters in column names
 
 **Data formatting:**
@@ -91,39 +114,24 @@ PRE-ITEM-002,Widget Beta,250,DC02
 PRE-ITEM-003,Widget Gamma,75,DC01
 ```
 
-### File Preview
+After loading data via file or paste, click **Read Data** to proceed to Step 2.
 
-After loading, Dobermann displays:
-- **Row count** - Total data rows (excludes header)
-- **Column list** - All column names detected
-- **Preview table** - First 5 rows of data
+---
 
-**Review checklist:**
-- Correct number of columns
-- Data appears in correct columns
-- No missing delimiters
-- Special characters display properly
+## Step 2 — Map & Transform
+{: #step-2-map-transform }
 
-## Column Mapping
-{: #column-mapping }
-
-Map source data columns to template variables in your endpoint configuration.
+Map source data columns to template variables in your endpoint configuration. This step only appears when using the File or Paste path.
 
 ### Automatic Mapping
 
-Dobermann automatically maps columns when:
-- Column name exactly matches a template variable
-- Example: Column `sku` maps to template variable `{{sku}}`
-
-**Case sensitivity:**
-- Mapping is case-insensitive
-- `SKU`, `sku`, `Sku` all map to `{{sku}}`
+Dobermann automatically maps columns when the column name matches a template variable. Mapping is case-insensitive — `SKU`, `sku`, and `Sku` all map to `{{sku}}`.
 
 ### Manual Mapping
 
 For columns that don't auto-map:
 
-1. Find unmapped variable in the mapping interface
+1. Find the unmapped variable in the mapping table
 2. Click the dropdown next to the variable name
 3. Select the corresponding source data column
 4. Mapping is saved automatically
@@ -142,19 +150,15 @@ Template Variable    | Source Column
 
 Dobermann validates your mapping:
 
-**Valid:**
-- All required variables are mapped
-- No duplicate mappings
-- Column names exist in source data
+- **All required variables mapped** — green checkmarks
+- **No duplicate mappings** — each variable maps to one column
+- **Column exists in source data** — mapped columns must be present
 
-**Invalid:**
-- Required variable unmapped (red indicator)
-- Multiple variables map to same column (warning)
-- Mapped column doesn't exist in source data (error)
+Unmapped required variables show a red indicator. Resolve all mapping issues before proceeding.
 
 ### Source Format Configuration
 
-The **Source Format** column in the mapping table lets you specify how source values should be interpreted before conversion.
+The **Source Format** column lets you specify how source values should be interpreted before conversion.
 
 **Number Formats:**
 
@@ -186,53 +190,105 @@ To handle Excel serial dates:
 2. Change **Source Format** to "Excel Serial Date"
 3. The number will be converted to a proper date
 
-**Example:**
-- Excel serial `45295` becomes `2024-01-04`
-- Excel serial `45458` becomes `2024-06-15`
+Click **Next** to proceed to Step 3. Dobermann validates all data type coercions before advancing.
 
-### Handling Missing Data
+---
 
-Configure how to handle empty/null values:
+## Step 3 — Review & Edit Data
+{: #step-3-review-edit-data }
 
-**Skip row:**
-- Row is not processed if required variable is empty
-- Useful for optional batch processing
+Step 3 presents your data in an editable grid. Depending on how you got here:
 
-**Use default value:**
-- Specify fallback value in template
-- Example: `{{quantity:100}}` defaults to 100
+- **File / Paste path** — The grid is pre-populated with your mapped and transformed data
+- **Enter Data path** — The grid is empty with columns matching your template variables
 
-**Send empty string:**
-- Empty CSV cell becomes empty string in request
-- May cause API validation errors
+This is your last chance to review and modify data before JSON generation.
 
-## Batch Configuration
+### Editing the Grid
 
-### Error Tolerance
+| Action | How |
+|--------|-----|
+| **Edit a cell** | Click the cell and type |
+| **Add a row** | Tab from the last cell in the last row, or use the Add Row button |
+| **Delete a row** | Select the row and press Delete, or use the row context menu |
+| **Paste data** | Select a cell and paste — data fills across cells and rows |
+| **Undo** | `Ctrl+Z` / `Cmd+Z` to undo the last change |
+| **Fill down** | `Ctrl+D` to copy the value from the cell above |
+
+### Grid Keyboard Shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `Tab` | Move to next cell. From last cell, adds a new row |
+| `Shift+Tab` | Move to previous cell |
+| `Enter` | Move down to same column in next row |
+| `Shift+Enter` | Move up to same column in previous row |
+| `Arrow Keys` | Navigate between cells |
+| `Ctrl+D` | Copy value from cell above (fill-down) |
+| `Escape` | Clear current cell |
+
+### Progressive Tab Copy (Nested Templates)
+
+For templates with nested structures (e.g., orders with line items), the grid supports progressive Tab copy:
+
+1. Fill first row completely
+2. Tab from last cell — adds a new row
+3. Tab again (without typing) — copies root-level values (e.g., order ID, destination)
+4. Tab again — copies next nesting level values
+5. Type to cancel progressive copy and enter unique values
+
+A hint appears to guide you through the progressive copy levels.
+
+### Validation
+
+When you click **Next** to proceed to Step 4, Dobermann validates your data:
+
+**Blank field check:**
+- Scans for empty cells in required columns
+- Shows a warning listing which rows and columns are blank
+- You can acknowledge the warning and proceed, or go back and fill in the values
+- Fields marked with the `|opt` modifier are excluded from this check
+
+**Modifier constraint validation:**
+- Validates cell values against any modifier constraints defined on the template variable
+- Checks include: minimum/maximum length, exact length, min/max numeric values, integer requirements, and date format validity
+- Invalid cells are highlighted with a red background
+- A summary of validation errors appears in the footer
+- You must fix all constraint errors before proceeding
+
+**Auto-cleaning:**
+- Completely empty rows are automatically removed before validation
+
+### Column Width
+
+For endpoints with many template variables, the grid scrolls horizontally. Each column has a minimum width to keep content readable.
+
+---
+
+## Step 4 — Review JSON
+{: #step-4-review-json }
+
+Step 4 shows a preview of the generated JSON payloads that will be sent to the API. Review the output to confirm variable substitution and structure are correct.
+
+**What's displayed:**
+- JSON preview with syntax highlighting
+- Total API calls to be made
+- Request size estimate
+
+### Batch Configuration
+
+**Error Tolerance:**
 
 Control how errors affect batch execution:
 
-**Stop on First Error** (default)
-- Batch stops immediately when any request fails
-- No further requests are processed
-- Use for critical operations where any failure is unacceptable
+| Setting | Behaviour |
+|---------|-----------|
+| **Stop on First Error** | Batch stops immediately on any failure (default) |
+| **Maximum Error Count** | Stops after N failures (e.g., 5) |
+| **Percentage-Based** | Stops if error rate exceeds threshold (e.g., 10%) |
+| **Continue on All Errors** | Runs to completion regardless of failures |
 
-**Maximum Error Count**
-- Specify number of failures allowed (e.g., 5)
-- Batch stops after reaching limit
-- Use when a few failures are acceptable but many indicate a problem
-
-**Percentage-Based Tolerance**
-- Specify maximum error rate (e.g., 10%)
-- Batch stops if error rate exceeds threshold
-- Use for large batches where some failures are expected
-
-**Continue on All Errors**
-- Batch runs to completion regardless of failures
-- All rows are attempted
-- Use for exploratory runs or when failures are expected
-
-**Example scenarios:**
+**Choosing a setting:**
 
 | Scenario | Recommended Setting |
 |----------|-------------------|
@@ -245,7 +301,7 @@ Control how errors affect batch execution:
 
 Limit how many times array values repeat in requests.
 
-**Default behavior:**
+**Default behaviour:**
 If CSV has fewer rows than array size in template, Dobermann repeats CSV rows:
 ```
 CSV: 3 rows
@@ -260,185 +316,81 @@ Max repetitions: 2
 Result: [row1, row2, row3, row1, row2, row3] (stops after 2 cycles)
 ```
 
-**Use cases:**
-- Prevent runaway repetition with small CSV files
-- Control exactly how many cycles to process
-- Testing without processing all possible combinations
+Click **Next** to proceed to Step 5.
 
-## Batch Execution
+---
 
-### Running the Batch
+## Step 5 — Execute Batch
+{: #step-5-execute-batch }
 
-1. Ensure endpoint is saved with all template variables
-2. Load data (grid entry or file upload)
-3. Verify column mapping (all green checkmarks)
-4. Configure error tolerance if needed
-5. Click **Run Batch**
+Step 5 shows the execution summary and lets you start the batch.
 
-Dobermann processes requests sequentially:
-- One request at a time (avoids rate limiting)
-- Progress indicator shows current row
-- Real-time success/failure count
-- Pause/Stop buttons available
+**Execution summary:**
+- Endpoint name, HTTP method, and URL path
+- Target environment and organization
+- Number of API calls to execute
+- Processing mode (sequential or parallel)
+- Error tolerance setting
+- Batch name (editable)
+
+Click **Execute** to start the batch. The Console opens automatically and results stream in real-time.
 
 ### Monitoring Progress
 
 **Progress indicators:**
-- **Progress bar** - Visual completion percentage
-- **Status text** - "Processing 45 of 100..."
-- **Success counter** - Green checkmark with count
-- **Error counter** - Red X with count
-- **Elapsed time** - Running timer
-
-**Real-time updates:**
-- Response times for recent requests
-- Current row being processed
-- Average requests per second
+- **Progress bar** — Visual completion percentage
+- **Status text** — "Processing 45 of 100..."
+- **Success counter** — Green checkmark with count
+- **Error counter** — Red X with count
+- **Elapsed time** — Running timer
+- **Requests per second** — Throughput metric
 
 ### Pausing and Stopping
 
-**Pause**
-- Temporarily halt execution
-- Resume from current position
-- Useful for rate limit cooling
+**Pause** — Temporarily halt execution after the current request completes. Resume from the exact position. Useful for rate limit cooling or reviewing errors mid-run.
 
-**Stop**
-- Terminate batch immediately
-- Partial results are saved
-- Cannot resume (must start over)
-
-## The Run Batch Webview
-
-After configuring a batch in the endpoint webview, the **Run Batch** webview provides a dedicated interface for execution and monitoring.
-
-### Opening Run Batch
-
-**From endpoint:**
-1. Configure endpoint with template variables
-2. Load data and map columns
-3. Click **Run Batch** button
-4. Run Batch webview opens
-
-**From context menu:**
-1. Right-click endpoint in sidebar
-2. Select **Run Batch**
-3. Load data (if not already loaded)
-
-### Run Batch Interface
-
-**Configuration summary:**
-- Endpoint name and method
-- Environment target
-- Row count from source data
-- Mapped variables preview
-
-**Execution controls:**
-- **Start** - Begin batch execution
-- **Pause** - Temporarily halt
-- **Resume** - Continue from pause
-- **Stop** - Terminate batch
-- **Export** - Save results
-
-**Real-time metrics:**
-- Progress percentage and bar
-- Requests completed / Total rows
-- Success and error counts
-- Average response time
-- Estimated time remaining
-
-**Results preview:**
-- Recent requests (last 10)
-- Status codes and response times
-- Error messages for failures
-- Success indicators
+**Stop** — Terminate batch immediately. Partial results are saved. Cannot resume (must start over).
 
 ### Batch Results
 
-When batch completes:
-- Console opens automatically
+When the batch completes:
+- Console opens automatically with full results
 - Results saved to workspace (`.active8/results/`)
-- CSV with results available
-- Execution remains in history
+- Execution remains in history sidebar
 
-**Console shows:**
-- Summary statistics
-- Complete request/response data
-- Error analysis
-- Performance metrics
+See [Console](console) for detailed results, export features, and error analysis.
 
-See [Console](console) for detailed results and export features.
+---
 
 ## Advanced Features
 
 ### Variable Types
 
-Specify data types in template variables for validation:
+Specify data types in template variables for validation. See [Template Variables](template-variables) for the full reference on types, modifiers, auto-generated variables, and advanced syntax.
 
-**String (default):**
-```json
-{
-  "sku": "{{sku}}"
-}
-```
+**Quick reference:**
 
-**Number:**
-```json
-{
-  "quantity": "{{quantity:number}}"
-}
-```
-- CSV value converted to number
-- Validation fails if not numeric
-
-**Boolean:**
-```json
-{
-  "active": "{{is_active:boolean}}"
-}
-```
-- `true`, `1`, `yes` become true
-- `false`, `0`, `no` become false
-- Case-insensitive
-
-**Array:**
-```json
-{
-  "items": [
-    {
-      "id": "{{sku}}"
-    }
-  ]
-}
-```
-- Multiple CSV rows create array entries
-- See Template Arrays section in Endpoints documentation
+| Type | Syntax | Example |
+|------|--------|---------|
+| String (default) | `{{sku}}` | Text value |
+| Number | `{{quantity:number}}` | Removes quotes, validates numeric |
+| Boolean | `{{is_active:boolean}}` | `true`/`false`, `1`/`0`, `yes`/`no` |
+| Date | `{{ship_date:date}}` | Date value with optional format modifiers |
 
 ### Pagination Support (A8:PAGE)
 
 For APIs supporting pagination, use the special `{{A8:PAGE}}` variable:
 
-**In endpoint URL or query parameters:**
 ```
 /api/items?page={{A8:PAGE}}&limit=100
 ```
 
-**Behavior:**
 - First request: `page=1`
 - Second request: `page=2`
 - Continues incrementing automatically
 
-**Use cases:**
-- Fetching all pages of results
-- Batch processing paginated data
-- API endpoints with page-based access
+### Batch File Organisation
 
-**Combined with CSV:**
-- CSV provides other parameters
-- `A8:PAGE` auto-increments independent of CSV rows
-
-### Batch File Organization
-
-**Directory structure:**
 ```
 .active8/
 ├── batches/
@@ -450,10 +402,7 @@ For APIs supporting pagination, use the special `{{A8:PAGE}}` variable:
         └── {timestamp}.json
 ```
 
-**File retention:**
-- Latest CSV is always saved
-- Historical CSVs retained for 30 days
-- Results retained indefinitely (manual cleanup)
+---
 
 ## Troubleshooting
 
@@ -477,6 +426,17 @@ For APIs supporting pagination, use the special `{{A8:PAGE}}` variable:
 - Manually map columns using dropdowns
 - Check for extra spaces in column names
 
+### Validation Errors in Step 3
+
+**Symptoms:** Red-highlighted cells in the data grid, footer showing validation errors
+
+**Solutions:**
+- Click on highlighted cells to see what's wrong
+- Check modifier constraints on the template variable (e.g., length limits, numeric ranges)
+- Fill in blank required fields
+- Fix data format issues (e.g., text in a number column)
+- Remove or fix invalid rows
+
 ### Batch Stops Immediately
 
 **Symptoms:** Batch stops after first request
@@ -497,7 +457,7 @@ For APIs supporting pagination, use the special `{{A8:PAGE}}` variable:
 - Variable misspelled in template
 
 **Solutions:**
-- Review column mapping interface
+- Review column mapping in Step 2
 - Ensure all variables have green checkmarks
 - Check variable names match exactly (including case)
 
@@ -505,8 +465,8 @@ For APIs supporting pagination, use the special `{{A8:PAGE}}` variable:
 
 **Symptoms:** Batch runs very slowly
 
-**Optimization:**
-- Reduce CSV file size (batch in smaller chunks)
+**Optimisation:**
+- Reduce file size (batch in smaller chunks)
 - Check API response times (may be server-side)
 - Ensure network connection is stable
 - Close unnecessary VS Code extensions
@@ -542,6 +502,7 @@ For APIs supporting pagination, use the special `{{A8:PAGE}}` variable:
 - Monitor API response times for degradation
 
 **Data validation:**
+- Use Step 3 to review data before generating JSON
 - Validate CSV data externally before importing
 - Test endpoint with single execution first
 - Review column mapping carefully
@@ -549,6 +510,7 @@ For APIs supporting pagination, use the special `{{A8:PAGE}}` variable:
 
 ## Related Topics
 
-- [Endpoints](endpoints) - Template variables and configuration
-- [Console](console) - Running and monitoring requests
-- [Import/Export](import-export) - Sharing endpoint configurations
+- [Endpoints](endpoints) — Template variables and configuration
+- [Template Variables](template-variables) — Variable syntax, types, modifiers, and editing
+- [Console](console) — Running and monitoring requests
+- [Import/Export](import-export) — Sharing endpoint configurations

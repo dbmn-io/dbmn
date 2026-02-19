@@ -38,9 +38,11 @@ You can execute batch requests entirely with the keyboard:
 2. **Search endpoint:** Type endpoint name
 3. **Select endpoint:** `Enter`
 4. **Choose Batch:** Arrow down, `Enter`
-5. **Load data:** `Tab` to file input, `Enter`, select file
-6. **Map columns:** `Tab` through dropdowns, `Enter` to select
-7. **Execute:** `Tab` to "Run Batch" button, `Enter`
+5. **Load data:** `Tab` to file input, `Enter`, select file → click **Read Data**
+6. **Map columns:** `Tab` through dropdowns, `Enter` to select → click **Next**
+7. **Review & edit data:** Review grid, fix any issues → click **Next**
+8. **Review JSON:** Confirm generated payloads → click **Next**
+9. **Execute:** Click **Execute** to start the batch
 
 ---
 

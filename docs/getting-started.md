@@ -16,7 +16,7 @@ Get up and running in 5 steps:
 1. **Create an Environment** — Define your API base URL and authentication
 2. **Create an Endpoint** — Configure HTTP method, URL, headers, and body template
 3. **Test with Run API** — Execute a single request to verify your configuration
-4. **Run a Batch** — Enter data in the grid or upload an Excel/CSV file, map columns to template variables, and execute
+4. **Run a Batch** — Upload a file, paste data, or type values directly. Map columns, review your data, and execute
 5. **Watch it Go** — The Console opens automatically with results streaming in real-time. Sit back and watch your batch execute — don't grab a coffee, you'll miss the show.
 
 ## Core Concepts
@@ -39,7 +39,7 @@ Every API request (individual or batch) creates a transaction record with reques
 
 ### Batch Execution
 
-Batch execution processes multiple API requests from your data. Enter values directly into the data grid or upload an Excel/CSV file, map columns to template variables, configure options (parallel processing, error tolerance), and execute. Monitor progress in real-time.
+Batch execution processes multiple API requests from your data. Upload a file, paste tabular data, or type values directly into the grid. Map columns to template variables, review and edit your data, configure options, and execute. A 5-step flow guides you from data loading to execution, with real-time monitoring in the Console.
 
 ## Your First Workflow
 
@@ -87,13 +87,14 @@ Follow this complete workflow to execute your first API request.
 ### Step 4: Run a Batch
 
 1. Right-click your endpoint and select **Run Batch**
-2. Enter data directly into the grid, or upload an Excel/CSV file
-3. Map source data columns to template variables:
+2. Upload an Excel/CSV file, paste data, or click **Enter Data** to type values directly
+3. Map source data columns to template variables (file/paste path):
    - `orderId` → `ORDER_ID`
    - `customerName` → `CUSTOMER_NAME`
    - `quantity` → `QUANTITY`
-4. Configure batch options (parallel processing, error tolerance)
-5. Click **Run Batch**
+4. Review and edit data in the grid — fix any validation errors
+5. Review the generated JSON preview
+6. Configure batch options (error tolerance, batch name) and click **Execute**
 
 ### Step 5: Watch it Go
 

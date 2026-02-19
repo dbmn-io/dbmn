@@ -34,14 +34,16 @@ Execute a single API request to test configuration, verify responses, or perform
 Execute the same endpoint multiple times with different data — entered in the grid or loaded from a file.
 
 **From endpoint webview:**
-1. Load data and map columns
-2. Click **Run Batch**
-3. Console opens and batch begins
+1. Click **Run Batch** to open the batch preparation flow
+2. Walk through the 5-step process: Load Data → Map & Transform → Review & Edit Data → Review JSON → Execute
+3. Click **Execute** in Step 5 — the Console opens and the batch begins
 
 **From sidebar:**
 1. Right-click endpoint → **Run Batch**
-2. Load data if not already loaded
-3. Execution begins in the Console
+2. Walk through the batch preparation steps
+3. Click **Execute** — the Console opens automatically
+
+See [Batch Preparation](batch-preparation) for the full 5-step workflow.
 
 ### Execution Queue
 {: #execution-queue }
