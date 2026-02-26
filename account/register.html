@@ -87,8 +87,10 @@
 
                     // Check if email confirmation is required
                     if (result.data.user && !result.data.session) {
-                        showAlert('alert', 'Check your email to confirm your account, then complete the questionnaire.', 'success');
-                        setButtonLoading('submitBtn', false);
+                        document.getElementById('registerForm').style.display = 'none';
+                        document.querySelector('.link-text').style.display = 'none';
+                        document.querySelector('.card h2').textContent = 'Check Your Email';
+                        showAlert('alert', 'We sent a confirmation link to ' + email + '. Click it to activate your account, then complete the questionnaire.', 'success');
                         return;
                     }
 
