@@ -74,7 +74,7 @@
                 setButtonLoading('submitBtn', true, 'Creating account...');
 
                 try {
-                    var result = await supabase.auth.signUp({
+                    var result = await dbmnSupabase.auth.signUp({
                         email: email,
                         password: password
                     });

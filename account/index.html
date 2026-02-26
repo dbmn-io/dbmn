@@ -151,7 +151,7 @@
 
             // Sign out handler
             document.getElementById('signOutBtn').addEventListener('click', async function() {
-                await supabase.auth.signOut();
+                await dbmnSupabase.auth.signOut();
                 window.location.reload();
             });
         });

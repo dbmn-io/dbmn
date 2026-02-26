@@ -58,7 +58,7 @@
                 setButtonLoading('submitBtn', true, 'Signing in...');
 
                 try {
-                    var result = await supabase.auth.signInWithPassword({
+                    var result = await dbmnSupabase.auth.signInWithPassword({
                         email: email,
                         password: password
                     });

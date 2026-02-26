@@ -16,17 +16,16 @@ const VSCODE_CALLBACK_URI = 'vscode://FlexionTech.active8/dbmn-auth-callback';
 const FUNCTIONS_URL = SUPABASE_URL + '/functions/v1';
 
 // Initialize Supabase client (loaded from CDN in each page)
-let supabase;
+// Note: CDN exposes global `supabase` — we use `dbmnSupabase` to avoid collision
+var dbmnSupabase;
 
 function initSupabase() {
-    if (typeof window.supabase_js !== 'undefined') {
-        supabase = window.supabase_js.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    } else if (typeof window.supabase !== 'undefined' && typeof window.supabase.createClient === 'function') {
-        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    if (typeof window.supabase !== 'undefined' && typeof window.supabase.createClient === 'function') {
+        dbmnSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     } else {
         console.error('Supabase JS SDK not loaded');
     }
-    return supabase;
+    return dbmnSupabase;
 }
 
 /**
@@ -74,8 +73,8 @@ function setButtonLoading(id, loading, loadingText) {
  * Get current user session. Returns null if not logged in.
  */
 async function getCurrentSession() {
-    if (!supabase) return null;
-    const { data: { session } } = await supabase.auth.getSession();
+    if (!dbmnSupabase) return null;
+    const { data: { session } } = await dbmnSupabase.auth.getSession();
     return session;
 }
 
@@ -83,8 +82,8 @@ async function getCurrentSession() {
  * Get current user. Returns null if not logged in.
  */
 async function getCurrentUser() {
-    if (!supabase) return null;
-    const { data: { user } } = await supabase.auth.getUser();
+    if (!dbmnSupabase) return null;
+    const { data: { user } } = await dbmnSupabase.auth.getUser();
     return user;
 }
 
