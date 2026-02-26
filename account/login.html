@@ -72,9 +72,11 @@
                     }
 
                     // If redirect=vscode, send tokens back to VS Code extension
+                    // then redirect browser to account dashboard
                     if (isVSCodeRedirect()) {
-                        showAlert('alert', 'Redirecting to VS Code...', 'success');
+                        showAlert('alert', 'Signed in! Redirecting to VS Code...', 'success');
                         redirectToVSCode(result.data.session);
+                        setTimeout(function() { window.location.href = 'index.html'; }, 1500);
                         return;
                     }
 
