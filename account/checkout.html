@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - DBMN</title>
+    <meta name="description" content="Complete your Dobermann subscription">
+    <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
+    <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
+    <link rel="stylesheet" href="/css/brand.css">
+    <link rel="stylesheet" href="/account/shared.css">
+</head>
+<body>
+    <header class="site-header has-user">
+        <a href="/">
+            <img src="/images/DBMNLogo.png" alt="DBMN">
+            <h1>DBMN</h1>
+        </a>
+        <div class="header-right">
+            <span id="headerEmail"></span>
+            <a href="/account/">Account</a>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Loading state -->
+        <div class="card" id="loadingCard">
+            <h2>Loading...</h2>
+            <p style="color: #a0a0b0;"><span class="spinner"></span> Preparing checkout</p>
+        </div>
+
+        <!-- Not signed in -->
+        <div class="card" id="signInCard" style="display: none;">
+            <h2>Sign In Required</h2>
+            <p style="color: #a0a0b0; margin-bottom: 1.5rem;">You need an account to subscribe. Sign in or register first.</p>
+            <a href="/account/login.html" class="btn btn-primary" style="display: block;">Sign In</a>
+            <div class="link-text">
+                Don't have an account? <a href="/account/register.html">Register</a>
+            </div>
+        </div>
+
+        <!-- Checkout form -->
+        <div class="card" id="checkoutCard" style="display: none;">
+            <h2 id="planTitle">Subscribe</h2>
+
+            <div id="alert" class="alert"></div>
+
+            <!-- Plan summary -->
+            <div style="background: var(--brand-surface); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div id="planName" style="font-weight: 600; color: var(--brand-text);"></div>
+                        <div id="planDesc" style="font-size: 0.8rem; color: var(--brand-text-muted); margin-top: 0.25rem;"></div>
+                    </div>
+                    <div id="planPrice" style="font-size: 1.25rem; font-weight: 700; color: var(--brand-text);"></div>
+                </div>
+            </div>
+
+            <!-- Environment URL input (shown for environment plans) -->
+            <div id="envUrlSection" style="display: none;">
+                <div class="form-group">
+                    <label for="environmentUrl">Approved Environment URL</label>
+                    <input type="url" id="environmentUrl" placeholder="https://customer.sce.manh.com">
+                    <p style="font-size: 0.75rem; color: var(--brand-text-muted); margin-top: 0.375rem;">
+                        The subdomain-level URL for your environment. All registered users connecting to this URL will get full access.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Second URL for bundle -->
+            <div id="envUrl2Section" style="display: none;">
+                <div class="form-group">
+                    <label for="environmentUrl2">Second Environment URL (Prod + Non-Prod)</label>
+                    <input type="url" id="environmentUrl2" placeholder="https://customer-prod.sce.manh.com">
+                </div>
+            </div>
+
+            <button id="checkoutBtn" class="btn btn-primary" style="width: 100%;">Proceed to Payment</button>
+
+            <div class="link-text">
+                <a href="/pricing.html">Back to pricing</a>
+            </div>
+        </div>
+
+        <footer>
+            <a href="/terms.html">Terms</a> &middot; <a href="/privacy.html">Privacy</a>
+            <br>
+            &copy; 2026 DBMN.io
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/account/shared.js"></script>
+    <script>
+        // Plan definitions with Stripe price IDs
+        var PLANS = {
+            individual_monthly:  { name: 'Individual', desc: 'Full access, 1 user', price: '$25/month', type: 'user', priceId: 'price_1T5jqTHxo6ioaSfMYI4ZBo2t', isLifetime: false },
+            individual_annual:   { name: 'Individual (Annual)', desc: 'Full access, 1 user — 2 months free', price: '$250/year', type: 'user', priceId: 'price_1T5jqzHxo6ioaSfMvFiFEtoJ', isLifetime: false },
+            environment_monthly: { name: 'Environment', desc: 'Unlimited users, 1 Approved Environment', price: '$250/month', type: 'environment', priceId: 'price_1T5jrPHxo6ioaSfMdk1868Mh', isLifetime: false },
+            environment_annual:  { name: 'Environment (Annual)', desc: 'Unlimited users, 1 Approved Environment — 2 months free', price: '$2,500/year', type: 'environment', priceId: 'price_1T5jrrHxo6ioaSfMs9c1EfCM', isLifetime: false },
+            bundle_monthly:      { name: 'Prod + Non-Prod', desc: 'Unlimited users, 2 Approved Environments', price: '$450/month', type: 'bundle', priceId: 'price_1T5jsIHxo6ioaSfMUIInpAHR', isLifetime: false },
+            bundle_annual:       { name: 'Prod + Non-Prod (Annual)', desc: 'Unlimited users, 2 Approved Environments — 2 months free', price: '$4,500/year', type: 'bundle', priceId: 'price_1T5jsmHxo6ioaSfMUNztYi7k', isLifetime: false },
+            lifetime:            { name: 'Lifetime Individual', desc: 'One-time payment, no expiry', price: '$500', type: 'user', priceId: 'price_1T5juIHxo6ioaSfMUclV3GK6', isLifetime: true }
+        };
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            initSupabase();
+
+            var user = await getCurrentUser();
+
+            if (!user) {
+                document.getElementById('loadingCard').style.display = 'none';
+                document.getElementById('signInCard').style.display = 'block';
+                return;
+            }
+
+            document.getElementById('headerEmail').textContent = user.email;
+
+            // Parse plan from URL params
+            var params = new URLSearchParams(window.location.search);
+            var planKey = params.get('plan');
+            var plan = planKey ? PLANS[planKey] : null;
+
+            if (!plan) {
+                document.getElementById('loadingCard').style.display = 'none';
+                document.getElementById('checkoutCard').style.display = 'block';
+                showAlert('alert', 'Invalid plan selected. Please choose a plan from the pricing page.', 'error');
+                document.getElementById('checkoutBtn').disabled = true;
+                return;
+            }
+
+            // Populate plan summary
+            document.getElementById('planTitle').textContent = 'Subscribe — ' + plan.name;
+            document.getElementById('planName').textContent = plan.name;
+            document.getElementById('planDesc').textContent = plan.desc;
+            document.getElementById('planPrice').textContent = plan.price;
+
+            // Show environment URL fields for environment/bundle plans
+            if (plan.type === 'environment' || plan.type === 'bundle') {
+                document.getElementById('envUrlSection').style.display = 'block';
+            }
+            if (plan.type === 'bundle') {
+                document.getElementById('envUrl2Section').style.display = 'block';
+            }
+
+            document.getElementById('loadingCard').style.display = 'none';
+            document.getElementById('checkoutCard').style.display = 'block';
+
+            // Checkout button handler
+            document.getElementById('checkoutBtn').addEventListener('click', async function() {
+                hideAlert('alert');
+
+                // Validate environment URL if needed
+                var environmentUrl = '';
+                if (plan.type === 'environment' || plan.type === 'bundle') {
+                    var url1 = document.getElementById('environmentUrl').value.trim();
+                    if (!url1) {
+                        showAlert('alert', 'Please enter your Approved Environment URL.', 'error');
+                        return;
+                    }
+                    environmentUrl = url1;
+
+                    if (plan.type === 'bundle') {
+                        var url2 = document.getElementById('environmentUrl2').value.trim();
+                        if (!url2) {
+                            showAlert('alert', 'Please enter both environment URLs for the bundle.', 'error');
+                            return;
+                        }
+                        environmentUrl = url1 + ',' + url2;
+                    }
+                }
+
+                if (!plan.priceId) {
+                    showAlert('alert', 'Payment processing is being configured. Please try again shortly.', 'info');
+                    return;
+                }
+
+                setButtonLoading('checkoutBtn', true, 'Redirecting to Stripe...');
+
+                try {
+                    var billingPeriod = planKey.includes('annual') ? 'annual' : 'monthly';
+                    var result = await callEdgeFunction('create-checkout-session', {
+                        priceId: plan.priceId,
+                        billingPeriod: billingPeriod,
+                        environmentUrl: environmentUrl,
+                        isLifetime: plan.isLifetime
+                    });
+
+                    if (result.url) {
+                        window.location.href = result.url;
+                    } else {
+                        showAlert('alert', 'Failed to create checkout session. Please try again.', 'error');
+                        setButtonLoading('checkoutBtn', false);
+                    }
+                } catch (err) {
+                    console.error('Checkout error:', err);
+                    showAlert('alert', 'Checkout failed: ' + err.message, 'error');
+                    setButtonLoading('checkoutBtn', false);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+---
+layout: null
+title: Terms of Service - Dobermann
+description: Terms of Service for Dobermann by DBMN.io
+nav_exclude: true
+permalink: /terms.html
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <meta name="description" content="{{ page.description }}">
+    <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
+    <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
+    <link rel="stylesheet" href="/css/brand.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--brand-font-body);
+            background: linear-gradient(135deg, var(--brand-bg-start) 0%, var(--brand-bg-end) 100%);
+            min-height: 100vh;
+            color: var(--brand-text-body);
+            padding: 0;
+        }
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 2rem;
+            border-bottom: 1px solid var(--brand-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(135deg, var(--brand-bg-start) 0%, var(--brand-bg-end) 100%);
+        }
+        .nav-left a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--brand-text);
+        }
+        .nav-left img { width: 36px; height: 36px; object-fit: contain; }
+        .nav-left h1 { font-family: var(--brand-font-heading); font-size: 1.25rem; margin: 0; }
+        .nav-right { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-right a {
+            color: var(--brand-text-muted);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+        .nav-right a:hover { color: var(--brand-text); }
+
+        .content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem 3rem;
+        }
+        .content h1 {
+            font-family: var(--brand-font-heading);
+            font-size: 2rem;
+            color: var(--brand-text);
+            margin-bottom: 0.5rem;
+        }
+        .effective-date {
+            font-size: 0.875rem;
+            color: var(--brand-text-muted);
+            margin-bottom: 2rem;
+        }
+        .content h2 {
+            font-size: 1.2rem;
+            color: var(--brand-text);
+            margin: 2rem 0 0.75rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--brand-border);
+        }
+        .content h2:first-of-type { border-top: none; padding-top: 0; }
+        .content p {
+            font-size: 0.9375rem;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+        .content ul {
+            margin: 0.5rem 0 1rem 1.5rem;
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+        .content li { margin-bottom: 0.375rem; }
+        .content a {
+            color: var(--brand-accent);
+            text-decoration: none;
+        }
+        .content a:hover { text-decoration: underline; }
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.875rem;
+        }
+        .content th, .content td {
+            text-align: left;
+            padding: 0.625rem 0.75rem;
+            border-bottom: 1px solid var(--brand-border);
+        }
+        .content th {
+            color: var(--brand-text);
+            font-weight: 600;
+            background: var(--brand-surface);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: var(--brand-text);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            transition: border-color 0.2s;
+            margin: 0 0.75rem;
+        }
+        footer a:hover { border-color: var(--brand-text); }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <div class="nav-left">
+            <a href="/">
+                <img src="/images/DBMNLogo.png" alt="DBMN">
+                <h1>DBMN</h1>
+            </a>
+        </div>
+        <div class="nav-right">
+            <a href="/docs/">Docs</a>
+            <a href="/pricing.html">Pricing</a>
+            <a href="/account/">Account</a>
+        </div>
+    </nav>
+
+    <div class="content">
+        <h1>Terms of Service</h1>
+        <p class="effective-date">Effective date: 1 March 2026</p>
+
+        <h2>1. Acceptance of Terms</h2>
+        <p>By accessing or using the Dobermann VS Code extension ("Service") provided by DBMN.io ("we", "us", "our"), you agree to be bound by these Terms of Service. If you do not agree, do not use the Service.</p>
+
+        <h2>2. Service Description</h2>
+        <p>Dobermann is a VS Code extension that enables users to interact with REST APIs at scale. The extension runs locally on your machine and communicates with your configured API endpoints. Our backend services (hosted on Supabase) handle authentication, licensing, and aggregate usage tracking only.</p>
+        <p>The Service does not process, store, or transmit your API request/response data, authentication tokens, CSV/JSON file contents, or any data from your configured environments.</p>
+
+        <h2>3. Registration &amp; Accounts</h2>
+        <p>To use Dobermann, you must register for an account. You agree to:</p>
+        <ul>
+            <li>Provide accurate and complete registration information</li>
+            <li>Maintain the security of your account credentials</li>
+            <li>Promptly notify us of any unauthorised use of your account</li>
+            <li>Accept responsibility for all activity under your account</li>
+        </ul>
+
+        <h2>4. Free Trial</h2>
+        <p>New accounts receive a 30-day free trial with full feature access. No credit card is required. After the trial expires, your account reverts to the free tier unless you subscribe to a paid plan or access a licensed environment.</p>
+
+        <h2>5. Pricing &amp; Billing</h2>
+        <p>All prices are in USD. Current pricing is published on our <a href="/pricing.html">Pricing page</a>. Local currency conversion is handled at payment time by the payment processor (Stripe).</p>
+        <ul>
+            <li><strong>Individual Licence</strong> &mdash; $25/month or $250/year. Full access for one user.</li>
+            <li><strong>Environment Licence</strong> &mdash; $250/month or $2,500/year per Approved Environment. Unlimited users.</li>
+            <li><strong>Prod + Non-Prod Bundle</strong> &mdash; $450/month or $4,500/year. Two Approved Environments.</li>
+            <li><strong>Lifetime Individual</strong> &mdash; $500 one-time, limited availability. No expiry.</li>
+        </ul>
+        <p>Annual billing is charged upfront and provides two months free (pay for 10, get 12). Subscriptions auto-renew unless cancelled before the renewal date.</p>
+
+        <h2>6. Refund Policy</h2>
+        <p>We offer a <strong>30-day refund policy, no questions asked</strong>. If you are not satisfied with the Service, contact us within 30 days of your payment for a full refund. Lifetime licence purchases are also eligible for a 30-day refund.</p>
+
+        <h2>7. Usage Limits</h2>
+        <p>The free tier (post-trial) is subject to the following limits:</p>
+        <table>
+            <thead>
+                <tr><th>Constraint</th><th>Limit</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>API calls</td><td>10 per week</td></tr>
+                <tr><td>Threading</td><td>Single-threaded only</td></tr>
+                <tr><td>Batch size</td><td>1,000 records max</td></tr>
+            </tbody>
+        </table>
+        <p>Paid plans have no API call, threading, or batch size limits. Individual licences are limited to 2 concurrent VS Code instances per licence.</p>
+
+        <h2>8. Telemetry &amp; Data Collection</h2>
+        <p>Dobermann collects aggregate usage data to improve the product. We <strong>never</strong> collect: API request/response bodies, authentication tokens, CSV/JSON file contents, or user data from your configured environments. If your organisation requires zero telemetry, contact us at <a href="mailto:hello@dbmn.io">hello@dbmn.io</a>. See our <a href="/privacy.html">Privacy Policy</a> for full details.</p>
+
+        <h2>9. Intellectual Property</h2>
+        <p>The Service, including all code, design, documentation, and branding, is the intellectual property of DBMN.io. Your licence to use the Service is limited to the terms described herein. You may not reverse-engineer, decompile, or create derivative works from the Service.</p>
+        <p>All data you process through the Service remains your property. We claim no ownership or rights over your data.</p>
+
+        <h2>10. Limitation of Liability</h2>
+        <p>The Service is provided "as is" without warranty of any kind, express or implied. To the maximum extent permitted by law:</p>
+        <ul>
+            <li>We are not liable for any indirect, incidental, special, consequential, or punitive damages</li>
+            <li>Our total liability shall not exceed the amount paid by you in the 12 months preceding the claim</li>
+            <li>We are not responsible for data loss, API failures, or issues arising from your configured environments</li>
+        </ul>
+
+        <h2>11. Termination</h2>
+        <p>You may cancel your subscription at any time from your account page. Upon cancellation:</p>
+        <ul>
+            <li>Your access continues until the end of the current billing period</li>
+            <li>After the billing period ends, your account reverts to the free tier</li>
+            <li>Lifetime licences do not expire and cannot be cancelled (30-day refund still applies)</li>
+        </ul>
+        <p>We may suspend or terminate your account if you violate these terms or engage in abusive use of the Service.</p>
+
+        <h2>12. Governing Law</h2>
+        <p>These terms are governed by the laws of Australia. Any disputes arising from or relating to these terms shall be subject to the exclusive jurisdiction of the courts of Australia.</p>
+
+        <h2>13. Changes to Terms</h2>
+        <p>We may update these Terms of Service from time to time. We will notify registered users of material changes via email. Continued use of the Service after changes constitutes acceptance of the updated terms.</p>
+
+        <h2>14. Contact</h2>
+        <p>Questions about these terms? Contact us at <a href="mailto:hello@dbmn.io">hello@dbmn.io</a>.</p>
+    </div>
+
+    <footer>
+        <a href="/terms.html">Terms</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/pricing.html">Pricing</a>
+        <br><br>
+        &copy; 2026 DBMN.io
+    </footer>
+</body>
+</html>

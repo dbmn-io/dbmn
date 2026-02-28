@@ -1,0 +1,273 @@
+---
+layout: null
+title: Privacy Policy - Dobermann
+description: Privacy Policy for Dobermann by DBMN.io
+nav_exclude: true
+permalink: /privacy.html
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <meta name="description" content="{{ page.description }}">
+    <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
+    <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
+    <link rel="stylesheet" href="/css/brand.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--brand-font-body);
+            background: linear-gradient(135deg, var(--brand-bg-start) 0%, var(--brand-bg-end) 100%);
+            min-height: 100vh;
+            color: var(--brand-text-body);
+            padding: 0;
+        }
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 2rem;
+            border-bottom: 1px solid var(--brand-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(135deg, var(--brand-bg-start) 0%, var(--brand-bg-end) 100%);
+        }
+        .nav-left a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--brand-text);
+        }
+        .nav-left img { width: 36px; height: 36px; object-fit: contain; }
+        .nav-left h1 { font-family: var(--brand-font-heading); font-size: 1.25rem; margin: 0; }
+        .nav-right { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-right a {
+            color: var(--brand-text-muted);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+        .nav-right a:hover { color: var(--brand-text); }
+
+        .content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem 3rem;
+        }
+        .content h1 {
+            font-family: var(--brand-font-heading);
+            font-size: 2rem;
+            color: var(--brand-text);
+            margin-bottom: 0.5rem;
+        }
+        .effective-date {
+            font-size: 0.875rem;
+            color: var(--brand-text-muted);
+            margin-bottom: 2rem;
+        }
+        .content h2 {
+            font-size: 1.2rem;
+            color: var(--brand-text);
+            margin: 2rem 0 0.75rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--brand-border);
+        }
+        .content h2:first-of-type { border-top: none; padding-top: 0; }
+        .content h3 {
+            font-size: 1rem;
+            color: var(--brand-text);
+            margin: 1.25rem 0 0.5rem;
+        }
+        .content p {
+            font-size: 0.9375rem;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+        .content ul {
+            margin: 0.5rem 0 1rem 1.5rem;
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+        .content li { margin-bottom: 0.375rem; }
+        .content a {
+            color: var(--brand-accent);
+            text-decoration: none;
+        }
+        .content a:hover { text-decoration: underline; }
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.875rem;
+        }
+        .content th, .content td {
+            text-align: left;
+            padding: 0.625rem 0.75rem;
+            border-bottom: 1px solid var(--brand-border);
+        }
+        .content th {
+            color: var(--brand-text);
+            font-weight: 600;
+            background: var(--brand-surface);
+        }
+        .highlight-box {
+            background: rgba(52,199,89,0.08);
+            border: 1px solid rgba(52,199,89,0.2);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+        }
+        .highlight-box strong { color: #5bd77a; }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: var(--brand-text);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            transition: border-color 0.2s;
+            margin: 0 0.75rem;
+        }
+        footer a:hover { border-color: var(--brand-text); }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <div class="nav-left">
+            <a href="/">
+                <img src="/images/DBMNLogo.png" alt="DBMN">
+                <h1>DBMN</h1>
+            </a>
+        </div>
+        <div class="nav-right">
+            <a href="/docs/">Docs</a>
+            <a href="/pricing.html">Pricing</a>
+            <a href="/account/">Account</a>
+        </div>
+    </nav>
+
+    <div class="content">
+        <h1>Privacy Policy</h1>
+        <p class="effective-date">Effective date: 1 March 2026</p>
+
+        <h2>1. Who We Are</h2>
+        <p>DBMN.io ("we", "us", "our") operates the Dobermann VS Code extension and the dbmn.io website. This policy explains what data we collect, why, and how we protect it.</p>
+
+        <h2>2. What We Collect</h2>
+
+        <h3>Registration Data</h3>
+        <p>When you create an account, we collect:</p>
+        <ul>
+            <li>Email address</li>
+            <li>Display name</li>
+            <li>Company name (optional)</li>
+            <li>Role and experience level (from registration questionnaire)</li>
+        </ul>
+
+        <h3>Usage Data</h3>
+        <p>The extension reports aggregate usage counters to track product health and enforce licence limits:</p>
+        <ul>
+            <li>API call counts, batch counts, records processed, export/import counts (per week)</li>
+            <li>Approved Environment URLs you connect to</li>
+            <li>Extension version, VS Code version, OS platform</li>
+        </ul>
+
+        <h3>Payment Data</h3>
+        <p>Payment processing is handled by <a href="https://stripe.com/privacy" target="_blank" rel="noopener">Stripe</a>. We do not store credit card numbers, CVVs, or full payment details. We receive only a Stripe customer ID and subscription status.</p>
+
+        <div class="highlight-box">
+            <strong>What we never collect:</strong>
+            <ul style="margin-bottom: 0;">
+                <li>API request or response bodies</li>
+                <li>Authentication tokens or credentials</li>
+                <li>CSV, JSON, or Excel file contents</li>
+                <li>User data from your configured API environments</li>
+                <li>Endpoint URLs, headers, or body templates</li>
+            </ul>
+        </div>
+        <p>If your organisation requires zero telemetry, contact us at <a href="mailto:hello@dbmn.io">hello@dbmn.io</a>.</p>
+
+        <h2>3. How We Use Your Data</h2>
+        <ul>
+            <li><strong>Authentication</strong> &mdash; Verify your identity and manage sessions</li>
+            <li><strong>Licence enforcement</strong> &mdash; Apply correct feature access based on your licence</li>
+            <li><strong>Product improvement</strong> &mdash; Understand which features are used to guide development</li>
+            <li><strong>Support</strong> &mdash; Diagnose issues when you contact us</li>
+            <li><strong>Billing</strong> &mdash; Process payments and manage subscriptions</li>
+        </ul>
+        <p>We do not sell your data. We do not share your data with third parties except as required for service operation (Supabase for backend, Stripe for payments).</p>
+
+        <h2>4. Data Storage &amp; Security</h2>
+        <p>Dobermann uses three local storage layers for your API data and one cloud layer for licence management. <strong>Your API data never leaves your machine.</strong></p>
+
+        <h3>4a. Credentials &mdash; VS Code SecretStorage API</h3>
+        <p>Environment tokens, OAuth tokens, and session credentials are stored via VS Code's <a href="https://code.visualstudio.com/api/references/vscode-api#SecretStorage" target="_blank" rel="noopener">SecretStorage API</a>. This uses your <strong>OS-level credential manager</strong> (macOS Keychain, Windows Credential Manager, or Linux libsecret). Credentials are encrypted at rest by the operating system and never touch our servers.</p>
+
+        <h3>4b. Execution History &mdash; Local SQLite Database</h3>
+        <p>A SQLite database (<code>.active8/executions.db</code>) ships as part of the extension and stores execution history and batch run metadata (status, record counts, timestamps). It lives entirely on your machine.</p>
+
+        <h3>4c. Transaction Files &mdash; Local File Storage</h3>
+        <p>Every transaction produces request, response, and log files saved to <code>.active8/results/</code> in your workspace. Files are standard JSON &mdash; fully visible, diffable, and exportable.</p>
+        <div class="highlight-box">
+            <strong>Your API data never leaves your machine.</strong> Every request, response, and log file is saved locally in your workspace as plain JSON files. You can inspect, diff, and audit every transaction Dobermann executes. Nothing is sent to our servers.
+        </div>
+
+        <h3>4d. Cloud (Supabase) &mdash; Licence &amp; Telemetry Only</h3>
+        <p>Supabase (PostgreSQL on AWS) stores <strong>only</strong> licence management data and telemetry counters. We use:</p>
+        <ul>
+            <li>Row-Level Security (RLS) policies to ensure users can only access their own data</li>
+            <li>Encrypted connections (TLS) for all data in transit</li>
+            <li>Supabase Auth with JWT tokens for session management</li>
+        </ul>
+        <p><strong>No API data, credentials, or transaction content is stored in the cloud.</strong></p>
+
+        <h2>5. Data Retention</h2>
+        <ul>
+            <li><strong>Account data</strong> &mdash; Retained while your account is active. Deleted within 30 days of account deletion request.</li>
+            <li><strong>Usage tracking</strong> &mdash; Weekly counters retained for 12 months, then aggregated and anonymised.</li>
+            <li><strong>Telemetry events</strong> &mdash; Daily aggregates retained for 12 months, then deleted.</li>
+            <li><strong>Payment records</strong> &mdash; Retained as required by tax and financial regulations.</li>
+        </ul>
+
+        <h2>6. Your Rights</h2>
+        <p>You have the right to:</p>
+        <ul>
+            <li><strong>Access</strong> &mdash; Request a copy of all data we hold about you</li>
+            <li><strong>Correction</strong> &mdash; Update inaccurate information via your account page</li>
+            <li><strong>Deletion</strong> &mdash; Request deletion of your account and associated data</li>
+            <li><strong>Export</strong> &mdash; Receive your data in a portable format</li>
+            <li><strong>Objection</strong> &mdash; Object to specific data processing activities</li>
+        </ul>
+        <p>To exercise any of these rights, contact us at <a href="mailto:hello@dbmn.io">hello@dbmn.io</a>.</p>
+
+        <h2>7. Cookies</h2>
+        <p>The dbmn.io website uses only essential cookies required for authentication (Supabase session tokens). We do not use advertising cookies, analytics trackers, or third-party tracking scripts.</p>
+
+        <h2>8. Children's Privacy</h2>
+        <p>The Service is not directed at children under 16. We do not knowingly collect personal information from children.</p>
+
+        <h2>9. Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. We will notify registered users of material changes via email. The "Effective date" at the top reflects the latest version.</p>
+
+        <h2>10. Contact</h2>
+        <p>Questions about privacy? Contact us at <a href="mailto:hello@dbmn.io">hello@dbmn.io</a>.</p>
+    </div>
+
+    <footer>
+        <a href="/terms.html">Terms</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/pricing.html">Pricing</a>
+        <br><br>
+        &copy; 2026 DBMN.io
+    </footer>
+</body>
+</html>

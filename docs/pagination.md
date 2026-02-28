@@ -155,9 +155,9 @@ If either value can't be determined, the "Fetch All" option won't be available â
 
 ---
 
-## Example: Manhattan Active API
+## Example: Paginated API
 
-A typical Manhattan Active paginated endpoint:
+A typical paginated endpoint:
 
 **Query Parameters:**
 

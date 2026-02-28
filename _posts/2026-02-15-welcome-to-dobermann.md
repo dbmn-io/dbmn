@@ -7,7 +7,7 @@ layout: default
 
 We're excited to launch the Dobermann documentation site at [dbmn.io](https://dbmn.io).
 
-Dobermann is a VS Code extension for mass data loading into Manhattan Active APIs. Whether you're loading thousands of inventory records, creating orders in bulk, or updating location data across environments, Dobermann gives you the tools to do it efficiently.
+Dobermann is a VS Code extension for mass data loading into Enterprise SaaS software. Whether you're loading thousands of inventory records, creating orders in bulk, or updating location data across environments, Dobermann gives you the tools to do it efficiently.
 
 ## What You'll Find Here
 

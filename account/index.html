@@ -8,7 +8,7 @@
     <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
     <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
     <link rel="stylesheet" href="/css/brand.css">
-    <link rel="stylesheet" href="shared.css">
+    <link rel="stylesheet" href="/account/shared.css">
 </head>
 <body>
     <header class="site-header has-user">
@@ -73,23 +73,32 @@
             <p style="font-size: 0.875rem; margin-bottom: 0.5rem;"><strong>Member since:</strong> <span id="memberSince">-</span></p>
             <p style="font-size: 0.875rem; margin-bottom: 1.5rem;"><strong>License:</strong> <span id="licenseType">-</span></p>
 
+            <!-- Upgrade CTA (shown for free/expired trial) -->
+            <div id="upgradeCta" style="display: none; margin-bottom: 1rem;">
+                <a href="/pricing.html" class="btn btn-primary" style="display: block; width: 100%;">Upgrade Plan</a>
+            </div>
+
             <button id="signOutBtn" class="btn btn-secondary" style="width: 100%;">Sign Out</button>
         </div>
 
         <div class="card" id="signInCard" style="display: none;">
             <h2>Not Signed In</h2>
             <p style="color: #a0a0b0; margin-bottom: 1.5rem;">Sign in to view your account details.</p>
-            <a href="login.html" class="btn btn-primary" style="display: block;">Sign In</a>
+            <a href="/account/login.html" class="btn btn-primary" style="display: block;">Sign In</a>
             <div class="link-text">
-                Don't have an account? <a href="register.html">Register</a>
+                Don't have an account? <a href="/account/register.html">Register</a>
             </div>
         </div>
 
-        <footer>&copy; 2026 <a href="https://flexion.tech">Flexion.tech</a></footer>
+        <footer>
+            <a href="/terms.html">Terms</a> &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/pricing.html">Pricing</a>
+            <br>
+            &copy; 2026 DBMN.io
+        </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="shared.js"></script>
+    <script src="/account/shared.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async function() {
             initSupabase();
@@ -145,6 +154,11 @@
                     var daysLeft = Math.max(0, Math.ceil((new Date(license.trialEndsAt) - new Date()) / (1000 * 60 * 60 * 24)));
                     document.getElementById('trialDaysLeft').textContent = daysLeft;
                     document.getElementById('trialInfo').style.display = 'block';
+                }
+
+                // Show upgrade CTA for free tier or expired trial
+                if (license.licenseType === 'free' || license.accessLevel === 'limited') {
+                    document.getElementById('upgradeCta').style.display = 'block';
                 }
 
                 // Usage stats

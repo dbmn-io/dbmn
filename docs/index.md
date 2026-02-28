@@ -26,6 +26,7 @@ Welcome to the Dobermann documentation. Dobermann bridges the gap between spread
 | [Shortcuts](shortcuts) | Keyboard shortcuts for efficiency |
 | [Troubleshooting](troubleshooting) | Common issues and solutions |
 | [Changelog](changelog) | Release history and what's new |
+| [Pricing](/pricing.html) | Plans, pricing, and free trial details |
 
 ## What is Dobermann?
 

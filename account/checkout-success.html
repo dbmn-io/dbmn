@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful - DBMN</title>
+    <meta name="description" content="Your Dobermann subscription is active">
+    <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
+    <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
+    <link rel="stylesheet" href="/css/brand.css">
+    <link rel="stylesheet" href="/account/shared.css">
+</head>
+<body>
+    <header class="site-header">
+        <a href="/">
+            <img src="/images/DBMNLogo.png" alt="DBMN">
+            <h1>DBMN</h1>
+        </a>
+    </header>
+
+    <div class="container">
+        <div class="card" style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">&#10003;</div>
+            <h2 style="color: #5bd77a; margin-bottom: 0.75rem;">Payment Successful</h2>
+            <p style="color: var(--brand-text-muted); margin-bottom: 1.5rem; line-height: 1.6;">
+                Your licence is now active. The VS Code extension will pick up your new licence automatically on its next refresh (within 15 minutes), or you can restart VS Code to apply immediately.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <a href="/account/" class="btn btn-primary" style="display: block;">View Account Dashboard</a>
+                <a href="vscode://" class="btn btn-secondary" style="display: block;">Return to VS Code</a>
+            </div>
+
+            <div class="link-text" style="margin-top: 1.5rem;">
+                Questions? <a href="mailto:hello@dbmn.io">Contact us</a>
+            </div>
+        </div>
+
+        <footer>
+            <a href="/terms.html">Terms</a> &middot; <a href="/privacy.html">Privacy</a>
+            <br>
+            &copy; 2026 DBMN.io
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/account/shared.js"></script>
+</body>
+</html>
