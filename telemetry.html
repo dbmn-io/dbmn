@@ -1,0 +1,272 @@
+---
+layout: null
+title: Data Transparency - Dobermann
+description: Exactly what data Dobermann collects, what it doesn't, and how it works.
+nav_exclude: true
+permalink: /telemetry.html
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <meta name="description" content="{{ page.description }}">
+    <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
+    <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
+    <link rel="stylesheet" href="/css/brand.css">
+    <link rel="canonical" href="https://dbmn.io/telemetry.html">
+    <meta property="og:title" content="Data Transparency - Dobermann">
+    <meta property="og:description" content="Exactly what data Dobermann collects, what it doesn't, and how it works.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dbmn.io/telemetry.html">
+    <meta property="og:image" content="https://dbmn.io/images/DBMNLogo.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--brand-font-body);
+            background: linear-gradient(135deg, var(--brand-bg-start) 0%, var(--brand-bg-end) 100%);
+            min-height: 100vh;
+            color: var(--brand-text-body);
+            padding: 0;
+        }
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 2rem;
+            border-bottom: 1px solid var(--brand-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(135deg, var(--brand-bg-start) 0%, var(--brand-bg-end) 100%);
+        }
+        .nav-left a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--brand-text);
+        }
+        .nav-left img { width: 36px; height: 36px; object-fit: contain; }
+        .nav-left h1 { font-family: var(--brand-font-heading); font-size: 1.25rem; margin: 0; }
+        .nav-right { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-right a {
+            color: var(--brand-text-muted);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+        .nav-right a:hover { color: var(--brand-text); }
+
+        .content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem 3rem;
+        }
+        .content h1 {
+            font-family: var(--brand-font-heading);
+            font-size: 2rem;
+            color: var(--brand-text);
+            margin-bottom: 0.5rem;
+        }
+        .content .subtitle {
+            font-size: 1rem;
+            color: var(--brand-text-muted);
+            margin-bottom: 2rem;
+        }
+        .content h2 {
+            font-size: 1.2rem;
+            color: var(--brand-text);
+            margin: 2rem 0 0.75rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--brand-border);
+        }
+        .content h2:first-of-type { border-top: none; padding-top: 0; }
+        .content p {
+            font-size: 0.9375rem;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+        .content ul {
+            margin: 0.5rem 0 1rem 1.5rem;
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+        .content li { margin-bottom: 0.375rem; }
+        .content a {
+            color: var(--brand-accent);
+            text-decoration: none;
+        }
+        .content a:hover { text-decoration: underline; }
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.875rem;
+        }
+        .content th, .content td {
+            text-align: left;
+            padding: 0.625rem 0.75rem;
+            border-bottom: 1px solid var(--brand-border);
+        }
+        .content th {
+            color: var(--brand-text);
+            font-weight: 600;
+            background: var(--brand-surface);
+        }
+        .content code {
+            font-size: 0.85em;
+            background: rgba(255,255,255,0.06);
+            padding: 0.15em 0.4em;
+            border-radius: 4px;
+        }
+        .highlight-box {
+            background: rgba(52,199,89,0.08);
+            border: 1px solid rgba(52,199,89,0.2);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+        }
+        .highlight-box strong { color: #5bd77a; }
+        .highlight-box ul { margin-bottom: 0; }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: var(--brand-text);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            transition: border-color 0.2s;
+            margin: 0 0.75rem;
+        }
+        footer a:hover { border-color: var(--brand-text); }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <div class="nav-left">
+            <a href="/">
+                <img src="/images/DBMNLogo.png" alt="DBMN">
+                <h1>DBMN</h1>
+            </a>
+        </div>
+        <div class="nav-right">
+            <a href="/docs/">Docs</a>
+            <a href="/pricing.html">Pricing</a>
+            <a href="/account/">Account</a>
+        </div>
+    </nav>
+
+    <div class="content">
+        <h1>Data Transparency</h1>
+        <p class="subtitle">Exactly what Dobermann collects, what it doesn't, and how it all works.</p>
+
+        <h2>What We Collect</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Example</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>API call count</td>
+                    <td><code>42</code></td>
+                    <td>Dashboard stats</td>
+                </tr>
+                <tr>
+                    <td>Batch run count</td>
+                    <td><code>3</code></td>
+                    <td>Dashboard stats, free tier limits</td>
+                </tr>
+                <tr>
+                    <td>Records processed</td>
+                    <td><code>1,200</code></td>
+                    <td>Dashboard stats</td>
+                </tr>
+                <tr>
+                    <td>Execution time</td>
+                    <td><code>8,450ms</code></td>
+                    <td>Dashboard stats</td>
+                </tr>
+                <tr>
+                    <td>Environment base URL</td>
+                    <td><code>https://api.example.com</code></td>
+                    <td>Environment licence validation</td>
+                </tr>
+                <tr>
+                    <td>Extension version</td>
+                    <td><code>1.5.0</code></td>
+                    <td>Compatibility &amp; support</td>
+                </tr>
+                <tr>
+                    <td>VS Code version</td>
+                    <td><code>1.96.0</code></td>
+                    <td>Compatibility</td>
+                </tr>
+                <tr>
+                    <td>OS platform</td>
+                    <td><code>win32</code></td>
+                    <td>Compatibility</td>
+                </tr>
+                <tr>
+                    <td>Feature usage flags</td>
+                    <td><code>{"pagination": true}</code></td>
+                    <td>Product development</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>What We Never Collect</h2>
+        <div class="highlight-box">
+            <strong>None of the following ever leaves your machine:</strong>
+            <ul>
+                <li>Request or response bodies</li>
+                <li>Auth tokens or credentials</li>
+                <li>CSV, JSON, or Excel file contents</li>
+                <li>API endpoint paths, headers, or query parameters</li>
+                <li>Individual record data</li>
+                <li>Error message content (only success/failure counts)</li>
+            </ul>
+        </div>
+
+        <h2>How It Works</h2>
+        <ul>
+            <li>Counters are aggregated locally, per environment, per day</li>
+            <li>Flushed to the server every 5 minutes</li>
+            <li>The server identifies you via <code>auth.uid()</code> &mdash; no user ID is sent from the client</li>
+            <li>Row-Level Security: you can only ever see your own data</li>
+            <li>View your stats on your <a href="/account/">Account dashboard</a></li>
+        </ul>
+
+        <h2>Your API Data Stays Local</h2>
+        <ul>
+            <li>Requests, responses, and logs are saved as plain JSON in <code>.active8/results/</code></li>
+            <li>Credentials are stored in your OS-level credential manager (Keychain / Windows Credential Manager)</li>
+            <li>Nothing leaves your machine</li>
+        </ul>
+
+        <h2>Need Zero Telemetry?</h2>
+        <p>Available by arrangement &mdash; contact <a href="mailto:hello@dbmn.io">hello@dbmn.io</a>.</p>
+
+        <p style="margin-top: 1.5rem;">For the full legal privacy policy, see our <a href="/privacy.html">Privacy Policy</a>.</p>
+    </div>
+
+    <footer>
+        <a href="/terms.html">Terms</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/telemetry.html">Telemetry</a>
+        <a href="/pricing.html">Pricing</a>
+        <br><br>
+        &copy; 2026 DBMN.io
+    </footer>
+</body>
+</html>

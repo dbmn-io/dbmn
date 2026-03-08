@@ -7,7 +7,7 @@ has_children: true
 
 # Dobermann Documentation
 
-Welcome to the Dobermann documentation. Dobermann bridges the gap between spreadsheets and JSON APIs — making it fast and easy to interact with any API at scale.
+Welcome to the Dobermann documentation. Dobermann enables bulk data migration through REST APIs — load, extract, and migrate millions of records without writing scripts.
 
 ## Quick Links
 
@@ -23,6 +23,7 @@ Welcome to the Dobermann documentation. Dobermann bridges the gap between spread
 | [Console](console) | Run requests, monitor progress, analyse results |
 | [↳ Pagination](pagination) | Configure and run paginated API requests |
 | [Import/Export](import-export) | Share configurations with your team |
+| [Playground](playground) | Live API sandbox with ready-to-paste endpoint templates |
 | [Shortcuts](shortcuts) | Keyboard shortcuts for efficiency |
 | [Troubleshooting](troubleshooting) | Common issues and solutions |
 | [Changelog](changelog) | Release history and what's new |
@@ -30,7 +31,7 @@ Welcome to the Dobermann documentation. Dobermann bridges the gap between spread
 
 ## What is Dobermann?
 
-Excel is still the number one tool for working with data. But working with JSON APIs from a spreadsheet? Almost impossible. Dobermann bridges that gap — take your data, map it to an API template, and execute thousands of requests with validation, transformation, and real-time results.
+Every enterprise system speaks REST. But migrating data through REST APIs still means custom scripts, fragile integrations, and developers pulled away from real work. Dobermann changes that — take your data, map it to any API, and load millions of records with parallel processing, validation, and real-time results.
 
 - **Endpoint Configuration** — Define HTTP method, URL, headers, body templates, and share them with your team
 - **Template Variables** — Map source data columns to API fields with type validation, modifiers, and conditional logic

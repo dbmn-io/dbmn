@@ -1,5 +1,5 @@
 title: DBMN.io
-description: Bridging the gap between spreadsheets and JSON APIs
+description: Migrate millions of records through any REST API — right from VS Code.
 url: https://dbmn.io
 baseurl: ""
 
@@ -27,7 +27,7 @@ aux_links:
 aux_links_new_tab: true
 
 # Footer
-footer_content: "&copy; 2026 DBMN.io. Making APIs and data easier than ever."
+footer_content: "&copy; 2026 DBMN.io. Migrate millions of records through any REST API."
 
 # Back to top link
 back_to_top: true

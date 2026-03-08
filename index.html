@@ -1,7 +1,7 @@
 ---
 layout: none
-title: Dobermann
-description: Bridge the gap between spreadsheets and JSON APIs. Load thousands of records through any REST API, right from VS Code.
+title: Dobermann — Migrate millions of records through any REST API
+description: Bulk data migration through REST APIs — without writing scripts. VS Code extension with parallel processing and real-time results.
 nav_exclude: true
 ---
 <!DOCTYPE html>
@@ -14,51 +14,112 @@ nav_exclude: true
     <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
     <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
     <link rel="stylesheet" href="/css/brand.css">
+    <link rel="canonical" href="https://dbmn.io/">
+    <meta property="og:title" content="Dobermann — Migrate millions of records through any REST API">
+    <meta property="og:description" content="Bulk data migration through REST APIs — without writing scripts. VS Code extension with parallel processing and real-time results.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dbmn.io/">
+    <meta property="og:image" content="https://dbmn.io/images/DBMNLogo.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: var(--brand-font-body);
             background: linear-gradient(135deg, var(--brand-bg-start) 0%, var(--brand-bg-end) 100%);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             color: var(--brand-text);
-            text-align: center;
-            padding: 2rem;
+            padding: 0;
         }
-        .hero {
+
+        /* ── Nav bar ── */
+        .nav-bar {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            margin-top: 2rem;
+            justify-content: space-between;
+            padding: 0.75rem 2rem;
+            border-bottom: 1px solid var(--brand-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(135deg, var(--brand-bg-start) 0%, var(--brand-bg-end) 100%);
         }
-        .logo {
-            width: 150px;
-            height: auto;
+        .nav-left a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--brand-text);
+        }
+        .nav-left img { width: 36px; height: 36px; object-fit: contain; }
+        .nav-left h1 { font-family: var(--brand-font-heading); font-size: 1.25rem; margin: 0; }
+        .nav-right { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-right a {
+            color: var(--brand-text-muted);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+        .nav-right a:hover { color: var(--brand-text); }
+        .nav-right .nav-cta {
+            background: var(--brand-accent);
+            color: var(--brand-text);
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-right .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,120,212,0.3);
+        }
+
+        /* ── Hero ── */
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero-badge {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+            background: rgba(0,120,212,0.15);
+            color: #7ab8ff;
+            margin-bottom: 1.5rem;
+        }
+        .hero h2 {
+            font-family: var(--brand-font-heading);
+            font-size: 3rem;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--brand-text-muted);
             margin-bottom: 2rem;
-            object-fit: contain;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        h1 { font-family: var(--brand-font-heading); font-size: 3rem; margin-bottom: 0.5rem; }
-        .subtitle { font-size: 1.4rem; opacity: 0.8; margin-bottom: 1.5rem; max-width: 650px; }
-        .tagline { font-size: 1.1rem; opacity: 0.6; margin-bottom: 2rem; max-width: 600px; }
         .buttons {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
             justify-content: center;
-            margin-bottom: 1rem;
         }
         .cta {
             display: inline-block;
             background: var(--brand-accent);
             color: var(--brand-text);
-            padding: 1rem 2rem;
+            padding: 0.875rem 2rem;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: transform 0.2s, box-shadow 0.2s;
         }
         .cta:hover {
@@ -67,66 +128,181 @@ nav_exclude: true
         }
         .cta-secondary {
             background: var(--brand-surface);
-            border: 2px solid rgba(255,255,255,0.3);
+            border: 2px solid rgba(255,255,255,0.2);
         }
         .cta-secondary:hover {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
             box-shadow: 0 10px 20px rgba(255,255,255,0.1);
         }
-        .features {
-            margin-top: 3rem;
+
+        /* ── Proof bar ── */
+        .proof-bar {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
             max-width: 900px;
-            width: 100%;
+            margin: 0 auto;
+            padding: 2rem 2rem 3rem;
+            text-align: center;
         }
-        @media (max-width: 700px) {
-            .features { grid-template-columns: repeat(2, 1fr); }
-        }
-        .feature {
-            background: var(--brand-surface);
-            padding: 1.5rem;
-            border-radius: 12px;
-        }
-        .feature-icon { font-size: 2rem; margin-bottom: 0.5rem; }
-        .feature h3 { margin-bottom: 0.5rem; }
-        .feature p { font-size: 0.9rem; opacity: 0.8; }
-
-        .product-visual {
-            margin-top: 4rem;
-            width: 100%;
-            max-width: 800px;
-        }
-        .product-visual-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 */
-            background: var(--brand-surface);
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
-            overflow: hidden;
-        }
-        .product-visual-placeholder {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            opacity: 0.5;
-        }
-
-        .social-proof {
-            margin-top: 4rem;
-            max-width: 1000px;
-            width: 100%;
-        }
-        .social-proof h2 {
+        .proof-stat .number {
             font-family: var(--brand-font-heading);
-            font-size: 1.8rem;
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+        .proof-stat .label {
+            font-size: 0.85rem;
+            color: var(--brand-text-muted);
+        }
+
+        /* ── Section defaults ── */
+        .section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        .section h2 {
+            font-family: var(--brand-font-heading);
+            font-size: 2rem;
+            text-align: center;
             margin-bottom: 2rem;
         }
+
+        /* ── Problem cards ── */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .problem-card {
+            background: var(--brand-surface);
+            border: 1px solid var(--brand-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .problem-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #ff6b6b;
+        }
+        .problem-card p {
+            font-size: 0.9rem;
+            color: var(--brand-text-muted);
+            line-height: 1.5;
+        }
+
+        /* ── Steps ── */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .step {
+            background: var(--brand-surface);
+            border: 1px solid var(--brand-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0,120,212,0.2);
+            color: #7ab8ff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+        }
+        .step h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .step p {
+            font-size: 0.9rem;
+            color: var(--brand-text-muted);
+            line-height: 1.5;
+        }
+
+        /* ── Comparison ── */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .comparison-col {
+            background: var(--brand-surface);
+            border: 1px solid var(--brand-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .comparison-col h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .comparison-col.without h3 { color: #ff6b6b; }
+        .comparison-col.with h3 { color: #5bd77a; }
+        .comparison-col ul {
+            list-style: none;
+        }
+        .comparison-col ul li {
+            font-size: 0.9rem;
+            color: var(--brand-text-muted);
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .comparison-col ul li:last-child { border-bottom: none; }
+
+        /* ── Use cases ── */
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        .use-case {
+            background: var(--brand-surface);
+            border: 1px solid var(--brand-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .use-case h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+        }
+        .use-case p {
+            font-size: 0.9rem;
+            color: var(--brand-text-muted);
+            line-height: 1.5;
+        }
+
+        /* ── Security bar ── */
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .security-item {
+            background: var(--brand-surface);
+            border: 1px solid var(--brand-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .security-item h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+        }
+        .security-item p {
+            font-size: 0.9rem;
+            color: var(--brand-text-muted);
+            line-height: 1.5;
+        }
+
+        /* ── Testimonials ── */
         .testimonials {
             display: flex;
             gap: 1.5rem;
@@ -135,15 +311,12 @@ nav_exclude: true
         }
         .testimonial {
             background: var(--brand-surface);
+            border: 1px solid var(--brand-border);
             border-radius: 12px;
             padding: 1.5rem;
             flex: 1 1 0;
             min-width: 0;
             text-align: left;
-        }
-        @media (max-width: 700px) {
-            .testimonials { flex-direction: column; align-items: center; }
-            .testimonial { max-width: 400px; width: 100%; }
         }
         .testimonial blockquote {
             font-size: 0.95rem;
@@ -161,20 +334,31 @@ nav_exclude: true
             color: var(--brand-text);
         }
 
+        /* ── Bottom CTA ── */
         .bottom-cta {
-            margin-top: 4rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
+            text-align: center;
+            padding: 3rem 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .bottom-cta h2 {
+            font-family: var(--brand-font-heading);
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
         }
         .bottom-cta p {
-            font-size: 1.25rem;
-            opacity: 0.8;
+            font-size: 1.1rem;
+            color: var(--brand-text-muted);
+            margin-bottom: 1.5rem;
+        }
+        .bottom-cta .buttons {
+            justify-content: center;
         }
 
+        /* ── Footer ── */
         footer {
-            margin-top: 3rem;
+            text-align: center;
+            padding: 2rem;
             opacity: 0.6;
             font-size: 0.9rem;
         }
@@ -184,63 +368,181 @@ nav_exclude: true
             border-bottom: 1px solid rgba(255,255,255,0.3);
             transition: border-color 0.2s;
         }
-        footer a:hover {
-            border-color: var(--brand-text);
+        footer a:hover { border-color: var(--brand-text); }
+        .footer-links {
+            margin-bottom: 0.75rem;
+        }
+        .footer-links a {
+            margin: 0 0.75rem;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 700px) {
+            .hero h2 { font-size: 2rem; }
+            .proof-bar { grid-template-columns: repeat(2, 1fr); }
+            .problem-grid { grid-template-columns: 1fr; }
+            .steps { grid-template-columns: 1fr; }
+            .comparison { grid-template-columns: 1fr; }
+            .use-cases { grid-template-columns: 1fr; }
+            .security-grid { grid-template-columns: 1fr; }
+            .testimonials { flex-direction: column; align-items: center; }
+            .testimonial { max-width: 400px; width: 100%; }
         }
     </style>
 </head>
 <body>
-    <section class="hero">
-        <a href="/" style="text-decoration: none;"><img src="/images/DBMNLogo.png" alt="Dobermann Logo" class="logo"></a>
-        <h1>Dobermann</h1>
-        <p class="subtitle">Bridge the gap between spreadsheets and JSON APIs</p>
-        <p class="tagline">Load thousands of records through any REST API, right from VS Code.</p>
 
+    <nav class="nav-bar">
+        <div class="nav-left">
+            <a href="/">
+                <img src="/images/DBMNLogo.png" alt="DBMN">
+                <h1>DBMN</h1>
+            </a>
+        </div>
+        <div class="nav-right">
+            <a href="/docs/">Docs</a>
+            <a href="/pricing.html">Pricing</a>
+            <a href="/account/" class="nav-cta">Account</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <span class="hero-badge">30-day free trial &mdash; no credit card required</span>
+        <h2>Migrate millions of records through any REST API</h2>
+        <p class="subtitle">Bulk data operations for REST APIs. No scripts. No ETL platforms. Just data in and out. Fast, reliable, done.</p>
         <div class="buttons">
             <a href="https://marketplace.visualstudio.com/items?itemName=FlexionTech.active8" class="cta">
                 Install for VS Code
             </a>
-            <a href="/docs/" class="cta cta-secondary">
-                Documentation
-            </a>
-            <a href="/pricing.html" class="cta cta-secondary">
-                Pricing
+            <a href="/docs/getting-started" class="cta cta-secondary">
+                Getting Started &rarr;
             </a>
         </div>
     </section>
 
-    <div class="features">
-        <div class="feature">
-            <div class="feature-icon">&#127919;</div>
-            <h3>1M+ Rows</h3>
-            <p>Process massive CSV/Excel files with ease</p>
+    <div class="proof-bar">
+        <div class="proof-stat">
+            <span class="number">10M+</span>
+            <span class="label">Records loaded</span>
         </div>
-        <div class="feature">
-            <div class="feature-icon">&#9889;</div>
-            <h3>16 Threads</h3>
-            <p>Parallel execution for maximum speed</p>
+        <div class="proof-stat">
+            <span class="number">12h &rarr; 15min</span>
+            <span class="label">Typical time savings</span>
         </div>
-        <div class="feature">
-            <div class="feature-icon">&#128260;</div>
-            <h3>Pause/Resume</h3>
-            <p>Full control over batch operations</p>
+        <div class="proof-stat">
+            <span class="number">0</span>
+            <span class="label">Lines of code required</span>
         </div>
-        <div class="feature">
-            <div class="feature-icon">&#10024;</div>
-            <h3>Share Templates</h3>
-            <p>Build and share API templates like never before</p>
+        <div class="proof-stat">
+            <span class="number">Extraction?</span>
+            <span class="label">Even faster.</span>
         </div>
     </div>
 
-    <section class="product-visual">
-        <div class="product-visual-container">
-            <div class="product-visual-placeholder">
-                Product demo coming soon
+    <section class="section">
+        <h2>Data migration through REST APIs shouldn't need a dev team</h2>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <h3>Scripts break</h3>
+                <p>Auth, pagination, retries, error handling. Every migration, from scratch.</p>
+            </div>
+            <div class="problem-card">
+                <h3>API clients don't scale</h3>
+                <p>Postman handles one request beautifully. Try 50,000.</p>
+            </div>
+            <div class="problem-card">
+                <h3>ETL is overkill</h3>
+                <p>Six figures and six months. You just need to load data.</p>
             </div>
         </div>
     </section>
 
-    <section class="social-proof">
+    <section class="section">
+        <h2>Your database experience, but for REST APIs</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Connect</h3>
+                <p>Any REST API. Any auth method. Done.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Map</h3>
+                <p>CSV or Excel to API fields. Preview before you commit.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Load</h3>
+                <p>Hit go. Millions of records. Batching, retries, and logging handled.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Not an API client. Not an ETL platform.</h2>
+        <div class="comparison">
+            <div class="comparison-col without">
+                <h3>Without Dobermann</h3>
+                <ul>
+                    <li>Custom scripts every time</li>
+                    <li>Manual auth token juggling</li>
+                    <li>No batch progress visibility</li>
+                    <li>Hope your overnight load finishes</li>
+                </ul>
+            </div>
+            <div class="comparison-col with">
+                <h3>With Dobermann</h3>
+                <ul>
+                    <li>Visual templates, zero code</li>
+                    <li>Auth handled automatically</li>
+                    <li>Live progress, pause/resume</li>
+                    <li>Row-level tracking and retry</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Built for the jobs that matter</h2>
+        <div class="use-cases">
+            <div class="use-case">
+                <h3>System implementations</h3>
+                <p>Stand up a new WMS, ERP, or CRM. Thousands of config records. Hours, not weeks.</p>
+            </div>
+            <div class="use-case">
+                <h3>Data migrations</h3>
+                <p>Move data between systems through REST APIs. No custom dev.</p>
+            </div>
+            <div class="use-case">
+                <h3>Bulk operations</h3>
+                <p>Mass updates, corrections, cleanup. Thousands of records in minutes.</p>
+            </div>
+            <div class="use-case">
+                <h3>Data extraction</h3>
+                <p>Pull data out of APIs with pagination. Export for analysis.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Your data stays on your machine</h2>
+        <div class="security-grid">
+            <div class="security-item">
+                <h3>Local-first</h3>
+                <p>Runs entirely in VS Code. No cloud processing.</p>
+            </div>
+            <div class="security-item">
+                <h3>Secure vault</h3>
+                <p>Credentials in VS Code's encrypted storage.</p>
+            </div>
+            <div class="security-item">
+                <h3>No cloud sync</h3>
+                <p>Your data never touches our servers.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
         <h2>Trusted by implementation teams</h2>
         <div class="testimonials">
             <div class="testimonial">
@@ -259,16 +561,27 @@ nav_exclude: true
     </section>
 
     <section class="bottom-cta">
-        <p>Ready to streamline your API workflows?</p>
-        <a href="https://marketplace.visualstudio.com/items?itemName=FlexionTech.active8" class="cta">
-            Install for VS Code
-        </a>
+        <h2>Stop scripting. Start migrating.</h2>
+        <p>Free 30-day trial. No credit card required.</p>
+        <div class="buttons">
+            <a href="https://marketplace.visualstudio.com/items?itemName=FlexionTech.active8" class="cta">
+                Install for VS Code
+            </a>
+            <a href="/pricing.html" class="cta cta-secondary">
+                See Pricing &rarr;
+            </a>
+        </div>
     </section>
 
     <footer>
-        <a href="/pricing.html">Pricing</a> &middot; <a href="/terms.html">Terms</a> &middot; <a href="/privacy.html">Privacy</a>
-        <br>
-        &copy; 2026 DBMN.io. Making APIs and data easier than ever.
+        <div class="footer-links">
+            <a href="/pricing.html">Pricing</a>
+            <a href="/terms.html">Terms</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/docs/">Docs</a>
+        </div>
+        &copy; 2026 DBMN.io. Migrate millions of records through any REST API.
     </footer>
+
 </body>
 </html>

@@ -1,7 +1,7 @@
 ---
 layout: null
 title: Pricing - Dobermann
-description: Simple, transparent pricing. Start free, upgrade when you're ready.
+description: Plans for individuals and teams. Free 30-day trial — migrate millions of records through any REST API.
 nav_exclude: true
 permalink: /pricing.html
 ---
@@ -15,6 +15,12 @@ permalink: /pricing.html
     <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
     <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
     <link rel="stylesheet" href="/css/brand.css">
+    <link rel="canonical" href="https://dbmn.io/pricing.html">
+    <meta property="og:title" content="Pricing - Dobermann">
+    <meta property="og:description" content="Plans for individuals and teams. Free 30-day trial — migrate millions of records through any REST API.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dbmn.io/pricing.html">
+    <meta property="og:image" content="https://dbmn.io/images/DBMNLogo.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -346,6 +352,38 @@ permalink: /pricing.html
         .footer-links a {
             margin: 0 0.75rem;
         }
+
+        /* ── Current plan indicator ── */
+        .plan-card.current-plan {
+            border-color: #5bd77a;
+            box-shadow: 0 0 0 1px #5bd77a;
+        }
+        .current-plan-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            background: rgba(52,199,89,0.2);
+            color: #5bd77a;
+            margin-left: 0.5rem;
+        }
+        .plan-card.current-plan .plan-cta {
+            background: rgba(52,199,89,0.15);
+            color: #5bd77a;
+            border: 1px solid rgba(52,199,89,0.3);
+            pointer-events: none;
+        }
+        .plan-cta-upgrade {
+            background: rgba(255, 159, 10, 0.9) !important;
+            color: #fff !important;
+            border: none !important;
+        }
+        .plan-cta-upgrade:hover {
+            background: rgba(255, 159, 10, 1) !important;
+        }
     </style>
 </head>
 <body>
@@ -365,8 +403,8 @@ permalink: /pricing.html
     </nav>
 
     <section class="pricing-hero">
-        <h1>Simple, transparent pricing</h1>
-        <p>Start with a 30-day free trial. No credit card required. Upgrade when you're ready.</p>
+        <h1>Plans that scale with your migrations</h1>
+        <p>Free 30-day trial. No credit card. Load millions of records through any REST API.</p>
 
         <div class="billing-toggle">
             <span id="monthlyLabel" class="active">Monthly</span>
@@ -388,23 +426,23 @@ permalink: /pricing.html
     <div class="pricing-grid">
 
         <!-- Free -->
-        <div class="plan-card">
+        <div class="plan-card" data-plan-type="free">
             <span class="plan-badge plan-badge-free">Free</span>
             <div class="plan-name">Free</div>
             <div class="plan-price">$0</div>
-            <p class="plan-desc">After trial expires, keep using Dobermann with basic limits. Forever.</p>
+            <p class="plan-desc">After trial, keep using Dobermann with basic limits. Forever.</p>
             <ul class="plan-features">
-                <li class="limit">10 API calls per week</li>
+                <li>Unlimited individual API calls</li>
+                <li class="limit">5 batches per week</li>
                 <li class="limit">Single-threaded execution</li>
-                <li class="limit">1,000 records per batch</li>
-                <li>All core features</li>
+                <li class="limit">Pagination limited to 3 pages</li>
                 <li>No credit card required</li>
             </ul>
             <a href="/account/register.html" class="plan-cta plan-cta-secondary">Get Started Free</a>
         </div>
 
         <!-- Individual -->
-        <div class="plan-card featured">
+        <div class="plan-card featured" data-plan-type="user">
             <span class="plan-badge plan-badge-popular">Most Popular</span>
             <div class="plan-name">Individual</div>
             <div class="plan-price">
@@ -413,19 +451,19 @@ permalink: /pricing.html
                 <span class="period price-monthly">/month</span>
                 <span class="period price-annual" style="display:none;">/year</span>
             </div>
-            <p class="plan-desc">Full access for a single user across any environment.</p>
+            <p class="plan-desc">Full migration power. Unlimited records, parallel processing, any API.</p>
             <ul class="plan-features">
-                <li>Unlimited API calls</li>
-                <li>Up to 16 threads</li>
                 <li>Unlimited batch size</li>
-                <li>All features unlocked</li>
+                <li>Unlimited batches</li>
+                <li>Up to 16 threads</li>
+                <li>Unlimited pagination + Fetch All</li>
                 <li class="limit">2 concurrent VS Code instances</li>
             </ul>
             <a href="/account/checkout.html?plan=individual_monthly" class="plan-cta plan-cta-primary plan-checkout-link" data-monthly="individual_monthly" data-annual="individual_annual">Start Free Trial</a>
         </div>
 
         <!-- Single Environment -->
-        <div class="plan-card">
+        <div class="plan-card" data-plan-type="environment">
             <span class="plan-badge plan-badge-team">Team</span>
             <div class="plan-name">Environment</div>
             <div class="plan-price">
@@ -434,19 +472,19 @@ permalink: /pricing.html
                 <span class="period price-monthly">/month</span>
                 <span class="period price-annual" style="display:none;">/year</span>
             </div>
-            <p class="plan-desc">Licence one environment URL. Unlimited users get full access.</p>
+            <p class="plan-desc">Licence one API environment. Individual licence for you, unlimited users on approved URLs.</p>
             <ul class="plan-features">
-                <li>Unlimited users</li>
+                <li>Individual licence included for you</li>
+                <li>Unlimited users on approved URL</li>
                 <li>Full access for everyone</li>
-                <li>No user-level telemetry</li>
-                <li>Single Approved Environment</li>
-                <li>No individual licences needed</li>
+                <li>Priority support</li>
+                <li>1 approved environment</li>
             </ul>
             <a href="/account/checkout.html?plan=environment_monthly" class="plan-cta plan-cta-primary plan-checkout-link" data-monthly="environment_monthly" data-annual="environment_annual">Subscribe</a>
         </div>
 
         <!-- Bundle -->
-        <div class="plan-card">
+        <div class="plan-card" data-plan-type="bundle">
             <span class="plan-badge plan-badge-best">Best Value</span>
             <div class="plan-name">Prod + Non-Prod</div>
             <div class="plan-price">
@@ -455,13 +493,13 @@ permalink: /pricing.html
                 <span class="period price-monthly">/month</span>
                 <span class="period price-annual" style="display:none;">/year</span>
             </div>
-            <p class="plan-desc">Two environment URLs bundled. Staging + production, sorted.</p>
+            <p class="plan-desc">Two environments bundled. Individual licence for you, unlimited users on both URLs.</p>
             <ul class="plan-features">
-                <li>Unlimited users</li>
+                <li>Individual licence included for you</li>
+                <li>Unlimited users on approved URLs</li>
                 <li>Full access for everyone</li>
-                <li>No user-level telemetry</li>
-                <li>2 Approved Environments</li>
-                <li>No individual licences needed</li>
+                <li>Priority support</li>
+                <li>2 approved environments</li>
             </ul>
             <a href="/account/checkout.html?plan=bundle_monthly" class="plan-cta plan-cta-primary plan-checkout-link" data-monthly="bundle_monthly" data-annual="bundle_annual">Subscribe</a>
         </div>
@@ -477,7 +515,7 @@ permalink: /pricing.html
                 <span class="faq-arrow">&#9660;</span>
             </button>
             <div class="faq-answer">
-                <p>You keep using Dobermann on the free tier: 10 API calls per week, single-threaded, 1,000 records per batch. No time limit. If you need full access, subscribe to any paid plan.</p>
+                <p>You keep using Dobermann on the free tier: unlimited individual API calls, 5 batches per week, single-threaded, pagination up to 3 pages. No time limit. If you need full batch power, subscribe to any paid plan.</p>
             </div>
         </div>
 
@@ -527,7 +565,7 @@ permalink: /pricing.html
                 <span class="faq-arrow">&#9660;</span>
             </button>
             <div class="faq-answer">
-                <p>Free and Individual plans collect usage counters and usernames connecting to environments. Environment plans collect only product usage data with no user-level tracking. We never collect API request/response bodies, auth tokens, or your CSV/JSON data. See our <a href="/privacy.html" style="color: var(--brand-accent);">Privacy Policy</a> for full details.</p>
+                <p>Dobermann collects aggregate usage counters (API calls, batch runs, records processed) and basic environment info. We never collect request/response bodies, auth tokens, or your CSV/JSON data. See our <a href="/telemetry.html" style="color: var(--brand-accent);">Data Transparency</a> page for the full breakdown.</p>
             </div>
         </div>
 
@@ -556,13 +594,17 @@ permalink: /pricing.html
         <div class="footer-links">
             <a href="/terms.html">Terms</a>
             <a href="/privacy.html">Privacy</a>
+            <a href="/telemetry.html">Telemetry</a>
             <a href="/docs/">Docs</a>
         </div>
         &copy; 2026 DBMN.io
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        var FUNCTIONS_URL = 'https://bxrflqpkiheyrqpikfll.supabase.co/functions/v1';
+        var SUPABASE_URL = 'https://bxrflqpkiheyrqpikfll.supabase.co';
+        var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ4cmZscXBraWhleXJxcGlrZmxsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5ODg3MzgsImV4cCI6MjA4NzU2NDczOH0.-qC5CregIAJwZvR_NsR1Sa6h-DuPICOO3gt55fgbycU';
+        var FUNCTIONS_URL = SUPABASE_URL + '/functions/v1';
 
         // Billing toggle
         var toggle = document.getElementById('billingToggle');
@@ -606,6 +648,103 @@ permalink: /pricing.html
                     }
                 })
                 .catch(function() { /* keep default 50 */ });
+        })();
+
+        // Current plan indicator
+        (async function() {
+            if (typeof window.supabase === 'undefined') return;
+            var db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            var sessionResult = await db.auth.getSession();
+            var session = sessionResult.data.session;
+            if (!session) return;
+
+            try {
+                var res = await fetch(FUNCTIONS_URL + '/check-license', {
+                    headers: {
+                        'Authorization': 'Bearer ' + session.access_token,
+                        'apikey': SUPABASE_ANON_KEY
+                    }
+                });
+                if (!res.ok) return;
+                var data = await res.json();
+                var license = data.license;
+                if (!license || !license.licenseType) return;
+
+                // Map licenseType to the plan card to highlight
+                var cardType = null;
+                var badgeLabel = 'CURRENT PLAN';
+                var ctaLabel = 'Current Plan';
+
+                switch (license.licenseType) {
+                    case 'free':
+                        cardType = 'free';
+                        break;
+                    case 'trial':
+                        cardType = 'user';
+                        badgeLabel = 'TRIAL ACTIVE';
+                        ctaLabel = 'Trial Active';
+                        break;
+                    case 'user':
+                        cardType = 'user';
+                        if (license.isLifetime) {
+                            badgeLabel = 'LIFETIME LICENCE';
+                            ctaLabel = 'Lifetime Licence';
+                        }
+                        break;
+                    case 'environment':
+                        // Only shown when checking from a licensed environment
+                        var envCount = (license.licensedEnvironmentUrls || []).length;
+                        cardType = envCount >= 2 ? 'bundle' : 'environment';
+                        break;
+                }
+
+                if (!cardType) return;
+
+                var card = document.querySelector('.plan-card[data-plan-type="' + cardType + '"]');
+                if (!card) return;
+
+                card.classList.add('current-plan');
+                card.classList.remove('featured');
+
+                var badge = card.querySelector('.plan-badge');
+                if (badge) {
+                    badge.className = 'plan-badge';
+                    badge.style.background = 'rgba(52,199,89,0.2)';
+                    badge.style.color = '#5bd77a';
+                    badge.textContent = badgeLabel;
+                }
+
+                var cta = card.querySelector('.plan-cta');
+                if (cta) {
+                    cta.textContent = ctaLabel;
+                    cta.href = '/account/';
+                }
+
+                // For expired trials (free + limited), change Individual CTA to "Upgrade Now"
+                if (license.licenseType === 'free' && license.accessLevel === 'limited') {
+                    var userCard = document.querySelector('.plan-card[data-plan-type="user"]');
+                    if (userCard) {
+                        var userCta = userCard.querySelector('.plan-cta');
+                        if (userCta) {
+                            userCta.textContent = 'Upgrade Now';
+                            userCta.classList.add('plan-cta-upgrade');
+                        }
+                    }
+                }
+
+                // For lifetime users, also update the launch offer section
+                if (license.isLifetime) {
+                    var launchOffer = document.querySelector('.launch-offer');
+                    if (launchOffer) {
+                        launchOffer.innerHTML = '<strong>Lifetime Individual Licence</strong> &mdash; You hold Lifetime Licence #1. No subscription, no expiry. Forever.'
+                            + '<div style="margin-top: 0.5rem;"><a href="/account/" style="color: var(--brand-accent); text-decoration: none; border-bottom: 1px solid rgba(0,120,212,0.3);">View your account</a></div>';
+                        launchOffer.style.borderColor = 'rgba(52,199,89,0.25)';
+                        launchOffer.style.background = 'rgba(52,199,89,0.08)';
+                    }
+                }
+            } catch (e) {
+                // Non-critical — pricing page works fine without indicator
+            }
         })();
     </script>
 </body>

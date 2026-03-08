@@ -7,7 +7,7 @@ parent: Documentation
 
 # Getting Started with Dobermann
 
-Dobermann bridges the gap between table-structured data and JSON APIs — enabling fast, efficient API interactions at scale. Take your spreadsheet data, map it to an API template, and execute thousands of requests with validation, transformation, and real-time results.
+Dobermann enables bulk data migration through REST APIs — load, extract, and migrate massive datasets without writing scripts.
 
 ## Quick Start
 

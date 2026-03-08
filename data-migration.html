@@ -1,0 +1,398 @@
+---
+layout: null
+title: REST API Data Migration Tool — Dobermann
+description: Migrate millions of records through any REST API without writing code. Bulk data loading from CSV/Excel — right from VS Code.
+nav_exclude: true
+permalink: /data-migration
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <meta name="description" content="{{ page.description }}">
+    <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
+    <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
+    <link rel="stylesheet" href="/css/brand.css">
+    <link rel="canonical" href="https://dbmn.io/data-migration">
+    <meta property="og:title" content="REST API Data Migration Tool — Dobermann">
+    <meta property="og:description" content="Migrate millions of records through any REST API without writing code. Bulk data loading from CSV/Excel — right from VS Code.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dbmn.io/data-migration">
+    <meta property="og:image" content="https://dbmn.io/images/DBMNLogo.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--brand-font-body);
+            background: linear-gradient(135deg, var(--brand-bg-start) 0%, var(--brand-bg-end) 100%);
+            min-height: 100vh;
+            color: var(--brand-text);
+            padding: 0;
+        }
+
+        /* ── Nav bar ── */
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 2rem;
+            border-bottom: 1px solid var(--brand-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(135deg, var(--brand-bg-start) 0%, var(--brand-bg-end) 100%);
+        }
+        .nav-left a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--brand-text);
+        }
+        .nav-left img { width: 36px; height: 36px; object-fit: contain; }
+        .nav-left h1 { font-family: var(--brand-font-heading); font-size: 1.25rem; margin: 0; }
+        .nav-right { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-right a {
+            color: var(--brand-text-muted);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+        .nav-right a:hover { color: var(--brand-text); }
+        .nav-right .nav-cta {
+            background: var(--brand-accent);
+            color: var(--brand-text);
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-right .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,120,212,0.3);
+        }
+
+        /* ── Hero ── */
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero h2 {
+            font-family: var(--brand-font-heading);
+            font-size: 3rem;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--brand-text-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta {
+            display: inline-block;
+            background: var(--brand-accent);
+            color: var(--brand-text);
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,120,212,0.3);
+        }
+        .cta-secondary {
+            background: var(--brand-surface);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .cta-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+        }
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* ── Section defaults ── */
+        .section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        .section h2 {
+            font-family: var(--brand-font-heading);
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        /* ── Problem/Solution ── */
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .ps-col {
+            background: var(--brand-surface);
+            border: 1px solid var(--brand-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .ps-col h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .ps-col.problem h3 { color: #ff6b6b; }
+        .ps-col.solution h3 { color: #5bd77a; }
+        .ps-col p {
+            font-size: 0.9rem;
+            color: var(--brand-text-muted);
+            line-height: 1.6;
+        }
+
+        /* ── Steps ── */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .step {
+            background: var(--brand-surface);
+            border: 1px solid var(--brand-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0,120,212,0.2);
+            color: #7ab8ff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+        }
+        .step h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .step p {
+            font-size: 0.9rem;
+            color: var(--brand-text-muted);
+            line-height: 1.5;
+        }
+
+        /* ── Features ── */
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .feature-item {
+            font-size: 0.95rem;
+            padding: 0.5rem 0;
+            color: var(--brand-text-body);
+        }
+        .feature-item::before {
+            content: '\2713';
+            color: #5bd77a;
+            margin-right: 0.5rem;
+            font-weight: 700;
+        }
+
+        /* ── Testimonial ── */
+        .testimonial {
+            background: var(--brand-surface);
+            border: 1px solid var(--brand-border);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 650px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .testimonial blockquote {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        .testimonial .attribution {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+        .testimonial .attribution strong {
+            opacity: 1;
+            color: var(--brand-text);
+        }
+
+        /* ── Bottom CTA ── */
+        .bottom-cta {
+            text-align: center;
+            padding: 3rem 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .bottom-cta h2 {
+            font-family: var(--brand-font-heading);
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        .bottom-cta p {
+            font-size: 1.1rem;
+            color: var(--brand-text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: var(--brand-text);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            transition: border-color 0.2s;
+        }
+        footer a:hover { border-color: var(--brand-text); }
+        .footer-links {
+            margin-bottom: 0.75rem;
+        }
+        .footer-links a {
+            margin: 0 0.75rem;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 700px) {
+            .hero h2 { font-size: 2rem; }
+            .problem-solution { grid-template-columns: 1fr; }
+            .steps { grid-template-columns: 1fr; }
+            .features-list { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <div class="nav-left">
+            <a href="/">
+                <img src="/images/DBMNLogo.png" alt="DBMN">
+                <h1>DBMN</h1>
+            </a>
+        </div>
+        <div class="nav-right">
+            <a href="/docs/">Docs</a>
+            <a href="/pricing.html">Pricing</a>
+            <a href="/account/" class="nav-cta">Account</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h2>REST API Data Migration Tool</h2>
+        <p class="subtitle">Migrate millions of records through any REST API. No scripts. No ETL platforms.</p>
+        <a href="https://marketplace.visualstudio.com/items?itemName=FlexionTech.active8" class="cta">
+            Install for VS Code
+        </a>
+    </section>
+
+    <section class="section">
+        <h2>The migration problem</h2>
+        <div class="problem-solution">
+            <div class="ps-col problem">
+                <h3>Without Dobermann</h3>
+                <p>Every REST API migration starts the same way: custom scripts for authentication, pagination, error handling, and retries. Weeks of development for each new system. One engineer becomes the bottleneck for every data load.</p>
+            </div>
+            <div class="ps-col solution">
+                <h3>With Dobermann</h3>
+                <p>Point at any REST API, map your CSV or Excel data to API fields, and load millions of records with parallel processing. No code. No custom integrations. Anyone on the team can run it.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>How it works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Connect</h3>
+                <p>Any REST API. Any auth method. Done.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Map</h3>
+                <p>CSV or Excel to API fields. Preview before you commit.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Load</h3>
+                <p>Hit go. Millions of records. Batching, retries, and logging handled.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Built for bulk API data loading</h2>
+        <div class="features-list">
+            <div class="feature-item">Parallel processing (up to 16 threads)</div>
+            <div class="feature-item">CSV and Excel file support</div>
+            <div class="feature-item">Any REST API, any auth method</div>
+            <div class="feature-item">Visual field mapping</div>
+            <div class="feature-item">Pause, resume, and retry</div>
+            <div class="feature-item">Row-level error handling</div>
+            <div class="feature-item">Automatic auth token management</div>
+            <div class="feature-item">Data extraction with pagination</div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="testimonial">
+            <blockquote>"We took a 16-hour process that only one person could execute, and turned it into a 20-minute process that multiple team members can run. That's a game-changer for our operations."</blockquote>
+            <p class="attribution"><strong>Callum S.</strong>, Project Director</p>
+        </div>
+    </section>
+
+    <section class="bottom-cta">
+        <h2>Start migrating today</h2>
+        <p>Free 30-day trial. No credit card required.</p>
+        <div class="buttons">
+            <a href="https://marketplace.visualstudio.com/items?itemName=FlexionTech.active8" class="cta">
+                Install for VS Code
+            </a>
+            <a href="/docs/getting-started" class="cta cta-secondary">
+                Getting Started &rarr;
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/pricing.html">Pricing</a>
+            <a href="/terms.html">Terms</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/docs/">Docs</a>
+        </div>
+        &copy; 2026 DBMN.io. Migrate millions of records through any REST API.
+    </footer>
+
+</body>
+</html>

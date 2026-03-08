@@ -44,24 +44,58 @@
                 </div>
             </div>
 
-            <!-- Usage stats -->
-            <h3 style="font-size: 0.875rem; color: #a0a0b0; margin-bottom: 0.75rem;">This Week's Usage</h3>
+            <!-- Weekly Usage -->
+            <h3 style="font-size: 0.875rem; color: #a0a0b0; margin-bottom: 0.75rem;">This Week</h3>
             <div class="stat-grid">
                 <div class="stat-card">
-                    <div class="stat-value" id="apiCallsStat">-</div>
+                    <div class="stat-value" id="weeklyApiCalls">-</div>
                     <div class="stat-label">API Calls</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value" id="batchesStat">-</div>
+                    <div class="stat-value" id="weeklyBatches">-</div>
                     <div class="stat-label">Batches</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value" id="recordsStat">-</div>
-                    <div class="stat-label">Records Processed</div>
+                    <div class="stat-value" id="weeklyRows">-</div>
+                    <div class="stat-label">Rows Processed</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value" id="exportsStat">-</div>
-                    <div class="stat-label">Exports</div>
+                    <div class="stat-value" id="weeklyRunTime">-</div>
+                    <div class="stat-label">Run Time</div>
+                </div>
+            </div>
+
+            <!-- Total Usage -->
+            <h3 style="font-size: 0.875rem; color: #a0a0b0; margin: 1.25rem 0 0.75rem;">All Time</h3>
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalApiCalls">-</div>
+                    <div class="stat-label">API Calls</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalBatches">-</div>
+                    <div class="stat-label">Batches</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalRows">-</div>
+                    <div class="stat-label">Rows Processed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalRunTime">-</div>
+                    <div class="stat-label">Run Time</div>
+                </div>
+            </div>
+
+            <!-- License Details -->
+            <hr class="divider">
+            <h3 style="font-size: 0.875rem; color: #a0a0b0; margin-bottom: 0.75rem;">License</h3>
+            <div id="licenseDetails"></div>
+
+            <!-- Expired trial alert -->
+            <div id="expiredTrialAlert" class="alert alert-warning" style="display: none; margin-top: 1rem;">
+                <strong>Trial Expired</strong> — Your 30-day trial has ended. Upgrade to restore full access.
+                <div style="margin-top: 0.5rem;">
+                    <a href="/pricing.html" style="color: #ffd60a; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(255,214,10,0.3);">View Plans &rarr;</a>
                 </div>
             </div>
 
@@ -71,7 +105,6 @@
             <h3 style="font-size: 0.875rem; color: #a0a0b0; margin-bottom: 0.75rem;">Account</h3>
             <p style="font-size: 0.875rem; margin-bottom: 0.5rem;"><strong>Email:</strong> <span id="userEmail">-</span></p>
             <p style="font-size: 0.875rem; margin-bottom: 0.5rem;"><strong>Member since:</strong> <span id="memberSince">-</span></p>
-            <p style="font-size: 0.875rem; margin-bottom: 1.5rem;"><strong>License:</strong> <span id="licenseType">-</span></p>
 
             <!-- Upgrade CTA (shown for free/expired trial) -->
             <div id="upgradeCta" style="display: none; margin-bottom: 1rem;">
@@ -100,6 +133,18 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="/account/shared.js"></script>
     <script>
+        function formatRunTime(ms) {
+            if (!ms || ms <= 0) return '0s';
+            var seconds = Math.floor(ms / 1000);
+            var minutes = Math.floor(seconds / 60);
+            var hours = Math.floor(minutes / 60);
+            var days = Math.floor(hours / 24);
+            if (days > 0) return days + 'd ' + (hours % 24) + 'h';
+            if (hours > 0) return hours + 'h ' + (minutes % 60) + 'm';
+            if (minutes > 0) return minutes + 'm ' + (seconds % 60) + 's';
+            return seconds + 's';
+        }
+
         document.addEventListener('DOMContentLoaded', async function() {
             initSupabase();
 
@@ -116,8 +161,8 @@
             document.getElementById('headerEmail').textContent = user.email;
 
             try {
-                // Fetch license and usage data
-                var licenseData = await callEdgeFunction('check-license', null, 'GET');
+                // Fetch license, usage, and telemetry stats
+                var licenseData = await callEdgeFunction('check-license?include_stats=true', null, 'GET');
 
                 // Fetch profile
                 var profileResult = await dbmnSupabase
@@ -142,12 +187,13 @@
 
                 // License badge
                 var badge = document.getElementById('licenseBadge');
-                badge.textContent = license.licenseType.charAt(0).toUpperCase() + license.licenseType.slice(1);
-                badge.className = 'license-badge license-' + license.licenseType;
-
-                document.getElementById('licenseType').textContent =
-                    license.licenseType.charAt(0).toUpperCase() + license.licenseType.slice(1) +
-                    (license.accessLevel === 'full' ? ' (Full Access)' : ' (Limited)');
+                if (license.isLifetime) {
+                    badge.textContent = 'Lifetime';
+                    badge.className = 'license-badge license-lifetime';
+                } else {
+                    badge.textContent = license.licenseType.charAt(0).toUpperCase() + license.licenseType.slice(1);
+                    badge.className = 'license-badge license-' + license.licenseType;
+                }
 
                 // Trial info
                 if (license.licenseType === 'trial' && license.trialEndsAt) {
@@ -156,16 +202,71 @@
                     document.getElementById('trialInfo').style.display = 'block';
                 }
 
+                // License details section
+                var detailsEl = document.getElementById('licenseDetails');
+                var detailsHtml = '';
+
+                if (license.isLifetime) {
+                    detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">Type</span><span class="license-detail-value">Lifetime Individual License</span></div>';
+                    detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">Expiry</span><span class="license-detail-value">No expiry</span></div>';
+                } else if (license.licenseType === 'user') {
+                    detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">Type</span><span class="license-detail-value">Individual License</span></div>';
+                    if (license.subscriptionEndsAt) {
+                        detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">Subscription ends</span><span class="license-detail-value">' + new Date(license.subscriptionEndsAt).toLocaleDateString() + '</span></div>';
+                    }
+                } else if (license.licenseType === 'trial') {
+                    detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">Type</span><span class="license-detail-value">Trial</span></div>';
+                    if (license.trialEndsAt) {
+                        detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">Trial ends</span><span class="license-detail-value">' + new Date(license.trialEndsAt).toLocaleDateString() + '</span></div>';
+                    }
+                } else if (license.licenseType === 'free') {
+                    detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">Type</span><span class="license-detail-value">Free Tier</span></div>';
+                    detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">Access</span><span class="license-detail-value">Limited — batch & concurrency restricted</span></div>';
+                }
+
+                // Licensed environments (only show for environment license holders)
+                var envUrls = license.licensedEnvironmentUrls || [];
+                if (envUrls.length > 0) {
+                    detailsHtml += '<div class="license-detail-row" style="flex-direction: column; align-items: flex-start;"><span class="license-detail-label">Licensed Environments</span>';
+                    detailsHtml += '<ul class="env-url-list">';
+                    envUrls.forEach(function(url) { detailsHtml += '<li>' + url + '</li>'; });
+                    detailsHtml += '</ul></div>';
+                }
+
+                detailsEl.innerHTML = detailsHtml;
+
+                // Expired trial alert (free + limited = was a trial that expired)
+                if (license.licenseType === 'free' && license.accessLevel === 'limited') {
+                    document.getElementById('expiredTrialAlert').style.display = 'block';
+                }
+
                 // Show upgrade CTA for free tier or expired trial
                 if (license.licenseType === 'free' || license.accessLevel === 'limited') {
                     document.getElementById('upgradeCta').style.display = 'block';
                 }
 
-                // Usage stats
-                document.getElementById('apiCallsStat').textContent = (usage?.apiCalls || 0).toLocaleString();
-                document.getElementById('batchesStat').textContent = (usage?.batchCount || 0).toLocaleString();
-                document.getElementById('recordsStat').textContent = (usage?.batchRecordCount || 0).toLocaleString();
-                document.getElementById('exportsStat').textContent = (usage?.exportCount || 0).toLocaleString();
+                // Telemetry stats (weekly + alltime)
+                var stats = licenseData.telemetryStats;
+                if (stats) {
+                    var weekly = stats.weekly || {};
+                    var alltime = stats.alltime || {};
+
+                    document.getElementById('weeklyApiCalls').textContent = (weekly.apiCalls || 0).toLocaleString();
+                    document.getElementById('weeklyBatches').textContent = (weekly.batchRuns || 0).toLocaleString();
+                    document.getElementById('weeklyRows').textContent = (weekly.rowsProcessed || 0).toLocaleString();
+                    document.getElementById('weeklyRunTime').textContent = formatRunTime(weekly.totalExecutionTimeMs || 0);
+
+                    document.getElementById('totalApiCalls').textContent = (alltime.apiCalls || 0).toLocaleString();
+                    document.getElementById('totalBatches').textContent = (alltime.batchRuns || 0).toLocaleString();
+                    document.getElementById('totalRows').textContent = (alltime.rowsProcessed || 0).toLocaleString();
+                    document.getElementById('totalRunTime').textContent = formatRunTime(alltime.totalExecutionTimeMs || 0);
+                } else {
+                    // Fallback: show zeros
+                    ['weeklyApiCalls','weeklyBatches','weeklyRows','weeklyRunTime',
+                     'totalApiCalls','totalBatches','totalRows','totalRunTime'].forEach(function(id) {
+                        document.getElementById(id).textContent = '0';
+                    });
+                }
 
                 // Show dashboard
                 document.getElementById('loadingCard').style.display = 'none';

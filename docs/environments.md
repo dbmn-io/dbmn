@@ -219,7 +219,7 @@ OAuth 2.0 authentication flow for secure, delegated access.
 
 **OAuth flow:**
 1. Configure OAuth settings
-2. Click **Authenticate with OAuth**
+2. Click **Sign In**
 3. Browser opens to authorization URL
 4. Log in and grant permissions
 5. Dobermann receives token automatically
@@ -228,7 +228,8 @@ OAuth 2.0 authentication flow for secure, delegated access.
 - Access tokens are stored securely
 - Refresh tokens are used automatically when access token expires
 - Visual indicators show authentication status
-- Click **Re-authenticate** if token becomes invalid
+- **Sign In** — Standard sign-in. If you already have a browser session with your identity provider, you may be signed in automatically without re-entering credentials.
+- **Sign In (New Token)** — Forces you to enter your credentials again, even if your browser remembers a previous session. Use this when your roles or permissions have changed on the server and your current token has stale claims.
 
 **Relative URLs:**
 Dobermann supports relative URLs for OAuth endpoints. If authorization URL or token URL starts with `/`, it will be automatically prepended with the environment's base URL.
@@ -372,7 +373,7 @@ Environments appear in the sidebar tree view with these indicators:
 
 **Solutions:**
 - **JWT:** Paste a new token in environment settings
-- **OAuth:** Click "Re-authenticate with OAuth"
+- **OAuth:** Click **Sign In (New Token)** to force fresh credentials and get an updated token
 - **Google Service Account:** Check key expiry, re-upload if needed
 
 ### OAuth Flow Fails

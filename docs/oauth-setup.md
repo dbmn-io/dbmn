@@ -75,9 +75,12 @@ You need two URLs from your provider:
    - **Authorization URL** — from step 4
    - **Token URL** — from step 4
    - **Scopes** — from step 3
-4. Click **Authenticate with OAuth**
+4. Click **Sign In** to authenticate
 5. Complete the login flow in your browser
 6. Dobermann receives and stores the token automatically
+
+{: .note }
+> **Sign In vs Sign In (New Token):** Both buttons are always visible for OAuth environments. **Sign In** uses your existing browser session (you may be signed in automatically). **Sign In (New Token)** forces you to re-enter credentials — use it when your roles or permissions have changed and your current token has stale claims.
 
 ---
 

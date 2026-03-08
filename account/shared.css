@@ -68,7 +68,7 @@ body {
 }
 
 .container {
-    max-width: 480px;
+    max-width: 720px;
     width: 100%;
     padding: 2rem;
     margin: 2rem auto 0 auto;
@@ -216,10 +216,16 @@ body {
     color: #7ab8ff;
 }
 
+.alert-warning {
+    background: rgba(255, 214, 10, 0.15);
+    border: 1px solid rgba(255, 214, 10, 0.3);
+    color: #ffd60a;
+}
+
 /* Dashboard styles */
 .stat-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
     margin-bottom: 1.5rem;
 }
@@ -271,6 +277,46 @@ body {
 .license-free {
     background: rgba(255, 255, 255, 0.1);
     color: var(--brand-text-muted);
+}
+
+.license-lifetime {
+    background: rgba(52, 199, 89, 0.2);
+    color: #34c759;
+}
+
+/* License details section */
+.license-detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    font-size: 0.875rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.license-detail-row:last-child {
+    border-bottom: none;
+}
+
+.license-detail-label {
+    color: var(--brand-text-muted);
+}
+
+.license-detail-value {
+    color: var(--brand-text);
+    font-weight: 500;
+}
+
+.env-url-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+}
+
+.env-url-list li {
+    font-size: 0.8rem;
+    color: var(--brand-text-body);
+    padding: 0.25rem 0;
 }
 
 .divider {
