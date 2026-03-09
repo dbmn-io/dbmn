@@ -91,6 +91,11 @@
             <h3 style="font-size: 0.875rem; color: #a0a0b0; margin-bottom: 0.75rem;">License</h3>
             <div id="licenseDetails"></div>
 
+            <!-- Manage Subscription (shown for active paid subscribers only) -->
+            <div id="manageSubscription" style="display: none; margin-top: 0.75rem;">
+                <button id="manageSubBtn" class="btn btn-secondary" style="width: 100%;">Manage Subscription</button>
+            </div>
+
             <!-- Expired trial alert -->
             <div id="expiredTrialAlert" class="alert alert-warning" style="display: none; margin-top: 1rem;">
                 <strong>Trial Expired</strong> — Your 30-day trial has ended. Upgrade to restore full access.
@@ -238,6 +243,28 @@
                 // Expired trial alert (free + limited = was a trial that expired)
                 if (license.licenseType === 'free' && license.accessLevel === 'limited') {
                     document.getElementById('expiredTrialAlert').style.display = 'block';
+                }
+
+                // Show "Manage Subscription" for active paid subscribers (not free/trial/lifetime)
+                if ((license.licenseType === 'user' || license.licenseType === 'environment') && !license.isLifetime) {
+                    document.getElementById('manageSubscription').style.display = 'block';
+                    document.getElementById('manageSubBtn').addEventListener('click', async function() {
+                        var btn = this;
+                        btn.disabled = true;
+                        btn.textContent = 'Redirecting...';
+                        try {
+                            var result = await callEdgeFunction('create-portal-session', null, 'POST');
+                            if (result.url) {
+                                window.location.href = result.url;
+                            } else {
+                                throw new Error(result.error || 'Failed to create portal session');
+                            }
+                        } catch (err) {
+                            btn.disabled = false;
+                            btn.textContent = 'Manage Subscription';
+                            showAlert('alert', 'Could not open subscription portal: ' + err.message, 'error');
+                        }
+                    });
                 }
 
                 // Show upgrade CTA for free tier or expired trial
