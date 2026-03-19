@@ -654,6 +654,8 @@ permalink: /pricing.html
         (async function() {
             if (typeof window.supabase === 'undefined') return;
             var db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            var userResult = await db.auth.getUser();
+            if (!userResult.data.user) return;
             var sessionResult = await db.auth.getSession();
             var session = sessionResult.data.session;
             if (!session) return;
