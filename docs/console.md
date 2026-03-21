@@ -440,6 +440,7 @@ For batches over 1,000 rows:
 ## Related Topics
 
 - [Pagination](pagination) — Configure and run paginated API requests
+- [Batch Reprocessing](batch-reprocessing) — Re-run failed transactions without re-executing the whole batch
 - [Endpoints](endpoints) — Configuring API requests
 - [Batch Preparation](batch-preparation) — Data loading and column mapping
 - [Environments](environments) — Authentication, timezone, and parallel processing

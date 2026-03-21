@@ -22,6 +22,7 @@ Welcome to the Dobermann documentation. Dobermann enables bulk data migration th
 | [Batch Preparation](batch-preparation) | Load data and map columns |
 | [Console](console) | Run requests, monitor progress, analyse results |
 | [↳ Pagination](pagination) | Configure and run paginated API requests |
+| [↳ Batch Reprocessing](batch-reprocessing) | Re-run only failed transactions from a previous batch |
 | [Import/Export](import-export) | Share configurations with your team |
 | [Playground](playground) | Live API sandbox with ready-to-paste endpoint templates |
 | [Shortcuts](shortcuts) | Keyboard shortcuts for efficiency |
