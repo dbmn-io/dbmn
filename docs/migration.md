@@ -11,6 +11,12 @@ Dobermann has moved from the **FlexionTech** publisher to the new **DBMN** publi
 
 The process takes about 2 minutes.
 
+## Before You Start
+
+Open the **same VS Code workspace** you were using with the FlexionTech extension. Execution history (your past batch results and transaction logs) is stored in a SQLite database inside your workspace folder. If you open a different workspace, that history won't be there.
+
+Your endpoints and environments will be migrated via export/import (Step 1–4 below). But execution history stays with the workspace automatically — as long as you keep using the same one, the new extension picks it up.
+
 ## Step 1: Export Your Data
 
 While the FlexionTech extension is still installed, export everything:
@@ -69,7 +75,7 @@ Do not run both extensions at the same time — they can conflict with each othe
 ## After Migration
 
 - **Sign in to DBMN** — If you had a DBMN account, sign in again from the Account panel to restore your license and trial status.
-- **Execution history** — Previous execution history from the FlexionTech version will not transfer. Only endpoint and environment configurations are included in the export.
+- **Execution history** — If you kept the same workspace (see Before You Start), your past batch results and transaction logs are already available in the new extension.
 
 ## Troubleshooting
 
