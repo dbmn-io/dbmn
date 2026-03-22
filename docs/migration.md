@@ -7,23 +7,19 @@ parent: Documentation
 
 # Migrating from FlexionTech to Dobermann
 
-Dobermann has moved from the **FlexionTech** publisher to the new **DBMN** publisher on the VS Code Marketplace. Your existing endpoints, environments, and data are safe — they live in your VS Code workspace and transfer automatically. This guide walks you through the switch.
+Dobermann has moved from the **FlexionTech** publisher to the new **DBMN** publisher on the VS Code Marketplace. Because the publisher has changed, the new extension uses a separate storage namespace — your existing data will **not** carry over automatically. You need to export from the old extension and import into the new one.
 
-## Before You Start
-
-- You should be using the **same VS Code workspace** you used with the FlexionTech version
-- The migration takes about 2 minutes
-- No data is lost — endpoints, environments, and execution history carry over
+The process takes about 2 minutes.
 
 ## Step 1: Export Your Data
 
-Open the FlexionTech extension and export everything as a backup:
+While the FlexionTech extension is still installed, export everything:
 
 1. Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`)
 2. Run **Dobermann: Export Workspace**
 3. Save the file somewhere easy to find
 
-This gives you a safety net. In most cases the data transfers automatically, but it's good practice to have a backup.
+This exports all your endpoints, folders, and environments into a single file. Sensitive data (tokens, secrets) is excluded for security.
 
 ## Step 2: Install Dobermann from the Marketplace
 
@@ -38,21 +34,11 @@ Or install directly from the [VS Code Marketplace](https://marketplace.visualstu
 
 ## Step 3: Open Dobermann
 
-In the Activity Bar (left sidebar), click **Dobermann** — the icon tooltip now reads "Dobermann" instead of "DBMN".
+In the Activity Bar (left sidebar), click **Dobermann** — the icon tooltip now reads "Dobermann".
 
-Your endpoints and environments should appear automatically since they're stored in your workspace.
+The extension will be empty — this is expected. Your data is coming in the next step.
 
-## Step 4: Verify Your Data
-
-Check that everything came across:
-
-- **Environments** — Open each environment and verify the base URL and auth method are correct. You may need to re-enter credentials (tokens, OAuth secrets) as these are never stored in exports.
-- **Endpoints** — Spot-check a few endpoints to confirm the URL, headers, body template, and variables are intact.
-- **Test** — Run a single API call against a non-production environment to confirm connectivity.
-
-## Step 5: Import (If Needed)
-
-If your data didn't transfer automatically:
+## Step 4: Import Your Data
 
 1. Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`)
 2. Run **Dobermann: Import Workspace**
@@ -60,6 +46,14 @@ If your data didn't transfer automatically:
 4. Choose **Merge** to import without overwriting
 
 See [Import/Export](import-export) for details on import modes.
+
+## Step 5: Re-enter Credentials
+
+Tokens and secrets are never included in exports. For each environment:
+
+- **OAuth** — Re-enter your client secret, then sign in
+- **JWT** — Re-enter your token
+- **Test** — Run a single API call against a non-production environment to confirm connectivity
 
 ## Step 6: Uninstall the FlexionTech Extension
 
@@ -70,19 +64,17 @@ Once you've confirmed everything works:
 3. Click **Uninstall**
 4. Reload VS Code when prompted
 
+Do not run both extensions at the same time — they can conflict with each other.
+
 ## After Migration
 
-- **Re-enter credentials** — OAuth client secrets, JWT tokens, and access tokens are excluded from exports for security. Configure authentication on each environment after migration.
 - **Sign in to DBMN** — If you had a DBMN account, sign in again from the Account panel to restore your license and trial status.
-- **Same workspace** — Continue using the same VS Code workspace. Your execution history and settings are workspace-scoped.
+- **Execution history** — Previous execution history from the FlexionTech version will not transfer. Only endpoint and environment configurations are included in the export.
 
 ## Troubleshooting
 
 **I can see both extensions in the Activity Bar**
 Uninstall the FlexionTech version (Step 6). Having both installed simultaneously can cause conflicts.
-
-**My endpoints are missing after install**
-Make sure you opened the same VS Code workspace. If they're still missing, import the backup from Step 1.
 
 **OAuth stopped working**
 Re-enter your OAuth client secret in the environment settings. Secrets are never transferred between extensions.
