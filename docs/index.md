@@ -27,6 +27,7 @@ Welcome to the Dobermann documentation. Dobermann enables bulk data migration th
 | [Playground](playground) | Live API sandbox with ready-to-paste endpoint templates |
 | [Shortcuts](shortcuts) | Keyboard shortcuts for efficiency |
 | [Migration Guide](migration) | Moving from FlexionTech to DBMN publisher |
+| [Your Data & Privacy](your-data) | Where data is stored and what leaves your machine |
 | [Troubleshooting](troubleshooting) | Common issues and solutions |
 | [Changelog](changelog) | Release history and what's new |
 | [Pricing](/pricing.html) | Plans, pricing, and free trial details |

@@ -330,7 +330,7 @@ Click any execution to reopen the Console with full results.
 
 ### Workspace Files
 
-Results are automatically saved to your workspace:
+Results are automatically saved to your [Dobermann workspace](../your-data#dobermann-workspace):
 
 ```
 .active8/
