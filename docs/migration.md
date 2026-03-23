@@ -57,7 +57,7 @@ See [Import/Export](import-export) for details on import modes.
 
 Tokens and secrets are never included in exports. For each environment:
 
-- **OAuth** — Re-enter your client secret, then sign in
+- **OAuth** — Re-enter your client secret, then sign in. **Important:** the OAuth redirect URI has changed from `vscode://FlexionTech.active8/oauth-callback` to `vscode://dbmn.dobermann/oauth-callback`. You must update this in your OAuth provider's client configuration — otherwise you'll get an `Invalid parameter: redirect_uri` error in the browser when signing in.
 - **JWT** — Re-enter your token
 - **Test** — Run a single API call against a non-production environment to confirm connectivity
 
@@ -82,8 +82,8 @@ Do not run both extensions at the same time — they can conflict with each othe
 **I can see both extensions in the Activity Bar**
 Uninstall the FlexionTech version (Step 6). Having both installed simultaneously can cause conflicts.
 
-**OAuth stopped working**
-Re-enter your OAuth client secret in the environment settings. Secrets are never transferred between extensions.
+**OAuth stopped working / `Invalid parameter: redirect_uri`**
+The redirect URI changed with the new publisher. Update your OAuth provider's client configuration to use `vscode://dbmn.dobermann/oauth-callback` (was `vscode://FlexionTech.active8/oauth-callback`). Then re-enter your client secret in the environment settings — secrets are never transferred between extensions.
 
 **Need help?**
 [Report an issue](https://github.com/dbmn-io/dbmn/issues) or ask in [GitHub Discussions](https://github.com/dbmn-io/dbmn/discussions).
