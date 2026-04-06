@@ -594,8 +594,17 @@
 // Path: /reference/carriers</div>
                             <button class="ps-copy-btn" onclick="copyTemplate(this)">Copy</button>
                         </div>
-                        <p>Hit <strong>Run</strong>.</p>
-                        <p>You should see a response like this:</p>
+                        <p>Hit <strong>Run</strong>. The Console opens automatically with your results.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="ps-step">
+                        <div class="ps-step-label">Step 4</div>
+                        <h3>Reading the Console</h3>
+                        <p>The Console is where every response lands. It has several tabs — let's walk through the ones that matter right now.</p>
+
+                        <p><strong>The Completed tab</strong> shows your successful responses as a structured data table. You should see it open by default with your carrier data. But the table might look a little flat — that's because the response wraps the data in an envelope:</p>
+
 <div class="ps-code">{
   "data": [
     {
@@ -606,12 +615,17 @@
     }
   ]
 }</div>
+
+                        <p>The carrier records you want are inside that <code class="ps-path">data</code> array. To see them as proper rows and columns, click the <strong>data</strong> array in the table to expand it, then click <strong>Set as Root</strong>. The table instantly re-renders with each carrier as its own row — SCAC codes, names, breeds, mottos — all as sortable, searchable columns.</p>
+
+                        <p><strong>The RAW tab</strong> shows the full HTTP conversation — the exact request sent and the complete response received, with syntax-highlighted JSON. Click it now and take a look. This is where you'll go when you need to debug what actually went over the wire. You can toggle the <strong>Request</strong> and <strong>Response</strong> checkboxes to show or hide each part.</p>
+
                         <p>The Training Ground uses dog-themed reference data throughout. The data structures are real — GS1-aligned, EDI-compatible, foreign key validated. The carrier names are not.</p>
                     </div>
 
-                    <!-- Step 4 -->
+                    <!-- Step 5 -->
                     <div class="ps-step">
-                        <div class="ps-step-label">Step 4</div>
+                        <div class="ps-step-label">Step 5</div>
                         <h3>Explore the Reference Data</h3>
                         <p>Create a new endpoint for each of the following. Copy each template, click <strong>Paste</strong> in Dobermann, and hit <strong>Run</strong>.</p>
 
@@ -636,7 +650,7 @@
                             <button class="ps-copy-btn" onclick="copyTemplate(this)">Copy</button>
                         </div>
 
-                        <p>Take a moment to read through the responses. These are your master data tables — carriers, warehouses, products, and trading partners. You will be referencing them throughout Puppy School, and they mirror exactly the kind of lookup tables you would encounter on a real implementation project.</p>
+                        <p>For each one, use what you just learned: check the <strong>Completed</strong> tab, expand the <strong>data</strong> array, and hit <strong>Set as Root</strong> to see the records as a proper table. These are your master data tables — carriers, warehouses, products, and trading partners. You will be referencing them throughout Puppy School, and they mirror exactly the kind of lookup tables you would encounter on a real implementation project.</p>
                     </div>
 
                     <!-- Callouts -->
