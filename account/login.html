@@ -89,8 +89,10 @@
                         return;
                     }
 
-                    // Otherwise go to account dashboard
-                    window.location.href = '/account/index.html';
+                    // Redirect to return URL if provided, otherwise account dashboard
+                    var params = new URLSearchParams(window.location.search);
+                    var returnUrl = params.get('return');
+                    window.location.href = returnUrl || '/account/index.html';
 
                 } catch (err) {
                     showAlert('alert', 'Sign-in failed: ' + err.message, 'error');
