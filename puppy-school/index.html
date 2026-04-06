@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puppy School - DBMN</title>
+    <meta name="description" content="Learn Dobermann from first connection to running real batch transactions against a live API sandbox.">
+    <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
+    <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
+    <link rel="stylesheet" href="/css/brand.css">
+    <link rel="stylesheet" href="/account/shared.css">
+    <style>
+        /* ── Puppy School custom styles ── */
+
+        .ps-container {
+            max-width: 720px;
+            width: 100%;
+            padding: 2rem;
+            margin: 2rem auto 0 auto;
+        }
+
+        /* Course header with paw icon */
+        .ps-course-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .ps-course-header h1 {
+            font-family: var(--brand-font-heading);
+            font-size: 2rem;
+            color: var(--brand-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .ps-course-header .ps-tagline {
+            font-size: 1rem;
+            color: var(--brand-text-muted);
+            line-height: 1.6;
+        }
+
+        /* Lesson card */
+        .ps-lesson {
+            display: none;
+            animation: stepFadeIn 0.3s ease;
+        }
+
+        .ps-lesson.active {
+            display: block;
+        }
+
+        .ps-lesson-card {
+            background: var(--brand-surface);
+            border: 1px solid var(--brand-border);
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .ps-lesson-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            color: var(--brand-text-muted);
+        }
+
+        .ps-lesson-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .ps-lesson-title {
+            font-family: var(--brand-font-heading);
+            font-size: 1.5rem;
+            color: var(--brand-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .ps-lesson-goal {
+            font-size: 0.9rem;
+            color: var(--brand-text-muted);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        /* Step sections within a lesson */
+        .ps-step {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .ps-step:last-of-type {
+            border-bottom: none;
+        }
+
+        .ps-step-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--brand-accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .ps-step h3 {
+            font-size: 1.1rem;
+            color: var(--brand-text);
+            margin-bottom: 0.75rem;
+        }
+
+        .ps-step p {
+            color: var(--brand-text-body);
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Config tables */
+        .ps-config-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.875rem;
+        }
+
+        .ps-config-table th,
+        .ps-config-table td {
+            padding: 0.5rem 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .ps-config-table th {
+            color: var(--brand-text-muted);
+            font-weight: 500;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .ps-config-table td {
+            color: var(--brand-text);
+        }
+
+        .ps-config-table code {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0.15rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.85rem;
+        }
+
+        /* Code blocks */
+        .ps-code {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #e0e0e0;
+            line-height: 1.5;
+            white-space: pre;
+        }
+
+        /* Inline path/code */
+        .ps-path {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0.15rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.85em;
+        }
+
+        /* Endpoint list */
+        .ps-endpoint-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .ps-endpoint-list li {
+            padding: 0.5rem 0;
+            color: var(--brand-text-body);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .ps-endpoint-list li::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--brand-accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Philosophy / Dig Deeper callouts */
+        .ps-callout {
+            background: rgba(0, 120, 212, 0.08);
+            border-left: 3px solid var(--brand-accent);
+            border-radius: 0 6px 6px 0;
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+        }
+
+        .ps-callout-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--brand-accent);
+            margin-bottom: 0.4rem;
+        }
+
+        .ps-callout p {
+            font-size: 0.875rem;
+            color: var(--brand-text-muted);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .ps-callout a {
+            color: var(--brand-accent);
+            text-decoration: none;
+        }
+
+        .ps-callout a:hover {
+            text-decoration: underline;
+        }
+
+        /* Next / Check Homework button */
+        .ps-action-bar {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .ps-action-bar .btn {
+            max-width: 400px;
+        }
+
+        /* Checkpoint screen */
+        .ps-checkpoint {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .ps-checkpoint-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ps-checkpoint h2 {
+            font-family: var(--brand-font-heading);
+            font-size: 1.5rem;
+            color: var(--brand-text);
+            margin-bottom: 1rem;
+        }
+
+        .ps-checkpoint p {
+            color: var(--brand-text-body);
+            line-height: 1.7;
+            max-width: 500px;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        .ps-checkpoint .ps-incomplete-list {
+            text-align: left;
+            background: rgba(255, 69, 58, 0.08);
+            border: 1px solid rgba(255, 69, 58, 0.2);
+            border-radius: 6px;
+            padding: 1rem 1.25rem;
+            margin: 1rem auto 1.5rem auto;
+            max-width: 500px;
+        }
+
+        .ps-incomplete-list li {
+            color: #ff6b6b;
+            font-size: 0.875rem;
+            padding: 0.25rem 0;
+            list-style: none;
+        }
+
+        .ps-incomplete-list li::before {
+            content: '\2717  ';
+            font-weight: bold;
+        }
+
+        .ps-support-link {
+            font-size: 0.875rem;
+            color: var(--brand-text-muted);
+            margin-top: 1.5rem;
+        }
+
+        .ps-support-link a {
+            color: var(--brand-accent);
+            text-decoration: none;
+        }
+
+        .ps-support-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Progress tracker at top */
+        .ps-progress {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .ps-progress-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .ps-progress-dot.completed {
+            background: #34c759;
+        }
+
+        .ps-progress-dot.current {
+            background: var(--brand-accent);
+            transform: scale(1.3);
+        }
+
+        .ps-progress-line {
+            width: 40px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .ps-progress-line.completed {
+            background: #34c759;
+        }
+
+        .ps-progress-label {
+            font-size: 0.7rem;
+            color: var(--brand-text-muted);
+            text-align: center;
+            margin-top: 0.25rem;
+        }
+
+        /* Welcome screen */
+        .ps-welcome {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .ps-welcome h1 {
+            font-family: var(--brand-font-heading);
+            font-size: 2.25rem;
+            color: var(--brand-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .ps-welcome p {
+            color: var(--brand-text-body);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            max-width: 560px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .ps-welcome .ps-outcomes {
+            text-align: left;
+            max-width: 520px;
+            margin: 1.5rem auto 2rem auto;
+        }
+
+        .ps-outcomes li {
+            color: var(--brand-text-body);
+            padding: 0.4rem 0;
+            list-style: none;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .ps-outcomes li::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--brand-accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 0.5rem;
+        }
+
+        .ps-welcome .ps-tagline-final {
+            font-style: italic;
+            color: var(--brand-text-muted);
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Completion screen */
+        .ps-completion {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .ps-completion h2 {
+            font-family: var(--brand-font-heading);
+            font-size: 1.75rem;
+            color: var(--brand-text);
+            margin-bottom: 1rem;
+        }
+
+        .ps-completion p {
+            color: var(--brand-text-body);
+            line-height: 1.7;
+            max-width: 500px;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        /* Loading / sign-in cards */
+        .ps-loading-card {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .ps-loading-card .spinner {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Locked lesson indicator */
+        .ps-locked {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header compact-header">
+        <a href="/">
+            <img src="/images/DBMNLogo.png" alt="DBMN">
+            <h1>DBMN</h1>
+        </a>
+    </header>
+
+    <div class="ps-container">
+
+        <!-- Loading state -->
+        <div class="card" id="loadingCard">
+            <div class="ps-loading-card">
+                <p style="color: var(--brand-text-muted);"><span class="spinner"></span> Loading Puppy School...</p>
+            </div>
+        </div>
+
+        <!-- Sign-in required -->
+        <div class="card" id="signInCard" style="display:none;">
+            <div class="ps-checkpoint">
+                <h2>Sign In Required</h2>
+                <p>Puppy School requires a DBMN account. Sign in or register to get started.</p>
+                <a href="/account/login.html" class="btn btn-primary" style="max-width:300px; display:inline-block;">Sign In</a>
+                <div class="link-text" style="margin-top:1rem;">
+                    No account? <a href="/account/register.html">Get started free</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================ -->
+        <!-- COURSE CONTENT (authenticated) -->
+        <!-- ================================================================ -->
+        <div id="courseContent" style="display:none;">
+
+            <!-- Progress dots -->
+            <div class="ps-progress" id="progressDots">
+                <div class="ps-progress-dot" data-lesson="lesson_1" title="Lesson 1"></div>
+                <div class="ps-progress-line" data-after="lesson_1"></div>
+                <div class="ps-progress-dot" data-lesson="lesson_2" title="Lesson 2"></div>
+                <div class="ps-progress-line" data-after="lesson_2"></div>
+                <div class="ps-progress-dot" data-lesson="lesson_2_1" title="Lesson 2.1"></div>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- WELCOME -->
+            <!-- ============================================================ -->
+            <div class="ps-lesson" data-screen="welcome">
+                <div class="ps-lesson-card">
+                    <div class="ps-welcome">
+                        <h1>Puppy School</h1>
+
+                        <p>You're about to learn Dobermann — an API client built for anyone working with APIs who believes there has to be an easier way.</p>
+                        <p>There is. You've found it.</p>
+                        <p>Puppy School will take you from first connection to running real batch transactions against a live API sandbox. Along the way you'll learn how Dobermann thinks, why it works the way it does, and how to get the most out of it on a real project.</p>
+
+                        <p style="margin-top:1.5rem; margin-bottom:0.5rem; color:var(--brand-text); font-weight:600;">By the end of this course you will know how to:</p>
+
+                        <ul class="ps-outcomes">
+                            <li>Connect to any REST API and retrieve data at scale</li>
+                            <li>Load thousands of records — flat, nested, and everything in between</li>
+                            <li>Handle errors, reprocess failed transactions, and validate data before it hits production</li>
+                            <li>Extract and export data from any API response</li>
+                            <li>Share your work with your team</li>
+                        </ul>
+
+                        <p class="ps-tagline-final">Every lesson builds on the last. Every badge is earned.</p>
+
+                        <button class="btn btn-primary" style="max-width:300px;" onclick="navigateTo('lesson_1')">Begin Puppy School</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- LESSON 1 — Getting Connected -->
+            <!-- ============================================================ -->
+            <div class="ps-lesson" data-screen="lesson_1">
+                <div class="ps-lesson-card">
+                    <div class="ps-lesson-meta">
+                        <span>Lesson 1</span>
+                        <span>~10 minutes</span>
+                    </div>
+                    <h2 class="ps-lesson-title">Getting Connected</h2>
+                    <p class="ps-lesson-goal">Connect Dobermann to The Training Ground and run your first API requests</p>
+
+                    <!-- Step 1 -->
+                    <div class="ps-step">
+                        <div class="ps-step-label">Step 1</div>
+                        <h3>Install and Sign In</h3>
+                        <p>Click the Dobermann icon in your VS Code activity bar.</p>
+                        <p>Not installed yet? <a href="https://marketplace.visualstudio.com/items?itemName=dbmn.dobermann" target="_blank" style="color:var(--brand-accent);">Get it from the VS Code Marketplace.</a></p>
+                        <p>Sign in or register for a free account. Once you're in, you're ready.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="ps-step">
+                        <div class="ps-step-label">Step 2</div>
+                        <h3>Create Your Environment</h3>
+                        <p>In Dobermann, navigate to <strong>Environments</strong> and create a new one with the following details:</p>
+                        <table class="ps-config-table">
+                            <tr><th>Field</th><th>Value</th></tr>
+                            <tr><td>Name</td><td><code>DBMN Puppy School</code></td></tr>
+                            <tr><td>Base URL</td><td><code>https://api.dbmn.io/functions/v1/playground</code></td></tr>
+                            <tr><td>Authentication</td><td><code>DBMN</code></td></tr>
+                        </table>
+                        <p>No tokens to copy. No headers to configure manually. Dobermann injects your authentication automatically at runtime — across every endpoint in this environment.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="ps-step">
+                        <div class="ps-step-label">Step 3</div>
+                        <h3>Your First Request</h3>
+                        <p>Create a new endpoint. Set the method to <strong>GET</strong> and the path to:</p>
+                        <div class="ps-code">/reference/carriers</div>
+                        <p>Hit <strong>Run</strong>.</p>
+                        <p>You should see a response like this:</p>
+<div class="ps-code">{
+  "data": [
+    {
+      "scac": "BARK",
+      "name": "BarkPost Express",
+      "breed": "Golden Retriever",
+      "motto": "Every package gets a tail wag"
+    }
+  ]
+}</div>
+                        <p>The Training Ground uses dog-themed reference data throughout. The data structures are real — GS1-aligned, EDI-compatible, foreign key validated. The carrier names are not.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="ps-step">
+                        <div class="ps-step-label">Step 4</div>
+                        <h3>Explore the Reference Data</h3>
+                        <p>Run a GET request for each of the following paths:</p>
+                        <ul class="ps-endpoint-list">
+                            <li><code class="ps-path">/reference/locations</code></li>
+                            <li><code class="ps-path">/reference/products</code></li>
+                            <li><code class="ps-path">/reference/trading-partners</code></li>
+                        </ul>
+                        <p>Take a moment to read through the responses. These are your master data tables — carriers, warehouses, products, and trading partners. You will be referencing them throughout Puppy School, and they mirror exactly the kind of lookup tables you would encounter on a real implementation project.</p>
+                    </div>
+
+                    <!-- Callouts -->
+                    <div class="ps-callout">
+                        <div class="ps-callout-title">Dobermann Philosophy</div>
+                        <p>Authentication should be configured once and forgotten. In Dobermann, auth lives at the environment level — every endpoint in that environment inherits it automatically. If your session expires, Dobermann tells you before execution begins, not halfway through a large batch run.</p>
+                    </div>
+
+                    <div class="ps-callout">
+                        <div class="ps-callout-title">Dig Deeper</div>
+                        <p>REST APIs use standard HTTP methods to define intent — GET retrieves data without modifying it, POST creates, PUT updates, DELETE removes. The requests you just ran are GET requests — read-only calls that leave the data exactly as you found it. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods" target="_blank">MDN's HTTP methods reference</a> is worth bookmarking.</p>
+                    </div>
+
+                    <div class="ps-action-bar">
+                        <button class="btn btn-primary" onclick="checkLesson('lesson_1')">Check My Homework</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- LESSON 2 — Bulk Upload at Scale -->
+            <!-- ============================================================ -->
+            <div class="ps-lesson" data-screen="lesson_2">
+                <div class="ps-lesson-card">
+                    <div class="ps-lesson-meta">
+                        <span>Lesson 2</span>
+                        <span>~15 minutes</span>
+                    </div>
+                    <h2 class="ps-lesson-title">Bulk Upload at Scale</h2>
+                    <p class="ps-lesson-goal">Load a flat CSV file into The Training Ground at scale using Dobermann's batch engine</p>
+
+                    <!-- Step 1 -->
+                    <div class="ps-step">
+                        <div class="ps-step-label">Step 1</div>
+                        <h3>Download the Inventory CSV</h3>
+                        <p>Download the sample inventory file: <a href="#" style="color:var(--brand-accent);">inventory-100k.csv</a></p>
+                        <p>This file contains 100,000 inventory records — products, locations, quantities. Flat structure, one row per record. Exactly the kind of export you would get from a WMS or ERP system.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="ps-step">
+                        <div class="ps-step-label">Step 2</div>
+                        <h3>Create the Inventory Upload Endpoint</h3>
+                        <p>Create a new endpoint in Dobermann. Click <strong>Paste</strong> and paste the following template — Dobermann will populate everything automatically:</p>
+<div class="ps-code">// Name: Puppy School — Bulk Inventory Upload
+// Method: POST
+// Path: /inventory
+// Header: Content-Type: application/json [enabled]
+
+[
+  {
+    "gtin": "{{gtin}}",
+    "sku": "{{sku}}",
+    "description": "{{description}}",
+    "locationGln": "{{locationGln}}",
+    "locationName": "{{locationName}}",
+    "quantityOnHand": "{{quantityOnHand:number}}",
+    "uom": "{{uom}}",
+    "status": "{{status}}"
+  }
+]</div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="ps-step">
+                        <div class="ps-step-label">Step 3</div>
+                        <h3>Load Your CSV</h3>
+                        <p>In Dobermann, open <strong>Batch Preparation</strong> and load the inventory CSV. Map your columns to the template fields.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="ps-step">
+                        <div class="ps-step-label">Step 4</div>
+                        <h3>Configure Threads and Run</h3>
+                        <p>Start with <strong>4 threads</strong>. Hit <strong>Run</strong> and watch the batch execute.</p>
+                        <p>Once complete — run it again with <strong>16 threads</strong>. Notice the difference.</p>
+                        <p>This is Dobermann running at scale. The Training Ground handles concurrent inserts — each thread processes its own batch of records independently.</p>
+                    </div>
+
+                    <!-- Callouts -->
+                    <div class="ps-callout">
+                        <div class="ps-callout-title">Dobermann Philosophy</div>
+                        <p>Dobermann was built because loading data one record at a time is not a workflow — it is a punishment. The batch engine was designed from the ground up for scale. Threads, error tracking, pause and resume — everything exists because real implementation projects demand it.</p>
+                    </div>
+
+                    <div class="ps-callout">
+                        <div class="ps-callout-title">Dig Deeper</div>
+                        <p>Multi-threading means sending multiple HTTP requests concurrently rather than sequentially. Each thread handles its own slice of the data independently. The speed improvement is not linear — network latency, server capacity, and connection overhead all play a role. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview" target="_blank">MDN's guide to HTTP</a> covers the fundamentals if you want to go deeper.</p>
+                    </div>
+
+                    <div class="ps-action-bar">
+                        <button class="btn btn-primary" onclick="checkLesson('lesson_2')">Check My Homework</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- LESSON 2.1 — Handling Errors -->
+            <!-- ============================================================ -->
+            <div class="ps-lesson" data-screen="lesson_2_1">
+                <div class="ps-lesson-card">
+                    <div class="ps-lesson-meta">
+                        <span>Lesson 2.1</span>
+                        <span>~10 minutes</span>
+                    </div>
+                    <h2 class="ps-lesson-title">Handling Errors</h2>
+                    <p class="ps-lesson-goal">Deliberately trigger batch errors, identify the failures, and reprocess them</p>
+
+                    <!-- Step 1 -->
+                    <div class="ps-step">
+                        <div class="ps-step-label">Step 1</div>
+                        <h3>Download the Error CSV</h3>
+                        <p>Download the error inventory file: <a href="#" style="color:var(--brand-accent);">inventory-errors.csv</a></p>
+                        <p>This file contains inventory records with deliberate errors — invalid GTINs that do not exist in the reference data. When you upload this file, some records will fail FK validation.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="ps-step">
+                        <div class="ps-step-label">Step 2</div>
+                        <h3>Run the Upload</h3>
+                        <p>Use your existing Puppy School inventory endpoint. Load the error CSV and run the batch.</p>
+                        <p>Some records will fail. That is expected. Watch the error count in the Dobermann console.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="ps-step">
+                        <div class="ps-step-label">Step 3</div>
+                        <h3>Inspect the Errors</h3>
+                        <p>Open the batch results. Review the failed records — Dobermann tells you exactly which rows failed and why.</p>
+                        <p>You should see errors like:</p>
+<div class="ps-code">{
+  "error": "Invalid reference value.",
+  "code": "FK_VIOLATION"
+}</div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="ps-step">
+                        <div class="ps-step-label">Step 4</div>
+                        <h3>Fix and Reprocess</h3>
+                        <p>Add the missing GTIN to the products reference table using a POST to <code class="ps-path">/reference/products</code>. Then select the failed records in Dobermann and hit <strong>Reprocess</strong>.</p>
+                        <p>Watch the failures clear.</p>
+                    </div>
+
+                    <!-- Callouts -->
+                    <div class="ps-callout">
+                        <div class="ps-callout-title">Dobermann Philosophy</div>
+                        <p>Errors are not failures — they are information. Dobermann surfaces exactly what went wrong, against which record, with enough detail to fix it. The reprocess flow exists because in a real migration, fixing and rerunning individual failures is the job. Dobermann makes that precise and repeatable.</p>
+                    </div>
+
+                    <div class="ps-callout">
+                        <div class="ps-callout-title">Dig Deeper</div>
+                        <p>The error you saw — <code class="ps-path">FK_VIOLATION</code> — is a foreign key constraint error. It means a value in your data references a record that does not exist in a related table. Databases use foreign keys to maintain referential integrity — ensuring your data stays consistent. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status" target="_blank">MDN's HTTP response codes reference</a> covers the 400-range errors you will encounter working with REST APIs.</p>
+                    </div>
+
+                    <div class="ps-action-bar">
+                        <button class="btn btn-primary" onclick="checkLesson('lesson_2_1')">Check My Homework</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- CHECKPOINT SCREEN (reused for all lessons) -->
+            <!-- ============================================================ -->
+            <div class="ps-lesson" data-screen="checkpoint">
+                <div class="ps-lesson-card">
+                    <div class="ps-checkpoint" id="checkpointContent">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- COMPLETION SCREEN -->
+            <!-- ============================================================ -->
+            <div class="ps-lesson" data-screen="completion">
+                <div class="ps-lesson-card">
+                    <div class="ps-completion">
+                        <div class="ps-checkpoint-icon">&#127942;</div>
+                        <h2>Course Complete</h2>
+                        <p>You've completed Lessons 1 through 2.1 of Puppy School. You now know how to connect, load data at scale, handle errors, and reprocess failures.</p>
+                        <p>More lessons are on the way. We'll let you know when they're ready.</p>
+                        <a href="/account/index.html" class="btn btn-primary" style="max-width:300px; display:inline-block;">Back to Account</a>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /courseContent -->
+
+        <footer>
+            <a href="/terms.html">Terms</a> &middot; <a href="/privacy.html">Privacy</a>
+            <br>
+            &copy; 2026 DBMN.io
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/account/shared.js"></script>
+    <script>
+        // =====================================================================
+        // Puppy School — Course Engine
+        // =====================================================================
+
+        var LESSONS = ['lesson_1', 'lesson_2', 'lesson_2_1'];
+        var LESSON_LABELS = {
+            'lesson_1': 'Lesson 1',
+            'lesson_2': 'Lesson 2',
+            'lesson_2_1': 'Lesson 2.1'
+        };
+
+        var currentUser = null;
+        var completedLessons = [];
+        var currentScreen = 'welcome';
+        var checkingLesson = null; // which lesson is being checked
+
+        // Checkpoint messages from spec
+        var CHECKPOINT_MESSAGES = {
+            lesson_1: {
+                pass: 'Good dog. All four reference endpoints fetched \u2014 Lesson 2 is unlocked.',
+                fail: 'Did the dog eat your homework? Looks like you haven\'t fetched all the reference data yet.'
+            },
+            lesson_2: {
+                pass: 'Good dog. 90,000 records loaded \u2014 that\'s what Dobermann was built for. Lesson 2.1 is unlocked.',
+                fail: 'Looks like the bulk upload didn\'t quite make it. Make sure you\'ve loaded your inventory file, configured your threads, and hit run.'
+            },
+            lesson_2_1: {
+                pass: 'Good dog. Errors found, reprocessed, resolved. That\'s real-world data migration right there.',
+                fail: 'We can see you\'ve had a run \u2014 but we can\'t confirm the full error and reprocess cycle. Try loading the error file and reprocessing the failed rows.'
+            }
+        };
+
+        // ── Initialise ──
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            initSupabase();
+
+            currentUser = await getCurrentUser();
+            if (!currentUser) {
+                document.getElementById('loadingCard').style.display = 'none';
+                document.getElementById('signInCard').style.display = 'block';
+                return;
+            }
+
+            // Load progress
+            try {
+                var result = await dbmnSupabase
+                    .from('user_course_progress')
+                    .select('completed_lessons, last_completed_lesson')
+                    .eq('user_id', currentUser.id)
+                    .eq('course', 'puppy_school')
+                    .single();
+
+                if (result.data) {
+                    completedLessons = result.data.completed_lessons || [];
+                }
+            } catch (err) {
+                // No progress yet — that's fine
+            }
+
+            // Show course content
+            document.getElementById('loadingCard').style.display = 'none';
+            document.getElementById('courseContent').style.display = 'block';
+
+            // Navigate to appropriate screen
+            if (completedLessons.length === 0) {
+                navigateTo('welcome');
+            } else if (completedLessons.length >= LESSONS.length) {
+                navigateTo('completion');
+            } else {
+                // Resume at first incomplete lesson
+                var nextLesson = LESSONS.find(function(l) { return completedLessons.indexOf(l) === -1; });
+                navigateTo(nextLesson || 'completion');
+            }
+        });
+
+        // ── Navigation ──
+
+        function navigateTo(screen) {
+            currentScreen = screen;
+
+            // Hide all screens
+            var screens = document.querySelectorAll('.ps-lesson');
+            screens.forEach(function(s) { s.classList.remove('active'); });
+
+            // Show target screen
+            var target = document.querySelector('[data-screen="' + screen + '"]');
+            if (target) target.classList.add('active');
+
+            // Update progress dots
+            updateProgressDots();
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateProgressDots() {
+            LESSONS.forEach(function(lesson, i) {
+                var dot = document.querySelector('.ps-progress-dot[data-lesson="' + lesson + '"]');
+                var line = document.querySelector('.ps-progress-line[data-after="' + lesson + '"]');
+
+                if (!dot) return;
+
+                dot.className = 'ps-progress-dot';
+                if (completedLessons.indexOf(lesson) !== -1) {
+                    dot.classList.add('completed');
+                } else if (currentScreen === lesson) {
+                    dot.classList.add('current');
+                }
+
+                if (line) {
+                    line.className = 'ps-progress-line';
+                    if (completedLessons.indexOf(lesson) !== -1) {
+                        line.classList.add('completed');
+                    }
+                }
+            });
+        }
+
+        // ── Checkpoint mechanic ──
+
+        async function checkLesson(lessonId) {
+            checkingLesson = lessonId;
+            navigateTo('checkpoint');
+
+            // Show loading state
+            var cp = document.getElementById('checkpointContent');
+            cp.innerHTML = '<div class="ps-checkpoint-icon"><span class="spinner" style="width:40px;height:40px;border-width:3px;"></span></div>'
+                + '<h2>Checking your homework...</h2>'
+                + '<p style="color:var(--brand-text-muted);">Give us a moment while we verify your progress.</p>';
+
+            // Minimum 1.5s for effect
+            var startTime = Date.now();
+
+            try {
+                var result = await dbmnSupabase.rpc('check_lesson_completion', {
+                    p_user_id: currentUser.id,
+                    p_lesson_id: lessonId
+                });
+
+                var elapsed = Date.now() - startTime;
+                var remaining = Math.max(0, 1500 - elapsed);
+
+                await new Promise(function(resolve) { setTimeout(resolve, remaining); });
+
+                if (result.error) {
+                    showCheckpointError('Something went wrong checking your progress. Please try again.');
+                    return;
+                }
+
+                var data = result.data;
+                if (data.passed) {
+                    showCheckpointPass(lessonId);
+                    await markLessonComplete(lessonId);
+                } else {
+                    showCheckpointFail(lessonId, data.incomplete || []);
+                }
+
+            } catch (err) {
+                showCheckpointError('Connection error. Please try again.');
+            }
+        }
+
+        function showCheckpointPass(lessonId) {
+            var msg = CHECKPOINT_MESSAGES[lessonId];
+            var nextLessonIndex = LESSONS.indexOf(lessonId) + 1;
+            var hasNext = nextLessonIndex < LESSONS.length;
+            var nextLessonId = hasNext ? LESSONS[nextLessonIndex] : null;
+
+            var html = '<div class="ps-checkpoint-icon">&#9989;</div>'
+                + '<h2>Good Dog.</h2>'
+                + '<p>' + msg.pass + '</p>';
+
+            if (hasNext) {
+                html += '<button class="btn btn-primary" style="max-width:300px;" onclick="navigateTo(\'' + nextLessonId + '\')">'
+                    + 'Continue to ' + LESSON_LABELS[nextLessonId]
+                    + '</button>';
+            } else {
+                html += '<button class="btn btn-primary" style="max-width:300px;" onclick="navigateTo(\'completion\')">'
+                    + 'View Completion'
+                    + '</button>';
+            }
+
+            document.getElementById('checkpointContent').innerHTML = html;
+        }
+
+        function showCheckpointFail(lessonId, incomplete) {
+            var msg = CHECKPOINT_MESSAGES[lessonId];
+
+            var html = '<div class="ps-checkpoint-icon">&#128054;</div>'
+                + '<h2>Not Quite...</h2>'
+                + '<p>' + msg.fail + '</p>';
+
+            if (incomplete && incomplete.length > 0) {
+                html += '<ul class="ps-incomplete-list">';
+                incomplete.forEach(function(item) {
+                    html += '<li>' + escapeHtml(item) + '</li>';
+                });
+                html += '</ul>';
+            }
+
+            html += '<button class="btn btn-primary" style="max-width:300px;" onclick="navigateTo(\'' + lessonId + '\')">'
+                + 'Try Again'
+                + '</button>';
+
+            html += '<div class="ps-support-link">'
+                + 'Don\'t hesitate to reach out to one of our Top Dogs for help \u2014 '
+                + '<a href="mailto:hello@dbmn.io">hello@dbmn.io</a>'
+                + '</div>';
+
+            document.getElementById('checkpointContent').innerHTML = html;
+        }
+
+        function showCheckpointError(message) {
+            var html = '<div class="ps-checkpoint-icon">&#9888;&#65039;</div>'
+                + '<h2>Oops</h2>'
+                + '<p>' + escapeHtml(message) + '</p>'
+                + '<button class="btn btn-secondary" style="max-width:300px;" onclick="navigateTo(\'' + (checkingLesson || 'welcome') + '\')">'
+                + 'Go Back'
+                + '</button>';
+
+            document.getElementById('checkpointContent').innerHTML = html;
+        }
+
+        // ── Progress persistence ──
+
+        async function markLessonComplete(lessonId) {
+            if (completedLessons.indexOf(lessonId) === -1) {
+                completedLessons.push(lessonId);
+            }
+            updateProgressDots();
+
+            try {
+                await dbmnSupabase
+                    .from('user_course_progress')
+                    .upsert({
+                        user_id: currentUser.id,
+                        course: 'puppy_school',
+                        last_completed_lesson: lessonId,
+                        completed_lessons: completedLessons,
+                        updated_at: new Date().toISOString()
+                    }, {
+                        onConflict: 'user_id,course'
+                    });
+            } catch (err) {
+                console.error('Failed to save progress:', err);
+            }
+        }
+
+        // ── Utility ──
+
+        function escapeHtml(str) {
+            var div = document.createElement('div');
+            div.appendChild(document.createTextNode(str));
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>
