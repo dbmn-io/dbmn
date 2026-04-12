@@ -1,0 +1,1001 @@
+gtin,sku,description,locationGln,locationName,quantityOnHand,uom,status
+00012345600012,SKU-WOOF-001-001,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,1428,EA,active
+00012345600029,SKU-WOOF-002-002,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,1111,EA,active
+00012345600036,SKU-WOOF-003-003,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,958,EA,active
+00012345600043,SKU-WOOF-004-004,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,1175,CS,active
+00012345600050,SKU-WOOF-005-005,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,491,CS,low_stock
+00012345600067,SKU-WOOF-006-006,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,326,EA,reserved
+00012345600074,SKU-WOOF-007-007,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,196,EA,active
+00012345600081,SKU-WOOF-008-008,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,518,EA,active
+00012345600012,SKU-WOOF-001-009,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,526,EA,active
+00012345600029,SKU-WOOF-002-010,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,351,EA,active
+00012345600036,SKU-WOOF-003-011,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,621,EA,low_stock
+00012345600043,SKU-WOOF-004-012,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,617,EA,active
+00012345600050,SKU-WOOF-005-013,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,1473,CS,active
+00012345600067,SKU-WOOF-006-014,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,819,PL,active
+00012345600074,SKU-WOOF-007-015,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,588,EA,reserved
+00012345600081,SKU-WOOF-008-016,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,1268,EA,active
+00012345600012,SKU-WOOF-001-017,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,968,EA,active
+00012345600029,SKU-WOOF-002-018,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,469,PL,low_stock
+00012345600036,SKU-WOOF-003-019,Squirrel Detection Radar,0614141000043,Poodle Processing Center,1246,EA,low_stock
+00012345600043,SKU-WOOF-004-020,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,385,EA,active
+00012345600050,SKU-WOOF-005-021,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,137,EA,active
+00012345600067,SKU-WOOF-006-022,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,279,PL,active
+00012345600074,SKU-WOOF-007-023,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,1203,CS,active
+00012345600081,SKU-WOOF-008-024,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,397,EA,active
+00012345600012,SKU-WOOF-001-025,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,879,EA,active
+00012345600029,SKU-WOOF-002-026,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,815,EA,reserved
+00012345600036,SKU-WOOF-003-027,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,122,EA,active
+00012345600043,SKU-WOOF-004-028,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,1475,EA,active
+00012345600050,SKU-WOOF-005-029,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,1272,EA,reserved
+00012345600067,SKU-WOOF-006-030,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,978,CS,active
+00012345600074,SKU-WOOF-007-031,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,506,EA,active
+00012345600081,SKU-WOOF-008-032,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,168,EA,active
+00012345600012,SKU-WOOF-001-033,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,1338,EA,active
+00012345600029,SKU-WOOF-002-034,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,1207,CS,active
+00012345600036,SKU-WOOF-003-035,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,61,EA,low_stock
+00012345600043,SKU-WOOF-004-036,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,568,EA,active
+00012345600050,SKU-WOOF-005-037,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,675,EA,active
+00012345600067,SKU-WOOF-006-038,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,73,EA,active
+00012345600074,SKU-WOOF-007-039,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,1481,EA,active
+00012345600081,SKU-WOOF-008-040,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,169,EA,active
+00012345600012,SKU-WOOF-001-041,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,384,EA,active
+00012345600029,SKU-WOOF-002-042,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,1194,EA,reserved
+00012345600036,SKU-WOOF-003-043,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,114,EA,active
+00012345600043,SKU-WOOF-004-044,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,859,EA,active
+00012345600050,SKU-WOOF-005-045,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,540,CS,active
+00012345600067,SKU-WOOF-006-046,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,605,EA,active
+00012345600074,SKU-WOOF-007-047,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,1306,EA,active
+00012345600081,SKU-WOOF-008-048,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,1321,CS,active
+00012345600012,SKU-WOOF-001-049,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,1217,EA,active
+00012345600029,SKU-WOOF-002-050,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,1263,EA,low_stock
+00012345600036,SKU-WOOF-003-051,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,509,EA,active
+00012345600043,SKU-WOOF-004-052,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,474,EA,active
+00012345600050,SKU-WOOF-005-053,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,471,EA,active
+00012345600067,SKU-WOOF-006-054,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,806,PL,low_stock
+00012345600074,SKU-WOOF-007-055,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,1413,EA,active
+00012345600081,SKU-WOOF-008-056,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,1175,EA,active
+00012345600012,SKU-WOOF-001-057,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,1043,EA,active
+00012345600029,SKU-WOOF-002-058,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,817,EA,active
+00012345600036,SKU-WOOF-003-059,Squirrel Detection Radar,0614141000043,Poodle Processing Center,367,EA,active
+00012345600043,SKU-WOOF-004-060,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,179,EA,reserved
+00012345600050,SKU-WOOF-005-061,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,418,EA,active
+00012345600067,SKU-WOOF-006-062,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,142,EA,active
+00012345600074,SKU-WOOF-007-063,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,831,EA,active
+00012345600081,SKU-WOOF-008-064,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,58,EA,reserved
+00012345600012,SKU-WOOF-001-065,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,165,EA,active
+00012345600029,SKU-WOOF-002-066,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,984,EA,active
+00012345600036,SKU-WOOF-003-067,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,755,EA,active
+00012345600043,SKU-WOOF-004-068,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,327,PL,reserved
+00012345600050,SKU-WOOF-005-069,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,1289,EA,active
+00012345600067,SKU-WOOF-006-070,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,804,EA,active
+00012345600074,SKU-WOOF-007-071,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,728,EA,reserved
+00012345600081,SKU-WOOF-008-072,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,898,CS,active
+00012345600012,SKU-WOOF-001-073,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,949,EA,reserved
+00012345600029,SKU-WOOF-002-074,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,281,EA,low_stock
+00012345600036,SKU-WOOF-003-075,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,448,EA,active
+00012345600043,SKU-WOOF-004-076,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,1372,CS,reserved
+00012345600050,SKU-WOOF-005-077,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,550,EA,low_stock
+00012345600067,SKU-WOOF-006-078,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,750,EA,active
+00012345600074,SKU-WOOF-007-079,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,731,EA,active
+00012345600081,SKU-WOOF-008-080,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,382,EA,active
+00012345600012,SKU-WOOF-001-081,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,845,CS,active
+00012345600029,SKU-WOOF-002-082,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,576,EA,active
+00012345600036,SKU-WOOF-003-083,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,943,CS,reserved
+00012345600043,SKU-WOOF-004-084,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,339,EA,active
+00012345600050,SKU-WOOF-005-085,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,916,EA,active
+00012345600067,SKU-WOOF-006-086,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,1010,EA,active
+00012345600074,SKU-WOOF-007-087,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,703,EA,active
+00012345600081,SKU-WOOF-008-088,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,1342,CS,active
+00012345600012,SKU-WOOF-001-089,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,1427,EA,active
+00012345600029,SKU-WOOF-002-090,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,218,CS,active
+00012345600036,SKU-WOOF-003-091,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,107,EA,active
+00012345600043,SKU-WOOF-004-092,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,1343,EA,active
+00012345600050,SKU-WOOF-005-093,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,316,EA,active
+00012345600067,SKU-WOOF-006-094,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,1124,EA,active
+00012345600074,SKU-WOOF-007-095,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,500,EA,reserved
+00012345600081,SKU-WOOF-008-096,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,1296,EA,active
+00012345600012,SKU-WOOF-001-097,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,1046,EA,low_stock
+00012345600029,SKU-WOOF-002-098,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,797,EA,low_stock
+00012345600036,SKU-WOOF-003-099,Squirrel Detection Radar,0614141000043,Poodle Processing Center,1210,EA,active
+00012345600043,SKU-WOOF-004-100,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,1317,EA,active
+00012345600050,SKU-WOOF-005-101,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,1360,PL,active
+00012345600067,SKU-WOOF-006-102,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,986,EA,active
+00012345600074,SKU-WOOF-007-103,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,494,CS,active
+00012345600081,SKU-WOOF-008-104,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,1096,EA,low_stock
+00012345600012,SKU-WOOF-001-105,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,667,EA,active
+00012345600029,SKU-WOOF-002-106,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,82,EA,active
+00012345600036,SKU-WOOF-003-107,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,532,CS,active
+00012345600043,SKU-WOOF-004-108,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,1137,CS,active
+00012345600050,SKU-WOOF-005-109,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,1224,CS,reserved
+00012345600067,SKU-WOOF-006-110,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,524,EA,active
+00012345600074,SKU-WOOF-007-111,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,996,EA,reserved
+00012345600081,SKU-WOOF-008-112,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,103,EA,reserved
+00012345600012,SKU-WOOF-001-113,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,588,PL,reserved
+00012345600029,SKU-WOOF-002-114,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,694,CS,active
+00012345600036,SKU-WOOF-003-115,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,428,EA,active
+00012345600043,SKU-WOOF-004-116,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,441,EA,low_stock
+00012345600050,SKU-WOOF-005-117,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,198,EA,active
+00012345600067,SKU-WOOF-006-118,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,863,EA,low_stock
+00012345600074,SKU-WOOF-007-119,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,741,EA,active
+00012345600081,SKU-WOOF-008-120,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,278,EA,low_stock
+00012345600012,SKU-WOOF-001-121,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,855,CS,low_stock
+00012345600029,SKU-WOOF-002-122,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,326,EA,low_stock
+00012345600036,SKU-WOOF-003-123,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,247,EA,active
+00012345600043,SKU-WOOF-004-124,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,847,EA,active
+00012345600050,SKU-WOOF-005-125,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,859,PL,active
+00012345600067,SKU-WOOF-006-126,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,254,EA,low_stock
+00012345600074,SKU-WOOF-007-127,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,228,EA,low_stock
+00012345600081,SKU-WOOF-008-128,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,54,EA,reserved
+00012345600012,SKU-WOOF-001-129,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,1245,EA,active
+00012345600029,SKU-WOOF-002-130,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,411,EA,low_stock
+00012345600036,SKU-WOOF-003-131,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,690,EA,active
+00012345600043,SKU-WOOF-004-132,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,1322,EA,active
+00012345600050,SKU-WOOF-005-133,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,1407,EA,low_stock
+00012345600067,SKU-WOOF-006-134,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,409,CS,active
+00012345600074,SKU-WOOF-007-135,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,226,EA,active
+00012345600081,SKU-WOOF-008-136,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,1483,CS,active
+00012345600012,SKU-WOOF-001-137,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,507,CS,reserved
+00012345600029,SKU-WOOF-002-138,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,912,EA,low_stock
+00012345600036,SKU-WOOF-003-139,Squirrel Detection Radar,0614141000043,Poodle Processing Center,346,EA,reserved
+00012345600043,SKU-WOOF-004-140,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,1139,CS,reserved
+00012345600050,SKU-WOOF-005-141,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,295,EA,active
+00012345600067,SKU-WOOF-006-142,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,502,EA,active
+00012345600074,SKU-WOOF-007-143,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,1387,EA,active
+00012345600081,SKU-WOOF-008-144,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,977,EA,active
+00012345600012,SKU-WOOF-001-145,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,1285,EA,active
+00012345600029,SKU-WOOF-002-146,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,1281,CS,active
+00012345600036,SKU-WOOF-003-147,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,1191,EA,active
+00012345600043,SKU-WOOF-004-148,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,903,EA,active
+00012345600050,SKU-WOOF-005-149,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,1222,EA,low_stock
+00012345600067,SKU-WOOF-006-150,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,1442,CS,active
+00012345600074,SKU-WOOF-007-151,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,899,EA,active
+00012345600081,SKU-WOOF-008-152,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,506,CS,active
+00012345600012,SKU-WOOF-001-153,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,1265,CS,active
+00012345600029,SKU-WOOF-002-154,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,613,EA,active
+00012345600036,SKU-WOOF-003-155,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,118,EA,active
+00012345600043,SKU-WOOF-004-156,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,1004,CS,active
+00012345600050,SKU-WOOF-005-157,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,502,EA,reserved
+00012345600067,SKU-WOOF-006-158,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,455,EA,low_stock
+00012345600074,SKU-WOOF-007-159,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,583,EA,active
+00012345600081,SKU-WOOF-008-160,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,1060,EA,low_stock
+00012345600012,SKU-WOOF-001-161,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,1435,EA,active
+00012345600029,SKU-WOOF-002-162,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,1006,EA,active
+00012345600036,SKU-WOOF-003-163,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,769,EA,active
+00012345600043,SKU-WOOF-004-164,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,1042,EA,active
+00012345600050,SKU-WOOF-005-165,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,1307,EA,active
+00012345600067,SKU-WOOF-006-166,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,1325,EA,active
+00012345600074,SKU-WOOF-007-167,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,69,CS,active
+00012345600081,SKU-WOOF-008-168,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,291,EA,low_stock
+00012345600012,SKU-WOOF-001-169,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,851,CS,active
+00012345600029,SKU-WOOF-002-170,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,660,EA,active
+00012345600036,SKU-WOOF-003-171,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,1085,EA,active
+00012345600043,SKU-WOOF-004-172,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,999,EA,low_stock
+00012345600050,SKU-WOOF-005-173,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,52,CS,active
+00012345600067,SKU-WOOF-006-174,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,1368,EA,active
+00012345600074,SKU-WOOF-007-175,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,643,CS,active
+00012345600081,SKU-WOOF-008-176,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,695,EA,active
+00012345600012,SKU-WOOF-001-177,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,1224,CS,low_stock
+00012345600029,SKU-WOOF-002-178,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,1384,CS,active
+00012345600036,SKU-WOOF-003-179,Squirrel Detection Radar,0614141000043,Poodle Processing Center,862,EA,active
+00012345600043,SKU-WOOF-004-180,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,1292,EA,active
+00012345600050,SKU-WOOF-005-181,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,286,CS,active
+00012345600067,SKU-WOOF-006-182,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,1099,EA,active
+00012345600074,SKU-WOOF-007-183,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,446,EA,active
+00012345600081,SKU-WOOF-008-184,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,528,EA,active
+00012345600012,SKU-WOOF-001-185,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,665,EA,active
+00012345600029,SKU-WOOF-002-186,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,856,EA,active
+00012345600036,SKU-WOOF-003-187,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,1437,EA,active
+00012345600043,SKU-WOOF-004-188,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,422,CS,active
+00012345600050,SKU-WOOF-005-189,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,1264,EA,active
+00012345600067,SKU-WOOF-006-190,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,1078,CS,active
+00012345600074,SKU-WOOF-007-191,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,354,EA,active
+00012345600081,SKU-WOOF-008-192,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,946,EA,low_stock
+00012345600012,SKU-WOOF-001-193,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,783,CS,reserved
+00012345600029,SKU-WOOF-002-194,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,319,EA,low_stock
+00012345600036,SKU-WOOF-003-195,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,1059,PL,active
+00012345600043,SKU-WOOF-004-196,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,513,EA,active
+00012345600050,SKU-WOOF-005-197,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,336,EA,low_stock
+00012345600067,SKU-WOOF-006-198,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,595,PL,active
+00012345600074,SKU-WOOF-007-199,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,1130,EA,active
+00012345600081,SKU-WOOF-008-200,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,333,EA,reserved
+00012345600012,SKU-WOOF-001-201,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,1114,EA,active
+00012345600029,SKU-WOOF-002-202,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,759,EA,active
+00012345600036,SKU-WOOF-003-203,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,398,EA,active
+00012345600043,SKU-WOOF-004-204,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,610,EA,active
+00012345600050,SKU-WOOF-005-205,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,1229,EA,active
+00012345600067,SKU-WOOF-006-206,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,1134,EA,active
+00012345600074,SKU-WOOF-007-207,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,588,EA,active
+00012345600081,SKU-WOOF-008-208,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,1434,EA,low_stock
+00012345600012,SKU-WOOF-001-209,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,1287,EA,active
+00012345600029,SKU-WOOF-002-210,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,925,EA,active
+00012345600036,SKU-WOOF-003-211,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,1024,PL,active
+00012345600043,SKU-WOOF-004-212,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,1366,EA,active
+00012345600050,SKU-WOOF-005-213,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,206,EA,low_stock
+00012345600067,SKU-WOOF-006-214,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,550,CS,low_stock
+00012345600074,SKU-WOOF-007-215,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,113,EA,reserved
+00012345600081,SKU-WOOF-008-216,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,1315,EA,active
+00012345600012,SKU-WOOF-001-217,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,66,EA,reserved
+00012345600029,SKU-WOOF-002-218,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,864,EA,active
+00012345600036,SKU-WOOF-003-219,Squirrel Detection Radar,0614141000043,Poodle Processing Center,672,EA,reserved
+00012345600043,SKU-WOOF-004-220,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,433,EA,active
+00012345600050,SKU-WOOF-005-221,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,1301,EA,low_stock
+00012345600067,SKU-WOOF-006-222,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,203,EA,active
+00012345600074,SKU-WOOF-007-223,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,298,EA,low_stock
+00012345600081,SKU-WOOF-008-224,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,1469,EA,active
+00012345600012,SKU-WOOF-001-225,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,613,EA,active
+00012345600029,SKU-WOOF-002-226,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,623,CS,active
+00012345600036,SKU-WOOF-003-227,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,242,EA,active
+00012345600043,SKU-WOOF-004-228,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,1264,EA,low_stock
+00012345600050,SKU-WOOF-005-229,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,404,EA,low_stock
+00012345600067,SKU-WOOF-006-230,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,1497,EA,low_stock
+00012345600074,SKU-WOOF-007-231,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,900,EA,active
+00012345600081,SKU-WOOF-008-232,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,164,EA,active
+00012345600012,SKU-WOOF-001-233,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,473,EA,active
+00012345600029,SKU-WOOF-002-234,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,414,CS,active
+00012345600036,SKU-WOOF-003-235,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,850,EA,active
+00012345600043,SKU-WOOF-004-236,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,683,CS,reserved
+00012345600050,SKU-WOOF-005-237,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,1299,PL,active
+00012345600067,SKU-WOOF-006-238,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,903,EA,active
+00012345600074,SKU-WOOF-007-239,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,1084,EA,low_stock
+00012345600081,SKU-WOOF-008-240,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,498,EA,active
+00012345600012,SKU-WOOF-001-241,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,1319,CS,low_stock
+00012345600029,SKU-WOOF-002-242,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,676,CS,reserved
+00012345600036,SKU-WOOF-003-243,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,1366,PL,active
+00012345600043,SKU-WOOF-004-244,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,832,EA,active
+00012345600050,SKU-WOOF-005-245,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,606,EA,reserved
+00012345600067,SKU-WOOF-006-246,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,676,EA,low_stock
+00012345600074,SKU-WOOF-007-247,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,278,EA,active
+00012345600081,SKU-WOOF-008-248,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,88,EA,active
+00012345600012,SKU-WOOF-001-249,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,1370,EA,low_stock
+00012345600029,SKU-WOOF-002-250,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,1434,EA,active
+00012345600036,SKU-WOOF-003-251,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,333,CS,low_stock
+00012345600043,SKU-WOOF-004-252,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,1308,EA,active
+00012345600050,SKU-WOOF-005-253,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,503,CS,low_stock
+00012345600067,SKU-WOOF-006-254,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,589,EA,active
+00012345600074,SKU-WOOF-007-255,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,1427,CS,low_stock
+00012345600081,SKU-WOOF-008-256,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,452,EA,low_stock
+00012345600012,SKU-WOOF-001-257,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,627,EA,active
+00012345600029,SKU-WOOF-002-258,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,198,EA,active
+00012345600036,SKU-WOOF-003-259,Squirrel Detection Radar,0614141000043,Poodle Processing Center,145,EA,active
+00012345600043,SKU-WOOF-004-260,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,664,EA,active
+00012345600050,SKU-WOOF-005-261,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,874,EA,low_stock
+00012345600067,SKU-WOOF-006-262,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,1340,EA,active
+00012345600074,SKU-WOOF-007-263,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,370,EA,active
+00012345600081,SKU-WOOF-008-264,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,498,EA,low_stock
+00012345600012,SKU-WOOF-001-265,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,1141,EA,active
+00012345600029,SKU-WOOF-002-266,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,621,EA,active
+00012345600036,SKU-WOOF-003-267,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,1215,EA,active
+00012345600043,SKU-WOOF-004-268,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,939,EA,active
+00012345600050,SKU-WOOF-005-269,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,1415,EA,low_stock
+00012345600067,SKU-WOOF-006-270,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,360,EA,active
+00012345600074,SKU-WOOF-007-271,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,108,CS,active
+00012345600081,SKU-WOOF-008-272,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,966,EA,low_stock
+00012345600012,SKU-WOOF-001-273,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,446,EA,active
+00012345600029,SKU-WOOF-002-274,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,893,EA,active
+00012345600036,SKU-WOOF-003-275,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,1408,EA,active
+00012345600043,SKU-WOOF-004-276,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,715,EA,active
+00012345600050,SKU-WOOF-005-277,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,934,EA,low_stock
+00012345600067,SKU-WOOF-006-278,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,174,EA,active
+00012345600074,SKU-WOOF-007-279,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,944,EA,active
+00012345600081,SKU-WOOF-008-280,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,403,EA,reserved
+00012345600012,SKU-WOOF-001-281,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,930,EA,active
+00012345600029,SKU-WOOF-002-282,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,533,EA,active
+00012345600036,SKU-WOOF-003-283,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,1470,EA,active
+00012345600043,SKU-WOOF-004-284,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,792,EA,reserved
+00012345600050,SKU-WOOF-005-285,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,68,CS,active
+00012345600067,SKU-WOOF-006-286,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,751,EA,active
+00012345600074,SKU-WOOF-007-287,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,1049,EA,active
+00012345600081,SKU-WOOF-008-288,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,634,CS,active
+00012345600012,SKU-WOOF-001-289,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,916,PL,reserved
+00012345600029,SKU-WOOF-002-290,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,220,EA,low_stock
+00012345600036,SKU-WOOF-003-291,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,1326,EA,active
+00012345600043,SKU-WOOF-004-292,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,957,EA,active
+00012345600050,SKU-WOOF-005-293,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,557,CS,low_stock
+00012345600067,SKU-WOOF-006-294,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,713,EA,reserved
+00012345600074,SKU-WOOF-007-295,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,1394,EA,active
+00012345600081,SKU-WOOF-008-296,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,201,EA,active
+00012345600012,SKU-WOOF-001-297,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,111,CS,reserved
+00012345600029,SKU-WOOF-002-298,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,1473,CS,low_stock
+00012345600036,SKU-WOOF-003-299,Squirrel Detection Radar,0614141000043,Poodle Processing Center,959,EA,low_stock
+00012345600043,SKU-WOOF-004-300,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,943,CS,reserved
+00012345600050,SKU-WOOF-005-301,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,507,EA,active
+00012345600067,SKU-WOOF-006-302,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,930,EA,active
+00012345600074,SKU-WOOF-007-303,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,457,EA,active
+00012345600081,SKU-WOOF-008-304,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,903,EA,reserved
+00012345600012,SKU-WOOF-001-305,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,253,CS,active
+00012345600029,SKU-WOOF-002-306,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,143,EA,active
+00012345600036,SKU-WOOF-003-307,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,480,PL,active
+00012345600043,SKU-WOOF-004-308,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,1459,EA,low_stock
+00012345600050,SKU-WOOF-005-309,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,1096,EA,active
+00012345600067,SKU-WOOF-006-310,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,306,EA,active
+00012345600074,SKU-WOOF-007-311,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,1274,EA,reserved
+00012345600081,SKU-WOOF-008-312,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,1379,CS,reserved
+00012345600012,SKU-WOOF-001-313,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,864,EA,active
+00012345600029,SKU-WOOF-002-314,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,1456,EA,active
+00012345600036,SKU-WOOF-003-315,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,528,EA,active
+00012345600043,SKU-WOOF-004-316,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,1217,EA,active
+00012345600050,SKU-WOOF-005-317,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,764,EA,low_stock
+00012345600067,SKU-WOOF-006-318,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,341,EA,active
+00012345600074,SKU-WOOF-007-319,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,825,EA,low_stock
+00012345600081,SKU-WOOF-008-320,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,1418,CS,active
+00012345600012,SKU-WOOF-001-321,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,608,EA,active
+00012345600029,SKU-WOOF-002-322,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,1344,PL,low_stock
+00012345600036,SKU-WOOF-003-323,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,989,EA,active
+00012345600043,SKU-WOOF-004-324,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,176,EA,active
+00012345600050,SKU-WOOF-005-325,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,210,EA,low_stock
+00012345600067,SKU-WOOF-006-326,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,1096,EA,active
+00012345600074,SKU-WOOF-007-327,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,410,EA,active
+00012345600081,SKU-WOOF-008-328,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,751,CS,low_stock
+00012345600012,SKU-WOOF-001-329,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,938,EA,active
+00012345600029,SKU-WOOF-002-330,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,588,EA,active
+00012345600036,SKU-WOOF-003-331,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,734,EA,active
+00012345600043,SKU-WOOF-004-332,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,1361,EA,active
+00012345600050,SKU-WOOF-005-333,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,1243,PL,reserved
+00012345600067,SKU-WOOF-006-334,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,999,EA,active
+00012345600074,SKU-WOOF-007-335,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,115,EA,active
+00012345600081,SKU-WOOF-008-336,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,692,EA,active
+00012345600012,SKU-WOOF-001-337,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,203,CS,low_stock
+00012345600029,SKU-WOOF-002-338,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,1432,EA,active
+00012345600036,SKU-WOOF-003-339,Squirrel Detection Radar,0614141000043,Poodle Processing Center,1170,EA,active
+00012345600043,SKU-WOOF-004-340,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,1429,EA,reserved
+00012345600050,SKU-WOOF-005-341,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,756,CS,active
+00012345600067,SKU-WOOF-006-342,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,1455,EA,active
+00012345600074,SKU-WOOF-007-343,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,825,CS,active
+00012345600081,SKU-WOOF-008-344,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,755,EA,active
+00012345600012,SKU-WOOF-001-345,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,1275,EA,active
+00012345600029,SKU-WOOF-002-346,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,1190,EA,active
+00012345600036,SKU-WOOF-003-347,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,284,EA,reserved
+00012345600043,SKU-WOOF-004-348,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,1156,EA,active
+00012345600050,SKU-WOOF-005-349,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,70,CS,low_stock
+00012345600067,SKU-WOOF-006-350,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,1016,EA,low_stock
+00012345600074,SKU-WOOF-007-351,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,379,CS,active
+00012345600081,SKU-WOOF-008-352,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,1087,EA,active
+00012345600012,SKU-WOOF-001-353,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,202,EA,low_stock
+00012345600029,SKU-WOOF-002-354,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,490,EA,active
+00012345600036,SKU-WOOF-003-355,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,761,PL,active
+00012345600043,SKU-WOOF-004-356,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,1419,PL,active
+00012345600050,SKU-WOOF-005-357,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,295,CS,active
+00012345600067,SKU-WOOF-006-358,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,1345,EA,active
+00012345600074,SKU-WOOF-007-359,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,240,EA,active
+00012345600081,SKU-WOOF-008-360,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,211,EA,low_stock
+00012345600012,SKU-WOOF-001-361,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,652,CS,active
+00012345600029,SKU-WOOF-002-362,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,1211,EA,active
+00012345600036,SKU-WOOF-003-363,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,1485,EA,active
+00012345600043,SKU-WOOF-004-364,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,1047,PL,active
+00012345600050,SKU-WOOF-005-365,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,1485,EA,active
+00012345600067,SKU-WOOF-006-366,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,1285,EA,active
+00012345600074,SKU-WOOF-007-367,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,1437,EA,active
+00012345600081,SKU-WOOF-008-368,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,930,CS,active
+00012345600012,SKU-WOOF-001-369,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,1088,EA,active
+00012345600029,SKU-WOOF-002-370,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,1452,EA,active
+00012345600036,SKU-WOOF-003-371,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,752,EA,active
+00012345600043,SKU-WOOF-004-372,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,318,CS,active
+00012345600050,SKU-WOOF-005-373,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,365,CS,active
+00012345600067,SKU-WOOF-006-374,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,355,EA,active
+00012345600074,SKU-WOOF-007-375,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,577,EA,active
+00012345600081,SKU-WOOF-008-376,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,111,EA,active
+00012345600012,SKU-WOOF-001-377,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,1352,EA,active
+00012345600029,SKU-WOOF-002-378,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,740,EA,low_stock
+00012345600036,SKU-WOOF-003-379,Squirrel Detection Radar,0614141000043,Poodle Processing Center,679,EA,active
+00012345600043,SKU-WOOF-004-380,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,1153,EA,low_stock
+00012345600050,SKU-WOOF-005-381,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,306,EA,active
+00012345600067,SKU-WOOF-006-382,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,130,EA,active
+00012345600074,SKU-WOOF-007-383,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,1336,CS,active
+00012345600081,SKU-WOOF-008-384,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,1360,CS,reserved
+00012345600012,SKU-WOOF-001-385,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,435,EA,active
+00012345600029,SKU-WOOF-002-386,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,253,EA,active
+00012345600036,SKU-WOOF-003-387,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,971,CS,active
+00012345600043,SKU-WOOF-004-388,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,916,CS,active
+00012345600050,SKU-WOOF-005-389,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,942,EA,active
+00012345600067,SKU-WOOF-006-390,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,1406,EA,active
+00012345600074,SKU-WOOF-007-391,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,81,EA,low_stock
+00012345600081,SKU-WOOF-008-392,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,1316,EA,low_stock
+00012345600012,SKU-WOOF-001-393,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,1439,EA,active
+00012345600029,SKU-WOOF-002-394,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,1056,EA,low_stock
+00012345600036,SKU-WOOF-003-395,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,99,EA,active
+00012345600043,SKU-WOOF-004-396,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,771,EA,active
+00012345600050,SKU-WOOF-005-397,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,224,EA,active
+00012345600067,SKU-WOOF-006-398,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,312,EA,active
+00012345600074,SKU-WOOF-007-399,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,944,PL,reserved
+00012345600081,SKU-WOOF-008-400,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,766,EA,reserved
+00012345600012,SKU-WOOF-001-401,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,317,EA,active
+00012345600029,SKU-WOOF-002-402,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,991,EA,active
+00012345600036,SKU-WOOF-003-403,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,227,PL,active
+00012345600043,SKU-WOOF-004-404,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,1354,EA,active
+00012345600050,SKU-WOOF-005-405,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,1462,EA,low_stock
+00012345600067,SKU-WOOF-006-406,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,1055,EA,active
+00012345600074,SKU-WOOF-007-407,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,906,CS,active
+00012345600081,SKU-WOOF-008-408,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,473,EA,active
+00012345600012,SKU-WOOF-001-409,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,74,EA,reserved
+00012345600029,SKU-WOOF-002-410,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,503,EA,active
+00012345600036,SKU-WOOF-003-411,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,1188,EA,reserved
+00012345600043,SKU-WOOF-004-412,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,731,EA,active
+00012345600050,SKU-WOOF-005-413,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,423,EA,active
+00012345600067,SKU-WOOF-006-414,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,1248,CS,active
+00012345600074,SKU-WOOF-007-415,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,183,PL,active
+00012345600081,SKU-WOOF-008-416,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,1104,CS,active
+00012345600012,SKU-WOOF-001-417,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,1180,EA,active
+00012345600029,SKU-WOOF-002-418,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,1418,CS,active
+00012345600036,SKU-WOOF-003-419,Squirrel Detection Radar,0614141000043,Poodle Processing Center,70,EA,low_stock
+00012345600043,SKU-WOOF-004-420,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,347,EA,low_stock
+00012345600050,SKU-WOOF-005-421,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,765,EA,active
+00012345600067,SKU-WOOF-006-422,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,1242,EA,low_stock
+00012345600074,SKU-WOOF-007-423,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,1331,EA,reserved
+00012345600081,SKU-WOOF-008-424,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,881,EA,low_stock
+00012345600012,SKU-WOOF-001-425,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,881,EA,reserved
+00012345600029,SKU-WOOF-002-426,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,518,EA,active
+00012345600036,SKU-WOOF-003-427,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,176,CS,active
+00012345600043,SKU-WOOF-004-428,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,229,EA,low_stock
+00012345600050,SKU-WOOF-005-429,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,334,EA,low_stock
+00012345600067,SKU-WOOF-006-430,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,1452,EA,reserved
+00012345600074,SKU-WOOF-007-431,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,1276,EA,reserved
+00012345600081,SKU-WOOF-008-432,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,1500,EA,active
+00012345600012,SKU-WOOF-001-433,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,485,EA,low_stock
+00012345600029,SKU-WOOF-002-434,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,97,CS,active
+00012345600036,SKU-WOOF-003-435,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,600,EA,active
+00012345600043,SKU-WOOF-004-436,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,174,EA,active
+00012345600050,SKU-WOOF-005-437,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,102,EA,active
+00012345600067,SKU-WOOF-006-438,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,257,EA,low_stock
+00012345600074,SKU-WOOF-007-439,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,1163,EA,low_stock
+00012345600081,SKU-WOOF-008-440,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,193,CS,low_stock
+00012345600012,SKU-WOOF-001-441,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,907,CS,active
+00012345600029,SKU-WOOF-002-442,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,605,EA,active
+00012345600036,SKU-WOOF-003-443,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,1372,PL,active
+00012345600043,SKU-WOOF-004-444,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,306,CS,active
+00012345600050,SKU-WOOF-005-445,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,623,EA,reserved
+00012345600067,SKU-WOOF-006-446,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,167,CS,active
+00012345600074,SKU-WOOF-007-447,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,1106,EA,active
+00012345600081,SKU-WOOF-008-448,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,180,PL,low_stock
+00012345600012,SKU-WOOF-001-449,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,453,EA,active
+00012345600029,SKU-WOOF-002-450,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,1284,EA,active
+00012345600036,SKU-WOOF-003-451,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,732,EA,active
+00012345600043,SKU-WOOF-004-452,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,1019,EA,active
+00012345600050,SKU-WOOF-005-453,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,224,CS,low_stock
+00012345600067,SKU-WOOF-006-454,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,1253,EA,active
+00012345600074,SKU-WOOF-007-455,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,142,EA,low_stock
+00012345600081,SKU-WOOF-008-456,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,191,EA,reserved
+00012345600012,SKU-WOOF-001-457,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,1394,EA,active
+00012345600029,SKU-WOOF-002-458,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,307,EA,low_stock
+00012345600036,SKU-WOOF-003-459,Squirrel Detection Radar,0614141000043,Poodle Processing Center,180,EA,active
+00012345600043,SKU-WOOF-004-460,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,356,EA,active
+00012345600050,SKU-WOOF-005-461,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,534,EA,active
+00012345600067,SKU-WOOF-006-462,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,1137,EA,active
+00012345600074,SKU-WOOF-007-463,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,1250,EA,active
+00012345600081,SKU-WOOF-008-464,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,1402,EA,active
+00012345600012,SKU-WOOF-001-465,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,1424,EA,active
+00012345600029,SKU-WOOF-002-466,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,1019,EA,low_stock
+00012345600036,SKU-WOOF-003-467,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,506,EA,low_stock
+00012345600043,SKU-WOOF-004-468,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,1366,EA,active
+00012345600050,SKU-WOOF-005-469,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,662,EA,low_stock
+00012345600067,SKU-WOOF-006-470,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,1454,EA,active
+00012345600074,SKU-WOOF-007-471,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,210,CS,active
+00012345600081,SKU-WOOF-008-472,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,1119,EA,low_stock
+00012345600012,SKU-WOOF-001-473,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,570,EA,active
+00012345600029,SKU-WOOF-002-474,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,1471,EA,low_stock
+00012345600036,SKU-WOOF-003-475,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,236,CS,reserved
+00012345600043,SKU-WOOF-004-476,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,807,EA,active
+00012345600050,SKU-WOOF-005-477,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,456,EA,active
+00012345600067,SKU-WOOF-006-478,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,1398,EA,reserved
+00012345600074,SKU-WOOF-007-479,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,1356,EA,active
+00012345600081,SKU-WOOF-008-480,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,1204,EA,low_stock
+00012345600012,SKU-WOOF-001-481,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,658,EA,reserved
+00012345600029,SKU-WOOF-002-482,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,117,CS,low_stock
+00012345600036,SKU-WOOF-003-483,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,640,EA,active
+00012345600043,SKU-WOOF-004-484,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,1085,EA,active
+00012345600050,SKU-WOOF-005-485,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,619,EA,active
+00012345600067,SKU-WOOF-006-486,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,900,EA,active
+00012345600074,SKU-WOOF-007-487,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,1268,CS,active
+00012345600081,SKU-WOOF-008-488,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,643,EA,active
+00012345600012,SKU-WOOF-001-489,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,1309,PL,active
+00012345600029,SKU-WOOF-002-490,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,110,CS,active
+00012345600036,SKU-WOOF-003-491,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,1029,EA,active
+00012345600043,SKU-WOOF-004-492,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,1264,EA,active
+00012345600050,SKU-WOOF-005-493,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,620,EA,active
+00012345600067,SKU-WOOF-006-494,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,982,EA,active
+00012345600074,SKU-WOOF-007-495,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,86,CS,active
+00012345600081,SKU-WOOF-008-496,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,680,EA,low_stock
+00012345600012,SKU-WOOF-001-497,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,248,EA,low_stock
+00012345600029,SKU-WOOF-002-498,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,757,EA,active
+00012345600036,SKU-WOOF-003-499,Squirrel Detection Radar,0614141000043,Poodle Processing Center,447,EA,active
+00012345600043,SKU-WOOF-004-500,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,548,EA,active
+00012345600050,SKU-WOOF-005-501,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,305,EA,active
+00012345600067,SKU-WOOF-006-502,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,1292,EA,low_stock
+00012345600074,SKU-WOOF-007-503,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,232,EA,reserved
+00012345600081,SKU-WOOF-008-504,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,1041,EA,reserved
+00012345600012,SKU-WOOF-001-505,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,950,EA,active
+00012345600029,SKU-WOOF-002-506,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,86,EA,reserved
+00012345600036,SKU-WOOF-003-507,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,1023,PL,low_stock
+00012345600043,SKU-WOOF-004-508,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,1242,EA,active
+00012345600050,SKU-WOOF-005-509,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,386,EA,low_stock
+00012345600067,SKU-WOOF-006-510,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,559,EA,active
+00012345600074,SKU-WOOF-007-511,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,427,EA,active
+00012345600081,SKU-WOOF-008-512,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,109,EA,active
+00012345600012,SKU-WOOF-001-513,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,1306,CS,active
+00012345600029,SKU-WOOF-002-514,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,1133,PL,active
+00012345600036,SKU-WOOF-003-515,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,909,EA,active
+00012345600043,SKU-WOOF-004-516,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,255,EA,low_stock
+00012345600050,SKU-WOOF-005-517,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,708,EA,active
+00012345600067,SKU-WOOF-006-518,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,1089,EA,low_stock
+00012345600074,SKU-WOOF-007-519,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,1347,EA,low_stock
+00012345600081,SKU-WOOF-008-520,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,844,CS,low_stock
+00012345600012,SKU-WOOF-001-521,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,348,EA,active
+00012345600029,SKU-WOOF-002-522,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,621,EA,low_stock
+00012345600036,SKU-WOOF-003-523,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,1467,CS,active
+00012345600043,SKU-WOOF-004-524,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,1291,EA,active
+00012345600050,SKU-WOOF-005-525,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,1353,EA,low_stock
+00012345600067,SKU-WOOF-006-526,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,775,EA,active
+00012345600074,SKU-WOOF-007-527,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,1052,EA,active
+00012345600081,SKU-WOOF-008-528,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,513,EA,low_stock
+00012345600012,SKU-WOOF-001-529,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,740,EA,active
+00012345600029,SKU-WOOF-002-530,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,1296,EA,active
+00012345600036,SKU-WOOF-003-531,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,1469,EA,active
+00012345600043,SKU-WOOF-004-532,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,732,CS,active
+00012345600050,SKU-WOOF-005-533,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,651,EA,active
+00012345600067,SKU-WOOF-006-534,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,715,EA,active
+00012345600074,SKU-WOOF-007-535,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,1445,EA,active
+00012345600081,SKU-WOOF-008-536,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,849,EA,reserved
+00012345600012,SKU-WOOF-001-537,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,218,EA,reserved
+00012345600029,SKU-WOOF-002-538,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,983,EA,active
+00012345600036,SKU-WOOF-003-539,Squirrel Detection Radar,0614141000043,Poodle Processing Center,1317,EA,active
+00012345600043,SKU-WOOF-004-540,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,1074,EA,active
+00012345600050,SKU-WOOF-005-541,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,159,EA,active
+00012345600067,SKU-WOOF-006-542,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,1223,CS,low_stock
+00012345600074,SKU-WOOF-007-543,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,1121,CS,active
+00012345600081,SKU-WOOF-008-544,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,733,EA,low_stock
+00012345600012,SKU-WOOF-001-545,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,154,CS,active
+00012345600029,SKU-WOOF-002-546,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,752,EA,low_stock
+00012345600036,SKU-WOOF-003-547,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,257,CS,active
+00012345600043,SKU-WOOF-004-548,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,150,EA,active
+00012345600050,SKU-WOOF-005-549,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,142,EA,active
+00012345600067,SKU-WOOF-006-550,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,656,EA,active
+00012345600074,SKU-WOOF-007-551,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,739,EA,active
+00012345600081,SKU-WOOF-008-552,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,738,EA,low_stock
+00012345600012,SKU-WOOF-001-553,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,721,CS,active
+00012345600029,SKU-WOOF-002-554,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,1164,EA,active
+00012345600036,SKU-WOOF-003-555,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,242,EA,active
+00012345600043,SKU-WOOF-004-556,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,231,EA,active
+00012345600050,SKU-WOOF-005-557,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,701,CS,active
+00012345600067,SKU-WOOF-006-558,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,648,EA,reserved
+00012345600074,SKU-WOOF-007-559,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,1489,EA,active
+00012345600081,SKU-WOOF-008-560,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,1384,CS,active
+00012345600012,SKU-WOOF-001-561,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,1081,EA,active
+00012345600029,SKU-WOOF-002-562,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,1395,EA,active
+00012345600036,SKU-WOOF-003-563,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,491,EA,low_stock
+00012345600043,SKU-WOOF-004-564,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,976,EA,active
+00012345600050,SKU-WOOF-005-565,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,501,CS,active
+00012345600067,SKU-WOOF-006-566,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,70,EA,active
+00012345600074,SKU-WOOF-007-567,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,1478,EA,active
+00012345600081,SKU-WOOF-008-568,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,1431,EA,low_stock
+00012345600012,SKU-WOOF-001-569,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,254,CS,active
+00012345600029,SKU-WOOF-002-570,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,359,EA,low_stock
+00012345600036,SKU-WOOF-003-571,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,1190,EA,active
+00012345600043,SKU-WOOF-004-572,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,967,EA,active
+00012345600050,SKU-WOOF-005-573,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,511,EA,active
+00012345600067,SKU-WOOF-006-574,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,94,EA,low_stock
+00012345600074,SKU-WOOF-007-575,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,1277,EA,active
+00012345600081,SKU-WOOF-008-576,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,1408,EA,active
+00012345600012,SKU-WOOF-001-577,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,891,EA,low_stock
+00012345600029,SKU-WOOF-002-578,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,555,EA,active
+00012345600036,SKU-WOOF-003-579,Squirrel Detection Radar,0614141000043,Poodle Processing Center,903,EA,active
+00012345600043,SKU-WOOF-004-580,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,1258,EA,reserved
+00012345600050,SKU-WOOF-005-581,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,399,EA,active
+00012345600067,SKU-WOOF-006-582,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,69,CS,active
+00012345600074,SKU-WOOF-007-583,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,1092,EA,active
+00012345600081,SKU-WOOF-008-584,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,114,EA,low_stock
+00012345600012,SKU-WOOF-001-585,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,1122,CS,active
+00012345600029,SKU-WOOF-002-586,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,386,EA,reserved
+00012345600036,SKU-WOOF-003-587,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,123,EA,active
+00012345600043,SKU-WOOF-004-588,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,1234,EA,active
+00012345600050,SKU-WOOF-005-589,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,1161,EA,active
+00012345600067,SKU-WOOF-006-590,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,672,EA,active
+00012345600074,SKU-WOOF-007-591,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,482,EA,active
+00012345600081,SKU-WOOF-008-592,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,1231,EA,low_stock
+00012345600012,SKU-WOOF-001-593,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,295,EA,active
+00012345600029,SKU-WOOF-002-594,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,1337,EA,active
+00012345600036,SKU-WOOF-003-595,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,287,EA,active
+00012345600043,SKU-WOOF-004-596,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,1337,EA,low_stock
+00012345600050,SKU-WOOF-005-597,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,62,EA,active
+00012345600067,SKU-WOOF-006-598,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,111,EA,low_stock
+00012345600074,SKU-WOOF-007-599,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,1472,EA,active
+00012345600081,SKU-WOOF-008-600,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,1241,PL,active
+00012345600012,SKU-WOOF-001-601,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,523,EA,reserved
+00012345600029,SKU-WOOF-002-602,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,1171,EA,low_stock
+00012345600036,SKU-WOOF-003-603,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,534,EA,active
+00012345600043,SKU-WOOF-004-604,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,474,EA,active
+00012345600050,SKU-WOOF-005-605,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,119,EA,reserved
+00012345600067,SKU-WOOF-006-606,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,1372,PL,low_stock
+00012345600074,SKU-WOOF-007-607,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,674,EA,active
+00012345600081,SKU-WOOF-008-608,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,789,EA,active
+00012345600012,SKU-WOOF-001-609,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,714,EA,reserved
+00012345600029,SKU-WOOF-002-610,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,597,EA,active
+00012345600036,SKU-WOOF-003-611,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,731,EA,active
+00012345600043,SKU-WOOF-004-612,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,1013,EA,active
+00012345600050,SKU-WOOF-005-613,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,258,EA,active
+00012345600067,SKU-WOOF-006-614,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,1225,EA,active
+00012345600074,SKU-WOOF-007-615,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,1020,CS,active
+00012345600081,SKU-WOOF-008-616,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,1171,CS,active
+00012345600012,SKU-WOOF-001-617,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,687,CS,active
+00012345600029,SKU-WOOF-002-618,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,1426,CS,low_stock
+00012345600036,SKU-WOOF-003-619,Squirrel Detection Radar,0614141000043,Poodle Processing Center,1486,EA,low_stock
+00012345600043,SKU-WOOF-004-620,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,1156,EA,active
+00012345600050,SKU-WOOF-005-621,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,460,EA,low_stock
+00012345600067,SKU-WOOF-006-622,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,572,EA,active
+00012345600074,SKU-WOOF-007-623,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,335,EA,active
+00012345600081,SKU-WOOF-008-624,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,777,EA,active
+00012345600012,SKU-WOOF-001-625,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,299,CS,active
+00012345600029,SKU-WOOF-002-626,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,805,EA,active
+00012345600036,SKU-WOOF-003-627,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,391,EA,low_stock
+00012345600043,SKU-WOOF-004-628,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,1470,EA,active
+00012345600050,SKU-WOOF-005-629,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,661,CS,active
+00012345600067,SKU-WOOF-006-630,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,432,EA,active
+00012345600074,SKU-WOOF-007-631,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,1151,EA,low_stock
+00012345600081,SKU-WOOF-008-632,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,330,EA,low_stock
+00012345600012,SKU-WOOF-001-633,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,621,EA,low_stock
+00012345600029,SKU-WOOF-002-634,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,511,CS,active
+00012345600036,SKU-WOOF-003-635,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,1485,EA,active
+00012345600043,SKU-WOOF-004-636,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,1401,CS,active
+00012345600050,SKU-WOOF-005-637,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,312,EA,low_stock
+00012345600067,SKU-WOOF-006-638,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,141,CS,low_stock
+00012345600074,SKU-WOOF-007-639,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,723,EA,low_stock
+00012345600081,SKU-WOOF-008-640,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,1030,EA,reserved
+00012345600012,SKU-WOOF-001-641,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,113,EA,active
+00012345600029,SKU-WOOF-002-642,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,305,PL,active
+00012345600036,SKU-WOOF-003-643,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,624,EA,low_stock
+00012345600043,SKU-WOOF-004-644,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,879,EA,active
+00012345600050,SKU-WOOF-005-645,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,958,EA,active
+00012345600067,SKU-WOOF-006-646,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,1350,EA,low_stock
+00012345600074,SKU-WOOF-007-647,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,1252,EA,active
+00012345600081,SKU-WOOF-008-648,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,808,EA,active
+00012345600012,SKU-WOOF-001-649,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,445,EA,low_stock
+00012345600029,SKU-WOOF-002-650,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,187,CS,active
+00012345600036,SKU-WOOF-003-651,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,1480,EA,low_stock
+00012345600043,SKU-WOOF-004-652,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,395,EA,reserved
+00012345600050,SKU-WOOF-005-653,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,498,EA,active
+00012345600067,SKU-WOOF-006-654,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,1452,EA,active
+00012345600074,SKU-WOOF-007-655,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,1000,EA,reserved
+00012345600081,SKU-WOOF-008-656,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,819,CS,reserved
+00012345600012,SKU-WOOF-001-657,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,145,EA,active
+00012345600029,SKU-WOOF-002-658,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,892,CS,reserved
+00012345600036,SKU-WOOF-003-659,Squirrel Detection Radar,0614141000043,Poodle Processing Center,1015,EA,active
+00012345600043,SKU-WOOF-004-660,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,639,EA,active
+00012345600050,SKU-WOOF-005-661,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,671,EA,reserved
+00012345600067,SKU-WOOF-006-662,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,202,EA,active
+00012345600074,SKU-WOOF-007-663,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,1465,EA,active
+00012345600081,SKU-WOOF-008-664,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,1161,CS,low_stock
+00012345600012,SKU-WOOF-001-665,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,93,EA,active
+00012345600029,SKU-WOOF-002-666,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,1311,EA,active
+00012345600036,SKU-WOOF-003-667,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,346,EA,active
+00012345600043,SKU-WOOF-004-668,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,947,EA,active
+00012345600050,SKU-WOOF-005-669,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,1415,EA,active
+00012345600067,SKU-WOOF-006-670,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,1246,EA,low_stock
+00012345600074,SKU-WOOF-007-671,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,885,EA,active
+00012345600081,SKU-WOOF-008-672,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,206,CS,low_stock
+00012345600012,SKU-WOOF-001-673,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,843,EA,active
+00012345600029,SKU-WOOF-002-674,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,294,CS,active
+00012345600036,SKU-WOOF-003-675,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,324,EA,low_stock
+00012345600043,SKU-WOOF-004-676,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,405,CS,active
+00012345600050,SKU-WOOF-005-677,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,1223,CS,low_stock
+00012345600067,SKU-WOOF-006-678,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,567,EA,reserved
+00012345600074,SKU-WOOF-007-679,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,528,EA,reserved
+00012345600081,SKU-WOOF-008-680,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,952,EA,active
+00012345600012,SKU-WOOF-001-681,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,603,EA,reserved
+00012345600029,SKU-WOOF-002-682,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,711,CS,active
+00012345600036,SKU-WOOF-003-683,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,975,EA,active
+00012345600043,SKU-WOOF-004-684,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,1204,EA,active
+00012345600050,SKU-WOOF-005-685,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,80,EA,active
+00012345600067,SKU-WOOF-006-686,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,212,EA,active
+00012345600074,SKU-WOOF-007-687,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,1471,EA,active
+00012345600081,SKU-WOOF-008-688,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,1129,EA,active
+00012345600012,SKU-WOOF-001-689,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,919,EA,active
+00012345600029,SKU-WOOF-002-690,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,201,CS,active
+00012345600036,SKU-WOOF-003-691,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,1273,EA,active
+00012345600043,SKU-WOOF-004-692,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,1449,EA,active
+00012345600050,SKU-WOOF-005-693,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,1249,EA,active
+00012345600067,SKU-WOOF-006-694,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,464,EA,reserved
+00012345600074,SKU-WOOF-007-695,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,1195,PL,active
+00012345600081,SKU-WOOF-008-696,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,197,EA,active
+00012345600012,SKU-WOOF-001-697,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,723,PL,reserved
+00012345600029,SKU-WOOF-002-698,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,1284,EA,active
+00012345600036,SKU-WOOF-003-699,Squirrel Detection Radar,0614141000043,Poodle Processing Center,1234,CS,active
+00012345600043,SKU-WOOF-004-700,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,810,PL,active
+00012345600050,SKU-WOOF-005-701,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,1322,EA,active
+00012345600067,SKU-WOOF-006-702,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,53,EA,active
+00012345600074,SKU-WOOF-007-703,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,1343,EA,low_stock
+00012345600081,SKU-WOOF-008-704,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,535,EA,active
+00012345600012,SKU-WOOF-001-705,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,798,EA,active
+00012345600029,SKU-WOOF-002-706,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,1446,CS,active
+00012345600036,SKU-WOOF-003-707,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,664,EA,active
+00012345600043,SKU-WOOF-004-708,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,768,CS,reserved
+00012345600050,SKU-WOOF-005-709,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,338,EA,active
+00012345600067,SKU-WOOF-006-710,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,1075,EA,reserved
+00012345600074,SKU-WOOF-007-711,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,311,EA,reserved
+00012345600081,SKU-WOOF-008-712,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,829,EA,active
+00012345600012,SKU-WOOF-001-713,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,424,EA,active
+00012345600029,SKU-WOOF-002-714,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,1068,EA,low_stock
+00012345600036,SKU-WOOF-003-715,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,1057,EA,active
+00012345600043,SKU-WOOF-004-716,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,1217,EA,active
+00012345600050,SKU-WOOF-005-717,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,797,EA,low_stock
+00012345600067,SKU-WOOF-006-718,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,1159,EA,active
+00012345600074,SKU-WOOF-007-719,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,593,EA,reserved
+00012345600081,SKU-WOOF-008-720,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,803,EA,reserved
+00012345600012,SKU-WOOF-001-721,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,589,CS,active
+00012345600029,SKU-WOOF-002-722,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,558,CS,reserved
+00012345600036,SKU-WOOF-003-723,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,595,EA,active
+00012345600043,SKU-WOOF-004-724,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,670,EA,active
+00012345600050,SKU-WOOF-005-725,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,497,EA,active
+00012345600067,SKU-WOOF-006-726,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,503,PL,active
+00012345600074,SKU-WOOF-007-727,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,658,CS,active
+00012345600081,SKU-WOOF-008-728,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,89,EA,reserved
+00012345600012,SKU-WOOF-001-729,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,723,EA,active
+00012345600029,SKU-WOOF-002-730,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,1292,CS,active
+00012345600036,SKU-WOOF-003-731,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,1086,CS,active
+00012345600043,SKU-WOOF-004-732,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,79,EA,active
+00012345600050,SKU-WOOF-005-733,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,1435,EA,active
+00012345600067,SKU-WOOF-006-734,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,336,PL,reserved
+00012345600074,SKU-WOOF-007-735,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,1105,EA,active
+00012345600081,SKU-WOOF-008-736,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,1381,EA,active
+00012345600012,SKU-WOOF-001-737,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,702,PL,active
+00012345600029,SKU-WOOF-002-738,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,586,CS,active
+00012345600036,SKU-WOOF-003-739,Squirrel Detection Radar,0614141000043,Poodle Processing Center,796,EA,active
+00012345600043,SKU-WOOF-004-740,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,54,EA,active
+00012345600050,SKU-WOOF-005-741,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,974,EA,low_stock
+00012345600067,SKU-WOOF-006-742,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,293,CS,active
+00012345600074,SKU-WOOF-007-743,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,677,EA,active
+00012345600081,SKU-WOOF-008-744,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,1207,CS,active
+00012345600012,SKU-WOOF-001-745,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,971,PL,low_stock
+00012345600029,SKU-WOOF-002-746,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,1366,EA,low_stock
+00012345600036,SKU-WOOF-003-747,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,89,EA,low_stock
+00012345600043,SKU-WOOF-004-748,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,774,EA,reserved
+00012345600050,SKU-WOOF-005-749,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,1021,EA,active
+00012345600067,SKU-WOOF-006-750,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,1420,EA,active
+00012345600074,SKU-WOOF-007-751,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,1211,PL,low_stock
+00012345600081,SKU-WOOF-008-752,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,186,EA,active
+00012345600012,SKU-WOOF-001-753,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,1389,EA,active
+00012345600029,SKU-WOOF-002-754,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,1036,EA,low_stock
+00012345600036,SKU-WOOF-003-755,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,1282,EA,low_stock
+00012345600043,SKU-WOOF-004-756,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,754,EA,active
+00012345600050,SKU-WOOF-005-757,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,1259,EA,active
+00012345600067,SKU-WOOF-006-758,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,1386,EA,reserved
+00012345600074,SKU-WOOF-007-759,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,306,EA,active
+00012345600081,SKU-WOOF-008-760,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,1372,EA,reserved
+00012345600012,SKU-WOOF-001-761,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,316,EA,low_stock
+00012345600029,SKU-WOOF-002-762,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,1241,EA,low_stock
+00012345600036,SKU-WOOF-003-763,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,663,EA,active
+00012345600043,SKU-WOOF-004-764,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,158,EA,active
+00012345600050,SKU-WOOF-005-765,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,1293,EA,active
+00012345600067,SKU-WOOF-006-766,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,1167,EA,active
+00012345600074,SKU-WOOF-007-767,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,1005,EA,low_stock
+00012345600081,SKU-WOOF-008-768,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,1402,CS,low_stock
+00012345600012,SKU-WOOF-001-769,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,269,EA,active
+00012345600029,SKU-WOOF-002-770,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,1100,EA,reserved
+00012345600036,SKU-WOOF-003-771,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,563,EA,active
+00012345600043,SKU-WOOF-004-772,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,1118,EA,low_stock
+00012345600050,SKU-WOOF-005-773,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,1140,EA,active
+00012345600067,SKU-WOOF-006-774,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,382,EA,active
+00012345600074,SKU-WOOF-007-775,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,562,EA,active
+00012345600081,SKU-WOOF-008-776,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,484,EA,active
+00012345600012,SKU-WOOF-001-777,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,715,EA,active
+00012345600029,SKU-WOOF-002-778,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,1173,EA,active
+00012345600036,SKU-WOOF-003-779,Squirrel Detection Radar,0614141000043,Poodle Processing Center,1021,EA,active
+00012345600043,SKU-WOOF-004-780,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,109,EA,active
+00012345600050,SKU-WOOF-005-781,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,704,CS,active
+00012345600067,SKU-WOOF-006-782,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,1346,CS,low_stock
+00012345600074,SKU-WOOF-007-783,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,165,EA,active
+00012345600081,SKU-WOOF-008-784,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,666,EA,active
+00012345600012,SKU-WOOF-001-785,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,1144,CS,reserved
+00012345600029,SKU-WOOF-002-786,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,1014,EA,active
+00012345600036,SKU-WOOF-003-787,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,210,EA,active
+00012345600043,SKU-WOOF-004-788,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,1365,EA,active
+00012345600050,SKU-WOOF-005-789,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,1042,CS,reserved
+00012345600067,SKU-WOOF-006-790,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,1358,EA,low_stock
+00012345600074,SKU-WOOF-007-791,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,910,EA,active
+00012345600081,SKU-WOOF-008-792,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,1375,EA,reserved
+00012345600012,SKU-WOOF-001-793,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,636,EA,active
+00012345600029,SKU-WOOF-002-794,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,1011,EA,low_stock
+00012345600036,SKU-WOOF-003-795,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,137,EA,active
+00012345600043,SKU-WOOF-004-796,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,669,EA,active
+00012345600050,SKU-WOOF-005-797,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,854,CS,low_stock
+00012345600067,SKU-WOOF-006-798,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,631,EA,active
+00012345600074,SKU-WOOF-007-799,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,926,EA,low_stock
+00012345600081,SKU-WOOF-008-800,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,937,EA,active
+00012345600012,SKU-WOOF-001-801,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,588,EA,active
+00012345600029,SKU-WOOF-002-802,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,979,EA,low_stock
+00012345600036,SKU-WOOF-003-803,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,1272,PL,active
+00012345600043,SKU-WOOF-004-804,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,1500,EA,active
+00012345600050,SKU-WOOF-005-805,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,1042,EA,active
+00012345600067,SKU-WOOF-006-806,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,311,EA,active
+00012345600074,SKU-WOOF-007-807,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,273,EA,active
+00012345600081,SKU-WOOF-008-808,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,1234,EA,reserved
+00012345600012,SKU-WOOF-001-809,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,541,EA,active
+00012345600029,SKU-WOOF-002-810,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,1092,EA,active
+00012345600036,SKU-WOOF-003-811,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,1443,EA,active
+00012345600043,SKU-WOOF-004-812,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,1217,EA,low_stock
+00012345600050,SKU-WOOF-005-813,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,225,CS,active
+00012345600067,SKU-WOOF-006-814,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,1145,EA,active
+00012345600074,SKU-WOOF-007-815,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,118,CS,active
+00012345600081,SKU-WOOF-008-816,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,1222,EA,active
+00012345600012,SKU-WOOF-001-817,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,542,PL,active
+00012345600029,SKU-WOOF-002-818,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,950,EA,active
+00012345600036,SKU-WOOF-003-819,Squirrel Detection Radar,0614141000043,Poodle Processing Center,230,EA,active
+00012345600043,SKU-WOOF-004-820,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,130,EA,low_stock
+00012345600050,SKU-WOOF-005-821,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,902,EA,low_stock
+00012345600067,SKU-WOOF-006-822,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,1498,EA,active
+00012345600074,SKU-WOOF-007-823,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,1328,EA,low_stock
+00012345600081,SKU-WOOF-008-824,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,494,CS,low_stock
+00012345600012,SKU-WOOF-001-825,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,644,EA,active
+00012345600029,SKU-WOOF-002-826,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,1169,EA,active
+00012345600036,SKU-WOOF-003-827,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,279,CS,low_stock
+00012345600043,SKU-WOOF-004-828,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,524,EA,active
+00012345600050,SKU-WOOF-005-829,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,510,EA,low_stock
+00012345600067,SKU-WOOF-006-830,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,509,EA,active
+00012345600074,SKU-WOOF-007-831,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,1409,EA,active
+00012345600081,SKU-WOOF-008-832,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,637,EA,active
+00012345600012,SKU-WOOF-001-833,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,291,EA,low_stock
+00012345600029,SKU-WOOF-002-834,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,278,EA,reserved
+00012345600036,SKU-WOOF-003-835,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,280,EA,active
+00012345600043,SKU-WOOF-004-836,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,144,EA,active
+00012345600050,SKU-WOOF-005-837,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,225,EA,active
+00012345600067,SKU-WOOF-006-838,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,266,EA,active
+00012345600074,SKU-WOOF-007-839,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,1044,EA,low_stock
+00012345600081,SKU-WOOF-008-840,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,865,EA,reserved
+00012345600012,SKU-WOOF-001-841,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,854,EA,active
+00012345600029,SKU-WOOF-002-842,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,852,EA,reserved
+00012345600036,SKU-WOOF-003-843,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,172,EA,active
+00012345600043,SKU-WOOF-004-844,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,1129,EA,active
+00012345600050,SKU-WOOF-005-845,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,371,EA,reserved
+00012345600067,SKU-WOOF-006-846,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,1230,EA,low_stock
+00012345600074,SKU-WOOF-007-847,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,169,EA,active
+00012345600081,SKU-WOOF-008-848,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,340,CS,active
+00012345600012,SKU-WOOF-001-849,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,1485,CS,active
+00012345600029,SKU-WOOF-002-850,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,467,PL,active
+00012345600036,SKU-WOOF-003-851,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,75,EA,active
+00012345600043,SKU-WOOF-004-852,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,1239,EA,active
+00012345600050,SKU-WOOF-005-853,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,1314,EA,active
+00012345600067,SKU-WOOF-006-854,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,1293,EA,active
+00012345600074,SKU-WOOF-007-855,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,1289,EA,active
+00012345600081,SKU-WOOF-008-856,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,786,EA,low_stock
+00012345600012,SKU-WOOF-001-857,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,714,EA,active
+00012345600029,SKU-WOOF-002-858,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,1268,EA,active
+00012345600036,SKU-WOOF-003-859,Squirrel Detection Radar,0614141000043,Poodle Processing Center,879,CS,active
+00012345600043,SKU-WOOF-004-860,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,548,EA,active
+00012345600050,SKU-WOOF-005-861,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,1086,EA,active
+00012345600067,SKU-WOOF-006-862,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,1017,EA,active
+00012345600074,SKU-WOOF-007-863,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,723,CS,active
+00012345600081,SKU-WOOF-008-864,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,998,EA,active
+00012345600012,SKU-WOOF-001-865,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,286,EA,active
+00012345600029,SKU-WOOF-002-866,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,751,CS,active
+00012345600036,SKU-WOOF-003-867,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,1201,EA,low_stock
+00012345600043,SKU-WOOF-004-868,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,162,EA,active
+00012345600050,SKU-WOOF-005-869,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,874,EA,active
+00012345600067,SKU-WOOF-006-870,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,773,EA,active
+00012345600074,SKU-WOOF-007-871,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,80,EA,active
+00012345600081,SKU-WOOF-008-872,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,618,EA,active
+00012345600012,SKU-WOOF-001-873,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,869,EA,active
+00012345600029,SKU-WOOF-002-874,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,1372,CS,active
+00012345600036,SKU-WOOF-003-875,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,1060,PL,active
+00012345600043,SKU-WOOF-004-876,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,362,EA,active
+00012345600050,SKU-WOOF-005-877,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,1159,EA,active
+00012345600067,SKU-WOOF-006-878,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,1015,EA,active
+00012345600074,SKU-WOOF-007-879,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,89,EA,low_stock
+00012345600081,SKU-WOOF-008-880,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,312,CS,active
+00012345600012,SKU-WOOF-001-881,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,981,EA,low_stock
+00012345600029,SKU-WOOF-002-882,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,112,EA,active
+00012345600036,SKU-WOOF-003-883,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,903,EA,active
+00012345600043,SKU-WOOF-004-884,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,180,EA,reserved
+00012345600050,SKU-WOOF-005-885,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,825,EA,active
+00012345600067,SKU-WOOF-006-886,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,254,EA,active
+00012345600074,SKU-WOOF-007-887,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,1331,CS,active
+00012345600081,SKU-WOOF-008-888,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,592,PL,reserved
+00012345600012,SKU-WOOF-001-889,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,621,CS,reserved
+00012345600029,SKU-WOOF-002-890,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,1029,EA,low_stock
+00012345600036,SKU-WOOF-003-891,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,1378,EA,active
+00012345600043,SKU-WOOF-004-892,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,62,EA,low_stock
+00012345600050,SKU-WOOF-005-893,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,773,EA,active
+00012345600067,SKU-WOOF-006-894,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,707,CS,low_stock
+00012345600074,SKU-WOOF-007-895,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,1449,EA,active
+00012345600081,SKU-WOOF-008-896,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,901,EA,active
+00012345600012,SKU-WOOF-001-897,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,949,EA,active
+00012345600029,SKU-WOOF-002-898,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,783,CS,active
+00012345600036,SKU-WOOF-003-899,Squirrel Detection Radar,0614141000043,Poodle Processing Center,383,EA,active
+00012345600043,SKU-WOOF-004-900,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,1076,EA,active
+00012345600050,SKU-WOOF-005-901,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,499,EA,low_stock
+00012345600067,SKU-WOOF-006-902,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,1333,EA,active
+00012345600074,SKU-WOOF-007-903,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,1427,EA,low_stock
+00012345600081,SKU-WOOF-008-904,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,711,CS,active
+00012345600012,SKU-WOOF-001-905,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,782,EA,low_stock
+00012345600029,SKU-WOOF-002-906,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,1045,EA,reserved
+00012345600036,SKU-WOOF-003-907,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,670,EA,active
+00012345600043,SKU-WOOF-004-908,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,556,EA,low_stock
+00012345600050,SKU-WOOF-005-909,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,1449,CS,low_stock
+00012345600067,SKU-WOOF-006-910,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,1085,CS,low_stock
+00012345600074,SKU-WOOF-007-911,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,1291,CS,active
+00012345600081,SKU-WOOF-008-912,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,802,EA,active
+00012345600012,SKU-WOOF-001-913,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,244,EA,active
+00012345600029,SKU-WOOF-002-914,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,1330,EA,active
+00012345600036,SKU-WOOF-003-915,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,919,EA,active
+00012345600043,SKU-WOOF-004-916,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,265,EA,active
+00012345600050,SKU-WOOF-005-917,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,1315,EA,active
+00012345600067,SKU-WOOF-006-918,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,918,EA,active
+00012345600074,SKU-WOOF-007-919,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,1167,EA,active
+00012345600081,SKU-WOOF-008-920,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,1482,EA,active
+00012345600012,SKU-WOOF-001-921,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,1231,EA,active
+00012345600029,SKU-WOOF-002-922,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,1224,CS,active
+00012345600036,SKU-WOOF-003-923,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,1162,EA,active
+00012345600043,SKU-WOOF-004-924,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,401,EA,active
+00012345600050,SKU-WOOF-005-925,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,1141,CS,active
+00012345600067,SKU-WOOF-006-926,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,1110,EA,active
+00012345600074,SKU-WOOF-007-927,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,1159,EA,active
+00012345600081,SKU-WOOF-008-928,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,718,CS,low_stock
+00012345600012,SKU-WOOF-001-929,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,1423,EA,active
+00012345600029,SKU-WOOF-002-930,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,1312,EA,low_stock
+00012345600036,SKU-WOOF-003-931,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,626,EA,active
+00012345600043,SKU-WOOF-004-932,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,194,EA,low_stock
+00012345600050,SKU-WOOF-005-933,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,431,EA,low_stock
+00012345600067,SKU-WOOF-006-934,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,1095,EA,active
+00012345600074,SKU-WOOF-007-935,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,692,PL,active
+00012345600081,SKU-WOOF-008-936,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,169,EA,low_stock
+00012345600012,SKU-WOOF-001-937,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,821,CS,active
+00012345600029,SKU-WOOF-002-938,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,256,PL,reserved
+00012345600036,SKU-WOOF-003-939,Squirrel Detection Radar,0614141000043,Poodle Processing Center,467,EA,active
+00012345600043,SKU-WOOF-004-940,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,261,EA,reserved
+00012345600050,SKU-WOOF-005-941,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,1339,EA,active
+00012345600067,SKU-WOOF-006-942,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,1312,EA,low_stock
+00012345600074,SKU-WOOF-007-943,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,1063,PL,active
+00012345600081,SKU-WOOF-008-944,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,851,EA,active
+00012345600012,SKU-WOOF-001-945,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,362,EA,low_stock
+00012345600029,SKU-WOOF-002-946,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,536,EA,active
+00012345600036,SKU-WOOF-003-947,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,984,EA,active
+00012345600043,SKU-WOOF-004-948,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,839,EA,active
+00012345600050,SKU-WOOF-005-949,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,847,EA,active
+00012345600067,SKU-WOOF-006-950,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,646,EA,low_stock
+00012345600074,SKU-WOOF-007-951,Self-Cleaning Dog Bath Station,0614141000012,Golden Retriever Distribution Center,970,EA,active
+00012345600081,SKU-WOOF-008-952,AI-Powered Smart Dog Door,0614141000029,Labrador Logistics Hub,347,EA,active
+00012345600012,SKU-WOOF-001-953,Premium Belly Rub Machine,0614141000036,German Shepherd Sorting Facility,964,CS,active
+00012345600029,SKU-WOOF-002-954,Tennis Ball Launcher 3000,0614141000043,Poodle Processing Center,274,EA,active
+00012345600036,SKU-WOOF-003-955,Squirrel Detection Radar,0614141000050,Bulldog Bulk Warehouse,864,EA,active
+00012345600043,SKU-WOOF-004-956,Anti-Mailman Defense System,0614141000012,Golden Retriever Distribution Center,587,EA,low_stock
+00012345600050,SKU-WOOF-005-957,Automatic Treat Dispenser Pro,0614141000029,Labrador Logistics Hub,715,PL,active
+00012345600067,SKU-WOOF-006-958,Indestructible Chew Toy (Ha Right),0614141000036,German Shepherd Sorting Facility,1400,CS,active
+00012345600074,SKU-WOOF-007-959,Self-Cleaning Dog Bath Station,0614141000043,Poodle Processing Center,333,EA,reserved
+00012345600081,SKU-WOOF-008-960,AI-Powered Smart Dog Door,0614141000050,Bulldog Bulk Warehouse,850,EA,reserved
+00012345600012,SKU-WOOF-001-961,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,1271,EA,active
+00012345600029,SKU-WOOF-002-962,Tennis Ball Launcher 3000,0614141000029,Labrador Logistics Hub,1454,CS,low_stock
+00012345600036,SKU-WOOF-003-963,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,1448,CS,low_stock
+00012345600043,SKU-WOOF-004-964,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,1096,EA,active
+00012345600050,SKU-WOOF-005-965,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,872,CS,active
+00012345600067,SKU-WOOF-006-966,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,662,EA,active
+00012345600074,SKU-WOOF-007-967,Self-Cleaning Dog Bath Station,0614141000029,Labrador Logistics Hub,1433,EA,active
+00012345600081,SKU-WOOF-008-968,AI-Powered Smart Dog Door,0614141000036,German Shepherd Sorting Facility,408,EA,active
+00012345600012,SKU-WOOF-001-969,Premium Belly Rub Machine,0614141000043,Poodle Processing Center,1267,EA,reserved
+00012345600029,SKU-WOOF-002-970,Tennis Ball Launcher 3000,0614141000050,Bulldog Bulk Warehouse,1039,EA,active
+00012345600036,SKU-WOOF-003-971,Squirrel Detection Radar,0614141000012,Golden Retriever Distribution Center,673,EA,active
+00012345600043,SKU-WOOF-004-972,Anti-Mailman Defense System,0614141000029,Labrador Logistics Hub,1005,EA,active
+00012345600050,SKU-WOOF-005-973,Automatic Treat Dispenser Pro,0614141000036,German Shepherd Sorting Facility,207,EA,low_stock
+00012345600067,SKU-WOOF-006-974,Indestructible Chew Toy (Ha Right),0614141000043,Poodle Processing Center,258,EA,active
+00012345600074,SKU-WOOF-007-975,Self-Cleaning Dog Bath Station,0614141000050,Bulldog Bulk Warehouse,208,EA,active
+00012345600081,SKU-WOOF-008-976,AI-Powered Smart Dog Door,0614141000012,Golden Retriever Distribution Center,550,EA,active
+00012345600012,SKU-WOOF-001-977,Premium Belly Rub Machine,0614141000029,Labrador Logistics Hub,673,EA,active
+00012345600029,SKU-WOOF-002-978,Tennis Ball Launcher 3000,0614141000036,German Shepherd Sorting Facility,1367,CS,active
+00012345600036,SKU-WOOF-003-979,Squirrel Detection Radar,0614141000043,Poodle Processing Center,1122,EA,active
+00012345600043,SKU-WOOF-004-980,Anti-Mailman Defense System,0614141000050,Bulldog Bulk Warehouse,1149,EA,active
+00012345600050,SKU-WOOF-005-981,Automatic Treat Dispenser Pro,0614141000012,Golden Retriever Distribution Center,1474,EA,low_stock
+00012345600067,SKU-WOOF-006-982,Indestructible Chew Toy (Ha Right),0614141000029,Labrador Logistics Hub,984,EA,low_stock
+00012345600074,SKU-WOOF-007-983,Self-Cleaning Dog Bath Station,0614141000036,German Shepherd Sorting Facility,168,EA,active
+00012345600081,SKU-WOOF-008-984,AI-Powered Smart Dog Door,0614141000043,Poodle Processing Center,976,EA,active
+00012345600012,SKU-WOOF-001-985,Premium Belly Rub Machine,0614141000050,Bulldog Bulk Warehouse,231,EA,active
+00012345600029,SKU-WOOF-002-986,Tennis Ball Launcher 3000,0614141000012,Golden Retriever Distribution Center,991,EA,active
+00012345600036,SKU-WOOF-003-987,Squirrel Detection Radar,0614141000029,Labrador Logistics Hub,392,PL,low_stock
+00012345600043,SKU-WOOF-004-988,Anti-Mailman Defense System,0614141000036,German Shepherd Sorting Facility,678,PL,active
+00012345600050,SKU-WOOF-005-989,Automatic Treat Dispenser Pro,0614141000043,Poodle Processing Center,783,EA,active
+00012345600067,SKU-WOOF-006-990,Indestructible Chew Toy (Ha Right),0614141000050,Bulldog Bulk Warehouse,1383,EA,low_stock
+99999999999999,SKU-BAD-001,Invisible Cat Repellent,0614141000012,Golden Retriever Distribution Center,100,EA,active
+00000000000000,SKU-BAD-002,Quantum Fetch Ball,0614141000029,Labrador Logistics Hub,50,CS,active
+00012345600012,SKU-WOOF-001-ERR,Premium Belly Rub Machine,9999999999999,Mystery Warehouse,200,EA,active
+00012345600029,SKU-WOOF-002-ERR,Tennis Ball Launcher 3000,0000000000000,Nonexistent Depot,75,EA,low_stock
+11111111111111,SKU-BAD-003,Self-Walking Leash,8888888888888,Ghost Distribution Center,300,EA,active
+00012345600036,SKU-WOOF-003-ERR,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,150,BOXES,active
+00012345600043,SKU-WOOF-004-ERR,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,80,EA,expired
+00012345600050,SKU-WOOF-005-ERR,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,25,EA,deleted
+00012345600067,SKU-WOOF-006-ERR,Indestructible Chew Toy (Ha Right),0614141000012,Golden Retriever Distribution Center,-50,EA,active
+55555555555555,SKU-BAD-004,Teleportation Dog Bed,0614141000029,Labrador Logistics Hub,100,PALLETS,low_stock

@@ -766,7 +766,7 @@
                     <div class="ps-step">
                         <div class="ps-step-label">Step 1</div>
                         <h3>Download the Error CSV</h3>
-                        <p>Download the error inventory file: <a href="#" style="color:var(--brand-accent);">inventory-errors.csv</a></p>
+                        <p>Download the error inventory file: <a href="/puppy-school/files/inventory-errors.csv" download style="color:var(--brand-accent);">inventory-errors.csv</a></p>
                         <p>This file contains inventory records with deliberate errors — invalid GTINs that do not exist in the reference data. When you upload this file, some records will fail FK validation.</p>
                     </div>
 
@@ -794,7 +794,23 @@
                     <div class="ps-step">
                         <div class="ps-step-label">Step 4</div>
                         <h3>Fix and Reprocess</h3>
-                        <p>Add the missing GTIN to the products reference table using a POST to <code class="ps-path">/reference/products</code>. Then select the failed records in Dobermann and hit <strong>Reprocess</strong>.</p>
+                        <p>The failed records reference GTINs that don't exist in the products table yet. You need to add them. Create a new endpoint using the template below — it will POST a new product to the reference table:</p>
+                        <div class="ps-code-wrapper">
+                            <div class="ps-code">// Name: Add Missing Product
+// Method: POST
+// Path: /reference/products
+// Header: Content-Type: application/json [enabled]
+
+{
+  "gtin": "00000000000000",
+  "sku": "SKU-FIX-001",
+  "description": "Emergency Recall Product",
+  "unitPrice": 9.99
+}</div>
+                            <button class="ps-copy-btn" onclick="copyTemplate(this)">Copy</button>
+                        </div>
+                        <p>Run it. Then repeat for the other missing GTINs — check the error details in your batch results to see which ones are missing. The error CSV contains four invalid GTINs: <code class="ps-path">00000000000000</code>, <code class="ps-path">11111111111111</code>, <code class="ps-path">55555555555555</code>, and <code class="ps-path">99999999999999</code>.</p>
+                        <p>Once all four products are added, go back to your failed batch, select the failed records, and hit <strong>Reprocess</strong>.</p>
                         <p>Watch the failures clear.</p>
                     </div>
 
