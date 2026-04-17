@@ -822,23 +822,26 @@
                     <div class="ps-step">
                         <div class="ps-step-label">Step 5</div>
                         <h3>Batch Load the Remaining Products</h3>
-                        <p>You have three more missing GTINs. Instead of creating them one at a time, let's use batch loading — the same technique you used in Lesson 2.</p>
-                        <p>Convert your endpoint into a template with variables. Copy this:</p>
-                        <div class="ps-code-wrapper">
-                            <div class="ps-code">// Name: Add Missing Products (Batch)
-// Method: POST
-// Path: /reference/products
-// Header: Content-Type: application/json [enabled]
-
-{
-  "gtin": "{{gtin}}",
-  "sku": "{{sku}}",
-  "description": "{{description}}",
-  "unitPrice": "{{unitPrice:number}}"
+                        <p>You have three more missing GTINs. Instead of creating them one at a time, let's turn your endpoint into a batch template.</p>
+                        <p>Open the <strong>Add Missing Product</strong> endpoint you just created. Your body looks like this:</p>
+<div class="ps-code">{
+  "gtin": "99999999999999",
+  "sku": "SKU-FIX-001",
+  "description": "Invisible Cat Repellent",
+  "unitPrice": 9.99
 }</div>
-                            <button class="ps-copy-btn" onclick="copyTemplate(this)">Copy</button>
-                        </div>
-                        <p>Copy the CSV below, then press <strong>Ctrl+M</strong> in Dobermann to paste it directly into Batch Preparation:</p>
+                        <p>Place your cursor on the <code class="ps-path">"gtin"</code> line and press <strong>Ctrl+M</strong>. Dobermann converts the hardcoded value into a template variable:</p>
+<div class="ps-code">"gtin": "{{gtin}}", //99999999999999</div>
+                        <p>It infers the variable name from the key and preserves the original value in a comment. Do the same for every line — click each line and press <strong>Ctrl+M</strong>. Your body should now look like this:</p>
+<div class="ps-code">{
+  "gtin": "{{gtin}}", //99999999999999
+  "sku": "{{sku}}", //SKU-FIX-001
+  "description": "{{description}}", //Invisible Cat Repellent
+  "unitPrice": "{{unitPrice:number}}", //9.99
+}</div>
+                        <p>Notice how Dobermann inferred <code class="ps-path">unitPrice:number</code> from the numeric value. That's type inference — it ensures numbers are sent as numbers in the JSON, not quoted strings.</p>
+                        <p>Your static endpoint is now a batch template. The <strong>Run</strong> button should have changed to <strong>Run Batch</strong>.</p>
+                        <p>Copy the CSV below, then press <strong>Ctrl+M</strong> in the Batch Preparation view to paste it directly:</p>
                         <div class="ps-code-wrapper">
                             <div class="ps-code">gtin,sku,description,unitPrice
 00000000000000,SKU-FIX-002,Quantum Fetch Ball,14.99
@@ -847,20 +850,20 @@
                             <button class="ps-copy-btn" onclick="copyTemplate(this)">Copy</button>
                         </div>
                         <p>Run the batch. Three products, one execution.</p>
-                        <p>Now do the same for the missing locations. Create this endpoint:</p>
+                        <p>Now do the same for the missing locations. Create a new endpoint:</p>
                         <div class="ps-code-wrapper">
-                            <div class="ps-code">// Name: Add Missing Locations (Batch)
+                            <div class="ps-code">// Name: Add Missing Location
 // Method: POST
 // Path: /reference/locations
 // Header: Content-Type: application/json [enabled]
 
 {
-  "gln": "{{gln}}",
-  "name": "{{name}}"
+  "gln": "9999999999999",
+  "name": "Mystery Warehouse"
 }</div>
                             <button class="ps-copy-btn" onclick="copyTemplate(this)">Copy</button>
                         </div>
-                        <p>Copy this CSV and press <strong>Ctrl+M</strong> to load it:</p>
+                        <p>Convert each line to a variable with <strong>Ctrl+M</strong>, then copy this CSV and press <strong>Ctrl+M</strong> in Batch Preparation to load it:</p>
                         <div class="ps-code-wrapper">
                             <div class="ps-code">gln,name
 9999999999999,Mystery Warehouse
