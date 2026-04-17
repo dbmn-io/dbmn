@@ -793,8 +793,14 @@
                     <!-- Step 4 -->
                     <div class="ps-step">
                         <div class="ps-step-label">Step 4</div>
-                        <h3>Fix and Reprocess</h3>
-                        <p>The failed records reference GTINs that don't exist in the products table yet. You need to add them. Create a new endpoint using the template below — it will POST a new product to the reference table:</p>
+                        <h3>Fix the Reference Data</h3>
+                        <p>Look at the errors in your batch results. You'll see two types:</p>
+                        <ul class="ps-endpoint-list">
+                            <li><strong>FK_VIOLATION</strong> — a GTIN or location GLN doesn't exist in the reference tables</li>
+                            <li><strong>INSERT_ERROR</strong> — a value like UOM or status doesn't match the allowed values</li>
+                        </ul>
+                        <p>The FK violations are fixable — you just need to add the missing reference data. The check constraint errors are bad data in the CSV itself (invalid UOM values, bad statuses, negative quantities). Those rows will fail again on reprocess, and that's expected — in real life, you'd fix the source file and re-import.</p>
+                        <p>Let's fix the FK violations. First, add one product manually. Create a new endpoint using this template:</p>
                         <div class="ps-code-wrapper">
                             <div class="ps-code">// Name: Add Missing Product
 // Method: POST
@@ -802,16 +808,75 @@
 // Header: Content-Type: application/json [enabled]
 
 {
-  "gtin": "00000000000000",
+  "gtin": "99999999999999",
   "sku": "SKU-FIX-001",
-  "description": "Emergency Recall Product",
+  "description": "Invisible Cat Repellent",
   "unitPrice": 9.99
 }</div>
                             <button class="ps-copy-btn" onclick="copyTemplate(this)">Copy</button>
                         </div>
-                        <p>Run it. Then repeat for the other missing GTINs — check the error details in your batch results to see which ones are missing. The error CSV contains four invalid GTINs: <code class="ps-path">00000000000000</code>, <code class="ps-path">11111111111111</code>, <code class="ps-path">55555555555555</code>, and <code class="ps-path">99999999999999</code>.</p>
-                        <p>Once all four products are added, go back to your failed batch, select the failed records, and hit <strong>Reprocess</strong>.</p>
-                        <p>Watch the failures clear.</p>
+                        <p>Run it. You've just created a product in the reference table via the API.</p>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="ps-step">
+                        <div class="ps-step-label">Step 5</div>
+                        <h3>Batch Load the Remaining Products</h3>
+                        <p>You have three more missing GTINs. Instead of creating them one at a time, let's use batch loading — the same technique you used in Lesson 2.</p>
+                        <p>Convert your endpoint into a template with variables. Copy this:</p>
+                        <div class="ps-code-wrapper">
+                            <div class="ps-code">// Name: Add Missing Products (Batch)
+// Method: POST
+// Path: /reference/products
+// Header: Content-Type: application/json [enabled]
+
+{
+  "gtin": "{{gtin}}",
+  "sku": "{{sku}}",
+  "description": "{{description}}",
+  "unitPrice": "{{unitPrice:number}}"
+}</div>
+                            <button class="ps-copy-btn" onclick="copyTemplate(this)">Copy</button>
+                        </div>
+                        <p>Now load this CSV into <strong>Batch Preparation</strong>:</p>
+                        <div class="ps-code-wrapper">
+                            <div class="ps-code">gtin,sku,description,unitPrice
+00000000000000,SKU-FIX-002,Quantum Fetch Ball,14.99
+11111111111111,SKU-FIX-003,Self-Walking Leash,29.99
+55555555555555,SKU-FIX-004,Teleportation Dog Bed,199.99</div>
+                            <button class="ps-copy-btn" onclick="copyTemplate(this)">Copy</button>
+                        </div>
+                        <p>Save that as a <code class="ps-path">.csv</code> file, load it into Dobermann, and run the batch. Three products, one execution.</p>
+                        <p>Now do the same for the missing locations. Create this endpoint:</p>
+                        <div class="ps-code-wrapper">
+                            <div class="ps-code">// Name: Add Missing Locations (Batch)
+// Method: POST
+// Path: /reference/locations
+// Header: Content-Type: application/json [enabled]
+
+{
+  "gln": "{{gln}}",
+  "name": "{{name}}"
+}</div>
+                            <button class="ps-copy-btn" onclick="copyTemplate(this)">Copy</button>
+                        </div>
+                        <p>Load this CSV and run:</p>
+                        <div class="ps-code-wrapper">
+                            <div class="ps-code">gln,name
+9999999999999,Mystery Warehouse
+0000000000000,Nonexistent Depot
+8888888888888,Ghost Distribution Center</div>
+                            <button class="ps-copy-btn" onclick="copyTemplate(this)">Copy</button>
+                        </div>
+                        <p>That's the power of template variables — any endpoint can become a batch endpoint just by replacing hardcoded values with <code class="ps-path">{{variables}}</code>.</p>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div class="ps-step">
+                        <div class="ps-step-label">Step 6</div>
+                        <h3>Reprocess the Failed Records</h3>
+                        <p>Go back to your failed inventory batch. Select the failed records and hit <strong>Reprocess</strong>.</p>
+                        <p>The FK violation rows should now succeed — the products and locations they reference exist. Some rows with bad UOM values or invalid statuses will fail again, and that's correct — those are genuine data quality issues that need fixing at the source.</p>
                     </div>
 
                     <!-- Callouts -->
