@@ -838,7 +838,7 @@
 }</div>
                             <button class="ps-copy-btn" onclick="copyTemplate(this)">Copy</button>
                         </div>
-                        <p>Now load this CSV into <strong>Batch Preparation</strong>:</p>
+                        <p>Copy the CSV below, then press <strong>Ctrl+M</strong> in Dobermann to paste it directly into Batch Preparation:</p>
                         <div class="ps-code-wrapper">
                             <div class="ps-code">gtin,sku,description,unitPrice
 00000000000000,SKU-FIX-002,Quantum Fetch Ball,14.99
@@ -846,7 +846,7 @@
 55555555555555,SKU-FIX-004,Teleportation Dog Bed,199.99</div>
                             <button class="ps-copy-btn" onclick="copyTemplate(this)">Copy</button>
                         </div>
-                        <p>Save that as a <code class="ps-path">.csv</code> file, load it into Dobermann, and run the batch. Three products, one execution.</p>
+                        <p>Run the batch. Three products, one execution.</p>
                         <p>Now do the same for the missing locations. Create this endpoint:</p>
                         <div class="ps-code-wrapper">
                             <div class="ps-code">// Name: Add Missing Locations (Batch)
@@ -860,7 +860,7 @@
 }</div>
                             <button class="ps-copy-btn" onclick="copyTemplate(this)">Copy</button>
                         </div>
-                        <p>Load this CSV and run:</p>
+                        <p>Copy this CSV and press <strong>Ctrl+M</strong> to load it:</p>
                         <div class="ps-code-wrapper">
                             <div class="ps-code">gln,name
 9999999999999,Mystery Warehouse
@@ -868,6 +868,7 @@
 8888888888888,Ghost Distribution Center</div>
                             <button class="ps-copy-btn" onclick="copyTemplate(this)">Copy</button>
                         </div>
+                        <p>Run the batch.</p>
                         <p>That's the power of template variables — any endpoint can become a batch endpoint just by replacing hardcoded values with <code class="ps-path">{{variables}}</code>.</p>
                     </div>
 
