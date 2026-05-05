@@ -24,8 +24,7 @@ Create folders to group endpoints by feature, service, or project. Right-click t
 
 Skip the tree entirely. Press **Alt+D E** (chord shortcut — press Alt+D, release, then press E) to open fuzzy search across all endpoints. Type a few characters to filter by name, method, path, or folder, then choose your action:
 
-- **Run API** — Execute once with parameter prompts
-- **Run Batch** — Open the batch runner
+- **Run** — Smart execution. Dobermann auto-detects whether to run a single API call or open the batch runner based on template variables
 - **Edit Endpoint** — Open the configuration editor
 
 Fully keyboard-driven. No mouse required.
@@ -61,7 +60,7 @@ The URL path is appended to your environment's base URL when running requests. T
 
 A link icon appears in the URL field when template variables are detected.
 
-For full variable syntax, types, and modifiers, see [Template Variables](template-variables).
+For full variable syntax, types, and modifiers, see [Template Variables](/docs/template-variables/).
 
 ---
 
@@ -113,7 +112,7 @@ Dobermann uses two special template variables for paginated APIs:
 {: .warning }
 > Do not edit these values directly. Use the **Configure Pagination** screen in the Console instead — it auto-detects settings from your API response and writes the correct templates for you.
 
-See the [Pagination guide](pagination) for the complete setup and execution workflow.
+See the [Pagination guide](/docs/pagination/) for the complete setup and execution workflow.
 
 ### Query Parameter Repetition
 
@@ -143,7 +142,7 @@ The JSON payload sent to your API. Dobermann provides a full-featured editor wit
 - **Always shown** for POST, PUT, PATCH methods
 - **Hidden by default** for GET and DELETE (shown if body has content or you explicitly add it)
 
-Use [Template Variables](template-variables) to map your spreadsheet columns to API fields — with type validation, data transformation, and conditional logic built right in.
+Use [Template Variables](/docs/template-variables/) to map your spreadsheet columns to API fields — with type validation, data transformation, and conditional logic built right in.
 
 ### Editor Toolbar
 
@@ -160,7 +159,7 @@ The toolbar above the editor provides quick access to template authoring feature
 | **Undo / Redo** | Ctrl+Z / Ctrl+Shift+Z | Standard undo/redo |
 | **Format JSON** | — | Pretty-print the JSON body |
 
-The editor also provides **intelligent autocomplete** as you type inside template variables — suggesting variable types, modifiers, and environment variables. See [Template Variables](template-variables) for the full editing experience.
+The editor also provides **intelligent autocomplete** as you type inside template variables — suggesting variable types, modifiers, and environment variables. See [Template Variables](/docs/template-variables/) for the full editing experience.
 
 ---
 
@@ -247,8 +246,7 @@ Perfect for creating endpoint variants (e.g., "Create Order" → "Create Order (
 | Button | Description |
 |--------|-------------|
 | **Save Endpoint** (Ctrl+S) | Save current configuration. Validates name, path, and JSON syntax first |
-| **Run API** | Execute endpoint once with parameter prompts. Disabled when unsaved changes exist |
-| **Run Batch** | Open the batch runner. Disabled when unsaved changes exist |
+| **Run API** / **Run Batch** | Smart single button. Shows "Run API" when no template variables exist (direct execution), or "Run Batch" when template variables are present (opens batch runner). Disabled when unsaved changes exist |
 
 ### Add Section (+) Dropdown
 
@@ -264,6 +262,7 @@ Perfect for creating endpoint variants (e.g., "Create Order" → "Create Order (
 |--------|-------------|-------------|
 | **Paste** | New endpoints only | Parse shared endpoint data from clipboard |
 | **Share** | Saved endpoints only | Copy endpoint to clipboard (rich + plain text) |
+| **More Actions → Download Template** | Saved endpoints with template variables | Download an Excel template with column headers from `{{variables}}`, correct data types, a sample row, and 100 pre-formatted empty rows |
 | **More Actions → Duplicate** | Saved endpoints only | Create a copy with "COPY " prefix |
 | **More Actions → Delete** | Saved endpoints only | Delete endpoint (shows transaction count warning) |
 
@@ -271,8 +270,8 @@ Perfect for creating endpoint variants (e.g., "Create Order" → "Create Order (
 
 ## Related Topics
 
-- [Template Variables](template-variables) — Full variable syntax, types, modifiers, and editing features
-- [Environments](environments) — Manage API connections and authentication
-- [Batch Preparation](batch-preparation) — Data loading and column mapping
-- [Import/Export](import-export) — Share configurations with your team
-- [Keyboard Shortcuts](shortcuts) — All keyboard shortcuts including editor shortcuts
+- [Template Variables](/docs/template-variables/) — Full variable syntax, types, modifiers, and editing features
+- [Environments](/docs/environments/) — Manage API connections and authentication
+- [Batch Preparation](/docs/batch-preparation/) — Data loading and column mapping
+- [Import/Export](/docs/import-export/) — Share configurations with your team
+- [Keyboard Shortcuts](/docs/shortcuts/) — All keyboard shortcuts including editor shortcuts

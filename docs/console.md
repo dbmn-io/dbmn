@@ -8,31 +8,36 @@ has_children: true
 
 # Console
 
-When you hit **Run API** or **Run Batch**, Dobermann opens the Console — your real-time window into what's happening. Single requests complete in a flash. Batches stream results as they run, with live progress, pause/resume controls, and full transaction detail.
+When you hit **Run**, Dobermann opens the Console — your real-time window into what's happening. Single requests complete in a flash. Batches stream results as they run, with live progress, pause/resume controls, and full transaction detail.
 
 ## Starting an Execution
 
+Dobermann uses a **smart Run button** that automatically detects the right execution mode:
+
+- **No template variables** → Runs a single API request (shows as "Run API")
+- **Has template variables** → Opens the batch runner (shows as "Run Batch")
+
+This works the same everywhere: the endpoint footer button, the sidebar play icon, and Quick Access search.
+
 ### Single Request (Run API)
 
-Execute a single API request to test configuration, verify responses, or perform one-off operations.
+Execute a single API request to test configuration, verify responses, or perform one-off operations. The button shows "Run API" when the endpoint has no `{{template variables}}`.
 
 **From endpoint webview:**
-1. Configure endpoint (method, URL, headers, body)
+1. Configure endpoint (method, URL, headers, body) — no template variables
 2. Click **Run API**
-3. Enter values for template variables (if any)
-4. Console opens with results
+3. Console opens with results
 
 **From sidebar:**
-1. Right-click endpoint → **Run API**
-2. Enter variable values when prompted
+1. Click the play icon on the endpoint
 
 **From Quick Access (Alt+D E):**
 1. Press **Alt+D E** to open fuzzy search
-2. Select endpoint → choose **Run API**
+2. Select endpoint → choose **Run**
 
 ### Batch Execution (Run Batch)
 
-Execute the same endpoint multiple times with different data — entered in the grid or loaded from a file.
+Execute the same endpoint multiple times with different data — entered in the grid or loaded from a file. The button shows "Run Batch" when the endpoint has `{{template variables}}`.
 
 **From endpoint webview:**
 1. Click **Run Batch** to open the batch preparation flow
@@ -40,11 +45,9 @@ Execute the same endpoint multiple times with different data — entered in the 
 3. Click **Execute** in Step 5 — the Console opens and the batch begins
 
 **From sidebar:**
-1. Right-click endpoint → **Run Batch**
-2. Walk through the batch preparation steps
-3. Click **Execute** — the Console opens automatically
+1. Click the play icon on the endpoint — Dobermann detects template variables and opens the batch runner
 
-See [Batch Preparation](batch-preparation) for the full 5-step workflow.
+See [Batch Preparation](/docs/batch-preparation/) for the full 5-step workflow.
 
 ### Execution Queue
 {: #execution-queue }
@@ -130,7 +133,7 @@ Shows the source data used to generate API requests.
 **Key behaviour:**
 - Available for batch executions with loaded data
 - Exportable as CSV during or after execution
-- Root path selector is hidden (not applicable to source data)
+- Views control doesn't apply to the Input tab (source data is always one row per record)
 
 ### Raw Tab
 {: #raw-tab }
@@ -193,68 +196,58 @@ Execution metadata and configuration details.
 
 The Completed and Error tabs use a powerful data table for analysing results:
 
-### Root Path Navigation
-{: #root-path-navigation }
+### Named Views
+{: #named-views }
 
-Navigate nested JSON response structures without writing code.
+The Completed and Errors tabs run on **Named Views** — saved configurations that control which columns appear and which array in the response produces one row each. Multiple views per tab; switch instantly; views save on the endpoint so they travel with it on export/share.
 
-**How it works:**
-- Dropdown labelled `Root:` in the toolbar
-- Select which JSON path to use as the table root
-- Changes which data fields appear as columns
-
-**Example:**
-```json
-{
-  "data": {
-    "items": [
-      {"id": 1, "name": "Item A"},
-      {"id": 2, "name": "Item B"}
-    ]
-  }
-}
-```
-- Select root path: `data.items`
-- Table shows columns: `id`, `name`
+> **[→ Read the Named Views guide](/docs/named-views/)** for the View dropdown, View Editor, Row Basis, Set as Row, Save As, and how views travel with endpoints.
 
 ### Search
 {: #search }
 
-Search across all visible columns simultaneously.
+Search across all visible columns simultaneously. Plain text search works as before (case-insensitive substring matching). Advanced patterns let you combine terms, use wildcards, exclude rows, and match exact phrases.
+
+| Syntax | Meaning | Example | Matches |
+|---|---|---|---|
+| `,` | OR between terms | `abc123,abc124` | rows containing either term |
+| `+` | AND between terms | `active+Dallas` | rows containing both terms |
+| `*` | Zero or more characters | `abc*` | "abcdef", "abc123" |
+| `?` | Exactly one character | `a?c` | "abc", "a1c" |
+| `-` prefix | Exclude rows | `-error` | rows NOT containing "error" |
+| `"quoted"` | Exact cell value | `"New York"` | only literal "New York" |
+| plain text | Substring (default) | `hello` | "Hello World" |
+
+Patterns are combinable: `active+pending,-error`, `"exact",-exclude,wild*`
 
 - Always shows the row count — total rows when no search is active, filtered/total when searching
-- Case-insensitive matching
+- Case-insensitive matching across all patterns
 - **Copy and Export respect the active search filter** — only the filtered rows are included
 
 **Tips:**
-- Search for specific error messages
-- Find rows with particular values
-- Filter by status codes (search "200" or "404")
-
-### Column Management
-{: #column-management }
-
-Click **Manage Columns** to customise which columns are visible:
-
-- **Search columns** — Filter column list by name
-- **Select All / Deselect All** — Quick toggle
-- **Reset to Default** — Restore original column selection
-- **Toggle checkboxes** — Show/hide individual columns
+- Search for specific error messages or exclude them: `-error`
+- Find rows with particular values using wildcards: `SHIP*`
+- Filter by status codes: `200` or exclude failures: `-4??`
+- Combine terms with commas: `abc123,abc124`
+- Require multiple terms with +: `active+Chicago`
+- Match exact cell values with quotes: `"New York"`
 
 ### Sorting
 
-Click any column header to sort:
+Click any column header to sort. Sort is saved on the active view, so it persists across tab switches and console reloads.
+
 - **First click:** Sort ascending
 - **Second click:** Sort descending
 - **Third click:** Remove sort
-- **Multi-column sort:** Hold `Shift` and click additional columns
+
+Sub-tables (rendered when expanding an `▸ N records` cell) sort independently — their sort state is local to the open expand-cell.
 
 ## Pagination
 {: #pagination }
 
 Dobermann has full support for paginated APIs — configure page and size parameters, auto-detect settings from API responses, and fetch hundreds of pages with concurrent execution.
 
-See the dedicated [Pagination](pagination) guide for the complete workflow.
+See the dedicated [Pagination](/docs/pagination/) guide for the complete workflow.
 
 ---
 
@@ -269,17 +262,22 @@ The **Copy** dropdown copies data straight to your clipboard — no file needed.
 
 | Format | Best for | What you get |
 |--------|----------|--------------|
-| **For Spreadsheet (TSV)** | Excel, Google Sheets | Tab-separated values — pastes directly into cells |
-| **For Email (HTML)** | Outlook, Gmail, Word, Teams, Confluence | Styled HTML table with formatting |
-| **For Jira/Docs (Markdown)** | GitHub, Jira, Notion | GitHub Flavoured Markdown table |
+| **Standard** | Outlook, Gmail, Word, Teams, Confluence | Styled HTML table with formatting |
+| **Excel** | Excel, Google Sheets | Tab-separated values with text-type preservation — pastes directly into cells with leading zeros and large numbers intact |
 | **CSV** | Scripts, data pipelines | Comma-separated plain text |
+| **CSV (Excel)** | CSV consumers that need type preservation | CSV with text fields prefixed to prevent number coercion |
+| **Markdown** | GitHub, Jira, Notion | GitHub Flavoured Markdown table |
 
 **Example workflow:**
 1. Switch to Error tab
 2. Search for a specific error pattern
 3. Sort by timestamp
-4. Click Copy → **For Email (HTML)**
+4. Click Copy → **Standard**
 5. Paste into Outlook — formatted table appears inline
+
+**Preserving leading zeros in Excel:**
+
+When pasting into Excel, numeric-looking text fields (e.g. GLN codes like `0012345000015`) are automatically converted to numbers, losing leading zeros. Use the **Excel** or **CSV (Excel)** copy options to prevent this — they prefix text columns with an apostrophe (`'`) that tells Excel to treat the value as text. For guaranteed type preservation without any prefix characters, use **Export → Excel (.xlsx)** instead.
 
 ### Export
 
@@ -288,7 +286,8 @@ The **Export** dropdown saves data to a file.
 | Format | Details |
 |--------|---------|
 | **CSV** | Plain text, streams line-by-line — handles any size |
-| **Excel (.xlsx)** | Formatted workbook with colour-coded status codes and typed columns |
+| **CSV (Excel)** | CSV with text fields prefixed to prevent Excel number coercion |
+| **Excel (.xlsx)** | Formatted workbook with colour-coded status codes and typed columns — guaranteed type preservation |
 
 ### Limits
 
@@ -296,11 +295,11 @@ Large copy/export operations can overwhelm target applications or the extension 
 
 | Action | Format | Limit | Reason |
 |--------|--------|-------|--------|
-| Copy | HTML / TSV | 1,000 rows | Paste crashes Excel/Outlook with large tables |
+| Copy | Standard / Excel | 1,000 rows | Paste crashes Excel/Outlook with large tables |
 | Copy | Markdown | 1,000 rows | Paste crashes target apps |
-| Copy | CSV | 10,000 rows | Lighter format, higher tolerance |
-| Export | Excel | 2,000,000 cells | XLSX library OOM in extension host |
-| Export | CSV | Unlimited | Streams line-by-line |
+| Copy | CSV / CSV (Excel) | 10,000 rows | Lighter format, higher tolerance |
+| Export | Excel (.xlsx) | 2,000,000 cells | XLSX library OOM in extension host |
+| Export | CSV / CSV (Excel) | Unlimited | Streams line-by-line |
 
 If you hit a limit, switch to CSV export (file) — it streams without memory constraints.
 
@@ -330,7 +329,7 @@ Click any execution to reopen the Console with full results.
 
 ### Workspace Files
 
-Results are automatically saved to your [Dobermann workspace](../your-data#dobermann-workspace):
+Results are automatically saved to your [Dobermann workspace](/docs/your-data/#dobermann-workspace):
 
 ```
 .active8/
@@ -376,7 +375,7 @@ Configure how errors affect batch execution (set during batch preparation):
 
 ### Parallel Processing
 
-Concurrency is configured per environment (see [Environments — Parallel Processing](environments#parallel-processing)). Higher concurrency = faster batches, but more server load.
+Concurrency is configured per environment (see [Environments — Parallel Processing](/docs/environments/#parallel-processing)). Higher concurrency = faster batches, but more server load.
 
 ### Large Batches
 
@@ -439,9 +438,10 @@ For batches over 1,000 rows:
 
 ## Related Topics
 
-- [Pagination](pagination) — Configure and run paginated API requests
-- [Batch Reprocessing](batch-reprocessing) — Re-run failed transactions without re-executing the whole batch
-- [Endpoints](endpoints) — Configuring API requests
-- [Batch Preparation](batch-preparation) — Data loading and column mapping
-- [Environments](environments) — Authentication, timezone, and parallel processing
-- [Troubleshooting](troubleshooting) — Common issues and solutions
+- [Named Views](/docs/named-views/) — Save column layouts and row-per-X shapes; switch and export instantly
+- [Pagination](/docs/pagination/) — Configure and run paginated API requests
+- [Batch Reprocessing](/docs/batch-reprocessing/) — Re-run failed transactions without re-executing the whole batch
+- [Endpoints](/docs/endpoints/) — Configuring API requests
+- [Batch Preparation](/docs/batch-preparation/) — Data loading and column mapping
+- [Environments](/docs/environments/) — Authentication, timezone, and parallel processing
+- [Troubleshooting](/docs/troubleshooting/) — Common issues and solutions

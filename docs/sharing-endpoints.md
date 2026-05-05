@@ -95,6 +95,6 @@ Everything is preserved — variable types, modifiers, header state, query param
 
 ## See Also
 
-- [Endpoints](../endpoints) — Full endpoint configuration reference
-- [Template Variables](../template-variables) — Variable syntax, types, and modifiers
-- [Import/Export](../import-export) — Bulk workspace and endpoint import/export
+- [Endpoints](/docs/endpoints/) — Full endpoint configuration reference
+- [Template Variables](/docs/template-variables/) — Variable syntax, types, and modifiers
+- [Import/Export](/docs/import-export/) — Bulk workspace and endpoint import/export

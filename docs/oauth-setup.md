@@ -168,5 +168,5 @@ Your OAuth provider's allowed redirect URIs don't include `vscode://dbmn.doberma
 
 ## Related Topics
 
-- [Environments](../environments) — Environment configuration overview
-- [Environments — Authentication](../environments#authentication) — Quick reference for all auth methods
+- [Environments](/docs/environments/) — Environment configuration overview
+- [Environments — Authentication](/docs/environments/#authentication) — Quick reference for all auth methods

@@ -192,7 +192,7 @@ Authenticate using your DBMN account. This is the simplest method — sign in on
 - If your session expires, Dobermann prompts you to re-authenticate before execution
 
 {: .note }
-> **DBMN auth is required for [Puppy School](playground)** — the playground API authenticates using your DBMN session.
+> **DBMN auth is required for [Puppy School](/docs/playground/)** — the playground API authenticates using your DBMN session.
 
 ### Manual JWT Token
 
@@ -262,7 +262,7 @@ Authorization URL: https://api.example.com/oauth/authorize
 Token URL: https://api.example.com/oauth/token
 ```
 
-For detailed setup instructions including provider configuration, see the [OAuth Setup Guide](oauth-setup).
+For detailed setup instructions including provider configuration, see the [OAuth Setup Guide](/docs/oauth-setup/).
 
 ### Google Service Account
 
@@ -342,7 +342,7 @@ Common uses:
 - They're resolved automatically from your active environment's variable list
 - If a variable is missing, execution fails with a clear error
 
-See [Template Variables — ENV](template-variables#environment-variables-env) for usage syntax.
+See [Template Variables — ENV](/docs/template-variables/#environment-variables-env) for usage syntax.
 
 ## Organization Selection (Manhattan Active)
 {: #organization-selection }
@@ -404,7 +404,7 @@ Environments appear in the sidebar tree view with these indicators:
 - Authorization URL and token URL are valid
 - Network connectivity to OAuth provider
 
-See the [OAuth Setup Guide](oauth-setup) for detailed configuration help.
+See the [OAuth Setup Guide](/docs/oauth-setup/) for detailed configuration help.
 
 ### Environment Not Selectable
 
@@ -427,7 +427,7 @@ See the [OAuth Setup Guide](oauth-setup) for detailed configuration help.
 
 ## Related Topics
 
-- [OAuth Setup Guide](oauth-setup) — Detailed OAuth and Google auth configuration
-- [Endpoints](endpoints) — Configure and manage API endpoints
-- [Console](console) — Execute requests against environments
-- [Import/Export](import-export) — Share environment configurations (excludes sensitive data)
+- [OAuth Setup Guide](/docs/oauth-setup/) — Detailed OAuth and Google auth configuration
+- [Endpoints](/docs/endpoints/) — Configure and manage API endpoints
+- [Console](/docs/console/) — Execute requests against environments
+- [Import/Export](/docs/import-export/) — Share environment configurations (excludes sensitive data)

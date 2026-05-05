@@ -19,11 +19,13 @@ The Quick Access feature provides fast, keyboard-driven endpoint search and exec
 1. Press `Alt+D` then `E` (chord shortcut - two-step key sequence)
 2. Type to search endpoints by name, method, path, or folder
 3. Press `Enter` to select an endpoint
-4. Choose action: Run API, Run Batch, or Edit Endpoint
+4. Choose action: **Run** or **Edit Endpoint**
 5. Press `Enter` to execute
 
 **Example workflow:**
-- `Alt+D E` -> Type "create order" -> `Enter` -> Arrow to "Run Batch" -> `Enter`
+- `Alt+D E` -> Type "create order" -> `Enter` -> Arrow to "Run" -> `Enter`
+
+> **Note:** Run auto-detects the right mode — single API call or batch — based on whether the endpoint has template variables.
 
 **Alternative access methods:**
 - Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) -> "DBMN: Search Endpoints"
@@ -155,7 +157,7 @@ The `Alt+D` namespace is reserved for additional Dobermann shortcuts:
 
 ## Related Topics
 
-- [Getting Started](getting-started) - Initial setup and first steps
-- [Endpoints](endpoints) - Endpoint configuration and execution
-- [Batch Preparation](batch-preparation) - CSV upload and column mapping
-- [Template Variables](template-variables) - Variable syntax and modifiers
+- [Getting Started](/docs/getting-started/) - Initial setup and first steps
+- [Endpoints](/docs/endpoints/) - Endpoint configuration and execution
+- [Batch Preparation](/docs/batch-preparation/) - CSV upload and column mapping
+- [Template Variables](/docs/template-variables/) - Variable syntax and modifiers

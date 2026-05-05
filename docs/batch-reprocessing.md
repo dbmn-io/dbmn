@@ -14,7 +14,7 @@ When a batch finishes with errors, you don't need to re-run the entire batch. Do
 
 ## Quick Start
 
-1. Run a batch from the [Console](console)
+1. Run a batch from the [Console](/docs/console/)
 2. Once the batch finishes (or finishes with errors), click **Reprocess Batch** in the Console toolbar
 3. Choose what to reprocess (errors only, incomplete, etc.)
 4. Dobermann resets the selected transactions and re-executes them in the same batch
@@ -94,6 +94,6 @@ Stopped and paused batches show **Resume** instead of Reprocess, since the batch
 
 ## Related Topics
 
-- [Console](console) — Run requests, monitor progress, analyse results
-- [Batch Preparation](batch-preparation) — Data loading and column mapping
-- [Pagination](pagination) — Configure and run paginated API requests
+- [Console](/docs/console/) — Run requests, monitor progress, analyse results
+- [Batch Preparation](/docs/batch-preparation/) — Data loading and column mapping
+- [Pagination](/docs/pagination/) — Configure and run paginated API requests

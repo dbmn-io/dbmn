@@ -13,23 +13,24 @@ Welcome to the Dobermann documentation. Dobermann enables bulk data migration th
 
 | Guide | Description |
 |-------|-------------|
-| [Getting Started](getting-started) | Installation and first steps |
-| [Environments](environments) | Configure API connections and authentication |
-| [↳ OAuth Setup Guide](oauth-setup) | OAuth and Google Service Account configuration |
-| [Endpoints](endpoints) | Configure API requests, share with your team |
-| [↳ Sharing Endpoints](sharing-endpoints) | Share an endpoint, paste it on the other side |
-| [↳ Template Variables](template-variables) | Variable syntax, types, modifiers, and editing |
-| [Batch Preparation](batch-preparation) | Load data and map columns |
-| [Console](console) | Run requests, monitor progress, analyse results |
-| [↳ Pagination](pagination) | Configure and run paginated API requests |
-| [↳ Batch Reprocessing](batch-reprocessing) | Re-run only failed transactions from a previous batch |
-| [Import/Export](import-export) | Share configurations with your team |
-| [Playground](playground) | Live API sandbox with ready-to-paste endpoint templates |
-| [Shortcuts](shortcuts) | Keyboard shortcuts for efficiency |
-| [Migration Guide](migration) | Moving from FlexionTech to DBMN publisher |
-| [Your Data & Privacy](your-data) | Where data is stored and what leaves your machine |
-| [Troubleshooting](troubleshooting) | Common issues and solutions |
-| [Changelog](changelog) | Release history and what's new |
+| [Getting Started](/docs/getting-started/) | Installation and first steps |
+| [Environments](/docs/environments/) | Configure API connections and authentication |
+| [↳ OAuth Setup Guide](/docs/oauth-setup/) | OAuth and Google Service Account configuration |
+| [Endpoints](/docs/endpoints/) | Configure API requests, share with your team |
+| [↳ Sharing Endpoints](/docs/sharing-endpoints/) | Share an endpoint, paste it on the other side |
+| [↳ Template Variables](/docs/template-variables/) | Variable syntax, types, modifiers, and editing |
+| [Batch Preparation](/docs/batch-preparation/) | Load data and map columns |
+| [Console](/docs/console/) | Run requests, monitor progress, analyse results |
+| [↳ Named Views](/docs/named-views/) | Save column layouts and row-per-X shapes; one response, many lenses |
+| [↳ Pagination](/docs/pagination/) | Configure and run paginated API requests |
+| [↳ Batch Reprocessing](/docs/batch-reprocessing/) | Re-run only failed transactions from a previous batch |
+| [Import/Export](/docs/import-export/) | Share configurations with your team |
+| [Playground](/docs/playground/) | Live API sandbox with ready-to-paste endpoint templates |
+| [Shortcuts](/docs/shortcuts/) | Keyboard shortcuts for efficiency |
+| [Migration Guide](/docs/migration/) | Moving from FlexionTech to DBMN publisher |
+| [Your Data & Privacy](/docs/your-data/) | Where data is stored and what leaves your machine |
+| [Troubleshooting](/docs/troubleshooting/) | Common issues and solutions |
+| [Changelog](/docs/changelog/) | Release history and what's new |
 | [Pricing](/pricing.html) | Plans, pricing, and free trial details |
 
 ## What is Dobermann?

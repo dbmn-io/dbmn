@@ -356,7 +356,7 @@ When the batch completes:
 - Results saved to workspace (`.active8/results/`)
 - Execution remains in history sidebar
 
-See [Console](console) for detailed results, export features, and error analysis.
+See [Console](/docs/console/) for detailed results, export features, and error analysis.
 
 ---
 
@@ -364,7 +364,7 @@ See [Console](console) for detailed results, export features, and error analysis
 
 ### Variable Types
 
-Specify data types in template variables for validation. See [Template Variables](template-variables) for the full reference on types, modifiers, auto-generated variables, and advanced syntax.
+Specify data types in template variables for validation. See [Template Variables](/docs/template-variables/) for the full reference on types, modifiers, auto-generated variables, and advanced syntax.
 
 **Quick reference:**
 
@@ -508,7 +508,7 @@ For APIs supporting pagination, use the special `{{A8:PAGE}}` variable:
 
 ## Related Topics
 
-- [Endpoints](endpoints) — Template variables and configuration
-- [Template Variables](template-variables) — Variable syntax, types, modifiers, and editing
-- [Console](console) — Running and monitoring requests
-- [Import/Export](import-export) — Sharing endpoint configurations
+- [Endpoints](/docs/endpoints/) — Template variables and configuration
+- [Template Variables](/docs/template-variables/) — Variable syntax, types, modifiers, and editing
+- [Console](/docs/console/) — Running and monitoring requests
+- [Import/Export](/docs/import-export/) — Sharing endpoint configurations

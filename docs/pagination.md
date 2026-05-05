@@ -220,7 +220,7 @@ Dobermann tries to auto-detect this from the response, but you can override it i
 
 ## Related Topics
 
-- [Console](../console) — Monitoring execution and analysing results
-- [Endpoints — Query Parameters](../endpoints#query-parameters) — Where pagination variables are configured
-- [Template Variables](../template-variables) — Full variable syntax reference
-- [Environments — Parallel Processing](../environments#parallel-processing) — Environment-level concurrency settings
+- [Console](/docs/console/) — Monitoring execution and analysing results
+- [Endpoints — Query Parameters](/docs/endpoints/#query-parameters) — Where pagination variables are configured
+- [Template Variables](/docs/template-variables/) — Full variable syntax reference
+- [Environments — Parallel Processing](/docs/environments/#parallel-processing) — Environment-level concurrency settings

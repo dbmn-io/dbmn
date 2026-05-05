@@ -9,4 +9,4 @@ permalink: /docs/viewing-results/
 
 # Viewing Results
 
-This page has moved. See [Console](console) for all execution and results documentation.
+This page has moved. See [Console](/docs/console/) for all execution and results documentation.

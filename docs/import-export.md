@@ -178,9 +178,15 @@ Import complete workspace export:
   "body": {
     "type": "json",
     "content": "{\"capacity\": {{capacity:number}}}"
+  },
+  "consoleViews": {
+    "success": { "activeView": "PO Lines", "defaultView": "PO Lines", "views": [ /* … */ ] },
+    "errors":  { "activeView": "Root",     "defaultView": "Root",     "views": [ /* … */ ] }
   }
 }
 ```
+
+**Console views travel with the endpoint.** Any [Named Views](/docs/console/#named-views) you've saved on the Completed/Errors tabs are exported alongside the endpoint and applied automatically on import. Share an endpoint with a teammate and they get not just the request configuration but also the column layouts, row bases, and sort preferences you've curated.
 
 ### Environment JSON Structure
 
@@ -276,6 +282,6 @@ Team members provide their own `API_KEY` value.
 
 ## Related Topics
 
-- [Environments](environments) - Authentication and connection setup
-- [Endpoints](endpoints) - Creating and managing API configurations
-- [Batch Preparation](batch-preparation) - Loading CSV data for batch execution
+- [Environments](/docs/environments/) - Authentication and connection setup
+- [Endpoints](/docs/endpoints/) - Creating and managing API configurations
+- [Batch Preparation](/docs/batch-preparation/) - Loading CSV data for batch execution

@@ -110,6 +110,6 @@ Telemetry can be disabled by arrangement.
 
 ## Related Topics
 
-- [Import/Export](import-export) — sharing configs (never includes secrets)
-- [Migration Guide](migration) — keeping your workspace when switching publishers
-- [Console](console) — viewing execution results
+- [Import/Export](/docs/import-export/) — sharing configs (never includes secrets)
+- [Migration Guide](/docs/migration/) — keeping your workspace when switching publishers
+- [Console](/docs/console/) — viewing execution results

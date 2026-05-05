@@ -568,7 +568,6 @@ The playground returns structured errors:
 | Code | Status | Meaning |
 |------|--------|---------|
 | `UNAUTHORIZED` | 401 | Missing or invalid auth token |
-| `LICENSE_REQUIRED` | 403 | No active license or trial |
 | `NOT_FOUND` | 404 | Resource not found |
 | `BAD_REQUEST` | 400 | Invalid JSON body |
 | `FK_VIOLATION` | 400 | Invalid SCAC, GLN, or GTIN — not in reference tables |
@@ -589,8 +588,8 @@ The playground returns structured errors:
 
 ## Related Topics
 
-- [Endpoints](endpoints) — Full endpoint configuration reference
-- [Template Variables](template-variables) — Variable syntax, types, and modifiers
-- [Batch Preparation](batch-preparation) — Load CSV data and map columns
-- [Pagination](pagination) — Configure paginated API requests
-- [Sharing Endpoints](sharing-endpoints) — Share endpoint templates with your team
+- [Endpoints](/docs/endpoints/) — Full endpoint configuration reference
+- [Template Variables](/docs/template-variables/) — Variable syntax, types, and modifiers
+- [Batch Preparation](/docs/batch-preparation/) — Load CSV data and map columns
+- [Pagination](/docs/pagination/) — Configure paginated API requests
+- [Sharing Endpoints](/docs/sharing-endpoints/) — Share endpoint templates with your team

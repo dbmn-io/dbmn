@@ -24,7 +24,7 @@ This guide covers common issues, error messages, and solutions for Dobermann. Is
 2. **Domain trust prompt** — VS Code asks you to trust the domain that triggered the redirect (your OAuth provider and/or dbmn.io). Click **Open**. One-time per domain.
 3. **Unverified publisher** — New Marketplace extensions show this badge until Microsoft grants verified status. Does not affect functionality.
 
-See [Getting Started — First Launch](getting-started#first-launch-what-to-expect) for more detail.
+See [Getting Started — First Launch](/docs/getting-started/#first-launch-what-to-expect) for more detail.
 
 ### Token Expired
 
@@ -352,7 +352,7 @@ When reporting issues, include:
 
 ## Related Topics
 
-- [Environments](environments) - Authentication and connection setup
-- [Endpoints](endpoints) - API configuration
-- [Console](console) - Running requests and analysing results
-- [Batch Preparation](batch-preparation) - CSV and variable mapping
+- [Environments](/docs/environments/) - Authentication and connection setup
+- [Endpoints](/docs/endpoints/) - API configuration
+- [Console](/docs/console/) - Running requests and analysing results
+- [Batch Preparation](/docs/batch-preparation/) - CSV and variable mapping

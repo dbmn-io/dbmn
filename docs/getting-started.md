@@ -15,7 +15,7 @@ Get up and running in 5 steps:
 
 1. **Create an Environment** — Define your API base URL and authentication
 2. **Create an Endpoint** — Configure HTTP method, URL, headers, and body template
-3. **Test with Run API** — Execute a single request to verify your configuration
+3. **Run It** — Click Run and Dobermann auto-detects whether to execute a single request or open the batch runner
 4. **Run a Batch** — Upload a file, paste data, or type values directly. Map columns, review your data, and execute
 5. **Watch it Go** — The Console opens automatically with results streaming in real-time. Sit back and watch your batch execute — don't grab a coffee, you'll miss the show.
 
@@ -96,20 +96,15 @@ Follow this complete workflow to execute your first API request.
 }
 ```
 
-### Step 3: Run a Single API Call
+### Step 3: Run It
 
-1. Right-click your endpoint
-2. Select **Run API**
-3. Enter values for template variables:
-   - orderId: `12345`
-   - customerName: `John Doe`
-   - quantity: `10`
-4. Click **Execute**
-5. Console opens showing request/response details
+Click the **play icon** on your endpoint in the sidebar, or click **Run** in the endpoint footer. Dobermann detects the `{{template variables}}` and opens the batch runner automatically.
+
+> **Tip:** If you remove the template variables and hardcode values, the same button switches to "Run API" for a single request — no configuration needed.
 
 ### Step 4: Run a Batch
 
-1. Right-click your endpoint and select **Run Batch**
+1. Click the play icon (or **Run Batch** in the endpoint footer) — Dobermann opens the batch runner
 2. Upload an Excel/CSV file, paste data, or click **Enter Data** to type values directly
 3. Map source data columns to template variables (file/paste path):
    - `orderId` → `ORDER_ID`
@@ -127,32 +122,32 @@ The Console opens automatically and results stream in real-time as each request 
 
 Now that you've completed your first workflow, explore these features:
 
-**Template Variables:** Learn about data types, modifiers, auto-generated variables, and the template editor. See [Template Variables](template-variables).
+**Template Variables:** Learn about data types, modifiers, auto-generated variables, and the template editor. See [Template Variables](/docs/template-variables/).
 
-**Batch Preparation:** Master data loading, column mapping, and data transformations. See [Batch Preparation](batch-preparation).
+**Batch Preparation:** Master data loading, column mapping, and data transformations. See [Batch Preparation](/docs/batch-preparation/).
 
-**Console:** Understand queue, parallel processing, error tolerance, and analyse results with the Console. See [Console](console).
+**Console:** Understand queue, parallel processing, error tolerance, and analyse results with the Console. See [Console](/docs/console/).
 
-**Environments:** Configure authentication (JWT, OAuth, Google Service Account), timezone, parallel threads, and more. See [Environments](environments).
+**Environments:** Configure authentication (JWT, OAuth, Google Service Account), timezone, parallel threads, and more. See [Environments](/docs/environments/).
 
-**Sharing:** Copy endpoint configurations and paste them in Teams, Outlook, or Confluence. See [Endpoints](endpoints#sharing).
+**Sharing:** Copy endpoint configurations and paste them in Teams, Outlook, or Confluence. See [Endpoints](/docs/endpoints/#sharing).
 
-**Import/Export:** Share endpoint and environment configurations with your team. See [Import/Export](import-export).
+**Import/Export:** Share endpoint and environment configurations with your team. See [Import/Export](/docs/import-export/).
 
 ## Getting Help
 
 If you encounter issues or have questions:
 
-1. Check the [Troubleshooting](troubleshooting) guide
+1. Check the [Troubleshooting](/docs/troubleshooting/) guide
 2. Review relevant documentation sections
 3. Check execution logs for error details
 4. [Report issues](https://github.com/dbmn-io/dbmn/issues) on GitHub
 
 ## Related Topics
 
-- [Environments](environments) — Managing API environments
-- [Endpoints](endpoints) — Endpoint configuration and template variables
-- [Batch Preparation](batch-preparation) — Data loading and column mapping
-- [Console](console) — Running requests, monitoring progress, and analysing results
-- [Import/Export](import-export) — Sharing configurations
-- [Troubleshooting](troubleshooting) — Common issues and solutions
+- [Environments](/docs/environments/) — Managing API environments
+- [Endpoints](/docs/endpoints/) — Endpoint configuration and template variables
+- [Batch Preparation](/docs/batch-preparation/) — Data loading and column mapping
+- [Console](/docs/console/) — Running requests, monitoring progress, and analysing results
+- [Import/Export](/docs/import-export/) — Sharing configurations
+- [Troubleshooting](/docs/troubleshooting/) — Common issues and solutions

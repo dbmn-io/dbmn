@@ -13,7 +13,7 @@ The process takes about 2 minutes.
 
 ## Before You Start
 
-Open the **same [Dobermann workspace](../your-data#dobermann-workspace)** you were using with the FlexionTech extension. Execution history (your past batch results and transaction logs) is stored in a SQLite database inside your workspace folder. If you open a different workspace, that history won't be there.
+Open the **same [Dobermann workspace](/docs/your-data/#dobermann-workspace)** you were using with the FlexionTech extension. Execution history (your past batch results and transaction logs) is stored in a SQLite database inside your workspace folder. If you open a different workspace, that history won't be there.
 
 Your endpoints and environments will be migrated via export/import (Step 1–4 below). But execution history stays with the workspace automatically — as long as you keep using the same one, the new extension picks it up.
 
@@ -51,7 +51,7 @@ The extension will be empty — this is expected. Your data is coming in the nex
 3. Select the export file from Step 1
 4. Choose **Merge** to import without overwriting
 
-See [Import/Export](import-export) for details on import modes.
+See [Import/Export](/docs/import-export/) for details on import modes.
 
 ## Step 5: Re-enter Credentials
 
