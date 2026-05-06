@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signing In - DBMN</title>
+    <meta name="description" content="Completing DBMN sign-in">
+    <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
+    <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
+    <link rel="stylesheet" href="/css/brand.css">
+    <link rel="stylesheet" href="/account/shared.css">
+</head>
+<body>
+    <header class="site-header">
+        <a href="/">
+            <img src="/images/DBMNLogo.png" alt="DBMN">
+            <h1>DBMN</h1>
+        </a>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2 id="callbackTitle">Signing you in...</h2>
+            <div id="alert" class="alert"></div>
+            <p id="callbackStatus" style="color: #a0a0b0;"><span class="spinner"></span> Verifying your sign-in link</p>
+        </div>
+
+        <footer>
+            <a href="/terms.html">Terms</a> &middot; <a href="/privacy.html">Privacy</a>
+            <br>
+            &copy; 2026 DBMN.io
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/account/shared.js"></script>
+    <script>
+        // If the user has no license yet, create a 30-day trial and send the welcome notification.
+        // Idempotent — safe to run on every callback. Best-effort: failures are logged, not surfaced.
+        async function ensureTrialAndWelcome(session) {
+            try {
+                var existing = await dbmnSupabase
+                    .from('user_licenses')
+                    .select('id')
+                    .eq('user_id', session.user.id)
+                    .limit(1);
+
+                if (existing.error) {
+                    console.warn('License lookup failed:', existing.error);
+                    return;
+                }
+                if (existing.data && existing.data.length > 0) {
+                    return; // Already has a license — not a new user
+                }
+
+                var now = new Date();
+                var trialEnd = new Date(now);
+                trialEnd.setDate(trialEnd.getDate() + 30);
+                var insertResult = await dbmnSupabase
+                    .from('user_licenses')
+                    .insert({
+                        user_id: session.user.id,
+                        license_type: 'trial',
+                        status: 'active',
+                        trial_started_at: now.toISOString(),
+                        trial_ends_at: trialEnd.toISOString()
+                    });
+                if (insertResult.error) {
+                    console.warn('Trial license creation warning:', insertResult.error);
+                }
+
+                try {
+                    await callEdgeFunction('send-welcome-email', { email: session.user.email });
+                } catch (emailErr) {
+                    console.warn('Welcome email notification failed:', emailErr);
+                }
+            } catch (err) {
+                console.warn('ensureTrialAndWelcome error:', err);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            initSupabase();
+
+            // Supabase JS auto-detects session from the URL hash fragment
+            // (the magic link redirect lands here with #access_token=...&refresh_token=...)
+            // Give the SDK a tick to process the hash, then check for a session.
+            var session = null;
+            for (var attempt = 0; attempt < 10; attempt++) {
+                session = await getCurrentSession();
+                if (session) break;
+                await new Promise(function(r) { setTimeout(r, 100); });
+            }
+
+            if (!session) {
+                document.getElementById('callbackTitle').textContent = 'Sign-in failed';
+                document.getElementById('callbackStatus').innerHTML =
+                    'Your sign-in link may have expired or been used already. ' +
+                    '<a href="/account/login.html">Request a new link</a>.';
+                showAlert('alert', 'Could not complete sign-in.', 'error');
+                return;
+            }
+
+            await ensureTrialAndWelcome(session);
+
+            if (isVSCodeRedirect()) {
+                document.getElementById('callbackTitle').textContent = 'Signed in';
+                document.getElementById('callbackStatus').textContent = 'Returning to VS Code...';
+                redirectToVSCode(session);
+                // After the vscode:// URI fires, leave the user on /account/index.html
+                setTimeout(function() { window.location.href = '/account/index.html'; }, 1500);
+                return;
+            }
+
+            window.location.href = '/account/index.html';
+        });
+    </script>
+</body>
+</html>

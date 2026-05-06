@@ -18,215 +18,50 @@
         </a>
     </header>
 
-    <div class="progress-bar" id="progressBar" style="display:none;">
-        <div class="progress-track">
-            <div class="progress-track-bar">
-                <div class="progress-fill" id="progressFill" style="width:0%"></div>
-            </div>
-        </div>
-    </div>
+    <div class="container">
+        <div class="card">
+            <h2>Start Your Free Trial</h2>
+            <p class="step-subtitle">30 days, no credit card. We'll send you a sign-in link &mdash; no password to remember.</p>
 
-    <div class="container container-wide">
-        <div class="card card-compact">
             <div id="alert" class="alert"></div>
 
-            <!-- Step 1: Intro -->
-            <div class="questionnaire-step active" data-step="1">
-                <div class="step-intro">
-                    <h2 class="step-title">Build Better API Workflows</h2>
-                    <p class="step-subtitle">
-                        DBMN helps you manage Enterprise SaaS APIs with purpose-built tools
-                        inside VS Code. Tell us a bit about yourself so we can tailor
-                        your trial experience.
-                    </p>
-                    <button type="button" class="btn btn-primary" onclick="goToStep(2)">Let's Get Started</button>
-                </div>
-            </div>
-
-            <!-- Step 2: Name -->
-            <div class="questionnaire-step" data-step="2">
-                <h2 class="step-title">What's your name?</h2>
-                <p class="step-subtitle">We'll use this to personalise your experience.</p>
+            <!-- Magic link form (default) -->
+            <form id="magicLinkForm">
                 <div class="form-group">
-                    <input type="text" id="displayName" required placeholder="Your name" autocomplete="name">
+                    <label for="magicEmail">Email</label>
+                    <input type="email" id="magicEmail" required placeholder="you@company.com" autocomplete="email">
                 </div>
-                <div class="step-nav">
-                    <button type="button" class="btn btn-secondary" onclick="goToStep(1)">Back</button>
-                    <button type="button" class="btn btn-primary" onclick="nextFromName()">Next</button>
-                </div>
+                <button type="submit" id="magicLinkBtn" class="btn btn-primary">Email me a sign-in link</button>
+            </form>
+
+            <div class="link-text" id="passwordToggleRow">
+                <a href="#" id="usePasswordLink">Use a password instead</a>
             </div>
 
-            <!-- Step 3: Company -->
-            <div class="questionnaire-step" data-step="3">
-                <h2 class="step-title">Where do you work?</h2>
-                <p class="step-subtitle">Optional — helps us understand your context.</p>
+            <!-- Password form (revealed by toggle) -->
+            <form id="passwordForm" style="display: none;">
                 <div class="form-group">
-                    <input type="text" id="company" placeholder="Company name" autocomplete="organization">
-                </div>
-                <div class="step-nav">
-                    <button type="button" class="btn btn-secondary" onclick="goToStep(2)">Back</button>
-                    <button type="button" class="btn btn-primary" onclick="goToStep(4)">Next</button>
-                </div>
-            </div>
-
-            <!-- Step 4: Role -->
-            <div class="questionnaire-step" data-step="4">
-                <h2 class="step-title">What's your role?</h2>
-                <p class="step-subtitle">This helps us show you relevant features.</p>
-                <div class="form-group">
-                    <select id="role">
-                        <option value="">Select role...</option>
-                        <option value="developer">Developer / Engineer</option>
-                        <option value="consultant">Consultant</option>
-                        <option value="analyst">Business Analyst</option>
-                        <option value="admin">System Administrator</option>
-                        <option value="manager">Manager / Director</option>
-                        <option value="hobby">Hobby</option>
-                        <option value="student">Student</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="step-nav">
-                    <button type="button" class="btn btn-secondary" onclick="goToStep(3)">Back</button>
-                    <button type="button" class="btn btn-primary" onclick="goToStep(5)">Next</button>
-                </div>
-            </div>
-
-            <!-- Step 5: Current Tools (multi-toggle) -->
-            <div class="questionnaire-step" data-step="5">
-                <h2 class="step-title">What tools do you use today?</h2>
-                <p class="step-subtitle">Select all that apply.</p>
-                <div class="toggle-group" data-field="current_tools">
-                    <button type="button" class="toggle-btn" data-value="postman">Postman</button>
-                    <button type="button" class="toggle-btn" data-value="excel">Excel</button>
-                    <button type="button" class="toggle-btn" data-value="bespoke_tools">Bespoke tools</button>
-                    <button type="button" class="toggle-btn" data-value="vendor_provided">Vendor-provided tools</button>
-                    <button type="button" class="toggle-btn" data-value="thunder_client">Thunder Client</button>
-                    <button type="button" class="toggle-btn" data-value="bruno">Bruno</button>
-                    <button type="button" class="toggle-btn" data-value="insomnia">Insomnia</button>
-                    <button type="button" class="toggle-btn" data-value="other" data-reveals="currentToolsOther">Other</button>
-                </div>
-                <div class="toggle-other-text" id="currentToolsOther">
-                    <div class="form-group">
-                        <textarea id="currentToolsOtherText" placeholder="Tell us what you use..."></textarea>
-                    </div>
-                </div>
-                <div class="step-nav">
-                    <button type="button" class="btn btn-secondary" onclick="goToStep(4)">Back</button>
-                    <button type="button" class="btn btn-primary" onclick="goToStep(6)">Next</button>
-                </div>
-            </div>
-
-            <!-- Step 6: Use Cases (multi-toggle + textarea) -->
-            <div class="questionnaire-step" data-step="6">
-                <h2 class="step-title">What are you interested in using DBMN for?</h2>
-                <p class="step-subtitle">Select all that apply.</p>
-                <div class="toggle-group" data-field="use_cases">
-                    <button type="button" class="toggle-btn" data-value="data_load">Data load</button>
-                    <button type="button" class="toggle-btn" data-value="data_extract">Data extract</button>
-                    <button type="button" class="toggle-btn" data-value="validate">Validate</button>
-                    <button type="button" class="toggle-btn" data-value="support">Support</button>
-                    <button type="button" class="toggle-btn" data-value="api_discovery">API discovery</button>
-                    <button type="button" class="toggle-btn" data-value="interface_mapping">Interface mapping</button>
-                    <button type="button" class="toggle-btn" data-value="bulk_operations">Bulk operations</button>
-                    <button type="button" class="toggle-btn" data-value="api_testing">API testing</button>
-                    <button type="button" class="toggle-btn" data-value="environment_management">Environment management</button>
-                    <button type="button" class="toggle-btn" data-value="data_migration">Data migration</button>
-                    <button type="button" class="toggle-btn" data-value="data_reconciliation">Data reconciliation</button>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required placeholder="you@company.com" autocomplete="email">
                 </div>
                 <div class="form-group">
-                    <textarea id="useCasesDetail" placeholder="Tell us more..."></textarea>
-                </div>
-                <div class="step-nav">
-                    <button type="button" class="btn btn-secondary" onclick="goToStep(5)">Back</button>
-                    <button type="button" class="btn btn-primary" onclick="goToStep(7)">Next</button>
-                </div>
-            </div>
-
-            <!-- Step 7: Important Features (multi-toggle) -->
-            <div class="questionnaire-step" data-step="7">
-                <h2 class="step-title">What features matter most?</h2>
-                <p class="step-subtitle">Select all that apply.</p>
-                <div class="toggle-group" data-field="important_features">
-                    <button type="button" class="toggle-btn" data-value="security">Security</button>
-                    <button type="button" class="toggle-btn" data-value="data_sovereignty">Data sovereignty</button>
-                    <button type="button" class="toggle-btn" data-value="speed">Speed</button>
-                    <button type="button" class="toggle-btn" data-value="team_collaboration">Team collaboration</button>
-                    <button type="button" class="toggle-btn" data-value="transparency">Transparency</button>
-                    <button type="button" class="toggle-btn" data-value="sox_compliance">SOX compliance</button>
-                </div>
-                <div class="step-nav">
-                    <button type="button" class="btn btn-secondary" onclick="goToStep(6)">Back</button>
-                    <button type="button" class="btn btn-primary" onclick="goToStep(8)">Next</button>
-                </div>
-            </div>
-
-            <!-- Step 8: Trial Goals (multi-toggle + textarea) -->
-            <div class="questionnaire-step" data-step="8">
-                <h2 class="step-title">What are your trial goals?</h2>
-                <p class="step-subtitle">Select all that apply.</p>
-                <div class="toggle-group" data-field="trial_goals">
-                    <button type="button" class="toggle-btn" data-value="replace_manual">Replace manual processes</button>
-                    <button type="button" class="toggle-btn" data-value="evaluate_team">Evaluate for team adoption</button>
-                    <button type="button" class="toggle-btn" data-value="speed_bulk">Speed up bulk operations</button>
-                    <button type="button" class="toggle-btn" data-value="replace_postman">Replace/supplement Postman</button>
-                    <button type="button" class="toggle-btn" data-value="proof_of_concept">Proof of concept</button>
-                    <button type="button" class="toggle-btn" data-value="improve_workflow">Improve API workflow</button>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required minlength="8" placeholder="Minimum 8 characters" autocomplete="new-password">
                 </div>
                 <div class="form-group">
-                    <textarea id="trialGoalsDetail" placeholder="Tell us more..."></textarea>
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" required minlength="8" placeholder="Re-enter password" autocomplete="new-password">
                 </div>
-                <div class="step-nav">
-                    <button type="button" class="btn btn-secondary" onclick="goToStep(7)">Back</button>
-                    <button type="button" class="btn btn-primary" onclick="goToStep(9)">Next</button>
-                </div>
+                <button type="submit" id="submitBtn" class="btn btn-primary">Create account</button>
+            </form>
+
+            <div class="link-text" id="magicToggleRow" style="display: none;">
+                <a href="#" id="useMagicLinkLink">Email me a sign-in link instead</a>
             </div>
 
-            <!-- Step 9: Socials -->
-            <div class="questionnaire-step" data-step="9">
-                <h2 class="step-title">Where can we find you?</h2>
-                <p class="step-subtitle">Optional — we'd love to connect.</p>
-                <div class="form-group">
-                    <label for="linkedinUrl">LinkedIn profile</label>
-                    <input type="url" id="linkedinUrl" placeholder="https://linkedin.com/in/...">
-                </div>
-                <div class="form-group">
-                    <label for="twitterHandle">Twitter / X handle</label>
-                    <input type="text" id="twitterHandle" placeholder="@yourhandle">
-                </div>
-                <div class="step-nav">
-                    <button type="button" class="btn btn-secondary" onclick="goToStep(8)">Back</button>
-                    <button type="button" class="btn btn-primary" onclick="finishQuestions()">Next</button>
-                </div>
+            <div class="link-text">
+                Already have an account? <a href="/account/login.html">Sign In</a>
             </div>
-
-            <!-- Step 10: Create Account -->
-            <div class="questionnaire-step" data-step="10">
-                <h2 class="step-title">Create Your Account</h2>
-                <p class="step-subtitle">One last step — then your 30-day trial begins.</p>
-                <form id="registerForm">
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" required placeholder="you@company.com" autocomplete="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" required minlength="8" placeholder="Minimum 8 characters" autocomplete="new-password">
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" id="confirmPassword" required minlength="8" placeholder="Re-enter password" autocomplete="new-password">
-                    </div>
-                    <button type="submit" id="submitBtn" class="btn btn-primary">Start Your Free Trial</button>
-                </form>
-                <div class="step-nav" style="margin-top:0.75rem;">
-                    <button type="button" class="btn btn-secondary" onclick="goToStep(9)">Back</button>
-                </div>
-                <div class="link-text">
-                    Already have an account? <a href="/account/login.html">Sign In</a>
-                </div>
-            </div>
-
         </div>
 
         <footer>
@@ -239,150 +74,114 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="/account/shared.js"></script>
     <script>
-        var TOTAL_STEPS = 10;
-        var currentStep = 1;
-        var sessionId = crypto.randomUUID();
-        var responseRowId = null; // set after first insert
-
-        // ── Step navigation ──
-
-        function goToStep(step) {
-            if (step < 1 || step > TOTAL_STEPS) return;
-
-            // Hide current, show target
-            var active = document.querySelector('.questionnaire-step.active');
-            if (active) active.classList.remove('active');
-            document.querySelector('[data-step="' + step + '"]').classList.add('active');
-            currentStep = step;
-            updateProgress();
-
-            // Scroll to top of card
-            document.querySelector('.card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Build the emailRedirectTo URL, preserving ?redirect=vscode if present
+        function buildRedirectUrl() {
+            var base = 'https://dbmn.io/account/auth-callback.html';
+            return isVSCodeRedirect() ? (base + '?redirect=vscode') : base;
         }
 
-        function updateProgress() {
-            var bar = document.getElementById('progressBar');
-            var fill = document.getElementById('progressFill');
-
-            if (currentStep === 1) {
-                bar.style.display = 'none';
-                return;
-            }
-            bar.style.display = '';
-            var pct = Math.round((currentStep / TOTAL_STEPS) * 100);
-            fill.style.width = pct + '%';
-        }
-
-        // ── Validation ──
-
-        function nextFromName() {
-            var name = document.getElementById('displayName').value.trim();
-            if (!name) {
-                showAlert('alert', 'Please enter your name.', 'error');
-                return;
-            }
+        // Toggle between magic link and password forms
+        function showMagicLinkForm() {
+            document.getElementById('magicLinkForm').style.display = '';
+            document.getElementById('passwordToggleRow').style.display = '';
+            document.getElementById('passwordForm').style.display = 'none';
+            document.getElementById('magicToggleRow').style.display = 'none';
             hideAlert('alert');
-            goToStep(3);
         }
 
-        // ── Toggle buttons ──
-
-        document.addEventListener('click', function(e) {
-            var btn = e.target.closest('.toggle-btn');
-            if (!btn) return;
-
-            btn.classList.toggle('active');
-
-            // Show/hide "Other" textarea
-            var reveals = btn.getAttribute('data-reveals');
-            if (reveals) {
-                var textArea = document.getElementById(reveals);
-                if (textArea) {
-                    textArea.classList.toggle('visible', btn.classList.contains('active'));
-                }
-            }
-        });
-
-        // ── Collect responses ──
-
-        function getToggleValues(fieldName) {
-            var group = document.querySelector('.toggle-group[data-field="' + fieldName + '"]');
-            if (!group) return [];
-            var active = group.querySelectorAll('.toggle-btn.active');
-            return Array.from(active).map(function(b) { return b.getAttribute('data-value'); });
+        function showPasswordForm() {
+            document.getElementById('magicLinkForm').style.display = 'none';
+            document.getElementById('passwordToggleRow').style.display = 'none';
+            document.getElementById('passwordForm').style.display = '';
+            document.getElementById('magicToggleRow').style.display = '';
+            hideAlert('alert');
         }
 
-        function collectResponses() {
-            return {
-                display_name: document.getElementById('displayName').value.trim(),
-                company: document.getElementById('company').value.trim() || null,
-                role: document.getElementById('role').value || null,
-                current_tools: getToggleValues('current_tools'),
-                current_tools_other: document.getElementById('currentToolsOtherText').value.trim() || null,
-                use_cases: getToggleValues('use_cases'),
-                use_cases_detail: document.getElementById('useCasesDetail').value.trim() || null,
-                important_features: getToggleValues('important_features'),
-                trial_goals: getToggleValues('trial_goals'),
-                trial_goals_detail: document.getElementById('trialGoalsDetail').value.trim() || null,
-                linkedin_url: document.getElementById('linkedinUrl').value.trim() || null,
-                twitter_handle: document.getElementById('twitterHandle').value.trim() || null
-            };
-        }
+        // Post-signup side effects: trial license + welcome email notification.
+        // Best-effort — failures are logged but not surfaced (registration succeeds either way).
+        async function createTrialAndNotify(user, email) {
+            if (!user) return;
 
-        // ── Supabase: save responses ──
-
-        async function saveResponses(funnelStage, userId) {
-            var responses = collectResponses();
-            var payload = {
-                session_id: sessionId,
-                funnel_stage: funnelStage,
-                responses: responses
-            };
-            if (userId) payload.user_id = userId;
-
-            if (responseRowId) {
-                // Update existing row
-                var result = await dbmnSupabase
-                    .from('signup_responses')
-                    .update({ funnel_stage: funnelStage, responses: responses, user_id: userId || undefined, updated_at: new Date().toISOString() })
-                    .eq('id', responseRowId);
-                return result;
-            } else {
-                // Insert new row
-                var result = await dbmnSupabase
-                    .from('signup_responses')
-                    .insert(payload)
-                    .select('id')
-                    .single();
-                if (result.data) responseRowId = result.data.id;
-                return result;
-            }
-        }
-
-        // ── Finish questions (step 9 → 10) ──
-
-        async function finishQuestions() {
             try {
-                var result = await saveResponses('questions_completed');
-                if (result.error) console.warn('Failed to save responses:', result.error);
+                var now = new Date();
+                var trialEnd = new Date(now);
+                trialEnd.setDate(trialEnd.getDate() + 30);
+                await dbmnSupabase
+                    .from('user_licenses')
+                    .insert({
+                        user_id: user.id,
+                        license_type: 'trial',
+                        status: 'active',
+                        trial_started_at: now.toISOString(),
+                        trial_ends_at: trialEnd.toISOString()
+                    });
             } catch (err) {
-                console.warn('Failed to save responses:', err);
+                console.warn('License creation warning:', err);
             }
-            goToStep(10);
-            // Update funnel stage to signup_started
+
             try {
-                await saveResponses('signup_started');
-            } catch (err) {
-                console.warn('Failed to update funnel stage:', err);
+                await callEdgeFunction('send-welcome-email', { email: email });
+            } catch (emailErr) {
+                console.warn('Welcome email notification failed:', emailErr);
             }
         }
-
-        // ── Signup form ──
 
         document.addEventListener('DOMContentLoaded', function() {
             initSupabase();
 
-            document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            document.getElementById('usePasswordLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                showPasswordForm();
+            });
+
+            document.getElementById('useMagicLinkLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                showMagicLinkForm();
+            });
+
+            // ── Magic link signup ──
+            document.getElementById('magicLinkForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                hideAlert('alert');
+
+                var email = document.getElementById('magicEmail').value.trim();
+                if (!email) {
+                    showAlert('alert', 'Please enter your email.', 'error');
+                    return;
+                }
+
+                setButtonLoading('magicLinkBtn', true, 'Sending link...');
+
+                try {
+                    var result = await dbmnSupabase.auth.signInWithOtp({
+                        email: email,
+                        options: {
+                            shouldCreateUser: true,
+                            emailRedirectTo: buildRedirectUrl()
+                        }
+                    });
+
+                    if (result.error) {
+                        showAlert('alert', result.error.message, 'error');
+                        setButtonLoading('magicLinkBtn', false);
+                        return;
+                    }
+
+                    document.getElementById('magicLinkForm').style.display = 'none';
+                    document.getElementById('passwordToggleRow').style.display = 'none';
+                    showAlert(
+                        'alert',
+                        'Check your inbox &mdash; we sent a sign-in link to ' + email + '. Click it to start your 30-day trial.',
+                        'success'
+                    );
+                } catch (err) {
+                    showAlert('alert', 'Could not send sign-in link: ' + err.message, 'error');
+                    setButtonLoading('magicLinkBtn', false);
+                }
+            });
+
+            // ── Password signup ──
+            document.getElementById('passwordForm').addEventListener('submit', async function(e) {
                 e.preventDefault();
                 hideAlert('alert');
 
@@ -407,7 +206,7 @@
                         email: email,
                         password: password,
                         options: {
-                            emailRedirectTo: 'https://dbmn.io/account/index.html'
+                            emailRedirectTo: buildRedirectUrl()
                         }
                     });
 
@@ -418,82 +217,21 @@
                     }
 
                     var user = signUpResult.data.user;
-                    var responses = collectResponses();
+                    await createTrialAndNotify(user, email);
 
-                    // Update signup_responses with user_id and signup_completed
-                    try {
-                        await saveResponses('signup_completed', user ? user.id : null);
-                    } catch (err) {
-                        console.warn('Failed to update signup response:', err);
-                    }
-
-                    // Upsert user_profiles with questionnaire data
-                    if (user) {
-                        try {
-                            await dbmnSupabase
-                                .from('user_profiles')
-                                .upsert({
-                                    id: user.id,
-                                    email: email,
-                                    display_name: responses.display_name,
-                                    company: responses.company,
-                                    role: responses.role
-                                });
-                        } catch (err) {
-                            console.warn('Failed to upsert profile:', err);
-                        }
-
-                        // Create trial license
-                        try {
-                            var now = new Date();
-                            var trialEnd = new Date(now);
-                            trialEnd.setDate(trialEnd.getDate() + 30);
-
-                            await dbmnSupabase
-                                .from('user_licenses')
-                                .insert({
-                                    user_id: user.id,
-                                    license_type: 'trial',
-                                    status: 'active',
-                                    trial_started_at: now.toISOString(),
-                                    trial_ends_at: trialEnd.toISOString()
-                                });
-                        } catch (err) {
-                            console.warn('License creation warning:', err);
-                        }
-
-                        // Send welcome email
-                        try {
-                            await callEdgeFunction('send-welcome-email', {
-                                email: email,
-                                displayName: responses.display_name,
-                                company: responses.company || 'Not provided',
-                                role: responses.role || 'Not provided',
-                                currentTools: responses.current_tools,
-                                useCases: responses.use_cases,
-                                useCasesDetail: responses.use_cases_detail || 'Not provided',
-                                trialGoals: responses.trial_goals,
-                                trialGoalsDetail: responses.trial_goals_detail || 'Not provided',
-                                linkedinUrl: responses.linkedin_url || 'Not provided',
-                                twitterHandle: responses.twitter_handle || 'Not provided'
-                            });
-                        } catch (emailErr) {
-                            console.warn('Welcome email notification failed:', emailErr);
-                        }
-                    }
-
-                    // Check if email confirmation is required
+                    // Email confirmation required (no session yet) — show inbox prompt
                     if (user && !signUpResult.data.session) {
-                        document.getElementById('registerForm').style.display = 'none';
-                        document.querySelector('[data-step="10"] .step-nav').style.display = 'none';
-                        document.querySelector('[data-step="10"] .link-text').style.display = 'none';
-                        document.querySelector('[data-step="10"] .step-title').textContent = 'Check Your Email';
-                        document.querySelector('[data-step="10"] .step-subtitle').textContent = '';
-                        showAlert('alert', 'We sent a confirmation link to ' + email + '. Click it to activate your account and start your 30-day trial.', 'success');
+                        document.getElementById('passwordForm').style.display = 'none';
+                        document.getElementById('magicToggleRow').style.display = 'none';
+                        showAlert(
+                            'alert',
+                            'We sent a confirmation link to ' + email + '. Click it to activate your account and start your 30-day trial.',
+                            'success'
+                        );
                         return;
                     }
 
-                    // If auto-confirmed, redirect
+                    // Auto-confirmed signup — redirect appropriately
                     if (isVSCodeRedirect()) {
                         var session = await getCurrentSession();
                         if (session) {
@@ -505,7 +243,6 @@
                     } else {
                         window.location.href = '/account/index.html';
                     }
-
                 } catch (err) {
                     showAlert('alert', 'Registration failed: ' + err.message, 'error');
                     setButtonLoading('submitBtn', false);

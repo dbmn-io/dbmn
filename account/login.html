@@ -25,7 +25,21 @@
 
             <div id="alert" class="alert"></div>
 
-            <form id="loginForm">
+            <!-- Magic link form (default) -->
+            <form id="magicLinkForm">
+                <div class="form-group">
+                    <label for="magicEmail">Email</label>
+                    <input type="email" id="magicEmail" required placeholder="you@company.com" autocomplete="email">
+                </div>
+                <button type="submit" id="magicLinkBtn" class="btn btn-primary">Email me a sign-in link</button>
+            </form>
+
+            <div class="link-text" id="passwordToggleRow">
+                <a href="#" id="usePasswordLink">Use a password instead</a>
+            </div>
+
+            <!-- Password form -->
+            <form id="loginForm" style="display: none;">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" required placeholder="you@company.com" autocomplete="email">
@@ -38,6 +52,10 @@
 
                 <button type="submit" id="submitBtn" class="btn btn-primary">Sign In</button>
             </form>
+
+            <div class="link-text" id="magicToggleRow" style="display: none;">
+                <a href="#" id="useMagicLinkLink">Email me a sign-in link instead</a>
+            </div>
 
             <div class="link-text">
                 Don't have an account? <a href="/account/register.html">Register</a>
@@ -54,12 +72,98 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="/account/shared.js"></script>
     <script>
+        // Build the emailRedirectTo URL, preserving ?redirect=vscode if present
+        function buildRedirectUrl() {
+            var base = 'https://dbmn.io/account/auth-callback.html';
+            return isVSCodeRedirect() ? (base + '?redirect=vscode') : base;
+        }
+
+        function showMagicLinkForm() {
+            document.getElementById('magicLinkForm').style.display = '';
+            document.getElementById('passwordToggleRow').style.display = '';
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('magicToggleRow').style.display = 'none';
+            hideAlert('alert');
+        }
+
+        function showPasswordForm() {
+            document.getElementById('magicLinkForm').style.display = 'none';
+            document.getElementById('passwordToggleRow').style.display = 'none';
+            document.getElementById('loginForm').style.display = '';
+            document.getElementById('magicToggleRow').style.display = '';
+            hideAlert('alert');
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             initSupabase();
 
-            var form = document.getElementById('loginForm');
+            document.getElementById('usePasswordLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                showPasswordForm();
+            });
 
-            form.addEventListener('submit', async function(e) {
+            document.getElementById('useMagicLinkLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                showMagicLinkForm();
+            });
+
+            // ── Magic link sign-in ──
+            // shouldCreateUser: false — login.html should never create accounts.
+            // Supabase returns an error when the email isn't registered; we surface that
+            // with a link to /account/register.html.
+            document.getElementById('magicLinkForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                hideAlert('alert');
+
+                var email = document.getElementById('magicEmail').value.trim();
+                if (!email) {
+                    showAlert('alert', 'Please enter your email.', 'error');
+                    return;
+                }
+
+                setButtonLoading('magicLinkBtn', true, 'Sending link...');
+
+                try {
+                    var result = await dbmnSupabase.auth.signInWithOtp({
+                        email: email,
+                        options: {
+                            shouldCreateUser: false,
+                            emailRedirectTo: buildRedirectUrl()
+                        }
+                    });
+
+                    if (result.error) {
+                        // Supabase returns "Signups not allowed for otp" when the email isn't registered
+                        // and shouldCreateUser is false. Surface a register-here message in that case.
+                        var msg = result.error.message || '';
+                        if (/signups? not allowed/i.test(msg) || /user not found/i.test(msg)) {
+                            var alertEl = document.getElementById('alert');
+                            alertEl.innerHTML = 'No account found for ' + escapeText(email) +
+                                '. <a href="/account/register.html">Register here</a> to create one.';
+                            alertEl.className = 'alert alert-error';
+                            alertEl.style.display = 'block';
+                        } else {
+                            showAlert('alert', msg, 'error');
+                        }
+                        setButtonLoading('magicLinkBtn', false);
+                        return;
+                    }
+
+                    document.getElementById('magicLinkForm').style.display = 'none';
+                    document.getElementById('passwordToggleRow').style.display = 'none';
+                    showAlert(
+                        'alert',
+                        'Check your inbox &mdash; we sent a sign-in link to ' + email + '.',
+                        'success'
+                    );
+                } catch (err) {
+                    showAlert('alert', 'Could not send sign-in link: ' + err.message, 'error');
+                    setButtonLoading('magicLinkBtn', false);
+                }
+            });
+
+            // ── Password sign-in ──
+            document.getElementById('loginForm').addEventListener('submit', async function(e) {
                 e.preventDefault();
                 hideAlert('alert');
 
@@ -80,8 +184,6 @@
                         return;
                     }
 
-                    // If redirect=vscode, send tokens back to VS Code extension
-                    // then redirect browser to account dashboard
                     if (isVSCodeRedirect()) {
                         showAlert('alert', 'Signed in! Redirecting to VS Code...', 'success');
                         redirectToVSCode(result.data.session);
@@ -89,7 +191,6 @@
                         return;
                     }
 
-                    // Redirect to return URL if provided, otherwise account dashboard
                     var params = new URLSearchParams(window.location.search);
                     var returnUrl = params.get('return');
                     window.location.href = returnUrl || '/account/index.html';
@@ -100,6 +201,15 @@
                 }
             });
         });
+
+        function escapeText(s) {
+            return String(s)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
     </script>
 </body>
 </html>
