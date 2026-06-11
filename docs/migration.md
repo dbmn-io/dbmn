@@ -74,7 +74,7 @@ Do not run both extensions at the same time — they can conflict with each othe
 
 ## After Migration
 
-- **Sign in to DBMN** — If you had a DBMN account, sign in again from the Account panel to restore your license and trial status.
+- **Sign in to DBMN** — If you had a DBMN account, sign in again from the Account panel to restore your license and account status.
 - **Execution history** — If you kept the same workspace (see Before You Start), your past batch results and transaction logs are already available in the new extension.
 
 ## Troubleshooting

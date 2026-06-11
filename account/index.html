@@ -37,10 +37,10 @@
 
             <div id="alert" class="alert"></div>
 
-            <!-- Trial info (shown only for trial users) -->
+            <!-- Unlimited access info (shown only while the 30-day window is active) -->
             <div id="trialInfo" style="display: none; margin-bottom: 1rem;">
                 <div class="alert alert-info" style="display: block;">
-                    <strong>Trial:</strong> <span id="trialDaysLeft">30</span> days remaining. Full access to all features.
+                    <strong>Unlimited access</strong> — full access to all features.
                 </div>
             </div>
 
@@ -96,9 +96,9 @@
                 <button id="manageSubBtn" class="btn btn-secondary" style="width: 100%;">Manage Subscription</button>
             </div>
 
-            <!-- Expired trial alert -->
+            <!-- Free tier alert (shown once the 30-day unlimited window ends) -->
             <div id="expiredTrialAlert" class="alert alert-warning" style="display: none; margin-top: 1rem;">
-                <strong>Trial Expired</strong> — Your 30-day trial has ended. Upgrade to restore full access.
+                <strong>Free tier</strong> — Upgrade for unlimited batches and concurrency.
                 <div style="margin-top: 0.5rem;">
                     <a href="/pricing.html" style="color: #ffd60a; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(255,214,10,0.3);">View Plans &rarr;</a>
                 </div>
@@ -195,16 +195,20 @@
                 if (license.isLifetime) {
                     badge.textContent = 'Lifetime';
                     badge.className = 'license-badge license-lifetime';
+                } else if (license.licenseType === 'trial') {
+                    badge.textContent = 'Unlimited';
+                    badge.className = 'license-badge license-trial';
                 } else {
                     badge.textContent = license.licenseType.charAt(0).toUpperCase() + license.licenseType.slice(1);
                     badge.className = 'license-badge license-' + license.licenseType;
                 }
 
-                // Trial info
+                // Unlimited-access banner (while the 30-day window is still active)
                 if (license.licenseType === 'trial' && license.trialEndsAt) {
                     var daysLeft = Math.max(0, Math.ceil((new Date(license.trialEndsAt) - new Date()) / (1000 * 60 * 60 * 24)));
-                    document.getElementById('trialDaysLeft').textContent = daysLeft;
-                    document.getElementById('trialInfo').style.display = 'block';
+                    if (daysLeft > 0) {
+                        document.getElementById('trialInfo').style.display = 'block';
+                    }
                 }
 
                 // License details section
@@ -222,9 +226,9 @@
                         detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">' + subLabel + '</span><span class="license-detail-value"' + subStyle + '>' + new Date(license.subscriptionEndsAt).toLocaleDateString() + '</span></div>';
                     }
                 } else if (license.licenseType === 'trial') {
-                    detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">Type</span><span class="license-detail-value">Trial</span></div>';
+                    detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">Type</span><span class="license-detail-value">Unlimited access</span></div>';
                     if (license.trialEndsAt) {
-                        detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">Trial ends</span><span class="license-detail-value">' + new Date(license.trialEndsAt).toLocaleDateString() + '</span></div>';
+                        detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">Unlimited until</span><span class="license-detail-value">' + new Date(license.trialEndsAt).toLocaleDateString() + '</span></div>';
                     }
                 } else if (license.licenseType === 'free') {
                     detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">Type</span><span class="license-detail-value">Free Tier</span></div>';

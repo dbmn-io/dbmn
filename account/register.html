@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Started - DBMN</title>
-    <meta name="description" content="Start your free DBMN trial">
+    <meta name="description" content="Register for DBMN — 30 days unlimited on signup">
     <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
     <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
     <link rel="stylesheet" href="/css/brand.css">
@@ -20,8 +20,8 @@
 
     <div class="container">
         <div class="card">
-            <h2>Start Your Free Trial</h2>
-            <p class="step-subtitle">30 days, no credit card. We'll send you a sign-in link &mdash; no password to remember.</p>
+            <h2>Get Started</h2>
+            <p class="step-subtitle">We'll create your account and email you a sign-in link. 30 days of unlimited access on signup. No credit card.</p>
 
             <div id="alert" class="alert"></div>
 
@@ -171,7 +171,7 @@
                     document.getElementById('passwordToggleRow').style.display = 'none';
                     showAlert(
                         'alert',
-                        'Check your inbox — we sent a sign-in link to ' + email + '. Click it to start your 30-day trial.',
+                        'Check your inbox — we sent a sign-in link to ' + email + '. Click it to activate your account and get 30 days of unlimited access.',
                         'success'
                     );
                 } catch (err) {
@@ -225,7 +225,7 @@
                         document.getElementById('magicToggleRow').style.display = 'none';
                         showAlert(
                             'alert',
-                            'We sent a confirmation link to ' + email + '. Click it to activate your account and start your 30-day trial.',
+                            'We sent a confirmation link to ' + email + '. Click it to activate your account and get 30 days of unlimited access.',
                             'success'
                         );
                         return;

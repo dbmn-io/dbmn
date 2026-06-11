@@ -31,7 +31,7 @@ Welcome to the Dobermann documentation. Dobermann enables bulk data migration th
 | [Your Data & Privacy](/docs/your-data/) | Where data is stored and what leaves your machine |
 | [Troubleshooting](/docs/troubleshooting/) | Common issues and solutions |
 | [Changelog](/docs/changelog/) | Release history and what's new |
-| [Pricing](/pricing.html) | Plans, pricing, and free trial details |
+| [Pricing](/pricing.html) | Plans and pricing |
 
 ## What is Dobermann?
 
