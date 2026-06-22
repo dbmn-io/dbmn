@@ -103,16 +103,7 @@ During a batch execution:
 
 ### Real-Time Progress (Batch)
 
-While a batch runs, you see live updates:
-- **Progress bar** — Visual completion percentage
-- **Row counter** — "Processing 45 of 100..."
-- **Success rate** — Green counter with checkmark
-- **Failure count** — Red counter (if any)
-- **Elapsed time** — Running timer
-- **Requests per second** — Throughput metric
-- **Estimated time remaining**
-
-Results stream into the tabs below as each request completes — no need to wait for the batch to finish.
+While a batch runs, the Console shows live progress — completion percentage, success/failure counts, throughput, and estimated time remaining. Results stream into the tabs below as each request completes, so you can start inspecting transactions before the batch finishes.
 
 ---
 
@@ -208,17 +199,40 @@ The Completed and Errors tabs run on **Named Views** — saved configurations th
 
 Search across all visible columns simultaneously. Plain text search works as before (case-insensitive substring matching). Advanced patterns let you combine terms, use wildcards, exclude rows, and match exact phrases.
 
+Operators light up in colour as you type — if a `+` or `-` doesn't change colour, it's being treated as part of a term, not as an operator.
+
 | Syntax | Meaning | Example | Matches |
 |---|---|---|---|
 | `,` | OR between terms | `abc123,abc124` | rows containing either term |
-| `+` | AND between terms | `active+Dallas` | rows containing both terms |
+| space `+term` | AND between terms | `active +Dallas` | rows containing both terms |
+| space `-term` | Exclude rows | `active -Dallas` | rows containing "active" but NOT "Dallas" |
 | `*` | Zero or more characters | `abc*` | "abcdef", "abc123" |
 | `?` | Exactly one character | `a?c` | "abc", "a1c" |
-| `-` prefix | Exclude rows | `-error` | rows NOT containing "error" |
 | `"quoted"` | Exact cell value | `"New York"` | only literal "New York" |
 | plain text | Substring (default) | `hello` | "Hello World" |
 
-Patterns are combinable: `active+pending,-error`, `"exact",-exclude,wild*`
+**Word-boundary rule.** `+` and `-` are operators only at the start of the search, or after whitespace / `,` / another operator. Everywhere else they're literal characters — so `ACAU-ASR3690` matches as-is, hyphens included.
+
+| You type | Parsed as |
+|---|---|
+| `ACAU-ASR3690 -"07"` | include rows with `ACAU-ASR3690`, exclude rows with cell exactly `"07"` |
+| `ACAU-ASR3690 + "07"` | rows with `ACAU-ASR3690` AND cell exactly `"07"` |
+| `ACAU-ASR3690-"07"` | literal substring match for the whole string (no operator picked up) |
+| `foo+bar` | literal substring `foo+bar` — add spaces to AND: `foo + bar` |
+
+**How clauses combine.** Every comma is OR. Every clause is its own independent search. A `-foo` only constrains the clause it sits in — adding another clause via `,` won't be limited by it.
+
+| You type | Meaning |
+|---|---|
+| `WOOF -Rub +da,Rub` | (WOOF AND da AND NOT Rub) OR (Rub) — the second clause pulls Rub rows in |
+| `foo -bar,baz` | (foo AND NOT bar) OR (baz) |
+| `foo,-error` | (foo) OR (rows without `error`) — almost every row, since most rows don't contain `error` |
+| `foo -error` | rows matching `foo` AND not containing `error` — write this when you want global exclusion |
+| `-error,-pending` | (NOT error) OR (NOT pending) — almost every row |
+| `-error -pending` | rows without `error` AND without `pending` — single clause, ANDed |
+| `foo -err,bar -err` | (foo AND NOT err) OR (bar AND NOT err) — `-err` repeated so it kills both clauses |
+
+Patterns are combinable: `active +pending,-error`, `"exact",-exclude,wild*`
 
 - Always shows the row count — total rows when no search is active, filtered/total when searching
 - Case-insensitive matching across all patterns
@@ -229,7 +243,7 @@ Patterns are combinable: `active+pending,-error`, `"exact",-exclude,wild*`
 - Find rows with particular values using wildcards: `SHIP*`
 - Filter by status codes: `200` or exclude failures: `-4??`
 - Combine terms with commas: `abc123,abc124`
-- Require multiple terms with +: `active+Chicago`
+- Require multiple terms with spaced `+`: `active +Chicago`
 - Match exact cell values with quotes: `"New York"`
 
 ### Sorting
@@ -311,21 +325,7 @@ All executions (single and batch) are saved in the sidebar.
 
 ### Viewing History
 
-Expand **Executions** in the sidebar to see past runs grouped by endpoint:
-
-**Icons:**
-- Checkmark — All successful
-- Warning — Partial (some failures)
-- X — All failed
-- Pause — Paused/incomplete
-
-Click any execution to reopen the Console with full results.
-
-**Context menu options:**
-- **View** — Open results
-- **Export Results** — Save to file
-- **Re-run** — Execute again with same data
-- **Delete** — Remove from history
+Expand **Executions** in the sidebar to see past runs grouped by endpoint. Each entry shows its outcome at a glance — all-success, partial, all-failed, or paused. Click any run to reopen the Console with full results, or right-click for **View**, **Export Results**, **Re-run**, and **Delete**.
 
 ### Workspace Files
 

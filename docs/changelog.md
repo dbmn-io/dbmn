@@ -71,7 +71,7 @@ All notable changes to Dobermann are documented here.
 - **Expanded nodes ignoring column visibility** — Expanding an inline array now honors the root column visibility settings instead of showing all columns
 
 ### Improved
-- **Console search patterns** — Search now supports comma-separated OR (`abc,def`), AND (`active+pending`), wildcards (`abc*`, `a?c`), negation (`-error`), and exact match (`"phrase"`). Plain text search works as before. (GitHub Issue #227)
+- **Console search patterns** — Search now supports comma-separated OR (`abc,def`), AND (`active +pending`), wildcards (`abc*`, `a?c`), negation (`-error`), and exact match (`"phrase"`). Plain text search works as before. (GitHub Issue #227)
 - **RAW tab response headers** — Headers view now displays as a styled two-column table (Header / Value) instead of plain text in the Monaco editor, making keys and values easy to scan at a glance
 - **Console HTML export** — Body cells no longer carry inline styles (border, padding, background). Header row keeps its styling. Prevents VS Code theme colours from bleeding into Excel paste. (GitHub Issue #225)
 
