@@ -71,10 +71,10 @@ HTTP headers define metadata for your requests — content type, authentication 
 
 ### Custom Headers
 
-Add headers as key-value pairs. Each header has:
-- **Enable/Disable toggle** — disabled headers are greyed out and excluded from requests
-- **Template variable support** — use variables in header values
-- A link icon appears when a header contains template variables
+Click the **+** dropdown above the editor and choose **Add Header** to insert a new key-value row. Each header has:
+
+- **Enable/Disable toggle** — disabled headers are greyed out and excluded from requests, but kept on the endpoint so you can flip them back on
+- **Template variable support** — use variables in header values; a link icon appears next to any header that contains one
 
 **Examples:**
 - `Authorization`: `Bearer {{authToken:string}}`
@@ -90,7 +90,7 @@ Toggle **Include environment-level headers** to inherit headers from your active
 ## Query Parameters
 {: #query-parameters }
 
-Key-value pairs appended to the URL. Each parameter supports enable/disable toggling and template variables.
+Click the **+** dropdown above the editor and choose **Add Query Parameter** to add a new row. Each parameter is a key-value pair appended to the URL, with the same enable/disable toggle and template-variable support as headers.
 
 **Examples:**
 - `itemId`: `PRE-{{sku}}`
@@ -139,8 +139,7 @@ Dobermann automatically splits into multiple requests if URL length or value cou
 
 The JSON payload sent to your API. Dobermann provides a full-featured editor with syntax highlighting, autocomplete, and a toolbar for rapid template authoring.
 
-- **Always shown** for POST, PUT, PATCH methods
-- **Hidden by default** for GET and DELETE (shown if body has content or you explicitly add it)
+The body editor is shown automatically for POST, PUT, and PATCH. For GET and DELETE it's hidden by default — click the **+** dropdown above the editor and choose **Request Body** if you need one.
 
 Use [Template Variables](/docs/template-variables/) to map your spreadsheet columns to API fields — with type validation, data transformation, and conditional logic built right in.
 
@@ -160,6 +159,21 @@ The toolbar above the editor provides quick access to template authoring feature
 | **Format JSON** | — | Pretty-print the JSON body |
 
 The editor also provides **intelligent autocomplete** as you type inside template variables — suggesting variable types, modifiers, and environment variables. See [Template Variables](/docs/template-variables/) for the full editing experience.
+
+---
+
+## Save & Run
+
+Two footer buttons drive the endpoint lifecycle.
+
+**Save Endpoint** (Ctrl+S) commits your changes. Dobermann validates the endpoint name, path, and JSON body syntax first — anything wrong is flagged inline so you can fix it before saving.
+
+**Run** is the smart execute button next to Save. Dobermann picks the right mode based on what's in your endpoint:
+
+- **No template variables** → label says **Run API**, single request fires straight to the Console
+- **Has template variables** → label says **Run Batch**, opens the 5-step batch runner
+
+Run is disabled while there are unsaved changes — save first so the batch always reflects what you're looking at on screen.
 
 ---
 
@@ -230,41 +244,18 @@ Click **More Actions** → **Duplicate** to create a copy of any saved endpoint.
 
 Perfect for creating endpoint variants (e.g., "Create Order" → "Create Order (Bulk)") without starting from scratch.
 
+### Download Template
+
+Click **More Actions** → **Download Template** on a saved endpoint with `{{template variables}}` and Dobermann generates a ready-to-fill `.xlsx` file. Column headers come from your variables, types match the variable types (number, date, boolean, string), date format modifiers carry across, and you get a sample row plus 100 pre-formatted empty rows in an Excel Table with autofilter.
+
+Hand it to the data owner, get it back filled in, drop it onto the batch runner — no column mapping required.
+
 ---
 
 ## Test Scripts
 
 {: .note }
 > Test scripts are under development and will be documented here when available. Stay tuned.
-
----
-
-## All Buttons Reference
-
-### Footer Buttons (Always Visible)
-
-| Button | Description |
-|--------|-------------|
-| **Save Endpoint** (Ctrl+S) | Save current configuration. Validates name, path, and JSON syntax first |
-| **Run API** / **Run Batch** | Smart single button. Shows "Run API" when no template variables exist (direct execution), or "Run Batch" when template variables are present (opens batch runner). Disabled when unsaved changes exist |
-
-### Add Section (+) Dropdown
-
-| Option | Description |
-|--------|-------------|
-| **Request Body** | Show the body editor |
-| **Add Header** | Add a new custom header row |
-| **Add Query Parameter** | Add a new query parameter row |
-
-### Context-Dependent Buttons
-
-| Button | When Visible | Description |
-|--------|-------------|-------------|
-| **Paste** | New endpoints only | Parse shared endpoint data from clipboard |
-| **Share** | Saved endpoints only | Copy endpoint to clipboard (rich + plain text) |
-| **More Actions → Download Template** | Saved endpoints with template variables | Download an Excel template with column headers from `{{variables}}`, correct data types, a sample row, and 100 pre-formatted empty rows |
-| **More Actions → Duplicate** | Saved endpoints only | Create a copy with "COPY " prefix |
-| **More Actions → Delete** | Saved endpoints only | Delete endpoint (shows transaction count warning) |
 
 ---
 

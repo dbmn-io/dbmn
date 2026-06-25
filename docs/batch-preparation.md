@@ -333,21 +333,11 @@ Step 5 shows the execution summary and lets you start the batch.
 - Error tolerance setting
 - Batch name (editable)
 
-Click **Execute** to start the batch. The Console opens automatically and results stream in real-time.
-
-### Monitoring Progress
-
-**Progress indicators:**
-- **Progress bar** — Visual completion percentage
-- **Status text** — "Processing 45 of 100..."
-- **Success counter** — Green checkmark with count
-- **Error counter** — Red X with count
-- **Elapsed time** — Running timer
-- **Requests per second** — Throughput metric
+Click **Execute** to start the batch. The Console opens automatically and results stream in real-time, with live completion percentage, success/error counts, throughput, and elapsed time.
 
 ### Pausing
 
-**Pause** — Temporarily halt execution after the current request completes. Resume from the exact position. Useful for rate limit cooling or reviewing errors mid-run.
+**Pause** — Halts execution after the current request completes. Resume from the exact position. Useful for rate limit cooling or reviewing errors mid-run.
 
 ### Batch Results
 
@@ -478,33 +468,6 @@ For APIs supporting pagination, use the special `{{A8:PAGE}}` variable:
 - Close other VS Code windows
 - Increase VS Code memory limit
 - Export results immediately after completion
-
-## Best Practices
-
-**Data preparation:**
-- Clean data before importing (remove duplicates, fix formatting)
-- Include meaningful column headers
-- Test with small sample (10-20 rows) first
-- Keep backups of original data files
-
-**Error handling:**
-- Start with "Stop on First Error" for testing
-- Use percentage tolerance for production runs
-- Review first few errors before continuing large batches
-- Export results frequently for large batches
-
-**Performance:**
-- Optimal batch size: 100-500 rows
-- Split large files into multiple batches
-- Run batches during off-peak hours (avoid API rate limits)
-- Monitor API response times for degradation
-
-**Data validation:**
-- Use Step 3 to review data before generating JSON
-- Validate CSV data externally before importing
-- Test endpoint with single execution first
-- Review column mapping carefully
-- Check variable types match API expectations
 
 ## Related Topics
 

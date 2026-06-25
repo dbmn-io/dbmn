@@ -65,11 +65,6 @@ The General tab contains environment identity, type classification, and executio
 
 A descriptive name for the environment (e.g., "Production US", "Staging Europe", "Dev Sandbox").
 
-**Best practices:**
-- Use clear, descriptive names
-- Include region or tenant if managing multiple instances
-- Avoid special characters that might cause issues
-
 #### Base URL
 
 The primary API endpoint for this environment.
@@ -111,20 +106,7 @@ When enabled, API requests use mock responses instead of calling real endpoints.
 ### Environment Type
 {: #environment-type }
 
-Environment type categorises environments for visual organisation in the tree view. This is purely for display purposes — it doesn't affect functionality.
-
-- **Production** — Live production systems
-- **Staging** — Pre-production testing
-- **UAT** — User acceptance testing
-- **QA/Testing** — Quality assurance
-- **Development** — Active development (default)
-- **Sandbox** — Experimental/demo
-- **Training** — Training environment
-- **Integration** — Integration testing
-- **Performance** — Performance testing
-- **Local** — Local development
-
-Environments are grouped and sorted by type in the sidebar.
+Pick a type from the dropdown — Production, Staging, UAT, Dev, Sandbox, etc. Type only controls how environments are grouped and sorted in the sidebar; it has no effect on execution behaviour.
 
 ### Execution Settings
 
@@ -209,16 +191,7 @@ Direct authentication using a JWT (JSON Web Token).
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 ```
 
-**Token expiration:**
-- Dobermann displays token expiration time if available
-- Visual warnings appear when token is about to expire
-- Refresh the token manually when needed
-
-**Best practices:**
-- Store tokens securely
-- Rotate tokens regularly
-- Use environment-specific tokens
-- Never commit tokens to source control
+Dobermann shows token expiry when the JWT carries an `exp` claim, and warns you before it lapses. Paste a fresh token to refresh.
 
 ### OAuth
 
@@ -241,12 +214,10 @@ OAuth 2.0 authentication flow for secure, delegated access.
 4. Log in and grant permissions
 5. Dobermann receives token automatically
 
-**Token management:**
-- Access tokens are stored securely
-- Refresh tokens are used automatically when access token expires
-- Visual indicators show authentication status
-- **Sign In** — Standard sign-in. If you already have a browser session with your identity provider, you may be signed in automatically without re-entering credentials.
-- **Sign In (New Token)** — Forces you to enter your credentials again, even if your browser remembers a previous session. Use this when your roles or permissions have changed on the server and your current token has stale claims.
+Access tokens are stored in VS Code's encrypted secret storage and refreshed automatically when they expire. Two sign-in buttons:
+
+- **Sign In** — uses your existing browser session with the identity provider; you may be signed in without re-entering credentials.
+- **Sign In (New Token)** — forces fresh credentials. Use this when your roles or permissions have changed on the server and the current token has stale claims.
 
 **Relative URLs:**
 Dobermann supports relative URLs for OAuth endpoints. If authorization URL or token URL starts with `/`, it will be automatically prepended with the environment's base URL.
@@ -294,25 +265,9 @@ Authenticate using a Google Cloud service account for Google APIs (Cloud Platfor
 }
 ```
 
-**Best practices:**
-- Use the minimum scopes required for your use case
-- Rotate service account keys periodically
-- Never commit service account JSON to source control
-
 ### Token Details
 
-After authenticating, the Token Details section appears below the authentication method. It provides a read-only view of your current token.
-
-**Features:**
-- **Decoded view** — Shows the decoded JWT payload (claims, expiration, issuer)
-- **Encoded view** — Shows the raw encoded token string
-- **Copy button** — Copy the full token to clipboard
-- **Status pill** — Visual indicator showing token validity:
-  - **Valid** — Token is current and usable
-  - **Expiring soon** — Token will expire shortly
-  - **Expired** — Token has expired and needs refreshing
-
-Token Details is shared across all authentication methods — whichever method provides the active token, its details appear here.
+After authenticating, the Token Details section appears below the authentication method. It shows a read-only view of the active token — switch between decoded JWT payload and encoded form, copy the full token, and see at-a-glance whether it's valid, expiring soon, or expired. The same panel is used for whichever auth method is active.
 
 ## Headers & Variables
 {: #headers-variables }
@@ -363,24 +318,9 @@ Manhattan Active APIs require organization headers. Dobermann automatically dete
 - `X-Tenant-Id`
 - Other Manhattan Active-specific headers
 
-**Visual indicators:**
-- Green checkmark — Organization selected
-- Warning icon — No organization selected (required for Manhattan Active)
-
 ## Environment Tree View
 
-Environments appear in the sidebar tree view with these indicators:
-
-**Status icons:**
-- Checkmark — Active environment (used for executions)
-- Lock — Authenticated
-- Warning — Authentication required or expired
-- Building — Organization selected
-
-**Actions:**
-- Click name — Open environment editor
-- Right-click — Context menu with actions
-- Drag endpoints — Move endpoints between environments
+Environments appear in the sidebar tree view, grouped by type. Click a name to open the editor, right-click for the context menu, and drag endpoints between environments to move them.
 
 ## Troubleshooting
 

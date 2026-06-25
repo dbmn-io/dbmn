@@ -158,6 +158,59 @@ Import complete workspace export:
 - Use for clean migration
 - Warning: Cannot be undone
 
+### Importing from Postman Collections
+
+Dobermann can import endpoints directly from a Postman v2.1 collection JSON file. This makes it easy to bring an existing API library into Dobermann without rebuilding each request by hand.
+
+**How to use it:**
+
+1. Open the Import/Export view (right-click in the Dobermann sidebar → **Import/Export**)
+2. Choose **Import**
+3. Drag your Postman collection `.json` file onto the drop zone (or browse to it)
+4. Use the Postman Import Options to choose how to bring the requests in
+5. Tick the items you want and click **Import Configuration**
+
+**Postman Import Options:**
+
+- **Include headers from collection** *(off by default)* — when ticked, request headers from each Postman request are imported alongside the endpoint. Dobermann will warn you before enabling this, because in most cases you should leave headers on the Environment (so they apply to every endpoint that uses it). Only enable this if a specific endpoint genuinely needs different headers from its environment.
+- **Folder destination** — either keep the folder names from the Postman collection (the immediate parent folder of each request becomes the Dobermann folder) or import everything into a single existing or new folder of your choice.
+
+#### What gets imported
+
+Dobermann reads only the fields it can map directly to a Dobermann endpoint. Variables in `{{this}}` syntax pass through unchanged — they continue to resolve from your active environment, exactly as they did in Postman.
+
+| Dobermann field | Source in Postman                         |
+|-----------------|-------------------------------------------|
+| Name            | `item.name`                               |
+| Method          | `request.method`                          |
+| Path            | `request.url.path` (host portion stripped)|
+| Body            | `request.body.raw` (raw mode only)        |
+| Folder          | Immediate parent folder name              |
+| Query params    | `request.url.query`                       |
+| Description     | `request.description`                     |
+| Headers         | `request.header` *(optional, off by default)*  |
+
+#### What is NOT imported (and why)
+
+Dobermann is not a Postman replacement — it's a focused tool for bulk data loads against REST APIs. Several things in a Postman collection have no equivalent in Dobermann and are deliberately dropped on import:
+
+| Postman feature | Why it's not imported |
+|-----------------|-----------------------|
+| **Pre-request scripts** (`event[].listen: "prerequest"`) | Dobermann does not run JavaScript hooks. Use template variables, environment variables, or auto-organization headers to compute values. |
+| **Test scripts** (`event[].listen: "test"`) | Dobermann does not execute Postman test scripts. Validation is handled in the Console after each batch run. |
+| **Saved response examples** (`response[]`) | Dobermann captures live responses each run; saved examples from Postman are not preserved. |
+| **Auth methods other than `bearer`** (OAuth 2.0, Basic, API Key, AWS Signature, NTLM, Hawk, etc.) | Auth is configured per-Environment in Dobermann (JWT, OAuth 2.0, Google Service Account, Dobermann auth, or none). Reconfigure these on the Environment after import. |
+| **Postman Bearer token (when headers are not included)** | Tokens belong on the Environment, not the endpoint. Set the bearer/JWT token once on your Environment and Dobermann attaches it to every request. |
+| **Body modes other than `raw`** (form-data, urlencoded, binary, GraphQL) | Only raw bodies are imported. Other body modes are dropped silently. |
+| **Collection-level variables** (`variable[]`) | Variables in `{{this}}` syntax pass through in URLs and bodies, but the *definitions* don't import. Set them on a Dobermann Environment instead. |
+| **Postman Environment files** (`*.postman_environment.json`) | Not currently supported — re-create the environment in Dobermann (it's usually a one-time setup with much richer auth options). |
+| **Folder hierarchy beyond one level** | Dobermann uses a single level of endpoint folders. Each request is filed under its *immediate* parent folder; deeper ancestors are flattened away. |
+| **Cookies, certificates, proxy settings** | Not part of the Dobermann endpoint model. |
+
+You don't need to memorise this list. When you upload a collection, Dobermann scans it and lists exactly which of these features it found at the top of the import preview, and flags each affected endpoint individually with a `⚠ data dropped` chip — hover the chip to see what specifically won't carry across for that request.
+
+If your Postman workflow leans heavily on pre-request/test scripts or non-raw bodies, you may need to redesign that flow — see [Template Variables](/docs/template-variables/) and [Environments](/docs/environments/) for the Dobermann-native equivalents.
+
 ## File Formats
 
 ### Endpoint JSON Structure
@@ -210,75 +263,19 @@ Import complete workspace export:
 
 ## Sharing with Teams
 
-### Best Practices
+Dobermann export files are JSON — diff-friendly, deterministic, and safe to commit to git. Sensitive fields (JWT tokens, OAuth client secrets, access/refresh tokens) are stripped on export, so the recipient always provides their own credentials after import.
 
-**Exporting for team:**
-1. Export workspace or specific folders
-2. Document any required setup steps
-3. Note any environment-specific requirements
-4. Share via Git, SharePoint, or cloud storage
+For values that vary per person (API keys, user-specific tokens), use an environment variable in the header instead of hardcoding it:
 
-**Receiving imports:**
-1. Review all imported items before use
-2. Verify URLs match target environment
-3. Update any customer-specific values
-4. Test with single execution first
-5. Configure authentication separately
-
-### Version Control
-
-Dobermann export files are Git-friendly:
-- JSON format (easy diff)
-- No sensitive data
-- Deterministic output
-- Human-readable structure
-
-### Security Considerations
-
-**What's safe to share:**
-- Endpoint configurations
-- Request templates
-- Variable definitions
-
-**Never share:**
-- JWT tokens
-- OAuth client secrets
-- Access/refresh tokens
-- API keys in headers
-- Production credentials
-
-**Recommendation:**
-Use environment-specific variables for sensitive data:
 ```json
 {
   "headers": [
-    {
-      "key": "X-API-Key",
-      "value": "{{API_KEY}}"
-    }
+    { "key": "X-API-Key", "value": "{{ENV:API_KEY}}" }
   ]
 }
 ```
-Team members provide their own `API_KEY` value.
 
-## Migration Scenarios
-
-### Moving to New Machine
-
-1. Export workspace on old machine
-2. Copy export file to new machine
-3. Install Dobermann extension
-4. Import workspace
-5. Configure environment authentication
-6. Test critical endpoints
-
-### Sharing with Contractor
-
-1. Export specific folder (not full workspace)
-2. Create separate environment for contractor
-3. Share folder export + environment export
-4. Provide authentication separately
-5. Contractor imports and configures auth
+Each team member sets `API_KEY` on their own environment, and the same exported endpoint works for everyone.
 
 ## Related Topics
 

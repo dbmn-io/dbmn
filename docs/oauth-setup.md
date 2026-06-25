@@ -124,13 +124,7 @@ Google Service Accounts provide server-to-server authentication without user int
 5. Click **Test Authentication** to verify the credentials work
 6. Click **Save Environment**
 
-### Security Best Practices
-
-- **Least privilege** — Only grant the roles and scopes your workflow actually needs
-- **Key rotation** — Rotate service account keys every 90 days
-- **No source control** — Never commit service account JSON to git or share in plain text
-- **Project isolation** — Use separate service accounts for different projects or environments
-- **Audit logging** — Enable Cloud Audit Logs to track service account activity
+The JSON key is stored in VS Code's encrypted secret storage and is excluded from environment exports — recipients of a shared environment must provide their own service account.
 
 ---
 

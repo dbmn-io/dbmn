@@ -42,7 +42,7 @@ Cursor lands after `ENV:` with autocomplete ready — type to pick from your env
 ```javascript
 "quantity": "{{A8:}}", //100
 ```
-Same behaviour — autocomplete suggests `sequence`, `date`, `datetime`.
+Same behaviour — autocomplete suggests `sequence`, `date`, `datetime`, and the pagination drivers `PAGE` and `SIZE`. Selecting `PAGE` inserts `{{A8:PAGE:0}}` and `SIZE` inserts `{{A8:SIZE:20}}` (see [Pagination](/docs/pagination/)); both are recognised as valid templates with hover help rather than flagged as unknown.
 
 **State 4 → Restore Original:**
 ```javascript
@@ -56,46 +56,13 @@ Press **Ctrl+Shift+M** to insert `{{}}` at the cursor position. If the cursor is
 
 ### Modifier Toolbar
 
-When your cursor is inside a variable like `{{sku:string}}`, the **Modifier** dropdown becomes active. It shows context-aware options based on the variable's data type:
+Place your cursor inside a variable and the **Modifier** dropdown becomes active. It only shows modifiers that apply to that variable's type — length and case for strings, comparisons and rounding for numbers, date math for dates. Click one to chain it on:
 
-- **String variables:** `upper`, `lower`, length range (`3-50`), `noTrim`
-- **Number variables:** `>0`, `>=0`, `int`, `rnd(2)`, `floor`, `ceil`
-- **Date/DateTime variables:** `+1d`, `-1d`, `+4h`, `+30m` (date math)
-- **All types:** `asString`, `opt`, `null`
-
-Click a modifier and it's inserted before the closing `}}`:
 ```
 {{sku:string}}  →  {{sku:string|upper}}
 ```
 
-### Autocomplete
-
-The editor provides intelligent suggestions as you type inside `{{...}}`:
-
-| You type | Suggestions shown |
-|----------|-------------------|
-| `{{` | `A8:` and `ENV:` prefixes |
-| `{{A8:` | `sequence`, `date`, `datetime` |
-| `{{varName:` | `string`, `number`, `boolean`, `date`, `datetime` |
-| `{{varName:date:` | `iso`, `YYYY-MM-DD`, `DD-MM-YYYY`, etc. |
-| <code>{{varName:string&#124;</code> | `upper`, `lower`, `3-50`, `opt`, `null`, etc. |
-| <code>{{varName:number&#124;</code> | `>0`, `>=0`, `int`, `rnd(2)`, `floor`, `ceil`, etc. |
-| <code>{{varName:date&#124;</code> | `+1d`, `-1d`, `+4h`, `+30m`, etc. |
-
-### Syntax Highlighting
-
-Variables are colour-coded in the editor so you can spot issues at a glance:
-
-| Element | Colour |
-|---------|--------|
-| `{{ }}` brackets | Dim grey |
-| User variables | Cyan/Blue |
-| A8 and ENV prefixes | Green |
-| Data types | Blue |
-| Format specifiers | Orange |
-| Validation modifiers | Yellow/Gold |
-| Transform modifiers | Purple |
-| Errors | Red underline |
+See **Advanced Templates — Modifiers** below for the full reference.
 
 ---
 

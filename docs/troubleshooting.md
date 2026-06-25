@@ -325,13 +325,7 @@ Dobermann auto-encodes query parameters and path variables. For special cases, p
 
 ### Performance Issues
 
-**Causes:** Large batch in progress, many executions in history, large CSV files loaded.
-
-**Solutions:**
-- Close unnecessary webviews
-- Clear old execution history
-- Reduce batch sizes
-- Disable other extensions
+If VS Code feels sluggish during a large batch, clear old executions from the Executions sidebar — each retained run keeps its request/response files indexed. Splitting very large CSVs into multiple batches also helps.
 
 ## Getting Help
 

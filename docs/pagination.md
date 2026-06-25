@@ -62,6 +62,33 @@ You don't need to type these manually — the settings dialog handles it. But if
 
 ---
 
+## Pagination in the Request Body
+
+Some APIs — typically POST searches — page through values in the **request body** rather than query parameters, for example:
+
+```jsonc
+{
+    "Query": "Status = 'active'",
+    "Page": "{{A8:PAGE:0:header.totalCount}}",
+    "Size": "{{A8:SIZE:20}}"
+}
+```
+
+Dobermann drives pagination from the body using the **same `{{A8:PAGE}}` and `{{A8:SIZE}}` templates** — just place them in the body instead of (or as well as) query parameters. Everything else works the same: first page on Run, then **Fetch All / Get Next X**, with total pages calculated from the response.
+
+**Setting it up:**
+
+1. In the body editor, type `{{A8:` and pick **PAGE** (inserts `{{A8:PAGE:0}}`) and **SIZE** (inserts `{{A8:SIZE:20}}`). Both are recognised as valid templates with hover help. This alone enables **Next Page**.
+2. Run the endpoint, then open **Configure Pagination** in the Console. It detects that pagination lives in the body — the key fields show as **read-only "Body field"** and a note explains it. Pick the **Total record count** path and Save; Dobermann writes it back into the body template (`{{A8:PAGE:0}}` → `{{A8:PAGE:0:header.totalCount}}`), which enables **Fetch All**.
+
+**Notes:**
+
+- Page/size templates should sit at the **top level** of the body as quoted string values (e.g. `"Page": "{{A8:PAGE:0}}"`).
+- If both query params and the body contain pagination templates, the **query parameter** takes precedence — keep pagination in one place.
+- Body pagination is for endpoints whose only variables are the pagination pair. If the body also contains data-driven `{{variables}}` (a CSV-driven batch), use query-parameter pagination instead.
+
+---
+
 ## Template Variable Reference
 
 ### {{A8:PAGE}}
