@@ -19,4 +19,22 @@
     --brand-text-body: #e0e0e0;
     --brand-surface: rgba(255, 255, 255, 0.05);
     --brand-border: rgba(255, 255, 255, 0.1);
+    --brand-link: #fff;
+    --brand-link-underline: rgba(255, 255, 255, 0.4);
+}
+
+/* Default link styling — readable on the dark navy gradient without the
+ * browser's old-school royal blue. Any page-specific or scoped rule (nav
+ * bars, footers, buttons) still wins via specificity. */
+a {
+    color: var(--brand-link);
+    text-decoration: underline;
+    text-decoration-color: var(--brand-link-underline);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.15s ease;
+}
+
+a:hover {
+    text-decoration-color: var(--brand-link);
 }

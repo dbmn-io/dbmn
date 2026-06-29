@@ -58,13 +58,7 @@ body {
 }
 
 .header-right a {
-    color: var(--brand-accent);
-    text-decoration: none;
     font-size: 0.875rem;
-}
-
-.header-right a:hover {
-    text-decoration: underline;
 }
 
 .container {
@@ -179,15 +173,6 @@ body {
     margin-top: 1rem;
     font-size: 0.875rem;
     color: var(--brand-text-muted);
-}
-
-.link-text a {
-    color: var(--brand-accent);
-    text-decoration: none;
-}
-
-.link-text a:hover {
-    text-decoration: underline;
 }
 
 .alert {
