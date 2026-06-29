@@ -66,6 +66,18 @@ The "D" prefix represents **Dobermann** - creating a dedicated shortcut namespac
 
 ---
 
+## Hub Tabs
+
+When the DBMN Hub is the active editor, these shortcuts apply:
+
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+W` / `Cmd+W` | Close the active Hub tab (endpoint editor, console, Run Batch, etc.) |
+
+`Ctrl+W` honours unsaved changes — if the active tab is dirty, you'll get the standard **Save / Discard / Cancel** dialog before it closes. The shortcut only fires when the Hub itself is focused; in any other editor it falls back to VS Code's built-in close-editor behaviour.
+
+---
+
 ## Customizing Shortcuts
 
 You can customize Dobermann shortcuts through VS Code's Keyboard Shortcuts editor:
