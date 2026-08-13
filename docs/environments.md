@@ -106,7 +106,40 @@ When enabled, API requests use mock responses instead of calling real endpoints.
 ### Environment Type
 {: #environment-type }
 
-Pick a type from the dropdown — Production, Staging, UAT, Dev, Sandbox, etc. Type only controls how environments are grouped and sorted in the sidebar; it has no effect on execution behaviour.
+Pick a type from the dropdown — Production, Staging, UAT, Dev, Sandbox, etc. Type controls how environments are grouped and sorted, and it drives the production safeguards.
+
+Setting an environment to **Production** turns on two protections automatically — there's no separate setting to enable:
+
+- The **Hub header turns red** with a `● PROD` marker whenever that environment is active, so there's no mistaking what you're connected to.
+- A **confirmation appears before any live execution** — both **Run API** and the final **Execute** step of a batch run. You can suppress the warning for 15, 30 or 60 minutes when doing repeated work; it comes back after a reload.
+
+If the warnings get in the way, change the environment's type. Unless it's protected — see below.
+
+### Prod Protect
+{: #prod-protect }
+
+**Prod Protect** makes an environment's type a property of the environment itself rather than a personal preference. For environments DBMN manages for your organisation, the type is set centrally and applies to **everyone connecting to that environment**.
+
+On a managed environment the **Environment Type dropdown is read-only**, with a note beneath it explaining why:
+
+| Pinned to | What you see |
+|---|---|
+| **Production** | 🛡 **Prod Protection enabled** — and all the production safeguards above are permanently on |
+| Any other type | 🔒 **Set by environment manager** — locked, but nothing to warn about |
+
+If DBMN has recorded who manages the environment, the note names them instead — "Prod Protection enabled by Acme IT".
+
+Production environments are also shown in **red in the environment selector**, so the risky choice stands out before you pick it, not just after.
+
+Protection follows the environment's URL, so it's recognised however the URL is typed — capitals, a port, a trailing slash or a path all still match.
+
+**You can't work around it by editing.** The type is applied wherever environments are saved, not just in the editor, so it survives importing a `.dbmn.zip`, or deleting the environment and adding it back.
+
+**It stays on.** Once your extension knows an environment is protected, it stays protected across restarts, network outages, expired sessions and signing out. Protection is only lifted when DBMN withdraws it.
+
+Prod Protect is a safety net against accidents — someone changing a dropdown and losing their production warnings. It isn't a security control and doesn't replace access management on the environment itself.
+
+**Getting it set up:** contact DBMN and let us know which environments you want protected and what each one should be pinned to.
 
 ### Execution Settings
 

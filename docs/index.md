@@ -14,7 +14,7 @@ Welcome to the Dobermann documentation. Dobermann enables bulk data migration th
 | Guide | Description |
 |-------|-------------|
 | [Getting Started](/docs/getting-started/) | Installation and first steps |
-| [Environments](/docs/environments/) | Configure API connections and authentication |
+| [Environments](/docs/environments/) | Configure API connections, authentication, and Prod Protect |
 | [↳ OAuth Setup Guide](/docs/oauth-setup/) | OAuth and Google Service Account configuration |
 | [Endpoints](/docs/endpoints/) | Configure API requests, share with your team |
 | [↳ Sharing Endpoints](/docs/sharing-endpoints/) | Share an endpoint, paste it on the other side |
