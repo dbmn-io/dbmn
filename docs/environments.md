@@ -118,6 +118,8 @@ If the warnings get in the way, change the environment's type. Unless it's prote
 ### Prod Protect
 {: #prod-protect }
 
+![The DBMN Dobermann standing guard over a production environment, with the Hub header turned red.](/images/prod-protect-hero.jpg)
+
 **Prod Protect** makes an environment's type a property of the environment itself rather than a personal preference. For environments DBMN manages for your organisation, the type is set centrally and applies to **everyone connecting to that environment**.
 
 On a managed environment the **Environment Type dropdown is read-only**, with a note beneath it explaining why:
