@@ -9,6 +9,20 @@ parent: Documentation
 
 All notable changes to Dobermann are documented here.
 
+## v0.2.1 — 2026-08-24
+
+### Added
+- **Prod Protect** — environment types set centrally and locked for managed environments, so a production instance can't be reclassified. Production environments now show in red in the environment selector. [Docs](https://dbmn.io/docs/prod-protect/) (GitHub Issue #273)
+- **New endpoints inherit the System from the active environment** — creating an endpoint (New or Paste) now pre-selects the active environment's System.
+- **Production environment safeguards** — Environments typed **Production** now turn the Hub header red and require a confirmation before every live execution. **Behaviour change:** this is driven by the environment type alone, with no setting to switch it off. [Docs](https://dbmn.io/docs/environments/#environment-type) (GitHub Issue #273)
+- **VS Code chords work from inside the Hub** — Command Palette, Quick Open, New / Open File, toggle Sidebar / Panel / Terminal, Settings and the Ctrl/Cmd+Shift view-focus chords now reach VS Code even when focus is deep inside a Hub tab.
+
+### Fixed
+- **Download Template no longer produces columns for `{{ENV:…}}` / `{{V8:…}}` variables** — Templates were emitting variables the runner already substitutes, so you were asked to fill values that had no effect. ENV, V8 and A8 prefixes are now excluded. [Docs](https://dbmn.io/docs/endpoints/#download-template) (GitHub Issue #284)
+- **Batch rows weren't auto-grouped with multiple arrays** — Grouping only examined the first top-level array, so a static block ahead of the data-driven one made every CSV row its own request. **Behaviour change:** the same endpoint and CSV may now produce fewer transactions. [Docs](https://dbmn.io/docs/batch-preparation/#step-4-review-json) (GitHub Issue #279)
+- **Hub environment dropdown showed multiple orgs ticked** — Every environment's remembered org was ticked, not just the active one's. The tick now appears only under the active environment. (GitHub Issue #273)
+- **Endpoint URL was covering the endpoint name in the Hub catalogue** — Rows repeated the path their group header already showed, squeezing the name into an ellipsis. The prefix is now stripped and the name column gets more room. (GitHub Issue #274)
+
 ## v0.2.0 — 2026-07-20
 
 ### Added
@@ -50,7 +64,6 @@ All notable changes to Dobermann are documented here.
 - **Save and Continue did nothing** — When prompted to save unsaved changes before switching context (e.g. closing the editor with pending edits, or running another endpoint while the current editor is dirty), clicking **Save and Continue** would silently time out and treat the response as "didn't save", abandoning the user's edits or aborting the action. The base webview was posting a `saveCurrentContext` message that no frontend listened for; it now invokes the subclass save handler directly so the editor's own save trigger runs.
 - **Console — "Remaining time" hides on completion** — Stays visible on Pause/Stop when an ETA was calculated; resumes the countdown on Resume. (GitHub Issue #264)
 - **Console — expanding a sub-row keeps scroll position** — Viewport stays anchored at the button, and clicking the same button again collapses without jumping. Hiding a column inside a sub-row now persists across all saved views and re-expands. (GitHub Issue #267)
-
 
 ## v0.1.5 — 2026-05-13
 
