@@ -162,7 +162,7 @@ When templates have nested arrays, control how sequences behave:
 
 | Modifier | Syntax | Behaviour |
 |----------|--------|-----------|
-| Default | `{{A8:sequence}}` | Same value for the entire request |
+| Default | `{{A8:sequence}}` | One value per object — the same across the request root, and the same within each array element (each element gets the next number) |
 | Local | `{{A8:sequence:local}}` | Unique within each array, resets per array |
 | Global | `{{A8:sequence:global}}` | Unique per item, persisted per array path |
 | Parent | `{{A8:sequence:parent}}` | Reuse the parent element's sequence value |
