@@ -74,11 +74,18 @@ Export all endpoints within a folder:
 **Excluded for security:**
 - JWT tokens
 - OAuth client secrets
+- Google service-account private keys
 - Access tokens
 - Refresh tokens
 - Organization IDs
 
-**Note:** Recipients must provide their own authentication credentials after importing.
+**Note:** Recipients must provide their own authentication credentials after importing. Importing a stripped export lists the environments whose credentials you need to re-enter.
+
+### Including credentials deliberately
+
+The export page has an **Include environment credentials** tick-box, off by default. Ticking it keeps the OAuth client secret and the Google service-account private key in the file.
+
+Only use it when you are sending the file somewhere you would send a password. A file exported this way is **not** safe to commit to git or paste into a chat — anyone holding it can authenticate as that service account or OAuth client. The export confirmation says so when the box was ticked.
 
 ### Export Workspace
 
@@ -259,11 +266,13 @@ If your Postman workflow leans heavily on pre-request/test scripts or non-raw bo
 }
 ```
 
-**Note:** Sensitive fields like `clientSecret`, `jwtToken`, `accessToken` are never exported.
+**Note:** Sensitive fields — `clientSecret`, the service-account `private_key`, `jwtToken`, `accessToken` — are stripped unless you tick **Include environment credentials** at export time. Session tokens (`jwtToken`, `accessToken`, `refreshToken`) are never exported either way.
 
 ## Sharing with Teams
 
-Dobermann export files are JSON — diff-friendly, deterministic, and safe to commit to git. Sensitive fields (JWT tokens, OAuth client secrets, access/refresh tokens) are stripped on export, so the recipient always provides their own credentials after import.
+Dobermann export files are JSON — diff-friendly and deterministic. By default they are safe to commit to git: JWT tokens, OAuth client secrets, Google service-account private keys and access/refresh tokens are stripped on export, so the recipient always provides their own credentials after import.
+
+The exception is a file exported with **Include environment credentials** ticked. That file holds live secrets — keep it out of git and share it only the way you would share a password.
 
 For values that vary per person (API keys, user-specific tokens), use an environment variable in the header instead of hardcoding it:
 
