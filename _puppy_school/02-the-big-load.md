@@ -53,15 +53,37 @@ Note `{{quantityOnHand:number}}` — the `:number` suffix tells Dobermann to sen
 as a JSON number rather than a quoted string. APIs care about that distinction more than
 you'd like.
 
-## Step 3 — Load Your Data
+## Step 3 — Load One Record First
 
-Open **Batch Preparation** and load `inventory-67k.csv`.
+Never point a batch at a file until you've watched a single record land.
+
+Save the endpoint. Notice the footer button now reads **Run Batch** — it changed from
+**Run API** the moment the body gained template variables. Click it. In **Load Data**, click
+**Enter Data**: Dobermann builds an empty grid with one column per variable in your template.
+
+Type one row:
+
+| gtin | sku | description | locationGln | locationName | quantityOnHand | uom | status |
+|---|---|---|---|---|---|---|---|
+| `00012345600012` | `SKU-PUPPY-001` | `Premium Belly Rub Machine` | `0614141000012` | `Golden Retriever Distribution Center` | `12` | `EA` | `active` |
+
+Both codes are real — you saw them in Lesson 1's products and locations. Click **Next**,
+glance at the generated JSON, then **Execute**.
+
+One request, one record, one row in the **Completed** tab, with the `id` the API gave it.
+Now you know the endpoint, the template and the API agree with each other. Everything from
+here is the same thing, more times.
+
+## Step 4 — Load Your Data
+
+Click **Run Batch** again. This time, in **Load Data**, upload `inventory-67k.csv`.
 
 Dobermann maps the CSV columns to your template variables automatically where the names
 match — which, here, they all do. Click through to **Review JSON** and look at the generated
-request. One record, wrapped in an array, exactly as the endpoint expects.
+request. One record, wrapped in an array, exactly as the endpoint expects — the same shape
+you just typed by hand.
 
-## Step 4 — Run It the Slow Way
+## Step 5 — Run It the Slow Way
 
 Set **Threads** to `4` and hit **Run**.
 
@@ -71,7 +93,7 @@ tool, and it is worth seeing with your own eyes.
 
 Let it run for about thirty seconds, then hit **Pause**. You've made your point, and so has it.
 
-## Step 5 — One Request, A Thousand Records
+## Step 6 — One Request, A Thousand Records
 
 Go back to **Review JSON**. Select the array in your template, and set **Reps** to `1000`.
 

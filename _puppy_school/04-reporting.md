@@ -115,6 +115,7 @@ Set the **Row Basis** to `data`, then tick these columns:
 | `location.name` | the nested location object |
 | `location.city` | the nested location object |
 | `product.category` | the nested product object |
+| `product.unitPrice` | the nested product object — you'll want this in Lesson 5 |
 
 Notice what you just did. `location.name` and `product.category` live one level down in the
 JSON, and you've pulled them up alongside the record's own fields as if they were flat

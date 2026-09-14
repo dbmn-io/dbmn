@@ -36,7 +36,7 @@ know what a foreign key violation costs at 4pm on a Friday will know what it mea
 We'd like to know what worked and what didn't — the course only gets better with people
 telling us where they got stuck.
 
-[Give us feedback] · [hello@dbmn.io](mailto:hello@dbmn.io)
+[Give us feedback] · [support@dbmn.io](mailto:support@dbmn.io)
 
 ---
 
@@ -50,7 +50,7 @@ Used by the "Check My Homework" mechanic on every lesson.
 | Loading, sub-line | Give us a moment while we verify your progress. |
 | Pass heading | Good Dog. |
 | Fail heading | Not Quite... |
-| Fail — support line | Don't hesitate to reach out to one of our Top Dogs for help — hello@dbmn.io |
+| Fail — support line | Don't hesitate to reach out to one of our Top Dogs for help — support@dbmn.io |
 | Fail — button | Return to Lesson |
 | Error heading | Oops |
 | Error body | Something went wrong checking your progress. Please try again. |

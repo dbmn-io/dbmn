@@ -1,0 +1,9 @@
+poNumber,buyerName,supplierName,status,sku,description,orderedQty,unitPrice,uom
+PO-REPLEN-001,Golden Retriever Distribution Center,Chew Toy Manufacturing Inc,submitted,SKU-WOOF-001-00001,Premium Belly Rub Machine,100,149.99,EA
+PO-REPLEN-001,Golden Retriever Distribution Center,Chew Toy Manufacturing Inc,submitted,SKU-WOOF-002-00001,Tennis Ball Launcher 3000,100,89.99,EA
+PO-REPLEN-001,Golden Retriever Distribution Center,Chew Toy Manufacturing Inc,submitted,SKU-WOOF-003-00001,Squirrel Detection Radar,100,249.99,EA
+PO-REPLEN-002,Labrador Logistics Hub,Wagmore Components Ltd,submitted,SKU-WOOF-004-00001,Anti-Mailman Defense System,100,349.99,EA
+PO-REPLEN-002,Labrador Logistics Hub,Wagmore Components Ltd,submitted,SKU-WOOF-005-00001,Automatic Treat Dispenser Pro,100,129.99,EA
+PO-REPLEN-003,German Shepherd Sorting Facility,Boop & Snoot Supply Co,submitted,SKU-WOOF-006-00001,Indestructible Chew Toy (Ha Right),100,24.99,EA
+PO-REPLEN-003,German Shepherd Sorting Facility,Boop & Snoot Supply Co,submitted,SKU-WOOF-007-00001,Self-Cleaning Dog Bath Station,100,499.99,EA
+PO-REPLEN-003,German Shepherd Sorting Facility,Boop & Snoot Supply Co,submitted,SKU-WOOF-008-00001,AI-Powered Smart Dog Door,100,299.99,EA

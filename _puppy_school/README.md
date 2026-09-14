@@ -40,6 +40,21 @@ checkpoint:
 `lesson_id` is the contract with the backend. Changing one means migrating
 `user_course_progress.completed_lessons` and the `check_lesson_completion` RPC together.
 
+Lessons that review a template the learner built carry a `review` block and place a
+`<!-- share-it-back -->` marker in the body where the exchange should render:
+
+```yaml
+review:
+  endpoint: My Replenishment Orders   # what the learner is asked to Share
+  prompt: DBMN's opening line
+  pass: Shown when the review has no errors
+  fail: Shown above the findings when it does
+```
+
+The rules themselves live server-side, keyed by `lesson_id` — see
+`docs/playground/share-it-back-brief.md` in vs-dbmn. A passing review is what the
+checkpoint consumes; the page never writes progress itself.
+
 ## Body conventions
 
 The renderers rely on these, so keep to them:
@@ -49,6 +64,9 @@ The renderers rely on these, so keep to them:
 - **Every fenced code block gets a Copy button.** Don't fence anything you don't want copied.
 - Blockquotes starting `> **🐾 Dobermann Philosophy**` or `> **🦴 Dig Deeper**` render as
   callouts at the foot of the lesson. Any other blockquote renders as an inline aside.
+- `<!-- share-it-back -->` is replaced by the share-it-back thread (lessons with a `review`
+  block only). HTML comment so Liquid and both renderers pass it through.
+- Support address is `support@dbmn.io` — every fail screen and the graduation page use it.
 - Tables render as-is.
 - `note_to_reviewer` in front matter is internal — it must never reach a renderer.
 
