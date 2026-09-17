@@ -38,3 +38,21 @@ a {
 a:hover {
     text-decoration-color: var(--brand-link);
 }
+
+/* DBMN icon tokens — `{icon:<role>}` in docs/lessons becomes an inline SVG
+ * taken from the extension's own icon registry (see _plugins/dbmn_icons.rb).
+ * Sized to the surrounding text and coloured by it, so "click {icon:x}"
+ * reads like a glyph in the sentence, not a picture dropped into it. */
+.dbmn-icon {
+    display: inline-block;
+    width: 1.1em;
+    height: 1.1em;
+    vertical-align: -0.2em;
+    margin: 0 0.1em;
+    color: inherit;
+}
+.dbmn-icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
