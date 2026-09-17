@@ -1,6 +1,7 @@
 ---
 screen_id: landing
 kind: landing
+permalink: /puppy-school/
 title: Puppy School
 subtitle: Learn Dobermann on a live API. Free, hands-on, about an hour.
 ---
@@ -42,11 +43,7 @@ Each lesson is a short set of steps you carry out in Dobermann. At the end you h
 
 Finish all five and you graduate, with a certificate to prove it.
 
-**Signed out:** [Sign in to start] · [Create a free account]
-
-**Signed in, not started:** [Begin Puppy School]
-
-**Signed in, part way through:** [Resume Lesson N] · [Course overview]
+<!-- course-cta -->
 
 > **A note on the dogs**
 >

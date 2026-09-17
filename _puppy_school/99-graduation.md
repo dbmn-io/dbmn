@@ -1,6 +1,7 @@
 ---
 screen_id: graduation
 kind: graduation
+slug: graduation
 title: Graduation
 ---
 
@@ -18,7 +19,7 @@ That last one is the whole job. Everything else is detail.
 
 ## Your certificate
 
-[Download your certificate] · [Share on LinkedIn]
+<!-- certificate -->
 
 It has your name on it and the date you finished. Put it wherever you like — the people who
 know what a foreign key violation costs at 4pm on a Friday will know what it means.
@@ -36,23 +37,4 @@ know what a foreign key violation costs at 4pm on a Friday will know what it mea
 We'd like to know what worked and what didn't — the course only gets better with people
 telling us where they got stuck.
 
-[Give us feedback] · [support@dbmn.io](mailto:support@dbmn.io)
-
----
-
-## Checkpoint copy (shared across lessons)
-
-Used by the "Check My Homework" mechanic on every lesson.
-
-| State | Copy |
-|---|---|
-| Loading | Checking your homework... |
-| Loading, sub-line | Give us a moment while we verify your progress. |
-| Pass heading | Good Dog. |
-| Fail heading | Not Quite... |
-| Fail — support line | Don't hesitate to reach out to one of our Top Dogs for help — support@dbmn.io |
-| Fail — button | Return to Lesson |
-| Error heading | Oops |
-| Error body | Something went wrong checking your progress. Please try again. |
-
-Per-lesson pass and fail copy lives in each lesson's front matter.
+[support@dbmn.io](mailto:support@dbmn.io)

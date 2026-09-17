@@ -20,7 +20,10 @@
 module DbmnIcons
   TOKEN = /\{icon:([a-z0-9-]+)\}/.freeze
   # Segments the replacer must not touch.
-  PROTECTED = %r{(<pre\b.*?</pre>|<code\b.*?</code>)}mi.freeze
+  # <script> too: page data is emitted as JSON in a script tag, and an injected <svg …>
+  # (full of double quotes) would corrupt it. <template> is NOT protected — copy in
+  # templates is HTML and wants its icons.
+  PROTECTED = %r{(<pre\b.*?</pre>|<code\b.*?</code>|<script\b.*?</script>)}mi.freeze
 
   # @param html  [String] rendered page HTML
   # @param roles [Hash]   `_data/dbmn_icons.json`["roles"]: role => { "icon", "svg" }

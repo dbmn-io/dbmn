@@ -1,0 +1,14 @@
+<section class="ps-widget" data-widget="verify" aria-live="polite">
+    <div class="ps-widget-prompt" data-copy="verify-prompt"></div>
+    <div class="ps-widget-signin" data-when="signed-out" hidden></div>
+    <div data-when="signed-in" hidden>
+        <label class="ps-widget-label" for="ps-verify-input">Paste the copied table</label>
+        <textarea id="ps-verify-input" class="ps-widget-input" rows="7" spellcheck="false" autocomplete="off"
+                  placeholder="sku&#9;description&#9;quantityOnHand&#9;…"></textarea>
+        <div class="ps-action-bar">
+            <button type="button" class="btn btn-primary ps-widget-submit" data-copy-label="widgets-submit_paste">Check my report</button>
+        </div>
+        <p class="ps-widget-note">We check it against what the API holds for you and keep only the result — never what you pasted.</p>
+    </div>
+    <div class="ps-widget-result" hidden></div>
+</section>

@@ -1,0 +1,135 @@
+{%- comment -%}
+  Puppy School — landing, the five lessons, graduation. One standalone document: it has no
+  parent layout, so the docs theme never wraps it.
+
+  The lesson BODY is rendered with Liquid off (it is full of literal {{variables}}); this
+  layout is Liquid as usual.
+
+  What reaches the browser from front matter is an EXPLICIT ALLOW-LIST — never
+  `page | jsonify`. Lessons carry reviewer notes that include answers
+  (see _plugins/puppy_school_guard.rb, the second lock on that door).
+
+  Human-readable copy goes into <template> elements, not the JSON: the icon plugin swaps
+  {icon:role} for an <svg>, which is right in HTML and would corrupt JSON.
+{%- endcomment -%}
+{%- assign lessons = site.puppy_school | where_exp: "d", "d.lesson_id" | sort: "number" -%}
+{%- assign kind = page.kind | default: "lesson" -%}
+{%- assign copy = site.data.puppy_school_copy -%}
+{%- capture paste_mount -%}{% include puppy_school/paste-it-back.html %}{%- endcapture -%}
+{%- capture share_mount -%}{% include puppy_school/share-it-back.html %}{%- endcapture -%}
+{%- capture cta_mount -%}<div id="ps-course-cta" class="ps-cta" data-auth-slot></div>{%- endcapture -%}
+{%- capture certificate_mount -%}<div id="ps-certificate" class="ps-certificate-mount"></div>{%- endcapture -%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if kind == "lesson" %}Lesson {{ page.number }} — {{ page.title }} · {% endif %}Puppy School · DBMN</title>
+    <meta name="description" content="{{ page.goal | default: page.subtitle | default: 'Learn Dobermann on a live API. Free, hands-on, about an hour.' | escape }}">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="/css/brand.css">
+    <link rel="stylesheet" href="/account/shared.css">
+    <link rel="stylesheet" href="/puppy-school/course.css">
+</head>
+<body class="ps-body ps-kind-{{ kind }}" data-auth="unknown">
+    <header class="site-header compact-header">
+        <a href="/">
+            <img src="/images/DBMNLogo.png" alt="DBMN">
+            <h1>DBMN</h1>
+        </a>
+        <div class="header-right ps-header-right">
+            <a href="/puppy-school/" class="ps-header-link">Puppy School</a>
+            <a href="/account/index.html" class="ps-header-link" data-when="signed-in" hidden>Account</a>
+            <a href="/account/login.html" class="ps-header-link" data-login-link data-when="signed-out" hidden>Sign in</a>
+        </div>
+    </header>
+
+    <div class="ps-container">
+        <nav class="ps-rail" id="ps-rail" aria-label="Course progress">
+            {%- for l in lessons %}
+            <a class="ps-rail-item" href="{{ l.url }}" data-lesson="{{ l.lesson_id }}"{% if l.lesson_id == page.lesson_id %} aria-current="page"{% endif %}>
+                <span class="ps-rail-dot" aria-hidden="true">{{ l.number }}</span>
+                <span class="ps-rail-label">{{ l.title }}</span>
+            </a>
+            {%- endfor %}
+            <a class="ps-rail-item ps-rail-graduation" href="/puppy-school/graduation/" data-lesson="graduation"{% if kind == "graduation" %} aria-current="page"{% endif %}>
+                <span class="ps-rail-dot" aria-hidden="true">&#127891;</span>
+                <span class="ps-rail-label">Graduation</span>
+            </a>
+        </nav>
+
+        <main class="ps-lesson-card" id="ps-main">
+            {%- if kind == "lesson" %}
+            <div class="ps-lesson-meta">
+                <span>Lesson {{ page.number }}</span>
+                <span>{{ page.estimate }}</span>
+            </div>
+            <h1 class="ps-lesson-title">{{ page.title }}</h1>
+            <p class="ps-lesson-goal">{{ page.goal }}</p>
+            {%- endif %}
+
+            {%- if kind == "graduation" %}
+            <div id="ps-graduation-gate" class="ps-gate" hidden></div>
+            {%- endif %}
+
+            <div class="ps-content" id="ps-content"{% if kind == "graduation" %} data-gated{% endif %}>
+                {{ content
+                    | replace: "<!-- paste-it-back -->", paste_mount
+                    | replace: "<!-- share-it-back -->", share_mount
+                    | replace: "<!-- course-cta -->", cta_mount
+                    | replace: "<!-- certificate -->", certificate_mount }}
+            </div>
+
+            {%- if kind == "lesson" %}
+            <section class="ps-checkpoint-panel" id="ps-checkpoint" aria-live="polite">
+                <h2>Check My Homework</h2>
+                <p class="ps-checkpoint-criteria"><strong>To pass:</strong> {{ page.completion.criteria }}</p>
+                <div class="ps-action-bar">
+                    <button type="button" class="btn btn-primary" id="ps-check-btn">{{ copy.checkpoint.button }}</button>
+                </div>
+                <div id="ps-checkpoint-result" class="ps-checkpoint-result" hidden></div>
+            </section>
+            <nav class="ps-pager" id="ps-pager" aria-label="Lessons"></nav>
+            {%- endif %}
+        </main>
+    </div>
+
+    <footer>
+        <p>Stuck? One of our Top Dogs will help — <a href="mailto:support@dbmn.io">support@dbmn.io</a></p>
+    </footer>
+
+    <script type="application/json" id="ps-meta">
+    {
+        "kind": {{ kind | jsonify }},
+        "lessonId": {{ page.lesson_id | jsonify }},
+        "number": {{ page.number | jsonify }},
+        "slug": {{ page.slug | jsonify }},
+        "title": {{ page.title | jsonify }},
+        "verifyEndpoint": {{ page.verify.endpoint | jsonify }},
+        "hasReview": {% if page.review %}true{% else %}false{% endif %},
+        "lessons": [
+            {%- for l in lessons %}
+            { "id": {{ l.lesson_id | jsonify }}, "number": {{ l.number | jsonify }}, "title": {{ l.title | jsonify }}, "url": {{ l.url | jsonify }} }{% unless forloop.last %},{% endunless %}
+            {%- endfor %}
+        ]
+    }
+    </script>
+
+    {%- comment %} Copy, as HTML. Keys are fixed; values come from front matter and _data. {% endcomment %}
+    <template id="ps-copy-checkpoint-pass">{{ page.checkpoint.pass | markdownify }}</template>
+    <template id="ps-copy-checkpoint-fail">{{ page.checkpoint.fail | markdownify }}</template>
+    <template id="ps-copy-verify-prompt">{{ page.verify.prompt | markdownify }}</template>
+    <template id="ps-copy-verify-pass">{{ page.verify.pass | markdownify }}</template>
+    <template id="ps-copy-verify-fail">{{ page.verify.fail | markdownify }}</template>
+    <template id="ps-copy-review-prompt">{{ page.review.prompt | markdownify }}</template>
+    <template id="ps-copy-review-pass">{{ page.review.pass | markdownify }}</template>
+    <template id="ps-copy-review-fail">{{ page.review.fail | markdownify }}</template>
+    {%- for group in copy %}{% for item in group[1] %}
+    <template id="ps-copy-{{ group[0] }}-{{ item[0] }}">{{ item[1] | markdownify }}</template>
+    {%- endfor %}{% endfor %}
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/account/shared.js"></script>
+    <script src="/puppy-school/course.js"></script>
+</body>
+</html>

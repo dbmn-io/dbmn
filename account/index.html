@@ -44,6 +44,18 @@
                 </div>
             </div>
 
+            <!-- Puppy School progress + the badge collection (rpc get_my_badges). Hidden until it
+                 loads, and stays hidden if the backend does not have it yet. -->
+            <div id="badgeSection" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                    <h3 style="font-size: 0.875rem; color: #a0a0b0; margin: 0;">Puppy School &amp; Badges</h3>
+                    <a id="courseLink" href="/puppy-school/" style="font-size: 0.875rem;">Start Puppy School</a>
+                </div>
+                <p id="courseProgress" style="color: #d0d0e0; margin: 0.5rem 0 0;"></p>
+                <div id="badgeGrid" class="dbmn-badge-grid"></div>
+                <hr class="divider">
+            </div>
+
             <!-- Weekly Usage -->
             <h3 style="font-size: 0.875rem; color: #a0a0b0; margin-bottom: 0.75rem;">This Week</h3>
             <div class="stat-grid">
@@ -148,6 +160,51 @@
             if (hours > 0) return hours + 'h ' + (minutes % 60) + 'm';
             if (minutes > 0) return minutes + 'm ' + (seconds % 60) + 's';
             return seconds + 's';
+        }
+
+        // Puppy School progress and the badge collection. The server decides what is earned;
+        // a locked badge is the same artwork greyed out (.dbmn-badge-locked).
+        async function loadBadges() {
+            try {
+                var result = await dbmnSupabase.rpc('get_my_badges');
+                if (result.error || !result.data) { return; }
+                var art = await fetch('/account/badges.json').then(function(r) { return r.json(); }).catch(function() { return null; });
+                var course = result.data.puppySchool;
+                var link = document.getElementById('courseLink');
+                var progress = document.getElementById('courseProgress');
+                if (course.graduatedAt) {
+                    progress.textContent = 'Puppy School graduate — ' + new Date(course.graduatedAt).toLocaleDateString();
+                    link.textContent = 'Your certificate';
+                    link.href = '/puppy-school/graduation/';
+                } else {
+                    progress.textContent = course.completed.length + ' of ' + course.total + ' lessons passed';
+                    link.textContent = course.completed.length ? 'Continue Puppy School' : 'Start Puppy School';
+                }
+
+                var grid = document.getElementById('badgeGrid');
+                grid.textContent = '';
+                (result.data.badges || []).forEach(function(badge) {
+                    var earned = !!badge.earnedAt;
+                    var item = document.createElement('div');
+                    item.className = 'dbmn-badge' + (earned ? '' : ' dbmn-badge-locked');
+                    item.title = earned
+                        ? badge.name + ' — earned ' + new Date(badge.earnedAt).toLocaleDateString()
+                        : badge.name + ' — ' + badge.description;
+                    var picture = document.createElement('div');
+                    picture.className = 'dbmn-badge-art';
+                    // Our own exported artwork, keyed by badge id — never markup from the API.
+                    picture.innerHTML = art ? ((art.badges[badge.id] && art.badges[badge.id].svg) || art.placeholder || '') : '';
+                    var name = document.createElement('div');
+                    name.className = 'dbmn-badge-name';
+                    name.textContent = badge.name;
+                    item.appendChild(picture);
+                    item.appendChild(name);
+                    grid.appendChild(item);
+                });
+                document.getElementById('badgeSection').style.display = 'block';
+            } catch (e) {
+                console.warn('Badges unavailable:', e);
+            }
         }
 
         document.addEventListener('DOMContentLoaded', async function() {
@@ -304,6 +361,9 @@
                 // Show dashboard
                 document.getElementById('loadingCard').style.display = 'none';
                 document.getElementById('dashboardCard').style.display = 'block';
+
+                // Badges load after the dashboard is up, and never break it.
+                loadBadges();
 
             } catch (err) {
                 console.error('Dashboard load error:', err);

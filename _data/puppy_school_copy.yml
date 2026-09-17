@@ -1,0 +1,24 @@
+# Copy shared by every Puppy School lesson (the "Check My Homework" mechanic and sign-in
+# prompts). Per-lesson pass and fail copy lives in each lesson's front matter.
+# Rendered into <template> elements by _layouts/puppy_school.html.
+checkpoint:
+  button: Check My Homework
+  loading: Checking your homework...
+  loading_sub: Give us a moment while we verify your progress.
+  pass_heading: Good Dog.
+  fail_heading: Not Quite...
+  fail_support: Don't hesitate to reach out to one of our Top Dogs for help — [support@dbmn.io](mailto:support@dbmn.io)
+  fail_button: Return to Lesson
+  error_heading: Oops
+  error_body: Something went wrong checking your progress. Please try again.
+  already: You've already passed this one.
+sign_in:
+  heading: Sign in to check your work
+  body: Reading is free. Checking your homework, the progress bar and your certificate need a free DBMN account.
+widgets:
+  submit_paste: Check my report
+  submit_share: Review my template
+  rate_limited: That's a lot of attempts in an hour. Take a break, re-read the step, and try again shortly.
+  too_large: That's far more than we expected. Filter the table first, then copy it again.
+  bad_request: We couldn't read that. Copy it again from Dobermann and paste the whole thing.
+  error: Something went wrong on our side. Please try again.

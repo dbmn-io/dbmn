@@ -47,8 +47,23 @@ search:
 # Blog
 permalink: /blog/:year/:month/:title/
 
+# Puppy School — the course. Lessons are markdown in _puppy_school/, rendered by
+# _layouts/puppy_school.html at /puppy-school/<slug>/ (landing: /puppy-school/).
+# See _puppy_school/README.md for the rendering contract.
+collections:
+  puppy_school:
+    output: true
+    permalink: /puppy-school/:slug/
+
 # Navigation defaults
 defaults:
+  - scope:
+      path: ""
+      type: puppy_school
+    values:
+      layout: puppy_school
+      # Lesson bodies are full of literal {{template variables}}: Liquid must not touch them.
+      render_with_liquid: false
   - scope:
       path: "docs"
     values:
@@ -69,3 +84,4 @@ exclude:
   - .jekyll-cache
   - .git
   - CLAUDE.md
+  - _puppy_school/README.md

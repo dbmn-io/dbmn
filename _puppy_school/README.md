@@ -3,12 +3,41 @@
 Source of truth for Puppy School lesson content. **Copy lives here; it is not authored in
 `puppy-school/index.html`.**
 
-The intent (see the delivery design) is that this content is rendered twice:
+**Rendered once, on dbmn.io** (decided 2026-09-17). The extension does not render lessons:
+it is a single Hub tab, and a lesson inside it would cover the screens being taught. The
+extension links here, and shows progress and badges in its Account section.
 
-1. **dbmn.io** — the Jekyll site renders these files at `/puppy-school/`
-2. **In the extension** — a Hub tab fetches the same content as JSON and renders it natively
+## How it is rendered
 
-Which is why the content is stored as data rather than as page markup.
+| Piece | Where |
+|---|---|
+| Collection `puppy_school`, `/puppy-school/<slug>/`, Liquid off for lesson bodies | `_config.yml` |
+| The page: header, progress rail, lesson head, checkpoint panel, page data, copy templates | `_layouts/puppy_school.html` |
+| Paste-it-back and share-it-back widgets, swapped in at their markers | `_includes/puppy_school/` |
+| Behaviour: progress, checkpoint, widgets, graduation, certificate | `puppy-school/course.js` |
+| Look | `puppy-school/course.css` (badge grid in `account/shared.css`) |
+| Copy shared by every lesson (checkpoint states, sign-in prompt, widget notices) | `_data/puppy_school_copy.yml` |
+| Reviewer notes can never reach a page: stripped before render, build fails on a leak | `_plugins/puppy_school_guard.rb` |
+| Badge artwork, exported from the extension, served to the raw-HTML pages | `_data/dbmn_badges.json` → `/account/badges.json` |
+
+Rules the layout keeps:
+
+- **Lessons are public.** Anyone can read them. Signing in adds the progress rail, Check My
+  Homework, the two widgets, graduation and the certificate.
+- **Front matter reaches the browser through an explicit allow-list** (`#ps-meta`), never
+  `page | jsonify`. Human-readable copy goes into `<template>` elements instead of JSON,
+  because `{icon:role}` becomes an `<svg>` — right in HTML, fatal in JSON.
+- **The server decides everything.** The page never writes progress, never knows an answer,
+  and never stores what a learner pastes. Text that comes back from the API is set with
+  `textContent`.
+- Markers: `<!-- paste-it-back -->`, `<!-- share-it-back -->`, `<!-- course-cta -->`
+  (landing), `<!-- certificate -->` (graduation).
+
+Run it locally from vs-dbmn: `npm run dev:local`, then http://127.0.0.1:4000/puppy-school/.
+Served from `127.0.0.1` the pages use the local Supabase stack and show a LOCAL ribbon
+(`account/shared.js`). Tests, also in vs-dbmn: `npm run test:e2e:lessons` plays a learner
+through all five lessons from THESE files and measures every number the copy states;
+`npm run test:e2e:course` does the whole course in a browser, to a downloaded certificate.
 
 ## Files
 
@@ -16,7 +45,7 @@ Which is why the content is stored as data rather than as page markup.
 |---|---|
 | `00-landing.md` | Public landing page. Sells the course to signed-out visitors; shows begin/resume to signed-in ones. |
 | `01-first-contact.md` … `05-own-template.md` | The five lessons, in order. |
-| `99-graduation.md` | Completion screen, certificate copy, and the checkpoint copy shared by every lesson. |
+| `99-graduation.md` | Graduation: shown to graduates only. Badges, the certificate, where to go next. |
 
 ## Front matter
 
@@ -131,8 +160,8 @@ Roles used by the lessons so far: `nav-environments`, `nav-api-catalogue`, `nav-
 ## Jekyll gotcha
 
 Lesson bodies contain `{{template variables}}`, which collide with Liquid. `_config.yml`
-sets `render_with_liquid: false` for `docs/` only — **the same scope rule has to be added
-for this collection** before it is rendered, or Jekyll will eat the variables.
+sets `render_with_liquid: false` for this collection, as it does for `docs/`. Keep it: the
+browser test asserts `{{gtin}}` reaches the page literally.
 
 ## Known dependencies
 
@@ -163,8 +192,14 @@ Backend — `supabase db push`, then `supabase functions deploy playground --no-
   (Lesson 4 Bonus Credit's `locationGln`), `POST /course/verify/lesson_4`,
   `POST /course/review/lesson_5`, and reference-data errors that name the missing value.
 
-All of the above has run end to end on a local Supabase stack
-(`node scripts/e2e-playground-local.mjs` in vs-dbmn). None of it is deployed.
+- `20260917000007_badges.sql` — the badge catalogue, server-side awards, `get_my_badges()`,
+  and the private certificate (`issue_my_certificate`).
+- `20260917000008_backfill_lesson_completions.sql` — carries learners who passed lessons on
+  the old page across. **Deploy before this site**, or they show 0 of 5.
+
+All of the above has run end to end on a local Supabase stack (vs-dbmn:
+`npm run test:e2e:backend`, `test:e2e:lessons`, `test:e2e:course`). None of it is deployed.
+Deploy order: migrations, then the playground function, then merge this branch.
 
 Extension — a release containing:
 
@@ -175,7 +210,7 @@ Extension — a release containing:
 Still open:
 
 - **Lesson 1** links a starter `.dbmn.zip` that does not exist yet.
-- **The page.** `puppy-school/index.html` still renders the old three hard-coded lessons.
-  Nothing renders these files, the share-it-back thread or the paste box yet.
-- **Row counts in Lesson 4** were measured on one learner's data. Re-measure on a stack
-  with the full Lesson 2 and 3 loads before publishing.
+- **Badge artwork** is a placeholder rosette until the real designs land
+  (`src/webviews/shared/badges.js` in vs-dbmn, then `npm run docs:icons`).
+- **Most users have no profile name** (nothing creates `user_profiles` rows since the
+  questionnaire was retired), so the certificate name box usually starts empty.
