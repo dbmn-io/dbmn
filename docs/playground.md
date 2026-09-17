@@ -153,7 +153,7 @@ Upload inventory records in bulk. Accepts an array of items — ideal for demons
 ### Inventory — List with Pagination (GET)
 {: #inventory-list }
 
-Paginated inventory listing. Configure this endpoint to demonstrate Dobermann's pagination feature. Responses include nested `location` and `product` reference objects.
+Paginated inventory listing. Configure this endpoint to demonstrate Dobermann's pagination feature. Responses include nested `location` and `product` reference objects. Each `product` carries its `reorderQty`, a `supplierSku` (blank for some suppliers) and a nested `supplier` with `gln` and `name` — two levels down, which makes it a good subject for a [Named View](/docs/named-views/).
 
 ```javascript
 // Name: Puppy School — List Inventory
@@ -230,10 +230,12 @@ Paginated inventory listing. Configure this endpoint to demonstrate Dobermann's 
 }
 ```
 
+Dobermann starts a new order each time **any header field** changes — see [how rows become requests](/docs/batch-preparation/#nested-grouping) — and folds the matching rows into that order's `lines`. Optional fields the API also accepts: `supplierGln` and `buyerGln` on the header (send them and the response resolves the full trading partner), `requestedDeliveryDate` on the header, and `supplierSku` on a line.
+
 ### Purchase Orders — List with Pagination (GET)
 {: #po-list }
 
-Responses include nested `buyer` and `supplier` reference objects from the trading partners table.
+Responses include nested `buyer` and `supplier` reference objects from the trading partners table, and each order's `lines`.
 
 ```javascript
 // Name: Puppy School — List Purchase Orders
@@ -520,6 +522,7 @@ Add query parameters to filter and sort:
 | Parameter | Example | Description |
 |-----------|---------|-------------|
 | `status` | `?status=active` | Filter by status |
+| any field | `?locationGln=0614141000012` | Exact match on any field of the resource, named as it appears in the response |
 | `sort` | `?sort=created_at` | Sort field |
 | `order` | `?order=asc` | Sort direction (`asc` or `desc`) |
 
@@ -549,6 +552,8 @@ The playground handles concurrent requests well. When running batch uploads:
 | **Data TTL** | 48 hours (your data auto-purges; seed data is permanent) |
 
 Use the [Stats](#stats) endpoint to check your current usage. Use [Reset](#reset) to clear all your data immediately.
+
+**No licence needed.** Against the Training Ground, every signed-in user gets Dobermann at full power — unlimited batches, up to 16 concurrent requests, unlimited pages and **Fetch all pages** — whether or not you have a licence or a trial. The limits above are the only ones.
 
 ---
 
