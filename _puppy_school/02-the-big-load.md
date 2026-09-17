@@ -23,9 +23,10 @@ project, usually with no warning and a deadline attached.
 
 ## Step 2 — Create the Upload Endpoint
 
-Create a new endpoint. Copy the template below, then click **Paste**.
+Copy the template below, then in the Hub open {icon:nav-api-catalogue} **API Catalogue**
+and click {icon:paste-endpoint} **Paste Endpoint** — the same button you used in Lesson 1.
 
-```
+```json
 // Name: Puppy School — Bulk Inventory Upload
 // Method: POST
 // Path: /inventory
@@ -57,18 +58,25 @@ you'd like.
 
 Never point a batch at a file until you've watched a single record land.
 
-Save the endpoint. Notice the footer button now reads **Run Batch** — it changed from
-**Run API** the moment the body gained template variables. Click it. In **Load Data**, click
-**Enter Data**: Dobermann builds an empty grid with one column per variable in your template.
+Save the endpoint. The footer now shows two buttons, **Run API** and **Run Batch** — in the
+API Catalogue they're the {icon:run-api} and {icon:run-batch} icons on the endpoint's row.
+**Run Batch** drives the template from a file. **Run API** asks you for each value, one
+field per `{{variable}}`.
 
-Type one row:
+Click **Run API**. A form opens with eight fields. Don't type them — copy this, then click
+{icon:paste-row} **Paste** at the bottom of the form:
 
-| gtin | sku | description | locationGln | locationName | quantityOnHand | uom | status |
-|---|---|---|---|---|---|---|---|
-| `00012345600012` | `SKU-PUPPY-001` | `Premium Belly Rub Machine` | `0614141000012` | `Golden Retriever Distribution Center` | `12` | `EA` | `active` |
+```csv
+gtin,sku,description,locationGln,locationName,quantityOnHand,uom,status
+00012345600012,SKU-PUPPY-001,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,12,EA,active
+```
 
-Both codes are real — you saw them in Lesson 1's products and locations. Click **Next**,
-glance at the generated JSON, then **Execute**.
+Dobermann reads the header row, matches each column to its variable, and fills the whole
+form from the data row. A row copied straight out of Excel works the same way, and so does
+Ctrl+V in any field. Both codes are real — you saw them in Lesson 1's products and
+locations.
+
+Check the fields, then click **Run**.
 
 One request, one record, one row in the **Completed** tab, with the `id` the API gave it.
 Now you know the endpoint, the template and the API agree with each other. Everything from
@@ -76,32 +84,38 @@ here is the same thing, more times.
 
 ## Step 4 — Load Your Data
 
-Click **Run Batch** again. This time, in **Load Data**, upload `inventory-67k.csv`.
+Click **Run Batch**. In **Load Data**, drop `inventory-67k.csv` onto the upload area and
+click **Import Data**.
 
 Dobermann maps the CSV columns to your template variables automatically where the names
-match — which, here, they all do. Click through to **Review JSON** and look at the generated
-request. One record, wrapped in an array, exactly as the endpoint expects — the same shape
-you just typed by hand.
+match — which, here, they all do. Click **Next** through to **Review JSON** and look at the
+generated request. One record, wrapped in an array, exactly as the endpoint expects — the
+same shape you just ran by hand.
 
 ## Step 5 — Run It the Slow Way
 
-Set **Threads** to `4` and hit **Run**.
+Click **Next** once more, to **Execute Batch**. Set **Processing Mode** to
+`4 concurrent requests` and hit **Execute**.
 
 Watch the counter. Every single record is going out as its own HTTP request — 67,000 of
 them, four at a time. It works. It is also the single most common way people misuse a batch
 tool, and it is worth seeing with your own eyes.
 
-Let it run for about thirty seconds, then hit **Pause**. You've made your point, and so has it.
+Let it run for about thirty seconds, then hit **Pause**. You've made your point, and so has
+it. (The paused batch stays in {icon:nav-history} **History**. Leave it — you're about to
+run the whole file properly.)
 
 ## Step 6 — One Request, A Thousand Records
 
-Go back to **Review JSON**. Select the array in your template, and set **Reps** to `1000`.
+Click **Run Batch** again and load the same file. This time, at **Review JSON**, pick the
+array in the **Array:** dropdown and set **Reps:** to `1000`.
 
-Look at what happens to the estimate above the button. The same 67,000 records now go out
+Look at what happens to the **Total API calls** figure. The same 67,000 records now go out
 as **67 requests** instead of 67,000 — because each request carries a thousand records in
 its array instead of one.
 
-Set **Threads** to `16` and run it.
+At **Execute Batch**, set **Processing Mode** to `16 concurrent requests` and hit
+**Execute**.
 
 That's the whole file, done, while you were reading this sentence.
 
@@ -109,7 +123,7 @@ Two separate dials, and most people only ever find the first one:
 
 | Dial | What it changes |
 |---|---|
-| **Threads** | How many requests are in flight at the same time |
+| **Processing Mode** — threads | How many requests are in flight at the same time |
 | **Reps** | How many records ride inside each request |
 
 Threads make you faster. Reps make you *smaller* — fewer connections, less overhead, less
@@ -122,10 +136,16 @@ complaining.
 
 > **Need to start over?**
 >
-> Your Training Ground data is yours alone, and you can wipe it whenever you like — create
-> an endpoint with method `DELETE` and path `/my-data`, and run it. Everything you've loaded
-> disappears; the shared reference data stays. Handy if you want to re-run a lesson from
-> clean.
+> Your Training Ground data is yours alone, and you can wipe it whenever you like. Paste
+> this as a new endpoint and run it: everything you've loaded disappears, and the shared
+> reference data stays. Handy if you want to re-run a lesson from clean.
+>
+> ```json
+> // Name: Reset My Data
+> // Method: DELETE
+> // Path: /my-data
+> // Description: Deletes everything you have loaded into the Training Ground
+> ```
 
 > **🐾 Dobermann Philosophy**
 >

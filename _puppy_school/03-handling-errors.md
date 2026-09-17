@@ -28,31 +28,34 @@ like the first time you load it, and finding those ten rows is the entire skill.
 
 ## Step 2 — Run the Upload
 
-Use the **Puppy School — Bulk Inventory Upload** endpoint you built in Lesson 2. Load the
-error CSV and run the batch.
+Use the **Puppy School — Bulk Inventory Upload** endpoint you built in Lesson 2. Click
+**Run Batch** and load the error CSV.
 
 Two settings to check before you run:
 
-- Set **Reps** back to `1`. With a thousand records per request, one bad record takes the
-  whole request down with it — and right now you want to know exactly which rows failed, not
-  lose 999 good ones alongside each bad one. Worth remembering as a rule: big Reps for speed,
-  small Reps for precision.
-- Set **Error Tolerance** to **Continue on all errors**. Otherwise the batch stops at the
-  first failure and you'll see one error instead of ten.
+- At **Review JSON**, set **Reps:** back to `1`. With a thousand records per request, one
+  bad record takes the whole request down with it — and right now you want to know exactly
+  which rows failed, not lose 999 good ones alongside each bad one. Worth remembering as a
+  rule: big Reps for speed, small Reps for precision.
+- At **Execute Batch**, check **Error Handling** is on **Continue processing** — it is by
+  default. **Stop on first error** would show you one error instead of ten.
 
-Run it. Ten records fail out of a thousand. That's the point.
+Hit **Execute**. Ten records fail out of a thousand. That's the point.
 
 ## Step 3 — Inspect the Errors
 
-Open the batch results and switch to the **Errors** tab. Dobermann tells you which rows
-failed and exactly why:
+In the Console, switch to the **Error** tab. Dobermann tells you which rows failed and
+exactly why:
 
 ```json
 {
-  "error": "Invalid reference value.",
+  "error": "Invalid reference value: Key (gtin)=(99999999999999) is not present in table \"playground_products\". Use GET /reference/<type> to see valid values.",
   "code": "FK_VIOLATION"
 }
 ```
+
+Read the message, not just the code. It names the column and the value that's missing —
+which is exactly what you'll need in Step 4.
 
 Ten failures, and they split evenly into two kinds — which is the distinction that matters
 most in this entire course:
@@ -76,7 +79,7 @@ reference tables, so you can add, break and fix freely without affecting anyone 
 
 Start with one product. Create a new endpoint:
 
-```
+```json
 // Name: Add Missing Product
 // Method: POST
 // Path: /reference/products
@@ -90,7 +93,8 @@ Start with one product. Create a new endpoint:
 }
 ```
 
-Run it. You've just created a product in the reference table through the API.
+Save it and hit **Run API**. You've just created a product in the reference table through
+the API.
 
 ## Step 5 — Turn a Single Request Into a Batch
 
@@ -99,32 +103,33 @@ the one you have.
 
 Open **Add Missing Product**. Put your cursor on the `"gtin"` line and press **Ctrl+M**:
 
-```
-"gtin": "{{gtin}}", //99999999999999
+```json
+"gtin": "{{gtin:string}}", //99999999999999
 ```
 
-Dobermann has replaced the hardcoded value with a template variable, inferred the variable
-name from the key, and preserved the original value in a comment so you don't lose it.
+Dobermann has replaced the hardcoded value with a template variable, named it from the key,
+typed it from the value, and preserved the original in a comment so you don't lose it.
 
 Do the same for every line. Your body becomes:
 
-```
+```json
 {
-  "gtin": "{{gtin}}", //99999999999999
-  "sku": "{{sku}}", //SKU-FIX-001
-  "description": "{{description}}", //Invisible Cat Repellent
-  "unitPrice": "{{unitPrice:number}}", //9.99
+  "gtin": "{{gtin:string}}", //99999999999999
+  "sku": "{{sku:string}}", //SKU-FIX-001
+  "description": "{{description:string}}", //Invisible Cat Repellent
+  "unitPrice": "{{unitPrice:number}}" //9.99
 }
 ```
 
 Notice it worked out `unitPrice:number` on its own, from the fact the value was numeric.
 
-Your static endpoint is now a batch template — the **Run** button has become **Run Batch**.
+Your static endpoint is now a batch template — the footer has grown a **Run Batch** button
+beside **Run API**.
 
-Copy the CSV below, then press **Ctrl+M** in the Batch Preparation view to paste it straight
-in without saving a file:
+Save, click **Run Batch**, and in **Load Data** switch to the **Paste Text** tab. Copy the
+CSV below, paste it in, and click **Import Data** — no file needed:
 
-```
+```csv
 gtin,sku,description,unitPrice
 00000000000000,SKU-FIX-002,Quantum Fetch Ball,14.99
 11111111111111,SKU-FIX-003,Self-Walking Leash,29.99
@@ -135,7 +140,7 @@ Run the batch. Three products, one execution.
 
 Now the missing locations. Same pattern — new endpoint:
 
-```
+```json
 // Name: Add Missing Location
 // Method: POST
 // Path: /reference/locations
@@ -147,9 +152,9 @@ Now the missing locations. Same pattern — new endpoint:
 }
 ```
 
-Convert each line with **Ctrl+M**, then paste this CSV with **Ctrl+M** in Batch Preparation:
+Convert each line with **Ctrl+M**, save, then **Run Batch** → **Paste Text** with this CSV:
 
-```
+```csv
 gln,name
 9999999999999,Mystery Warehouse
 0000000000000,Nonexistent Depot
@@ -163,7 +168,8 @@ moment you replace its hardcoded values with `{{variables}}`.
 
 ## Step 6 — Reprocess the Failures
 
-Go back to your failed inventory batch. Select the failed records and hit **Reprocess**.
+Open {icon:nav-history} **History** and open the failed inventory batch. In the Console
+footer click **Reprocess**, choose **Errors only**, and **Continue**.
 
 Five clear. The products and locations they were pointing at now exist, so the records go
 through untouched.

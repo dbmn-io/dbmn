@@ -11,7 +11,7 @@ subtitle: Learn Dobermann on a live API. Free, hands-on, about an hour.
 
 Puppy School is a free, hands-on course that takes you from your first API request to
 building your own data loaders. You work in Dobermann itself against The Training Ground:
-a live REST sandbox with master data, foreign key validation, so you can stretch your legs, and learn what true speed is, risk free.
+a live REST sandbox with master data, foreign key validation and a few other tricks so you can stretch your legs, and learn what true speed is, risk free.
 
 ## What you'll learn
 
@@ -34,15 +34,11 @@ records in any shape it expects, deal with the failures that always happen, and 
 - **A free DBMN account** — that's the sign-in button below
 - **About an hour**, though the course remembers where you got to, so it doesn't have to be in one sitting
 
-You don't need an API of your own, a licence, or a credit card. The Training Ground is
-included, and every lesson is free.
+You don't need an API of your own, a licence, or a credit card. Your personal Training Ground is included, and every lesson is free.
 
 ## How it works
 
-Each lesson is a short set of steps you carry out in Dobermann. At the end you hit
-**Check My Homework** and we look at what actually landed on the API — not what you say
-you did. Pass, and the next lesson unlocks. Miss something, and we tell you exactly what's
-still outstanding.
+Each lesson is a short set of steps you carry out in Dobermann. At the end you hit **Check My Homework** and we look at what actually landed on the API — not what you say you did. Pass, and the next lesson unlocks. Miss something, and we tell you exactly what's still outstanding.
 
 Finish all five and you graduate, with a certificate to prove it.
 

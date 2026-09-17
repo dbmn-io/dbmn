@@ -19,14 +19,15 @@ Click the Dobermann icon in your VS Code activity bar.
 
 Not installed yet? [Get it from the VS Code Marketplace.](https://marketplace.visualstudio.com/items?itemName=dbmn.dobermann)
 
-Sign in with the same account you used to get here. Once you're in, you're ready.
+Sign in with the same account you used to get here. No account yet? Open {icon:nav-account}
+**Account** in the Hub and register there — it takes a minute. Once you're in, you're ready.
 
 ## Step 2 — Create Your Environment
 
 An **environment** is where an API lives — its address and how you authenticate against it.
 Set it up once, and every endpoint you build inside it inherits both.
 
-In Dobermann, go to **Environments** and create a new one:
+In the Hub, open {icon:nav-environments} **Environments** and add a new one:
 
 | Field | Value |
 |---|---|
@@ -37,6 +38,15 @@ In Dobermann, go to **Environments** and create a new one:
 No tokens to copy. No headers to configure by hand. Dobermann injects your authentication
 automatically at runtime, across every endpoint in this environment.
 
+One more setting while you're here. Under **Execution Settings**, tick **Enable parallel
+batch processing** and set **Max Concurrency** to **Extreme Parallel — 16 concurrent
+requests**. You'll find out why in Lesson 2.
+
+Click **Save Environment**. Then tell Dobermann to use it: at the top of the Hub, click the
+environment selector {icon:env-switcher} — it reads `No environment` until you've picked
+one — and choose `DBMN Puppy School`. Whatever that selector shows is where every request
+you run will go.
+
 > **In a hurry?**
 >
 > You can [download the starter file](/puppy-school/files/puppy-school-starter.dbmn.zip)
@@ -46,23 +56,29 @@ automatically at runtime, across every endpoint in this environment.
 
 ## Step 3 — Your First Request
 
-Copy the template below, then click **Paste**  option on the New Endpoint menu in Dobermann (do we need a screen shot here??) 
+Copy the template below. Then, in the Hub, open {icon:nav-api-catalogue} **API Catalogue**
+and click {icon:paste-endpoint} **Paste Endpoint** — the clipboard button beside
+{icon:add-endpoint} **Add Endpoint**. Dobermann reads the clipboard and fills in the name,
+method and path for you. (Ctrl+V on any new, unsaved endpoint does the same.)
 
-```
+```json
 // Name: Get Carriers
 // Method: GET
 // Path: /reference/carriers
 ```
 
-Hit **Run**. The Console opens automatically with your results.
+Save it, then hit **Run API**. A Console tab opens by itself, and — all being well — your
+results are waiting in its **Completed** tab.
 
 ## Step 4 — Reading the Console
 
 The Console is where every response lands. It has several tabs — let's walk through the
 ones that matter right now.
 
-**The Completed tab** shows your successful responses as a structured data table. It should
-open by default with your carrier data. If you don't directly see the data you expect at this point, it could be because the data you want to see is "nested" within the JSON response. 
+**The Completed tab** shows your successful responses as a table. It should open with one
+row per carrier — SCAC codes, names, breeds, mottos — sortable and searchable. That's worth
+a second look, because the API didn't send a table. It sent this, with the records "nested"
+inside it:
 
 ```json
 {
@@ -77,39 +93,46 @@ open by default with your carrier data. If you don't directly see the data you e
 }
 ```
 
-The carrier records are inside that `data` array. If you see only "data" we will need to ((we have by default expand data, and set as root. we could also put a link to "View Manager" here for people wanting to skip ahead. we must talk about view manager here a LITTLE bit.)) The table
-re-renders instantly with each carrier as its own row — SCAC codes, names, breeds, mottos —
-sortable and searchable.
+The carrier records are inside the `data` array, and Dobermann spotted that and made each
+one a row. When it can't guess — or guesses wrong — you'll see a single row with a
+`▸ N records` cell instead. Expand it and click **Set as Row**, and that array becomes the
+rows. The choice is saved on the endpoint's **View**, so every future run of this endpoint
+opens the same way. Views get a whole step of their own in Lesson 4; impatient puppies can
+read [Named Views](/docs/named-views/) now.
 
-**The RAW tab** shows the full HTTP conversation: the exact request sent and the complete
+**The Raw tab** shows the full HTTP conversation: the exact request sent and the complete
 response received, syntax-highlighted. Click it now and have a look. This is where you go
-when you need to know what actually went over the wire. Toggle the **Request** and
-**Response** checkboxes to show or hide each half.
+when you need to know what actually went over the wire. Click {icon:filters} **Filters** to
+show or hide the **Request** and **Response** halves. Each call's execution log is here as
+well, for the day something misbehaves.
 
 ## Step 5 — Explore the Reference Data
 
-Create an endpoint for each of the following. Copy each template, use the new from clipboard, save, then hit **Run**.
+Create an endpoint for each of the following. Copy each template, click
+{icon:paste-endpoint} **Paste Endpoint** in the API Catalogue, save, then hit **Run API**.
 
-```
+```json
 // Name: Get Locations
 // Method: GET
 // Path: /reference/locations
 ```
 
-```
+```json
 // Name: Get Products
 // Method: GET
 // Path: /reference/products
 ```
 
-```
+```json
 // Name: Get Trading Partners
 // Method: GET
 // Path: /reference/trading-partners
 ```
 
-For each one, use what you just learned: **Completed** tab, expand the `data` field,
-and **Set as Root**. This updates the current **View**, and will default for every API call made in future. Views are covered in detail in section ((linkto section, and another link)). for impatient puppies, click here for dbmn docs
+For each one, use what you just learned: check the **Completed** tab shows one row per
+record, and if it doesn't, expand `data` and click **Set as Row**. That updates the
+endpoint's **View**, and it sticks for every run from now on. Lesson 4 builds a view from
+scratch; the reference is [Named Views](/docs/named-views/).
 
 These four are your master data — carriers, warehouses, products and trading partners.
 You'll reference them throughout Puppy School, and they behave exactly like the lookup
@@ -122,9 +145,8 @@ see everything The Training Ground offers.
 > **🐾 Dobermann Philosophy**
 >
 > Authentication should be configured once and forgotten. In Dobermann, auth lives at the
-> environment level — every endpoint in that environment inherits it automatically. If your
-> session expires, Dobermann tells you before execution begins, not halfway through a large
-> batch run.
+> environment level — every API request executed while connected to an environment inherits it automatically. If your
+> session expires, Dobermann will take you through the login process, then execute your request automatically as soon as you are authenticated.
 
 > **🦴 Dig Deeper**
 >

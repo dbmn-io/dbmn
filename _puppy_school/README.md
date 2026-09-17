@@ -55,20 +55,75 @@ The rules themselves live server-side, keyed by `lesson_id` — see
 `docs/playground/share-it-back-brief.md` in vs-dbmn. A passing review is what the
 checkpoint consumes; the page never writes progress itself.
 
+Lessons that check something the learner *produced* carry a `verify` block and a
+`<!-- paste-it-back -->` marker (Lesson 4: the filtered report, copied from the Console):
+
+```yaml
+verify:
+  endpoint: /course/verify/lesson_4   # POSTed to the Training Ground API as { "paste": "…" }
+  prompt: DBMN's line above the paste box
+  pass: Shown on a 200
+  fail: Shown on a 422, above the findings the API returns
+```
+
+The page is a text box and a button, nothing more. It POSTs what was pasted, with the
+learner's DBMN session, to `<playground base URL><endpoint>` and renders `findings[].message`
+from the response. **The answers never reach the page**: the rules live in
+`supabase/functions/playground/course-verify.ts` in vs-dbmn, the expected row count is
+computed from the learner's own data at request time, and the findings are worded to say
+what's wrong without saying what's right. Keep it that way — no expected values in front
+matter, copy, data attributes or scripts. Nothing pasted is stored; the function logs only
+the outcome, and `check_lesson_completion` reads that.
+
 ## Body conventions
 
 The renderers rely on these, so keep to them:
 
 - `## Step N — Title` starts a step. Everything up to the next `##` belongs to it.
+- `## Bonus Credit — Title` is an optional section after the last step. It is never part of
+  the checkpoint and should render visibly as extra — for things that are true and useful
+  but aren't Dobermann itself (Lesson 4's API-side filtering is the model). The main steps
+  teach the product; bonus credit teaches the habit around it.
 - Prose above the first `## Step` is lesson intro copy.
 - **Every fenced code block gets a Copy button.** Don't fence anything you don't want copied.
 - Blockquotes starting `> **🐾 Dobermann Philosophy**` or `> **🦴 Dig Deeper**` render as
   callouts at the foot of the lesson. Any other blockquote renders as an inline aside.
 - `<!-- share-it-back -->` is replaced by the share-it-back thread (lessons with a `review`
   block only). HTML comment so Liquid and both renderers pass it through.
+- `<!-- paste-it-back -->` is replaced by the paste box (lessons with a `verify` block only).
+- **Fence tags:** `json` for anything JSON-shaped — endpoint templates included, they're
+  JSONC — `csv` for CSV, `text` for everything else (search expressions, this file's token
+  examples). Never an untagged fence, never `JSON`.
 - Support address is `support@dbmn.io` — every fail screen and the graduation page use it.
 - Tables render as-is.
 - `note_to_reviewer` in front matter is internal — it must never reach a renderer.
+- **Icons are written as `{icon:<role>}`**, never as an image or an icon name — see below.
+
+## Icons
+
+When a step says "click the paste button", the lesson shows the button's icon inline so
+the learner can find it. The token names the button's *function*, not its picture:
+
+```text
+open {icon:nav-api-catalogue} **API Catalogue**, then click {icon:paste-endpoint}
+```
+
+The roles and their SVGs are owned by the extension — `ICON_ROLES` in vs-dbmn
+`src/webviews/shared/icons.js` — and exported here as `_data/dbmn_icons.json` by
+`npm run docs:icons` in vs-dbmn (automatically on every release). If the product changes
+the icon it draws for "paste endpoint", the next export changes it on every page that
+says `{icon:paste-endpoint}`. Nothing in this folder needs editing.
+
+- dbmn.io: `_plugins/dbmn_icons.rb` replaces the token after render (works with
+  `render_with_liquid: false`); `.dbmn-icon` in `css/brand.css` sizes it to the text.
+- Extension Hub renderer: `window.Icons.roleIcon(role)` returns the same SVG.
+- Unknown role → the token is left visible and the build logs a warning. Add the role to
+  `ICON_ROLES` in vs-dbmn (a unit test pins each role to the control that draws it) and
+  re-export.
+
+Roles used by the lessons so far: `nav-environments`, `nav-api-catalogue`, `nav-history`,
+`nav-account`, `env-switcher`, `add-endpoint`, `paste-endpoint`, `paste-row`, `run-api`,
+`run-batch`, `add-query-param`, `filters`.
 
 ## Jekyll gotcha
 
@@ -78,15 +133,36 @@ for this collection** before it is rendered, or Jekyll will eat the variables.
 
 ## Known dependencies
 
-Copy here describes behaviour that the backend phase delivers. Until those land:
+The copy describes behaviour that is written but not all released. As of 2026-09-17 the
+course needs **all** of these before it is published. Everything in vs-dbmn is on branch
+`worktree-run-api-row-paste`.
+
+Backend — `supabase db push`, then `supabase functions deploy playground --no-verify-jwt`:
+
+- `20260917000001_open_environments.sql` — no licence gate on the Training Ground. Lessons
+  2, 3 and 4 use full-licence features (more than five batches a week, 16 concurrent
+  requests, more than three pages, **Fetch all pages**).
+- `20260917000002_playground_product_suppliers.sql` — every product gets a supplier, a
+  reorder quantity and a sometimes-blank supplier part number. Lessons 4 and 5.
+- `20260917000003_puppy_school_lessons_3_4_5.sql` — `check_lesson_completion` for all five
+  lessons; Lesson 2's threshold becomes the 60,000 the copy states. `lesson_2_1` is still
+  accepted as `lesson_3`; stored progress ids are **not** migrated yet — do that in the
+  release that switches the page to these files.
+- The playground function: `product.supplier` / `reorderQty` / `supplierSku` on inventory,
+  `lines` on the purchase-order list (Lesson 5 Steps 1 and 7), camelCase filter keys
+  (Lesson 4 Bonus Credit's `locationGln`), and `POST /course/verify/lesson_4`.
+
+Extension — a release containing:
+
+- Run API row paste, issue #302 (Lesson 2 Step 3, Lesson 5 Step 4).
+- `|opt` omitting keys in **nested** templates. Before the fix a blank part number goes out
+  as `""`, and Lesson 5 Step 6's "no `supplierSku` key at all" is false.
+
+Still open:
 
 - **Lesson 3** tells the learner their reference data is theirs alone. True only once
-  reference rows are user-scoped.
-- **Lesson 4** completes on an export. Requires the extension to record exports as
-  telemetry (`recordExport()` is implemented but never called) and to flush promptly.
+  reference rows are user-scoped; until then the second learner's error file stops erroring.
 - **Lesson 1** links a starter `.dbmn.zip` that does not exist yet.
-- **Lesson 2** states a 60,000 record threshold; the deployed RPC currently checks 67,000.
-- **Lesson 4** uses `locationGln` as a query-param filter. The playground currently passes
-  filter keys straight to PostgREST (`parsePagination` → `.eq(key, value)`), so only the
-  snake_case column name `location_gln` works today. The backend phase should camelCase-map
-  filter keys — the API responds in camelCase, so accepting snake_case only is a wart.
+- **The page.** `puppy-school/index.html` still renders the old three hard-coded lessons.
+  Nothing renders these files, the share-it-back thread or the paste box yet.
+- **Share-it-back** (Lesson 5) has a brief but no server: `docs/playground/share-it-back-brief.md`.
