@@ -76,8 +76,7 @@
     <script>
         // Build the emailRedirectTo URL, preserving ?redirect=vscode if present
         function buildRedirectUrl() {
-            var base = 'https://dbmn.io/account/auth-callback.html';
-            return isVSCodeRedirect() ? (base + '?redirect=vscode') : base;
+            return buildAuthCallbackUrl();
         }
 
         // Toggle between magic link and password forms

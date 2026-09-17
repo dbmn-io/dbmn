@@ -502,3 +502,21 @@ footer a {
 footer a:hover {
     border-color: var(--brand-text);
 }
+
+/* Shown on every page when the site is served from 127.0.0.1 / localhost and therefore
+ * talking to the LOCAL Supabase stack (see shared.js). Never rendered on dbmn.io. */
+.dbmn-local-ribbon {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    padding: 2px 14px;
+    border-radius: 0 0 8px 8px;
+    background: #f2b632;
+    color: #1a1a2e;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    pointer-events: none;
+}

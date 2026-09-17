@@ -112,7 +112,8 @@
                 return;
             }
 
-            window.location.href = '/account/index.html';
+            // Back to where sign-in was asked for (e.g. /puppy-school/), same-site paths only.
+            window.location.href = getReturnPath();
         });
     </script>
 </body>

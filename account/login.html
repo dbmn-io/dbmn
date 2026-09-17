@@ -74,8 +74,7 @@
     <script>
         // Build the emailRedirectTo URL, preserving ?redirect=vscode if present
         function buildRedirectUrl() {
-            var base = 'https://dbmn.io/account/auth-callback.html';
-            return isVSCodeRedirect() ? (base + '?redirect=vscode') : base;
+            return buildAuthCallbackUrl();
         }
 
         function showMagicLinkForm() {
@@ -96,6 +95,13 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             initSupabase();
+
+            // Opened from the extension or from Puppy School with the email known: one click.
+            var emailHint = takeEmailHint();
+            if (emailHint) {
+                document.getElementById('magicEmail').value = emailHint;
+                document.getElementById('email').value = emailHint;
+            }
 
             document.getElementById('usePasswordLink').addEventListener('click', function(e) {
                 e.preventDefault();
@@ -191,9 +197,8 @@
                         return;
                     }
 
-                    var params = new URLSearchParams(window.location.search);
-                    var returnUrl = params.get('return');
-                    window.location.href = returnUrl || '/account/index.html';
+                    // Same-site paths only — see safeReturnPath() in shared.js.
+                    window.location.href = getReturnPath();
 
                 } catch (err) {
                     showAlert('alert', 'Sign-in failed: ' + err.message, 'error');

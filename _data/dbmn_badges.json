@@ -1,0 +1,31 @@
+{
+  "_generated": "by vs-dbmn scripts/export-icons.js — do not edit; run `npm run docs:icons` in vs-dbmn",
+  "source": "src/webviews/shared/badges.js",
+  "placeholder": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" role=\"img\" aria-hidden=\"true\"><path d=\"M22 38 14 60l10-5 6 9 6-20z\" fill=\"#0b5cad\"/><path d=\"M42 38l8 22-10-5-6 9-6-20z\" fill=\"#0078d4\"/><circle cx=\"32\" cy=\"26\" r=\"22\" fill=\"#f2b632\"/><circle cx=\"32\" cy=\"26\" r=\"16\" fill=\"#ffd978\"/><path d=\"M32 15l3.4 6.9 7.6 1.1-5.5 5.4 1.3 7.6-6.8-3.6-6.8 3.6 1.3-7.6-5.5-5.4 7.6-1.1z\" fill=\"#c8860b\"/></svg>",
+  "badges": {
+    "ps_graduate": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" role=\"img\" aria-hidden=\"true\"><path d=\"M22 38 14 60l10-5 6 9 6-20z\" fill=\"#0b5cad\"/><path d=\"M42 38l8 22-10-5-6 9-6-20z\" fill=\"#0078d4\"/><circle cx=\"32\" cy=\"26\" r=\"22\" fill=\"#f2b632\"/><circle cx=\"32\" cy=\"26\" r=\"16\" fill=\"#ffd978\"/><path d=\"M32 15l3.4 6.9 7.6 1.1-5.5 5.4 1.3 7.6-6.8-3.6-6.8 3.6 1.3-7.6-5.5-5.4 7.6-1.1z\" fill=\"#c8860b\"/></svg>",
+      "placeholder": true
+    },
+    "ps_lesson_1": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" role=\"img\" aria-hidden=\"true\"><path d=\"M22 38 14 60l10-5 6 9 6-20z\" fill=\"#0b5cad\"/><path d=\"M42 38l8 22-10-5-6 9-6-20z\" fill=\"#0078d4\"/><circle cx=\"32\" cy=\"26\" r=\"22\" fill=\"#f2b632\"/><circle cx=\"32\" cy=\"26\" r=\"16\" fill=\"#ffd978\"/><path d=\"M32 15l3.4 6.9 7.6 1.1-5.5 5.4 1.3 7.6-6.8-3.6-6.8 3.6 1.3-7.6-5.5-5.4 7.6-1.1z\" fill=\"#c8860b\"/></svg>",
+      "placeholder": true
+    },
+    "ps_lesson_2": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" role=\"img\" aria-hidden=\"true\"><path d=\"M22 38 14 60l10-5 6 9 6-20z\" fill=\"#0b5cad\"/><path d=\"M42 38l8 22-10-5-6 9-6-20z\" fill=\"#0078d4\"/><circle cx=\"32\" cy=\"26\" r=\"22\" fill=\"#f2b632\"/><circle cx=\"32\" cy=\"26\" r=\"16\" fill=\"#ffd978\"/><path d=\"M32 15l3.4 6.9 7.6 1.1-5.5 5.4 1.3 7.6-6.8-3.6-6.8 3.6 1.3-7.6-5.5-5.4 7.6-1.1z\" fill=\"#c8860b\"/></svg>",
+      "placeholder": true
+    },
+    "ps_lesson_3": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" role=\"img\" aria-hidden=\"true\"><path d=\"M22 38 14 60l10-5 6 9 6-20z\" fill=\"#0b5cad\"/><path d=\"M42 38l8 22-10-5-6 9-6-20z\" fill=\"#0078d4\"/><circle cx=\"32\" cy=\"26\" r=\"22\" fill=\"#f2b632\"/><circle cx=\"32\" cy=\"26\" r=\"16\" fill=\"#ffd978\"/><path d=\"M32 15l3.4 6.9 7.6 1.1-5.5 5.4 1.3 7.6-6.8-3.6-6.8 3.6 1.3-7.6-5.5-5.4 7.6-1.1z\" fill=\"#c8860b\"/></svg>",
+      "placeholder": true
+    },
+    "ps_lesson_4": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" role=\"img\" aria-hidden=\"true\"><path d=\"M22 38 14 60l10-5 6 9 6-20z\" fill=\"#0b5cad\"/><path d=\"M42 38l8 22-10-5-6 9-6-20z\" fill=\"#0078d4\"/><circle cx=\"32\" cy=\"26\" r=\"22\" fill=\"#f2b632\"/><circle cx=\"32\" cy=\"26\" r=\"16\" fill=\"#ffd978\"/><path d=\"M32 15l3.4 6.9 7.6 1.1-5.5 5.4 1.3 7.6-6.8-3.6-6.8 3.6 1.3-7.6-5.5-5.4 7.6-1.1z\" fill=\"#c8860b\"/></svg>",
+      "placeholder": true
+    },
+    "ps_lesson_5": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" role=\"img\" aria-hidden=\"true\"><path d=\"M22 38 14 60l10-5 6 9 6-20z\" fill=\"#0b5cad\"/><path d=\"M42 38l8 22-10-5-6 9-6-20z\" fill=\"#0078d4\"/><circle cx=\"32\" cy=\"26\" r=\"22\" fill=\"#f2b632\"/><circle cx=\"32\" cy=\"26\" r=\"16\" fill=\"#ffd978\"/><path d=\"M32 15l3.4 6.9 7.6 1.1-5.5 5.4 1.3 7.6-6.8-3.6-6.8 3.6 1.3-7.6-5.5-5.4 7.6-1.1z\" fill=\"#c8860b\"/></svg>",
+      "placeholder": true
+    }
+  }
+}

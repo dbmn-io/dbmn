@@ -51,9 +51,12 @@ review:
   fail: Shown above the findings when it does
 ```
 
-The rules themselves live server-side, keyed by `lesson_id` — see
-`docs/playground/share-it-back-brief.md` in vs-dbmn. A passing review is what the
-checkpoint consumes; the page never writes progress itself.
+The rules themselves live server-side, keyed by `lesson_id`:
+`supabase/functions/playground/course-review.ts` in vs-dbmn. The page POSTs the pasted text
+to the Training Ground API as `{ "share_text": "…" }` at `/course/review/lesson_5` and
+renders the findings that come back (200 pass, 422 fail). Only the outcome and the findings
+are kept — what the learner pasted is never stored. A passing review is what the checkpoint
+consumes; the page never writes progress itself.
 
 Lessons that check something the learner *produced* carry a `verify` block and a
 `<!-- paste-it-back -->` marker (Lesson 4: the filtered report, copied from the Console):
@@ -144,13 +147,24 @@ Backend — `supabase db push`, then `supabase functions deploy playground --no-
   requests, more than three pages, **Fetch all pages**).
 - `20260917000002_playground_product_suppliers.sql` — every product gets a supplier, a
   reorder quantity and a sometimes-blank supplier part number. Lessons 4 and 5.
-- `20260917000003_puppy_school_lessons_3_4_5.sql` — `check_lesson_completion` for all five
-  lessons; Lesson 2's threshold becomes the 60,000 the copy states. `lesson_2_1` is still
-  accepted as `lesson_3`; stored progress ids are **not** migrated yet — do that in the
-  release that switches the page to these files.
+- `20260917000004_playground_reference_ownership.sql` — reference records a learner adds
+  are visible to and usable by that learner alone. Without it the first learner to finish
+  Lesson 3 fixes the error file for everyone after them.
+- `20260917000005_course_submissions.sql` — the outcome of each paste-it-back and
+  share-it-back. Never the pasted content.
+- `20260917000006_course_completion.sql` — `check_lesson_completion` for all five lessons,
+  and it now **records** the pass itself; the page can no longer write progress. Lesson 2's
+  threshold becomes the 60,000 the copy states. Lesson 3 also needs inventory that uses a
+  product or location the learner added. `lesson_2_1` is still accepted as `lesson_3`;
+  stored progress ids are **not** migrated yet — do that in the release that switches the
+  page to these files.
 - The playground function: `product.supplier` / `reorderQty` / `supplierSku` on inventory,
   `lines` on the purchase-order list (Lesson 5 Steps 1 and 7), camelCase filter keys
-  (Lesson 4 Bonus Credit's `locationGln`), and `POST /course/verify/lesson_4`.
+  (Lesson 4 Bonus Credit's `locationGln`), `POST /course/verify/lesson_4`,
+  `POST /course/review/lesson_5`, and reference-data errors that name the missing value.
+
+All of the above has run end to end on a local Supabase stack
+(`node scripts/e2e-playground-local.mjs` in vs-dbmn). None of it is deployed.
 
 Extension — a release containing:
 
@@ -160,9 +174,8 @@ Extension — a release containing:
 
 Still open:
 
-- **Lesson 3** tells the learner their reference data is theirs alone. True only once
-  reference rows are user-scoped; until then the second learner's error file stops erroring.
 - **Lesson 1** links a starter `.dbmn.zip` that does not exist yet.
 - **The page.** `puppy-school/index.html` still renders the old three hard-coded lessons.
   Nothing renders these files, the share-it-back thread or the paste box yet.
-- **Share-it-back** (Lesson 5) has a brief but no server: `docs/playground/share-it-back-brief.md`.
+- **Row counts in Lesson 4** were measured on one learner's data. Re-measure on a stack
+  with the full Lesson 2 and 3 loads before publishing.
