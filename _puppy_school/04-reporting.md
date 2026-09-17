@@ -32,10 +32,14 @@ note_to_reviewer: >
   "Fetch all pages" and 16 concurrent requests are full-licence features. Decision
   2026-09-17: no gate on the Training Ground — every signed-in user gets full access there
   (vs-dbmn migration 20260917000001_open_environments.sql, must be deployed first).
-  The search counts in Step 4 (10,046 / 831 / 706) were run through shared/search-matcher.js
-  against inventory-67k.csv; they hold for a learner who loaded that file exactly once.
+  The search counts in Step 4 are MEASURED by vs-dbmn `npm run test:e2e:lessons`, which plays
+  a learner through Lessons 1-4 on a local stack and runs these searches through
+  shared/search-matcher.js: 10,961 / 924 / 784 (2026-09-18). That is more than the file alone
+  gives (10,046 / 831 / 706) because a learner's report also holds the rows the Training
+  Ground ships with and their Lesson 3 rows. The Lesson 2 thirty-second slow run adds a few
+  more. The test fails if the copy drifts more than 5% from what it measures.
   Unquoted -CS returns ZERO rows (it matches "Electronics"); the quoted form is deliberate.
-  Copy -> Excel stops at 1,000 rows. 831 fits; a learner who loaded the file twice has 1,662
+  Copy -> Excel stops at 1,000 rows. 924 fits; a learner who loaded the file twice has ~1,750
   and the verifier tells them so (COPY_CAP) rather than just failing.
   The four product.* columns marked for Lesson 5 need vs-dbmn migration
   20260917000002_playground_product_suppliers.sql and the updated playground function.
@@ -179,7 +183,7 @@ Click into the search box above the table and type:
 low_stock
 ```
 
-The row count drops to around ten thousand: every record, at every site, whose status is
+The row count drops to around eleven thousand: every record, at every site, whose status is
 low. Search looks across every column in the view, which is why `status` is one of them.
 
 Now narrow it to the site that asked. A space and a `+` means **and**:
@@ -188,7 +192,7 @@ Now narrow it to the site that asked. A space and a `+` means **and**:
 low_stock +Golden
 ```
 
-About eight hundred rows — low stock, at the Golden Retriever Distribution Center. That is
+About nine hundred rows — low stock, at the Golden Retriever Distribution Center. That is
 the report.
 
 One more, because someone always asks. They don't reorder by the case, so leave the `CS`
@@ -257,7 +261,7 @@ probably went in twice — reset with `DELETE /my-data`, reload it once, and fet
 
 ## Bonus Credit — Ask the API a Narrower Question
 
-You just pulled 67,000 records to keep 800. It worked, and it will work on any API — which is
+You just pulled 67,000 records to keep 900. It worked, and it will work on any API — which is
 why it came first. But when an API *can* filter, let it. Less data over the wire, fewer
 pages, less load on a system you're a guest on.
 

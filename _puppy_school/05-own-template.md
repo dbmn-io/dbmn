@@ -27,7 +27,7 @@ review:
 note_to_reviewer: >
   Shape (decided 2026-09-17): ONE PURCHASE ORDER PER SUPPLIER. A throwaway hand-written order
   proves the endpoint; the first real order (supplier A, one line) goes through Run API; the
-  other four suppliers go through ONE batch, four requests, ~160 lines each. Six POSTs.
+  other four suppliers go through ONE batch, four requests, ~180 lines each (measured: 170-196). Six POSTs.
   Why it works out: the Golden Retriever DC's low-stock rows in inventory-67k.csv cover exactly
   five products (WOOF-001/005/009/013/017), and vs-dbmn migration
   20260917000002_playground_product_suppliers.sql deals suppliers so those five differ.
@@ -225,7 +225,7 @@ low_stock +Golden -"Chew Toy Manufacturing Inc"
 ```
 
 Low stock, at this warehouse, from everyone except the supplier you've already ordered
-from. Around 660 rows, four suppliers.
+from. Around 730 rows, four suppliers.
 
 Open the **Copy** menu and choose **Excel**. The whole filtered table — headers included —
 is on your clipboard. No file, no spreadsheet.
@@ -252,7 +252,7 @@ The columns you don't use — `status`, `quantityOnHand` and the rest — are si
 
 Click **Next** through to **Review JSON** and look carefully.
 
-- **Total API calls: 4.** Six hundred-odd rows, four requests — one per supplier.
+- **Total API calls: 4.** Seven hundred-odd rows, four requests — one per supplier.
 - Each request is a **single purchase order with well over a hundred lines**, the header
   taken once and the line repeated per row, `lineNumber` counting up from 1 inside each.
 - Your rows weren't sorted by supplier. Dobermann sorted them before it folded them.
