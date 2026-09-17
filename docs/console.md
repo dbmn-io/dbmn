@@ -12,42 +12,12 @@ When you hit **Run**, Dobermann opens the Console — your real-time window into
 
 ## Starting an Execution
 
-Dobermann uses a **smart Run button** that automatically detects the right execution mode:
+Two things put results in the Console, and both open it for you:
 
-- **No template variables** → Runs a single API request (shows as "Run API")
-- **Has template variables** → Opens the batch runner (shows as "Run Batch")
+- **Run API** {icon:run-api} — one request. If the endpoint has `{{template variables}}` it asks for their values first, and you can paste a spreadsheet row to fill them. See [Run API](/docs/run-api/).
+- **Run Batch** {icon:run-batch} — the same endpoint driven from a file, through the 5-step flow: Load Data → Map & Transform → Review & Edit Data → Review JSON → Execute. It appears once the endpoint has template variables. See [Batch Preparation](/docs/batch-preparation/).
 
-This works the same everywhere: the endpoint footer button, the sidebar play icon, and Quick Access search.
-
-### Single Request (Run API)
-
-Execute a single API request to test configuration, verify responses, or perform one-off operations. The button shows "Run API" when the endpoint has no `{{template variables}}`.
-
-**From endpoint webview:**
-1. Configure endpoint (method, URL, headers, body) — no template variables
-2. Click **Run API**
-3. Console opens with results
-
-**From sidebar:**
-1. Click the play icon on the endpoint
-
-**From Quick Access (Alt+D E):**
-1. Press **Alt+D E** to open fuzzy search
-2. Select endpoint → choose **Run**
-
-### Batch Execution (Run Batch)
-
-Execute the same endpoint multiple times with different data — entered in the grid or loaded from a file. The button shows "Run Batch" when the endpoint has `{{template variables}}`.
-
-**From endpoint webview:**
-1. Click **Run Batch** to open the batch preparation flow
-2. Walk through the 5-step process: Load Data → Map & Transform → Review & Edit Data → Review JSON → Execute
-3. Click **Execute** in Step 5 — the Console opens and the batch begins
-
-**From sidebar:**
-1. Click the play icon on the endpoint — Dobermann detects template variables and opens the batch runner
-
-See [Batch Preparation](/docs/batch-preparation/) for the full 5-step workflow.
+Both live in the endpoint editor's footer and on each endpoint's row in the API Catalogue. Quick Access (**Alt+D E**) reaches them from the keyboard.
 
 ### Execution Queue
 {: #execution-queue }

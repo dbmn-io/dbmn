@@ -15,7 +15,7 @@ Get up and running in 5 steps:
 
 1. **Create an Environment** — Define your API base URL and authentication
 2. **Create an Endpoint** — Configure HTTP method, URL, headers, and body template
-3. **Run It** — Click Run and Dobermann auto-detects whether to execute a single request or open the batch runner
+3. **Run It** — Click **Run API** to send one request and see what comes back
 4. **Run a Batch** — Upload a file, paste data, or type values directly. Map columns, review your data, and execute
 5. **Watch it Go** — The Console opens automatically with results streaming in real-time. Sit back and watch your batch execute — don't grab a coffee, you'll miss the show.
 
@@ -98,9 +98,9 @@ Follow this complete workflow to execute your first API request.
 
 ### Step 3: Run It
 
-Click the **play icon** on your endpoint in the sidebar, or click **Run** in the endpoint footer. Dobermann detects the `{{template variables}}` and opens the batch runner automatically.
+Click **Run API** in the endpoint footer, or the {icon:run-api} icon on the endpoint's row in the API Catalogue. Because this endpoint has `{{template variables}}`, a form asks for one value each — type them, or copy a header row and a data row from your spreadsheet and click {icon:paste-row} **Paste**. Click **Run** and the Console opens with the response.
 
-> **Tip:** If you remove the template variables and hardcode values, the same button switches to "Run API" for a single request — no configuration needed.
+One request proves the endpoint, the template and the API agree. See [Run API](/docs/run-api/).
 
 ### Step 4: Run a Batch
 

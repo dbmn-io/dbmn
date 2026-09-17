@@ -163,17 +163,16 @@ The editor also provides **intelligent autocomplete** as you type inside templat
 ---
 
 ## Save & Run
-
-Two footer buttons drive the endpoint lifecycle.
+{: #save-run }
 
 **Save Endpoint** (Ctrl+S) commits your changes. Dobermann validates the endpoint name, path, and JSON body syntax first — anything wrong is flagged inline so you can fix it before saving.
 
-**Run** is the smart execute button next to Save. Dobermann picks the right mode based on what's in your endpoint:
+Once saved, the footer offers two ways to run it. In the API Catalogue the same two actions are the {icon:run-api} and {icon:run-batch} icons on the endpoint's row.
 
-- **No template variables** → label says **Run API**, single request fires straight to the Console
-- **Has template variables** → label says **Run Batch**, opens the 5-step batch runner
+- **Run API** sends one request. If the endpoint has template variables it asks for their values first. See [Run API](/docs/run-api/).
+- **Run Batch** appears once the endpoint has `{{template variables}}` and drives it from a file. See [Batch Preparation](/docs/batch-preparation/).
 
-Run is disabled while there are unsaved changes — save first so the batch always reflects what you're looking at on screen.
+Both are disabled while there are unsaved changes — save first, so what runs is what you're looking at.
 
 ---
 

@@ -20,6 +20,7 @@ Welcome to the Dobermann documentation. Dobermann enables bulk data migration th
 | [Endpoints](/docs/endpoints/) | Configure API requests, share with your team |
 | [↳ Sharing Endpoints](/docs/sharing-endpoints/) | Share an endpoint, paste it on the other side |
 | [↳ Template Variables](/docs/template-variables/) | Variable syntax, types, modifiers, and editing |
+| [Run API](/docs/run-api/) | Send one request; paste a spreadsheet row to fill its values |
 | [Batch Preparation](/docs/batch-preparation/) | Load data and map columns |
 | [Console](/docs/console/) | Run requests, monitor progress, analyse results |
 | [↳ Named Views](/docs/named-views/) | Save column layouts and row-per-X shapes; one response, many lenses |
