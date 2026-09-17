@@ -156,6 +156,8 @@ Dobermann validates your mapping:
 
 Unmapped required variables show a red indicator. Resolve all mapping issues before proceeding.
 
+**Optional variables don't need a column.** A variable marked `|opt` or `|null` — shown with a ○ in the mapping table — can be left unmapped when your file simply doesn't have that column. Every request then omits the key (`|opt`) or sends `null` (`|null`), exactly as it would for a blank cell. See [Template Variables](/docs/template-variables/).
+
 ### Source Format Configuration
 
 The **Source Format** column lets you specify how source values should be interpreted before conversion.
@@ -296,6 +298,42 @@ Control how errors affect batch execution:
 | Bulk update with validation | Max 5 errors |
 | Large import (10,000 rows) | 5% error tolerance |
 | Data quality testing | Continue on all errors |
+
+### How rows become requests (nested templates)
+{: #nested-grouping }
+
+When a template has header fields and an array of lines — a purchase order, a shipment — one row of your data is one **line**, and Dobermann folds rows into requests:
+
+> **A new request starts whenever any header field changes.** Rows that agree on every header field become one request; each row adds a line to it.
+
+This is how one flat file becomes one order per supplier and site, with the order number generated rather than supplied:
+
+```json
+{
+  "poNumber": "PO-{{A8:sequence}}",
+  "supplier": "{{supplier}}",
+  "shipTo": "{{shipTo}}",
+  "lines": [ { "sku": "{{sku}}" } ]
+}
+```
+
+| supplier | shipTo | sku | Goes into |
+|---|---|---|---|
+| Wagmore | Atlanta | SKU-A | request 1 |
+| Boop | Atlanta | SKU-B | request 2 |
+| Wagmore | Atlanta | SKU-C | request 1 — gathered with the first row, though they aren't adjacent |
+| Wagmore | Boston | SKU-D | request 3 — same supplier, different site |
+
+{: .warning }
+> **If the header carries an identifier from your data, the other header fields must agree with it.** Put `{{poNumber}}` in the header, and every row for `PO-1` has to carry the same supplier, the same ship-to, the same everything else. If one row says Atlanta and another says Boston, that is bad data — and Dobermann will send **two requests for `PO-1`**. What happens next is up to the API: it may reject the second as a duplicate, or it may overwrite the first. Dobermann can't know which header is the right one, so it doesn't guess. Check **Total API calls** against the number of orders you expect before you execute, and fix the file if they differ.
+
+- **The header is true of every line.** Only put something in the header if it holds for the whole order. A per-line value up there gives you one request per row.
+- **Rows don't need to be sorted** — matching rows are gathered wherever they sit. Dobermann sorts by the header fields first, so requests come out in that order.
+- **Spaces around a value don't count** (`Acme ` is `Acme`), but **case does** — `ACME` is a different header, and gets its own request where you can see it.
+- **Generated values aren't part of it.** `{{A8:sequence}}` in the header is handed out after grouping, one number per request. `{{ENV:…}}` values are the same for every row anyway.
+- The same rule applies one level down: in a three-level template, a new shipment starts when any of the shipment's own fields changes, and a new package when any of the package's does.
+
+The **Total API calls** figure in this step is the number of requests the rule produced. If it isn't what you expected, this is why.
 
 ### Maximum Repetitions (Advanced)
 

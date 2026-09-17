@@ -220,6 +220,10 @@ This is incredibly useful for APIs that treat missing keys differently from empt
 | `"ABC"` | `"Test"` | `{ "code": "ABC", "name": "Test" }` |
 | *(empty)* | `"Test"` | `{ "name": "Test" }` — code key completely removed |
 
+It works the same at every depth — on a header field, or on a field inside a `lines` array, where each line keeps or drops the key according to its own row.
+
+**The column itself is optional too.** In Run Batch, an `|opt` or `|null` variable can be left unmapped when the file has no such column; every request then omits the key, or sends `null`. A variable without either modifier still has to be mapped.
+
 #### The null Modifier
 
 ```javascript
