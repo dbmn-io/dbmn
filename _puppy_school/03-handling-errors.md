@@ -19,7 +19,7 @@ note_to_reviewer: >
 
 ## Step 1 — Download the Error File
 
-Download the error inventory file: [inventory-errors.csv](/puppy-school/files/inventory-errors.csv)
+Download the error inventory file: [inventory-errors.csv](/puppy-school/files/inventory-errors.csv){:download="inventory-errors.csv"}
 
 A thousand inventory records, **ten of which are deliberately broken**. Some point at
 products and locations that don't exist. Others carry values the API won't accept. A one
@@ -29,7 +29,7 @@ like the first time you load it, and finding those ten rows is the entire skill.
 ## Step 2 — Run the Upload
 
 Use the **Puppy School — Bulk Inventory Upload** endpoint you built in Lesson 2. Click
-**Run Batch** and load the error CSV.
+**Run Batch** and load [inventory-errors.csv](/puppy-school/files/inventory-errors.csv){:download="inventory-errors.csv"}.
 
 Two settings to check before you run:
 

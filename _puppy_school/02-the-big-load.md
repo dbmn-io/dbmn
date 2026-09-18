@@ -15,7 +15,7 @@ checkpoint:
 
 ## Step 1 — Download the Inventory File
 
-Download the sample inventory file: [inventory-67k.csv](/puppy-school/files/inventory-67k.csv)
+Download the sample inventory file: [inventory-67k.csv](/puppy-school/files/inventory-67k.csv){:download="inventory-67k.csv"}
 
 67,000 inventory records — products, locations, quantities. Flat structure, one row per
 record. Exactly the kind of export you get handed out of a WMS or ERP on day one of a
@@ -84,8 +84,8 @@ here is the same thing, more times.
 
 ## Step 4 — Load Your Data
 
-Click **Run Batch**. In **Load Data**, drop `inventory-67k.csv` onto the upload area and
-click **Import Data**.
+Click **Run Batch**. In **Load Data**, drop [inventory-67k.csv](/puppy-school/files/inventory-67k.csv){:download="inventory-67k.csv"}
+onto the upload area and click **Import Data**.
 
 Dobermann maps the CSV columns to your template variables automatically where the names
 match — which, here, they all do. Click **Next** through to **Review JSON** and look at the
