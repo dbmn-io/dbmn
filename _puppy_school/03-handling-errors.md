@@ -119,7 +119,8 @@ small ones, and you only pay for precision on the records that earned it.
 
 ## Step 7 — Read the Errors
 
-The **Error** tab now holds nine rows, each naming a record and a reason:
+The **Error** tab now holds nine rows. It is a table, and two of its columns carry the
+story — **error** and **code**:
 
 ```json
 {
@@ -128,7 +129,10 @@ The **Error** tab now holds nine rows, each naming a record and a reason:
 }
 ```
 
-Read the message, not just the code. It names the column and the value that is missing.
+Read the message, not just the code — it names the column and the value that is missing.
+Open the **Raw** tab on any row for the whole exchange, request and response. And if your
+Error tab is showing different columns from these, a saved **View** is choosing them; Lesson
+4 is where you build your own.
 
 The nine split into two kinds, and this is the distinction that matters most in the course:
 

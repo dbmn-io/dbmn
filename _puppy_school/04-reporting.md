@@ -167,6 +167,9 @@ Notice what you just did. `location.name` lives one level down in the JSON and
 if they were flat columns. That is the whole point of a view — the API's shape and the reader's shape are
 almost never the same, and this is where you reconcile them without touching either.
 
+Views work on any tab, the **Error** tab included — the same three regions. That is how you
+turn a pile of failures into a table you can hand to whoever produced the file.
+
 Name the view `Low Stock by Location` and save it.
 
 Views save **on the endpoint**, so this one travels with it — export or share the endpoint
