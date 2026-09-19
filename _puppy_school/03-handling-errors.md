@@ -4,7 +4,7 @@ number: 3
 slug: handling-errors
 title: Handling Errors
 goal: Break the load deliberately, find out why, fix the data, and reprocess the failures
-estimate: ~10 minutes
+estimate: ~15 minutes
 completion:
   criteria: A failed POST /inventory followed by a later successful POST /inventory
   summary: errors triggered, then resolved
@@ -12,7 +12,17 @@ checkpoint:
   pass: Good dog. Errors found, reprocessed, resolved. That's real-world data migration right there.
   fail: We can see you've had a run — but we can't confirm the full error and reprocess cycle. Load the error file, fix the reference data, and reprocess the failed rows.
 note_to_reviewer: >
-  Written for the per-user reference data change. The "yours alone" line in Step 4 is only
+  Step 2 walks all five loader steps because the pre-execution check is the most valuable
+  thing in the lesson and was previously skipped. It only fires because Lesson 2's template
+  declares {{quantityOnHand:number|>=0}} — with a bare :number there is no rule, no dotted
+  underline and no amber cell. The counts below assume the learner makes the -50 correction
+  the step tells them to: ten broken rows in the file, one caught in the loader, nine reach
+  the API. Reps is 100, so all nine land in ONE request (the bad rows are the last ten rows
+  of the file) and the API reports a single uom_check error for the hundred — which is what
+  makes Split array errors worth teaching. After the split: 91 through, 9 individual errors
+  (5 FK_VIOLATION + 4 INSERT_ERROR), then 5 clear on reprocess and 4 fail again.
+  vs-dbmn `npm run test:e2e:lessons` plays exactly that and checks every number here.
+  Written for the per-user reference data change. The "yours alone" line in Step 5 is only
   true once reference rows are user-scoped; until that migration lands, learners share
   reference tables and this lesson stops failing for the second learner onward.
 ---
@@ -26,26 +36,94 @@ products and locations that don't exist. Others carry values the API won't accep
 percent failure rate is not a contrived exercise — it is roughly what a real extract looks
 like the first time you load it, and finding those ten rows is the entire skill.
 
-## Step 2 — Run the Upload
+## Step 2 — Walk the Loader
 
-Use the **Puppy School — Bulk Inventory Upload** endpoint you built in Lesson 2. Click
-**Run Batch** and load [inventory-errors.csv](/puppy-school/files/inventory-errors.csv){:download="inventory-errors.csv"}.
+Use the **Puppy School — Bulk Inventory Upload** endpoint you built in Lesson 2 and click
+**Run Batch**. The loader is five steps, and it will not let you past a problem it can
+already see.
 
-Two settings to check before you run:
+**Step 1: Load Data.** Drop [inventory-errors.csv](/puppy-school/files/inventory-errors.csv){:download="inventory-errors.csv"}
+onto the upload area and click **Import Data**.
 
-- At **Review JSON**, set **Reps:** back to `1`. With a thousand records per request, one
-  bad record takes the whole request down with it — and right now you want to know exactly
-  which rows failed, not lose 999 good ones alongside each bad one. Worth remembering as a
-  rule: big Reps for speed, small Reps for precision.
-- At **Execute Batch**, check **Error Handling** is on **Continue processing** — it is by
-  default. **Stop on first error** would show you one error instead of ten.
+**Step 2: Map & Transform.** Dobermann matches the file's columns to your template variables
+by name. All eight match, so there is nothing to do. Click **Next**.
 
-Hit **Execute**. Ten records fail out of a thousand. That's the point.
+**Step 3: Review & Edit Data.** This is the step most people click straight through. It has
+just saved you a request.
 
-## Step 3 — Inspect the Errors
+Look at the `quantityOnHand` column header: it carries a dotted underline. That means the
+column has a rule. Hover it and Dobermann names the rule — `≥0` — which it knows because
+you wrote it into the template in Lesson 2:
 
-In the Console, switch to the **Error** tab. Dobermann tells you which rows failed and
-exactly why:
+```json
+"quantityOnHand": "{{quantityOnHand:number|>=0}}"
+```
+
+One cell is highlighted amber, and the footer tells you which column and how many records:
+
+```text
+"quantityOnHand" has 1 invalid record — must be ≥ 0
+```
+
+Click **Filter Errors** to hide the rows that are fine. One is left — row 999,
+`SKU-WOOF-006-ERR`, with a quantity of `-50`. Negative stock is not a rounding error, it is
+a broken extract.
+
+Click the cell, change `-50` to `50`, and click **Next**. The highlight clears and the
+loader lets you through. Your file on disk is untouched; the edit applies to this run.
+
+Now notice what it did *not* catch. Nine broken rows are still in there — a `uom` of
+`BOXES`, a status of `expired`, GTINs for products that don't exist. Dobermann checked the
+one rule your template declared, and nothing else. It has no idea which units this API
+accepts or which products exist on the server, and it never will: that knowledge lives on
+the API.
+
+Which gives you the rule worth taking to every project: **state in the template whatever you
+already know.** You get it checked on every row, for free, before you spend a request
+finding out. Everything else, the API tells you — and that is the rest of this lesson.
+
+**Step 4: Review JSON.** Set **Reps:** to `100`. A thousand records go out as ten requests
+of a hundred — fast, and how you would really run a load this size.
+
+**Step 5: Execute Batch.** Check **Error Handling** is on **Continue processing** — it is by
+default. **Stop on first error** would abandon the run at the first bad request.
+
+Hit **Execute**. Nine requests succeed. One fails.
+
+## Step 3 — One Error Is Not Nine
+
+Nine hundred records are in. One request failed, and the Error tab has exactly one row in
+it:
+
+```json
+{
+  "error": "new row for relation \"playground_inventory\" violates check constraint \"playground_inventory_uom_check\"",
+  "code": "INSERT_ERROR"
+}
+```
+
+One error, for a hundred records. The API validates the array and rejects it as a unit, so
+one bad record takes the ninety-nine around it down too — and names only itself. You now
+know a `uom` is wrong somewhere in the last hundred rows. That is the whole of what you know.
+
+Don't reach for **Reps: 1** and run the thousand again. Those nine hundred records went in
+on nine requests instead of nine hundred, and that speed is worth keeping. You just need to
+open up the one request that failed.
+
+In the Console footer click **Reprocess**, choose **Split array errors**, and **Continue**.
+Dobermann explains what it is about to do — every element of the failed array becomes its
+own transaction — so click **Split**.
+
+The failed request is now a hundred transactions. Ninety-one go through. Nine fail, each
+one carrying its own error, against its own record.
+
+That is the move worth taking with you: **run coarse, split on failure.** You get the speed
+of big requests and the precision of small ones, and you only pay for the precision on the
+records that actually earned it.
+
+## Step 4 — Inspect the Errors
+
+The **Error** tab now holds nine rows, and each one names the record and the reason:
 
 ```json
 {
@@ -55,22 +133,22 @@ exactly why:
 ```
 
 Read the message, not just the code. It names the column and the value that's missing —
-which is exactly what you'll need in Step 4.
+which is exactly what you'll need in Step 5.
 
-Ten failures, and they split evenly into two kinds — which is the distinction that matters
-most in this entire course:
+Nine failures, and they split into two kinds — which is the distinction that matters most
+in this entire course:
 
 - **`FK_VIOLATION`** — five records pointing at a GTIN or location GLN that doesn't exist in
   the reference tables. The records are fine; the master data is missing. **You can fix these.**
-- **`INSERT_ERROR`** — five records carrying values the API rejects outright: a `uom` of
-  `BOXES` or `PALLETS` when only `EA`, `CS`, `PL` and `KG` are allowed, a status of `expired`
-  or `deleted`, and a quantity of `-50`. **Bad data at source.**
+- **`INSERT_ERROR`** — four records carrying values the API rejects outright: a `uom` of
+  `BOXES` or `PALLETS` when only `EA`, `CS`, `PL` and `KG` are allowed, and a status of
+  `expired` or `deleted`. **Bad data at source.**
 
-Real migrations are always this mix. Half your failures you can clear yourself in five
-minutes. The other half have to go back to whoever produced the file, and no amount of
-retrying will change their minds.
+Real migrations are always this mix. Five of these you can clear yourself in five minutes.
+The other four have to go back to whoever produced the file, and no amount of retrying will
+change their minds.
 
-## Step 4 — Fix the Reference Data
+## Step 5 — Fix the Reference Data
 
 Let's deal with the FK violations by adding the missing master data.
 
@@ -96,7 +174,7 @@ Start with one product. Create a new endpoint:
 Save it and hit **Run API**. You've just created a product in the reference table through
 the API.
 
-## Step 5 — Turn a Single Request Into a Batch
+## Step 6 — Turn a Single Request Into a Batch
 
 Three more GTINs are missing. Rather than hand-writing three more endpoints, let's convert
 the one you have.
@@ -166,19 +244,20 @@ Run the batch.
 That's the whole trick with template variables: any endpoint becomes a batch endpoint the
 moment you replace its hardcoded values with `{{variables}}`.
 
-## Step 6 — Reprocess the Failures
+## Step 7 — Reprocess the Failures
 
 Open {icon:nav-history} **History** and open the failed inventory batch. In the Console
-footer click **Reprocess**, choose **Errors only**, and **Continue**.
+footer click **Reprocess**, choose **Errors only**, and **Continue**. This time it reprocesses
+the nine individual transactions the split left behind — not the whole hundred.
 
 Five clear. The products and locations they were pointing at now exist, so the records go
 through untouched.
 
-Five fail again, and that is the correct outcome — `BOXES`, `PALLETS`, `expired`, `deleted`
-and `-50` are still exactly as wrong as they were ten minutes ago.
+Four fail again, and that is the correct outcome — `BOXES`, `PALLETS`, `expired` and
+`deleted` are still exactly as wrong as they were ten minutes ago.
 
 Look closely at that last group and you'll spot something. `SKU-BAD-004` had a missing GTIN
-*and* an invalid `uom` of `PALLETS`. You added the product for it in Step 5, and it still
+*and* an invalid `uom` of `PALLETS`. You added the product for it in Step 6, and it still
 fails — because it had a second problem that adding reference data was never going to solve.
 Records with more than one thing wrong are completely normal, and they are why you always
 re-read the error after a reprocess instead of assuming your fix worked.

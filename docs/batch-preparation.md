@@ -254,7 +254,7 @@ When you click **Next** to proceed to Step 4, Dobermann validates your data:
 **Modifier constraint validation:**
 - Validates cell values against any modifier constraints defined on the template variable
 - Checks include: minimum/maximum length, exact length, min/max numeric values, integer requirements, and date format validity
-- Invalid cells are highlighted with a red background
+- Invalid cells are highlighted with an amber background
 - A summary of validation errors appears in the footer
 - You must fix all constraint errors before proceeding
 
@@ -454,7 +454,7 @@ For APIs supporting pagination, use the special `{{A8:PAGE}}` variable:
 
 ### Validation Errors in Step 3
 
-**Symptoms:** Red-highlighted cells in the data grid, footer showing validation errors
+**Symptoms:** Amber-highlighted cells in the data grid, footer showing validation errors
 
 **Solutions:**
 - Click on highlighted cells to see what's wrong

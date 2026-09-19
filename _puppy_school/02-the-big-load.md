@@ -39,7 +39,7 @@ and click {icon:paste-endpoint} **Paste Endpoint** — the same button you used 
     "description": "{{description}}",
     "locationGln": "{{locationGln}}",
     "locationName": "{{locationName}}",
-    "quantityOnHand": "{{quantityOnHand:number}}",
+    "quantityOnHand": "{{quantityOnHand:number|>=0}}",
     "uom": "{{uom}}",
     "status": "{{status}}"
   }
@@ -50,9 +50,12 @@ Look at what you just pasted. The body is an **array containing one object**, an
 value is a `{{template variable}}` rather than a fixed value. That is what makes this a
 batch endpoint: Dobermann fills those variables from a spreadsheet, one row at a time.
 
-Note `{{quantityOnHand:number}}` — the `:number` suffix tells Dobermann to send that value
-as a JSON number rather than a quoted string. APIs care about that distinction more than
-you'd like.
+Note `{{quantityOnHand:number|>=0}}`. Everything after the variable name is you telling
+Dobermann what this field *is*. `:number` sends the value as a JSON number rather than a
+quoted string — APIs care about that distinction more than you'd like. `|>=0` says stock
+can never be negative, and Dobermann holds you to it: a row that breaks the rule is caught
+in the loader, before a single request leaves your machine. You'll watch that happen in
+Lesson 3.
 
 ## Step 3 — Load One Record First
 
