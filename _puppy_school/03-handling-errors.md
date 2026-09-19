@@ -12,88 +12,83 @@ checkpoint:
   pass: Good dog. Errors found, reprocessed, resolved. That's real-world data migration right there.
   fail: We can see you've had a run — but we can't confirm the full error and reprocess cycle. Load the error file, fix the reference data, and reprocess the failed rows.
 note_to_reviewer: >
-  Step 2 walks all five loader steps because the pre-execution check is the most valuable
-  thing in the lesson and was previously skipped. It only fires because Lesson 2's template
-  declares {{quantityOnHand:number|>=0}} — with a bare :number there is no rule, no dotted
-  underline and no amber cell. The counts below assume the learner makes the -50 correction
-  the step tells them to: ten broken rows in the file, one caught in the loader, nine reach
-  the API. Reps is 100, so all nine land in ONE request (the bad rows are the last ten rows
-  of the file) and the API reports a single uom_check error for the hundred — which is what
-  makes Split array errors worth teaching. After the split: 91 through, 9 individual errors
-  (5 FK_VIOLATION + 4 INSERT_ERROR), then 5 clear on reprocess and 4 fail again.
-  vs-dbmn `npm run test:e2e:lessons` plays exactly that and checks every number here.
-  Written for the per-user reference data change. The "yours alone" line in Step 5 is only
-  true once reference rows are user-scoped; until that migration lands, learners share
-  reference tables and this lesson stops failing for the second learner onward.
+  Ten steps, one action each, ~1,000 words — rewritten 2026-09-19 because seven long steps
+  read as a wall and the loader's own Step 1-5 nested inside lesson Step 2. Never write
+  "Step" inside a step: call the loader's screens by name (Load Data, Review & Edit Data,
+  Review JSON, Execute Batch).
+  THE REVEAL: Step 1 must NOT say how many records are broken. The learner earns the count —
+  one caught by the loader, nine by the API — and the close adds it up to ten. A test asserts
+  Step 1 names no number.
+  The Step 3 check only fires because Lesson 2's template declares
+  {{quantityOnHand:number|>=0}}; with a bare :number there is no rule, no dotted underline
+  and no amber cell. Reps is 100, so all nine bad rows (the last ten rows of the file, minus
+  the one corrected in the loader) land in ONE request and the API reports a single
+  uom_check error for the hundred — which is what makes Split array errors worth teaching.
+  After the split: 91 through, 9 individual errors (5 FK_VIOLATION + 4 INSERT_ERROR), then
+  5 clear on reprocess and 4 fail again. vs-dbmn `npm run test:e2e:lessons` plays exactly
+  this and checks every number.
+  The "yours alone" line in Step 8 is only true once reference rows are user-scoped; until
+  that migration lands, learners share reference tables and this lesson stops failing for
+  the second learner onward.
 ---
 
-## Step 1 — Download the Error File
+## Step 1 — Get the File
 
-Download the error inventory file: [inventory-errors.csv](/puppy-school/files/inventory-errors.csv){:download="inventory-errors.csv"}
+Download [inventory-errors.csv](/puppy-school/files/inventory-errors.csv){:download="inventory-errors.csv"}
 
-A thousand inventory records, **ten of which are deliberately broken**. Some point at
-products and locations that don't exist. Others carry values the API won't accept. A one
-percent failure rate is not a contrived exercise — it is roughly what a real extract looks
-like the first time you load it, and finding those ten rows is the entire skill.
+A thousand inventory records, and a handful of them are deliberately broken. Some point at
+products and locations that don't exist. Others carry values the API won't accept. That is
+not a contrived exercise — it is what a real extract looks like the first time you load it.
 
-## Step 2 — Walk the Loader
+## Step 2 — Load It
 
-Use the **Puppy School — Bulk Inventory Upload** endpoint you built in Lesson 2 and click
-**Run Batch**. The loader is five steps, and it will not let you past a problem it can
-already see.
+Open the **Puppy School — Bulk Inventory Upload** endpoint you built in Lesson 2 and click
+**Run Batch**.
 
-**Step 1: Load Data.** Drop [inventory-errors.csv](/puppy-school/files/inventory-errors.csv){:download="inventory-errors.csv"}
-onto the upload area and click **Import Data**.
+In **Load Data**, drop the file onto the upload area and click **Import Data**.
 
-**Step 2: Map & Transform.** Dobermann matches the file's columns to your template variables
-by name. All eight match, so there is nothing to do. Click **Next**.
+**Map & Transform** matches your file's columns to the template's variables by name. All
+eight match, so there is nothing to do here. Click **Next**.
 
-**Step 3: Review & Edit Data.** This is the step most people click straight through. It has
-just saved you a request.
+You land on **Review & Edit Data**, a thousand rows in a grid. Most people click straight
+through. Don't.
 
-Look at the `quantityOnHand` column header: it carries a dotted underline. That means the
-column has a rule. Hover it and Dobermann names the rule — `≥0` — which it knows because
-you wrote it into the template in Lesson 2:
+## Step 3 — Fix What Dobermann Caught
 
-```json
-"quantityOnHand": "{{quantityOnHand:number|>=0}}"
-```
-
-One cell is highlighted amber, and the footer tells you which column and how many records:
+One cell is amber, and the footer names it:
 
 ```text
 "quantityOnHand" has 1 invalid record — must be ≥ 0
 ```
 
-Click **Filter Errors** to hide the rows that are fine. One is left — row 999,
-`SKU-WOOF-006-ERR`, with a quantity of `-50`. Negative stock is not a rounding error, it is
-a broken extract.
+Click **Filter Errors** to hide every row that is fine. One is left: row 999,
+`SKU-WOOF-006-ERR`, with a quantity of `-50`.
 
-Click the cell, change `-50` to `50`, and click **Next**. The highlight clears and the
-loader lets you through. Your file on disk is untouched; the edit applies to this run.
+Dobermann knows stock cannot be negative because you told it, back in Lesson 2:
 
-Now notice what it did *not* catch. Nine broken rows are still in there — a `uom` of
-`BOXES`, a status of `expired`, GTINs for products that don't exist. Dobermann checked the
-one rule your template declared, and nothing else. It has no idea which units this API
-accepts or which products exist on the server, and it never will: that knowledge lives on
-the API.
+```json
+"quantityOnHand": "{{quantityOnHand:number|>=0}}"
+```
 
-Which gives you the rule worth taking to every project: **state in the template whatever you
-already know.** You get it checked on every row, for free, before you spend a request
-finding out. Everything else, the API tells you — and that is the rest of this lesson.
+That is also why the column header carries a dotted underline — hover it and Dobermann names
+the rule.
 
-**Step 4: Review JSON.** Set **Reps:** to `100`. A thousand records go out as ten requests
-of a hundred — fast, and how you would really run a load this size.
+Click the cell, change `-50` to `50`, and click **Next**. The highlight clears. Your file on
+disk is untouched; the edit applies to this run.
 
-**Step 5: Execute Batch.** Check **Error Handling** is on **Continue processing** — it is by
-default. **Stop on first error** would abandon the run at the first bad request.
+## Step 4 — Send It
+
+On **Review JSON**, set **Reps:** to `100`. A thousand records go out as ten requests of a
+hundred — fast, and how you would really run a load this size.
+
+On **Execute Batch**, check **Error Handling** is on **Continue processing**. **Stop on
+first error** would abandon the whole run at the first bad request.
 
 Hit **Execute**. Nine requests succeed. One fails.
 
-## Step 3 — One Error Is Not Nine
+## Step 5 — One Error for a Hundred Records
 
-Nine hundred records are in. One request failed, and the Error tab has exactly one row in
-it:
+Nine hundred records are in. The **Error** tab holds a single row:
 
 ```json
 {
@@ -102,28 +97,29 @@ it:
 }
 ```
 
-One error, for a hundred records. The API validates the array and rejects it as a unit, so
-one bad record takes the ninety-nine around it down too — and names only itself. You now
-know a `uom` is wrong somewhere in the last hundred rows. That is the whole of what you know.
+The API validates the array and rejects it as a unit, so one bad record takes the ninety-nine
+around it down with it — and names only itself.
 
-Don't reach for **Reps: 1** and run the thousand again. Those nine hundred records went in
-on nine requests instead of nine hundred, and that speed is worth keeping. You just need to
-open up the one request that failed.
+So you know a `uom` is wrong somewhere in the last hundred rows. You don't know which row.
+You don't know whether it's the only one.
 
-In the Console footer click **Reprocess**, choose **Split array errors**, and **Continue**.
-Dobermann explains what it is about to do — every element of the failed array becomes its
-own transaction — so click **Split**.
+## Step 6 — Narrow It Down
 
-The failed request is now a hundred transactions. Ninety-one go through. Nine fail, each
-one carrying its own error, against its own record.
+Don't set **Reps: 1** and run the thousand again. Nine hundred records went in on nine
+requests, and that speed is worth keeping. Open up the one request that failed instead.
 
-That is the move worth taking with you: **run coarse, split on failure.** You get the speed
-of big requests and the precision of small ones, and you only pay for the precision on the
-records that actually earned it.
+In the Console footer click **Reprocess**, choose **Split array errors**, **Continue**, then
+**Split**. Every element of the failed array becomes a transaction of its own.
 
-## Step 4 — Inspect the Errors
+Ninety-one go through. Nine fail — not one. Each carries its own error, against its own
+record.
 
-The **Error** tab now holds nine rows, and each one names the record and the reason:
+**Run coarse, split on failure.** You get the speed of big requests and the precision of
+small ones, and you only pay for precision on the records that earned it.
+
+## Step 7 — Read the Errors
+
+The **Error** tab now holds nine rows, each naming a record and a reason:
 
 ```json
 {
@@ -132,11 +128,9 @@ The **Error** tab now holds nine rows, and each one names the record and the rea
 }
 ```
 
-Read the message, not just the code. It names the column and the value that's missing —
-which is exactly what you'll need in Step 5.
+Read the message, not just the code. It names the column and the value that is missing.
 
-Nine failures, and they split into two kinds — which is the distinction that matters most
-in this entire course:
+The nine split into two kinds, and this is the distinction that matters most in the course:
 
 - **`FK_VIOLATION`** — five records pointing at a GTIN or location GLN that doesn't exist in
   the reference tables. The records are fine; the master data is missing. **You can fix these.**
@@ -144,18 +138,14 @@ in this entire course:
   `BOXES` or `PALLETS` when only `EA`, `CS`, `PL` and `KG` are allowed, and a status of
   `expired` or `deleted`. **Bad data at source.**
 
-Real migrations are always this mix. Five of these you can clear yourself in five minutes.
-The other four have to go back to whoever produced the file, and no amount of retrying will
-change their minds.
+Five you can clear yourself in five minutes. Four go back to whoever produced the file.
 
-## Step 5 — Fix the Reference Data
-
-Let's deal with the FK violations by adding the missing master data.
+## Step 8 — Add One Product
 
 Reference records you add are **yours alone** — every learner gets their own view of the
-reference tables, so you can add, break and fix freely without affecting anyone else.
+reference tables, so you can add, break and fix freely.
 
-Start with one product. Create a new endpoint:
+Create a new endpoint and hit **Run API**:
 
 ```json
 // Name: Add Missing Product
@@ -171,24 +161,21 @@ Start with one product. Create a new endpoint:
 }
 ```
 
-Save it and hit **Run API**. You've just created a product in the reference table through
-the API.
+One product, created through the API.
 
-## Step 6 — Turn a Single Request Into a Batch
+## Step 9 — Turn That Into a Batch
 
-Three more GTINs are missing. Rather than hand-writing three more endpoints, let's convert
-the one you have.
+Three more GTINs are missing. Convert the endpoint you already have rather than writing three
+more.
 
-Open **Add Missing Product**. Put your cursor on the `"gtin"` line and press **Ctrl+M**:
+Open **Add Missing Product**, put your cursor on the `"gtin"` line and press **Ctrl+M**:
 
 ```json
 "gtin": "{{gtin:string}}", //99999999999999
 ```
 
-Dobermann has replaced the hardcoded value with a template variable, named it from the key,
-typed it from the value, and preserved the original in a comment so you don't lose it.
-
-Do the same for every line. Your body becomes:
+Dobermann replaced the hardcoded value with a variable, named it from the key, typed it from
+the value, and kept the original in a comment. Do the same for every line:
 
 ```json
 {
@@ -199,13 +186,11 @@ Do the same for every line. Your body becomes:
 }
 ```
 
-Notice it worked out `unitPrice:number` on its own, from the fact the value was numeric.
+It worked out `unitPrice:number` on its own, from the value. The footer has grown a **Run
+Batch** button beside **Run API**.
 
-Your static endpoint is now a batch template — the footer has grown a **Run Batch** button
-beside **Run API**.
-
-Save, click **Run Batch**, and in **Load Data** switch to the **Paste Text** tab. Copy the
-CSV below, paste it in, and click **Import Data** — no file needed:
+Save, click **Run Batch**, and in **Load Data** switch to the **Paste Text** tab. Paste this
+and click **Import Data** — no file needed:
 
 ```csv
 gtin,sku,description,unitPrice
@@ -214,9 +199,9 @@ gtin,sku,description,unitPrice
 55555555555555,SKU-FIX-004,Teleportation Dog Bed,199.99
 ```
 
-Run the batch. Three products, one execution.
+Run it. Three products, one execution.
 
-Now the missing locations. Same pattern — new endpoint:
+Now the missing locations. Same pattern — a new endpoint:
 
 ```json
 // Name: Add Missing Location
@@ -230,7 +215,7 @@ Now the missing locations. Same pattern — new endpoint:
 }
 ```
 
-Convert each line with **Ctrl+M**, save, then **Run Batch** → **Paste Text** with this CSV:
+**Ctrl+M** each line, save, then **Run Batch** → **Paste Text** with this:
 
 ```csv
 gln,name
@@ -239,31 +224,27 @@ gln,name
 8888888888888,Ghost Distribution Center
 ```
 
-Run the batch.
+Run it. Any endpoint becomes a batch endpoint the moment its values become `{{variables}}`.
 
-That's the whole trick with template variables: any endpoint becomes a batch endpoint the
-moment you replace its hardcoded values with `{{variables}}`.
-
-## Step 7 — Reprocess the Failures
+## Step 10 — Reprocess
 
 Open {icon:nav-history} **History** and open the failed inventory batch. In the Console
-footer click **Reprocess**, choose **Errors only**, and **Continue**. This time it reprocesses
-the nine individual transactions the split left behind — not the whole hundred.
+footer click **Reprocess**, choose **Errors only**, then **Continue**. It reprocesses the
+nine transactions the split left behind, not the whole hundred.
 
-Five clear. The products and locations they were pointing at now exist, so the records go
-through untouched.
+Five clear. The products and locations they pointed at now exist.
 
 Four fail again, and that is the correct outcome — `BOXES`, `PALLETS`, `expired` and
 `deleted` are still exactly as wrong as they were ten minutes ago.
 
-Look closely at that last group and you'll spot something. `SKU-BAD-004` had a missing GTIN
-*and* an invalid `uom` of `PALLETS`. You added the product for it in Step 6, and it still
-fails — because it had a second problem that adding reference data was never going to solve.
-Records with more than one thing wrong are completely normal, and they are why you always
-re-read the error after a reprocess instead of assuming your fix worked.
+Look at `SKU-BAD-004`. It had a missing GTIN *and* an invalid `uom` of `PALLETS`. You added
+its product in Step 9 and it still fails, because it had a second problem that master data
+was never going to solve. Always re-read the error after a reprocess instead of assuming
+your fix worked.
 
-You now have the complete loop: load, fail, diagnose, fix, reprocess. That loop is most of
-what a data migration actually is.
+Ten broken records, then. One you caught before sending anything, nine the API caught, five
+you fixed yourself, and four that go back to whoever produced the file. Load, fail, diagnose,
+fix, reprocess — that loop is most of what a data migration actually is.
 
 > **🐾 Dobermann Philosophy**
 >

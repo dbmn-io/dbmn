@@ -117,6 +117,16 @@ The renderers rely on these, so keep to them:
   but aren't Dobermann itself (Lesson 4's API-side filtering is the model). The main steps
   teach the product; bonus credit teaches the habit around it.
 - Prose above the first `## Step` is lesson intro copy.
+- **A step is one action and one thing to notice.** Two verbs in the title means two steps.
+  Aim for 60-150 words; a step over ~200 is a wall and should be split. Lesson 3 is the
+  worked example: ten steps, ~1,200 words.
+- **Never write "Step" inside a step.** The Run Batch loader has its own numbered screens;
+  call them by name (Load Data, Map & Transform, Review & Edit Data, Review JSON, Execute
+  Batch) so the lesson's own numbering is the only one on the page.
+- **End a step with what the learner should see**, so they can check themselves before
+  moving on.
+- **Don't give away a number the lesson is about to reveal.** Lesson 3 never says how many
+  records are broken until the close, because finding that out is the lesson.
 - **Every fenced code block gets a Copy button.** Don't fence anything you don't want copied.
 - Blockquotes starting `> **🐾 Dobermann Philosophy**` or `> **🦴 Dig Deeper**` render as
   callouts at the foot of the lesson. Any other blockquote renders as an inline aside.
