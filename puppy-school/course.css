@@ -260,35 +260,73 @@
     text-decoration: underline;
 }
 
-/* Aside — marginalia, not another highlighted box. Detail a curious learner can read now or
-   skip entirely; the step has to make sense without it, so it must not compete with the
-   instructions around it. Quieter than .ps-callout on purpose: no fill, muted rule, smaller
-   type. Directly under a code block it closes the gap and reads as a note on that block. */
-.ps-callout.ps-aside {
-    background: none;
-    border-left: 2px solid var(--brand-border);
-    border-radius: 0;
-    padding: 0.75rem 0 0.75rem 1.25rem;
+/* Margin note — optional detail, parked out of the reading line.
+ *
+ * Tagged `{: .ps-margin-note}` on a blockquote in the lesson. The step must read straight
+ * through without it, so on a wide screen it leaves the flow entirely and floats in the
+ * right-hand margin beside the paragraph or code block it belongs to. `top` is left alone,
+ * so it keeps the vertical position it had in the source and lands next to its subject; the
+ * main column closes up behind it, which is what makes it genuinely skippable.
+ *
+ * It is a card, not a tinted stripe: out there over the page gradient it has to read as a
+ * separate object, and that contrast is the only thing telling a reader it is optional —
+ * nothing labels it.
+ *
+ * Below the breakpoint there is no margin to move into, so it stays in the flow as a card,
+ * still visibly a different kind of thing from the instructions around it. */
+.ps-callout.ps-margin-note {
+    background: rgba(255, 255, 255, 0.055);
+    border: 1px solid var(--brand-border);
+    border-left: 1px solid var(--brand-border);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
     margin: 1rem 0 1.5rem 0;
 }
 
-.ps-code-wrapper + .ps-callout.ps-aside {
-    margin-top: 0.5rem;
+.ps-code-wrapper + .ps-callout.ps-margin-note {
+    margin-top: 0.75rem;
 }
 
-.ps-callout.ps-aside .ps-callout-title {
-    color: var(--brand-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    font-size: 0.7rem;
+.ps-callout.ps-margin-note .ps-callout-title {
+    color: var(--brand-text);
+    font-size: 0.78rem;
+    margin-bottom: 0.5rem;
 }
 
-.ps-callout.ps-aside p {
-    font-size: 0.82rem;
+.ps-callout.ps-margin-note p {
+    font-size: 0.8rem;
+    line-height: 1.55;
 }
 
-.ps-callout.ps-aside p + p {
+.ps-callout.ps-margin-note p + p {
     margin-top: 0.6rem;
+}
+
+/* Long template variables must not push the card wider than the margin allows. */
+.ps-callout.ps-margin-note code {
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* The usable margin is `50vw - 345px` (the step is 690px wide and centred). Reserve 28px of
+ * gutter and 24px of breathing room off the viewport edge, and the note gets what is left,
+ * capped so it never becomes a second column of body text. Below 1300px that leaves too
+ * little to be worth it, so the note stays in the flow. */
+@media (min-width: 1300px) {
+    .ps-step {
+        position: relative;
+    }
+
+    .ps-callout.ps-margin-note {
+        position: absolute;
+        left: 100%;
+        width: min(300px, calc(50vw - 397px));
+        margin: 0 0 0 1.75rem;
+    }
+
+    .ps-code-wrapper + .ps-callout.ps-margin-note {
+        margin-top: 0;
+    }
 }
 
 /* Next / Check Homework button */

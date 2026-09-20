@@ -72,7 +72,7 @@ Let's see it in action. Copy this, open {icon:nav-api-catalogue} **API Catalogue
 // QueryParam: size: {{A8:SIZE:500:pageSize}} [enabled]
 ```
 
-> **🔍 Aside — how Dobermann knows where to stop**
+> **How Dobermann knows where to stop**
 >
 > Those two `QueryParam` lines are pagination variables, and they are the whole trick.
 > `{{A8:PAGE:0:totalCount}}` starts at page `0` and reads `totalCount` out of each response to
@@ -81,6 +81,7 @@ Let's see it in action. Copy this, open {icon:nav-api-catalogue} **API Catalogue
 >
 > You will rarely type them. On an endpoint that has none, the **Pagination** button's
 > **Settings** tab reads a real response and writes them for you.
+{: .ps-margin-note}
 
 Save, and hit **Run API**. The Console opens with page one — 500 rows of 67,000-odd. Dobermann
 never walks a whole API without being asked.
