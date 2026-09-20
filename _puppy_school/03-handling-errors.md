@@ -4,7 +4,7 @@ number: 3
 slug: handling-errors
 title: Handling Errors
 goal: Break the load deliberately, find out why, fix the data, and reprocess the failures
-estimate: ~15 minutes
+estimate: ~20 minutes
 completion:
   criteria: A failed POST /inventory followed by a later successful POST /inventory
   summary: errors triggered, then resolved
@@ -12,7 +12,7 @@ checkpoint:
   pass: Good dog. Errors found, reprocessed, resolved. That's real-world data migration right there.
   fail: We can see you've had a run — but we can't confirm the full error and reprocess cycle. Load the error file, fix the reference data, and reprocess the failed rows.
 note_to_reviewer: >
-  Ten steps, one action each, ~1,000 words — rewritten 2026-09-19 because seven long steps
+  Twelve steps, one action each — rewritten 2026-09-19 because seven long steps
   read as a wall and the loader's own Step 1-5 nested inside lesson Step 2. Never write
   "Step" inside a step: call the loader's screens by name (Load Data, Review & Edit Data,
   Review JSON, Execute Batch).
@@ -27,6 +27,15 @@ note_to_reviewer: >
   After the split: 91 through, 9 individual errors (5 FK_VIOLATION + 4 INSERT_ERROR), then
   5 clear on reprocess and 4 fail again. vs-dbmn `npm run test:e2e:lessons` plays exactly
   this and checks every number.
+  Steps 11-12 close the loop (added 2026-09-20). Deliberately NOT solved with a template
+  rule: {{uom:string|2}} would catch BOXES and PALLETS in the loader, but SKU-BAD-004 carries
+  a missing GTIN AND a bad uom, and that double fault is the point of Step 10 — it must reach
+  the API. The 5-FK/4-INSERT split of Step 7 depends on it too.
+  Step 11 uses column SORT, not a filter: the Input tab's columns carry filterable:true in
+  the data but nothing renders a per-column filter, so sorting and the search box are what
+  actually exist. Step 12's four rows land as NEW inventory rows — the originals never
+  inserted, and the table has no unique key on (gtin, location_gln) — so Lessons 4 and 5
+  count four more rows than the file's thousand. Those counts are measured, not guessed.
   The "yours alone" line in Step 8 is only true once reference rows are user-scoped; until
   that migration lands, learners share reference tables and this lesson stops failing for
   the second learner onward.
@@ -244,9 +253,54 @@ its product in Step 9 and it still fails, because it had a second problem that m
 was never going to solve. Always re-read the error after a reprocess instead of assuming
 your fix worked.
 
-Ten broken records, then. One you caught before sending anything, nine the API caught, five
-you fixed yourself, and four that go back to whoever produced the file. Load, fail, diagnose,
-fix, reprocess — that loop is most of what a data migration actually is.
+## Step 11 — Find the Rows
+
+The error names the constraint. It does not name the record — so before you can fix anything
+you have to work out which four rows these are.
+
+Open the **Input** tab. It holds every row you sent, exactly as the file had it. Click the
+**uom** column header to sort it: `EA`, `CS` and `PL` stack up together, and `BOXES` and
+`PALLETS` sort clear of them. Two rows, found by eye.
+
+Click **status** and do the same. `deleted` and `expired` fall outside the run of `active`
+and `low_stock`.
+
+Four SKUs, and one of them you have already met:
+
+```text
+SKU-WOOF-003-ERR    uom BOXES
+SKU-BAD-004         uom PALLETS
+SKU-WOOF-004-ERR    status expired
+SKU-WOOF-005-ERR    status deleted
+```
+
+Sorting a column to make the odd values fall out of line is the cheapest diagnostic you have.
+Reach for it before you write a filter.
+
+## Step 12 — Fix It at Source
+
+You cannot decide what `BOXES` was supposed to mean. Neither can Dobermann. That is a
+question for whoever produced the extract, and it is the one part of this lesson no tool
+does for you — so you ask, and the answer comes back: `BOXES` is a case, `PALLETS` is a
+pallet, and both `expired` and `deleted` mean the line is `discontinued`.
+
+*Now* you can fix it. Open your inventory endpoint, click **Run Batch**, switch to the
+**Paste Text** tab and paste the four corrected records:
+
+```csv
+gtin,sku,description,locationGln,locationName,quantityOnHand,uom,status
+00012345600036,SKU-WOOF-003-ERR,Squirrel Detection Radar,0614141000036,German Shepherd Sorting Facility,150,CS,active
+00012345600043,SKU-WOOF-004-ERR,Anti-Mailman Defense System,0614141000043,Poodle Processing Center,80,EA,discontinued
+00012345600050,SKU-WOOF-005-ERR,Automatic Treat Dispenser Pro,0614141000050,Bulldog Bulk Warehouse,25,EA,discontinued
+55555555555555,SKU-BAD-004,Teleportation Dog Bed,0614141000029,Labrador Logistics Hub,100,PL,low_stock
+```
+
+Four records, four successes, and nothing left in the Error tab.
+
+Ten broken records, then. One you caught before sending anything and nine the API caught —
+five of those you fixed with master data you could legitimately create, and four you could
+only fix by going back to the source and asking. Load, fail, diagnose, fix, reprocess. That
+loop is most of what a data migration actually is.
 
 > **🐾 Dobermann Philosophy**
 >
