@@ -53,14 +53,16 @@ low on stock, in Excel.**
 
 Everything you need is already in The Training Ground — you put it there in Lesson 2.
 
-## Step 1 — Fetch Everything
+## Step 1 — Pagination
 
-Start by getting all of it. Shaping and filtering come afterwards, and they happen in
-Dobermann — so they work the same on every API you'll ever meet, whatever that API can or
-can't do for itself.
+An API will not hand you everything at once. Ask for 67,000 records and you get the first few
+hundred and a note saying there are more. That is every API you will ever meet.
 
-Copy this, open {icon:nav-api-catalogue} **API Catalogue**, and click {icon:paste-endpoint}
-**Paste Endpoint**:
+Dobermann has a trick up its sleeve. It will walk the pages for you — and as each page comes
+back, its rows are added to the **Completed** tab. One click, one table, all of it.
+
+Let's see it in action. Copy this, open {icon:nav-api-catalogue} **API Catalogue**, and click
+{icon:paste-endpoint} **Paste Endpoint**:
 
 ```json
 // Name: Puppy School — Inventory Report
@@ -70,26 +72,24 @@ Copy this, open {icon:nav-api-catalogue} **API Catalogue**, and click {icon:past
 // QueryParam: size: {{A8:SIZE:500:pageSize}} [enabled]
 ```
 
-No API hands over 67,000 records in one response, so this one comes in pages. Those two
-values are Dobermann's **pagination variables**:
+> **🔍 Aside — how Dobermann knows where to stop**
+>
+> Those two `QueryParam` lines are pagination variables, and they are the whole trick.
+> `{{A8:PAGE:0:totalCount}}` starts at page `0` and reads `totalCount` out of each response to
+> work out how many pages there are. `{{A8:SIZE:500:pageSize}}` asks for `500` a page and reads
+> `pageSize` back to check the API agreed.
+>
+> You will rarely type them. On an endpoint that has none, the **Pagination** button's
+> **Settings** tab reads a real response and writes them for you.
 
-- `{{A8:PAGE:0:totalCount}}` — start at page `0`, and read `totalCount` from each response to
-  work out how many pages there are
-- `{{A8:SIZE:500:pageSize}}` — ask for `500` records a page, and read `pageSize` back to check
-  the API agreed
+Save, and hit **Run API**. The Console opens with page one — 500 rows of 67,000-odd. Dobermann
+never walks a whole API without being asked.
 
-You'll rarely type these. On an endpoint without them, the **Pagination** button you're about
-to meet has a **Settings** tab that reads a real response and writes them for you.
+So ask. In the Console footer click **Pagination**, choose **Fetch all pages**, and click
+**Run**.
 
-Save, and hit **Run API**. The Console opens with **page one only** — 500 rows of 67,000-odd.
-Dobermann never walks a whole API without being asked.
-
-So ask. In the Console footer, click **Pagination**. The **Execute** tab shows what it found —
-the total, the page size, how many pages are left — and two choices. Pick **Fetch all pages**
-and click **Run**.
-
-Pages stream in several at a time, and the row count at the bottom of the table climbs as
-they land. Dobermann loves to fetch.
+Pages stream in several at a time and the row count climbs as they land. Dobermann loves to
+fetch.
 
 ## Step 2 — Find the Data in the Response
 

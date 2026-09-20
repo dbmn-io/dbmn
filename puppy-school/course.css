@@ -260,6 +260,37 @@
     text-decoration: underline;
 }
 
+/* Aside — marginalia, not another highlighted box. Detail a curious learner can read now or
+   skip entirely; the step has to make sense without it, so it must not compete with the
+   instructions around it. Quieter than .ps-callout on purpose: no fill, muted rule, smaller
+   type. Directly under a code block it closes the gap and reads as a note on that block. */
+.ps-callout.ps-aside {
+    background: none;
+    border-left: 2px solid var(--brand-border);
+    border-radius: 0;
+    padding: 0.75rem 0 0.75rem 1.25rem;
+    margin: 1rem 0 1.5rem 0;
+}
+
+.ps-code-wrapper + .ps-callout.ps-aside {
+    margin-top: 0.5rem;
+}
+
+.ps-callout.ps-aside .ps-callout-title {
+    color: var(--brand-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 0.7rem;
+}
+
+.ps-callout.ps-aside p {
+    font-size: 0.82rem;
+}
+
+.ps-callout.ps-aside p + p {
+    margin-top: 0.6rem;
+}
+
 /* Next / Check Homework button */
 .ps-action-bar {
     margin-top: 2rem;

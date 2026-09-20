@@ -125,11 +125,18 @@
         });
 
         // Callouts: > **🐾 Dobermann Philosophy** / > **🦴 Dig Deeper** / > **A note …**
+        // An "Aside" is the quiet one: detail a curious learner can read now or skip. It
+        // styles as marginalia and, when it follows a code block, attaches to it — the step
+        // itself must still read straight through without it.
         content.querySelectorAll('blockquote').forEach(function(quote) {
             var lead = quote.querySelector('p:first-child > strong:first-child');
             quote.classList.add('ps-callout');
             if (lead) {
-                var titleEl = el('div', 'ps-callout-title', lead.textContent.trim());
+                var text = lead.textContent.trim();
+                // The code block is wrapped later in this pass, so an aside that follows one
+                // is attached in CSS (.ps-code-wrapper + .ps-aside), not from here.
+                if (/^(\W*\s*)?Aside\b/.test(text)) { quote.classList.add('ps-aside'); }
+                var titleEl = el('div', 'ps-callout-title', text);
                 var firstPara = lead.parentNode;
                 firstPara.removeChild(lead);
                 if (!firstPara.textContent.trim()) { quote.removeChild(firstPara); }
