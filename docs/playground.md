@@ -131,7 +131,6 @@ Upload inventory records in bulk. Accepts an array of items — ideal for demons
 // Name: Puppy School — Bulk Inventory Upload
 // Method: POST
 // Path: /inventory
-// Header: Content-Type: application/json [enabled]
 
 [
   {
@@ -180,7 +179,6 @@ Paginated inventory listing. Configure this endpoint to demonstrate Dobermann's 
 // Name: Puppy School — Update Inventory
 // Method: PUT
 // Path: /inventory/{{id}}
-// Header: Content-Type: application/json [enabled]
 
 {
   "quantityOnHand": "{{quantityOnHand:number}}",
@@ -208,7 +206,6 @@ Paginated inventory listing. Configure this endpoint to demonstrate Dobermann's 
 // Name: Puppy School — Create Purchase Orders
 // Method: POST
 // Path: /purchase-orders
-// Header: Content-Type: application/json [enabled]
 
 {
   "poNumber": "{{poNumber}}",
@@ -264,7 +261,6 @@ Returns the PO with nested `buyer`/`supplier` objects and all line items (each w
 // Name: Puppy School — Update Purchase Order
 // Method: PUT
 // Path: /purchase-orders/{{id}}
-// Header: Content-Type: application/json [enabled]
 
 {
   "status": "{{status}}"
@@ -291,7 +287,6 @@ The most complex template: shipments contain packages, which contain items. All 
 // Name: Puppy School — Create Shipments (3-level)
 // Method: POST
 // Path: /shipments
-// Header: Content-Type: application/json [enabled]
 
 {
   "shipmentId": "{{shipmentId}}",
@@ -353,7 +348,6 @@ Returns the full 3-level hierarchy: shipment with nested `carrier`/`origin`/`des
 // Name: Puppy School — Update Shipment
 // Method: PUT
 // Path: /shipments/{{id}}
-// Header: Content-Type: application/json [enabled]
 
 {
   "status": "{{status}}"

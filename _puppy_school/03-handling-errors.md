@@ -155,7 +155,6 @@ Create a new endpoint and hit **Run API**:
 // Name: Add Missing Product
 // Method: POST
 // Path: /reference/products
-// Header: Content-Type: application/json [enabled]
 
 {
   "gtin": "99999999999999",
@@ -211,7 +210,6 @@ Now the missing locations. Same pattern — a new endpoint:
 // Name: Add Missing Location
 // Method: POST
 // Path: /reference/locations
-// Header: Content-Type: application/json [enabled]
 
 {
   "gln": "9999999999999",

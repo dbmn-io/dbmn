@@ -30,7 +30,6 @@ and click {icon:paste-endpoint} **Paste Endpoint** — the same button you used 
 // Name: Puppy School — Bulk Inventory Upload
 // Method: POST
 // Path: /inventory
-// Header: Content-Type: application/json [enabled]
 
 [
   {

@@ -80,7 +80,6 @@ Create a new endpoint. This time you're writing the body yourself, not pasting a
 // Name: My Replenishment Orders
 // Method: POST
 // Path: /purchase-orders
-// Header: Content-Type: application/json [enabled]
 ```
 
 In the body, write a single, complete, real purchase order with hardcoded values — two
