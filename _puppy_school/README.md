@@ -129,7 +129,14 @@ The renderers rely on these, so keep to them:
   records are broken until the close, because finding that out is the lesson.
 - **Every fenced code block gets a Copy button.** Don't fence anything you don't want copied.
 - Blockquotes starting `> **🐾 Dobermann Philosophy**` or `> **🦴 Dig Deeper**` render as
-  callouts at the foot of the lesson. Any other blockquote renders as an inline aside.
+  callouts at the foot of the lesson. Any other blockquote renders as an inline callout.
+- **Optional detail belongs in the margin.** Tag a blockquote `{: .ps-margin-note}` on the
+  line straight after it and, on a screen wide enough to hold one, it leaves the flow and
+  sits in the right margin, lined up with the top of the block above it. Use it for the
+  "how does this actually work" detail a curious learner might want and everyone else
+  should be able to skip — the step has to read straight through without it, so never put
+  an instruction there. Its bold first line is the title; don't label it as a note or an
+  aside, the placement already says that. Below the breakpoint it stays in the flow.
 - `<!-- share-it-back -->` is replaced by the share-it-back thread (lessons with a `review`
   block only). HTML comment so Liquid and both renderers pass it through.
 - `<!-- paste-it-back -->` is replaced by the paste box (lessons with a `verify` block only).
