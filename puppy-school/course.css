@@ -260,72 +260,77 @@
     text-decoration: underline;
 }
 
-/* Margin note — optional detail, parked out of the reading line.
+/* Boxout — optional detail, set to one side with the text running past it.
  *
- * Tagged `{: .ps-margin-note}` on a blockquote in the lesson. The step must read straight
- * through without it, so on a wide screen it leaves the flow entirely and floats in the
- * right-hand margin beside the paragraph or code block it belongs to. `top` is left alone,
- * so it keeps the vertical position it had in the source and lands next to its subject; the
- * main column closes up behind it, which is what makes it genuinely skippable.
+ * Tagged `{: .ps-boxout}` on a blockquote in the lesson. A newspaper boxout: it floats right
+ * inside the same column and the instructions flow down its left, so the step reads straight
+ * through whether or not you stop to read the box. Nothing is reserved for it and nothing
+ * hangs off the page — an empty step is exactly as wide as a full one.
  *
- * It is a card, not a tinted stripe: out there over the page gradient it has to read as a
- * separate object, and that contrast is the only thing telling a reader it is optional —
- * nothing labels it.
- *
- * Below the breakpoint there is no margin to move into, so it stays in the flow as a card,
- * still visibly a different kind of thing from the instructions around it. */
-.ps-callout.ps-margin-note {
+ * It is a card, not a tinted stripe. Contrast against the lesson surface is the only thing
+ * telling a reader this is optional; nothing labels it. */
+.ps-callout.ps-boxout {
+    float: right;
+    width: 45%;
+    max-width: 320px;
+    clear: right;
     background: rgba(255, 255, 255, 0.055);
     border: 1px solid var(--brand-border);
-    border-left: 1px solid var(--brand-border);
     border-radius: 8px;
     padding: 0.9rem 1.1rem;
-    margin: 1rem 0 1.5rem 0;
+    margin: 0.25rem 0 1rem 1.75rem;
 }
 
-.ps-code-wrapper + .ps-callout.ps-margin-note {
-    margin-top: 0.75rem;
+/* Contain the float so it can never reach the next step, or off a page that has no steps. */
+.ps-step,
+.ps-content {
+    display: flow-root;
 }
 
-.ps-callout.ps-margin-note .ps-callout-title {
+/* Only inline content wraps around a float. A block box slides UNDER it, so a code block,
+ * table or callout following a boxout would be covered by it — push them clear instead.
+ * This is why a boxout needs running prose after it to be worth using at all. */
+.ps-code-wrapper,
+.ps-table-wrap,
+.ps-callout:not(.ps-boxout) {
+    clear: right;
+}
+
+/* ...but a block INSIDE a boxout must not clear the boxout's own float, or it drops out of
+ * the bottom of the box it belongs to. */
+.ps-boxout .ps-code-wrapper,
+.ps-boxout .ps-table-wrap {
+    clear: none;
+}
+
+.ps-callout.ps-boxout .ps-callout-title {
     color: var(--brand-text);
     font-size: 0.78rem;
     margin-bottom: 0.5rem;
 }
 
-.ps-callout.ps-margin-note p {
+.ps-callout.ps-boxout p {
     font-size: 0.8rem;
     line-height: 1.55;
 }
 
-.ps-callout.ps-margin-note p + p {
+.ps-callout.ps-boxout p + p {
     margin-top: 0.6rem;
 }
 
-/* Long template variables must not push the card wider than the margin allows. */
-.ps-callout.ps-margin-note code {
+/* Long template variables must not push the box wider than its float. */
+.ps-callout.ps-boxout code {
     overflow-wrap: break-word;
     word-break: break-word;
 }
 
-/* The usable margin is `50vw - 345px` (the step is 690px wide and centred). Reserve 28px of
- * gutter and 24px of breathing room off the viewport edge, and the note gets what is left,
- * capped so it never becomes a second column of body text. Below 1300px that leaves too
- * little to be worth it, so the note stays in the flow. */
-@media (min-width: 1300px) {
-    .ps-step {
-        position: relative;
-    }
-
-    .ps-callout.ps-margin-note {
-        position: absolute;
-        left: 100%;
-        width: min(300px, calc(50vw - 397px));
-        margin: 0 0 0 1.75rem;
-    }
-
-    .ps-code-wrapper + .ps-callout.ps-margin-note {
-        margin-top: 0;
+/* Too narrow to set text beside it: drop the float and let it be a card in the flow. */
+@media (max-width: 760px) {
+    .ps-callout.ps-boxout {
+        float: none;
+        width: auto;
+        max-width: none;
+        margin: 1rem 0 1.5rem 0;
     }
 }
 

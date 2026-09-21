@@ -125,10 +125,10 @@
         });
 
         // Callouts: > **🐾 Dobermann Philosophy** / > **🦴 Dig Deeper** / > **A note …**
-        // A blockquote tagged `{: .ps-margin-note}` in the lesson is the quiet one: optional
-        // detail that moves into the right margin on a wide screen. The class comes straight
-        // from kramdown, so nothing here has to detect it and no marker word reaches the
-        // reader — the placement is what says "you can skip this".
+        // A blockquote tagged `{: .ps-boxout}` in the lesson floats to one side with the
+        // instructions running past it. The class comes straight from kramdown, so nothing
+        // here has to detect it and no marker word reaches the reader — the placement is
+        // what says "you can skip this". All of it is CSS; there is nothing to do here.
         content.querySelectorAll('blockquote').forEach(function(quote) {
             var lead = quote.querySelector('p:first-child > strong:first-child');
             quote.classList.add('ps-callout');
@@ -175,33 +175,6 @@
             if (label) { node.textContent = label; }
         });
 
-        alignMarginNotes(content);
-        var realign;
-        window.addEventListener('resize', function() {
-            clearTimeout(realign);
-            realign = setTimeout(function() { alignMarginNotes(content); }, 120);
-        });
-    }
-
-    /**
-     * Line a margin note up with the top of the block it belongs to.
-     *
-     * Left alone, an absolutely positioned note keeps the vertical position it had in the
-     * source — i.e. it starts *below* the code block it is explaining, which reads as a
-     * footnote rather than a note on that block. Pulling it up to its subject's top is what
-     * makes it a margin note. CSS cannot do this: the subject's height is not knowable.
-     *
-     * Only runs where the stylesheet has actually taken the note out of the flow, so the
-     * narrow layout is untouched, and it re-runs on resize because the breakpoint can change
-     * under it.
-     */
-    function alignMarginNotes(content) {
-        content.querySelectorAll('.ps-margin-note').forEach(function(note) {
-            note.style.top = '';
-            if (window.getComputedStyle(note).position !== 'absolute') { return; }
-            var subject = note.previousElementSibling;
-            if (subject) { note.style.top = subject.offsetTop + 'px'; }
-        });
     }
 
     function renderPager() {

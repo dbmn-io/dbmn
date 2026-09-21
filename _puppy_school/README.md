@@ -130,13 +130,21 @@ The renderers rely on these, so keep to them:
 - **Every fenced code block gets a Copy button.** Don't fence anything you don't want copied.
 - Blockquotes starting `> **🐾 Dobermann Philosophy**` or `> **🦴 Dig Deeper**` render as
   callouts at the foot of the lesson. Any other blockquote renders as an inline callout.
-- **Optional detail belongs in the margin.** Tag a blockquote `{: .ps-margin-note}` on the
-  line straight after it and, on a screen wide enough to hold one, it leaves the flow and
-  sits in the right margin, lined up with the top of the block above it. Use it for the
-  "how does this actually work" detail a curious learner might want and everyone else
-  should be able to skip — the step has to read straight through without it, so never put
-  an instruction there. Its bold first line is the title; don't label it as a note or an
-  aside, the placement already says that. Below the breakpoint it stays in the flow.
+- **Optional detail goes in a boxout.** Tag a blockquote `{: .ps-boxout}` on the line
+  straight after it and it floats to the right of the column, with the instructions running
+  down its left — a newspaper boxout. Use it for the "how does this actually work" detail a
+  curious learner might want and everyone else should be able to skip, so never put an
+  instruction in one: the step must read straight through without it. Its bold first line is
+  the title; don't label it a note, a boxout or an aside — the box already says that. On a
+  narrow screen it becomes a full-width card in the flow.
+- **A boxout needs prose after it.** Only inline content wraps around a float; a code fence,
+  a table or another callout slides under one, so those are pushed clear instead. Put a
+  boxout before the paragraphs meant to run down its side — never last in a step, never
+  immediately before a fence or a table, or you get a box with an empty gutter beside it.
+  That rule is why the existing callouts stayed as they are (reviewed 2026-09-21): the
+  Philosophy and Dig Deeper pairs close a lesson with nothing after them; "In a hurry?" and
+  "Need to start over?" are actions the reader is meant to take, one of them carrying a
+  fence that will not fit a float; "A note on the dogs" ends the landing page.
 - `<!-- share-it-back -->` is replaced by the share-it-back thread (lessons with a `review`
   block only). HTML comment so Liquid and both renderers pass it through.
 - `<!-- paste-it-back -->` is replaced by the paste box (lessons with a `verify` block only).

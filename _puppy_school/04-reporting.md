@@ -81,7 +81,7 @@ Let's see it in action. Copy this, open {icon:nav-api-catalogue} **API Catalogue
 >
 > You will rarely type them. On an endpoint that has none, the **Pagination** button's
 > **Settings** tab reads a real response and writes them for you.
-{: .ps-margin-note}
+{: .ps-boxout}
 
 Save, and hit **Run API**. The Console opens with page one — 500 rows of 67,000-odd. Dobermann
 never walks a whole API without being asked.
