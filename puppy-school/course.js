@@ -82,16 +82,66 @@
         state.badges = result.data.badges || [];
     }
 
+    /**
+     * How far the learner has earned their way, as an index into meta.lessons.
+     *
+     * Everything up to and including that index is open; anything past it is locked. Returns
+     * Infinity when we have no right to an opinion — signed out, or progress not loaded yet —
+     * because the lesson pages are public on purpose and a locked rail would be a lie we
+     * cannot back up. The gate that actually matters is server-side: graduation needs five
+     * recorded passes, and no amount of clicking ahead produces one.
+     */
+    function reachedIndex() {
+        if (!state.user || !state.progress) { return Infinity; }
+        var order = meta.lessons.map(function(l) { return l.id; });
+        var next = state.progress.nextLesson;
+        return next ? order.indexOf(next) : order.length;
+    }
+
+    /** An <a> with no href is inert and unfocusable — the simplest honest "not yet". */
+    function setLocked(link, locked, reason) {
+        if (locked) {
+            if (link.hasAttribute('href')) {
+                link.setAttribute('data-href', link.getAttribute('href'));
+                link.removeAttribute('href');
+            }
+            link.setAttribute('aria-disabled', 'true');
+            link.title = reason;
+        } else {
+            if (!link.hasAttribute('href') && link.hasAttribute('data-href')) {
+                link.setAttribute('href', link.getAttribute('data-href'));
+            }
+            link.removeAttribute('aria-disabled');
+        }
+        link.classList.toggle('is-locked', locked);
+    }
+
+    function lockReason() {
+        var next = state.progress && state.progress.nextLesson ? lessonById(state.progress.nextLesson) : null;
+        return next ? 'Finish Lesson ' + next.number + ' first' : 'Not yet';
+    }
+
     function renderRail() {
         var done = state.progress ? state.progress.completed : [];
         var next = state.progress ? state.progress.nextLesson : null;
+        var graduated = !!(state.progress && state.progress.graduatedAt);
+        var order = meta.lessons.map(function(l) { return l.id; });
+        var reached = reachedIndex();
         document.querySelectorAll('.ps-rail-item').forEach(function(item) {
             var id = item.getAttribute('data-lesson');
-            var complete = id === 'graduation' ? !!(state.progress && state.progress.graduatedAt) : done.indexOf(id) !== -1;
+            var complete = id === 'graduation' ? graduated : done.indexOf(id) !== -1;
+            var locked = id === 'graduation'
+                ? (reached !== Infinity && !graduated)
+                : order.indexOf(id) > reached;
             item.classList.toggle('is-complete', complete);
             item.classList.toggle('is-next', !!state.user && id === next);
-            item.title = complete ? 'Passed' : '';
+            // Never lock the page you are already on: it would strand a learner who got here
+            // from the extension, a bookmark or a link, with no way back into the rail.
+            if (item.getAttribute('aria-current') === 'page') { locked = false; }
+            setLocked(item, locked, id === 'graduation' ? 'Finish all five lessons first' : lockReason());
+            if (!locked) { item.title = complete ? 'Passed' : ''; }
         });
+        renderPagerLocks();
     }
 
     // ------------------------------------------------------------------ lesson body
@@ -190,7 +240,24 @@
         } else { pager.appendChild(el('span')); }
         var forward = el('a', 'ps-pager-link ps-pager-next', next ? 'Lesson ' + next.number + ': ' + next.title + ' →' : 'Graduation →');
         forward.href = next ? next.url : '/puppy-school/graduation/';
+        forward.setAttribute('data-lesson', next ? next.id : 'graduation');
         pager.appendChild(forward);
+        renderPagerLocks();
+    }
+
+    /** The pager forward link obeys the same rule as the rail, and is re-checked whenever
+     *  progress arrives — the pager is built before the first badge call comes back. */
+    function renderPagerLocks() {
+        var forward = document.querySelector('.ps-pager-next');
+        if (!forward) { return; }
+        var id = forward.getAttribute('data-lesson');
+        var order = meta.lessons.map(function(l) { return l.id; });
+        var reached = reachedIndex();
+        var graduated = !!(state.progress && state.progress.graduatedAt);
+        var locked = id === 'graduation'
+            ? (reached !== Infinity && !graduated)
+            : order.indexOf(id) > reached;
+        setLocked(forward, locked, id === 'graduation' ? 'Finish all five lessons first' : lockReason());
     }
 
     // ------------------------------------------------------------------ checkpoint

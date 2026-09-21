@@ -590,6 +590,20 @@
 .ps-rail-item.is-complete .ps-rail-dot { background: #34c759; border-color: #34c759; color: #0b1a10; }
 .ps-rail-item:hover .ps-rail-label { color: var(--brand-text); }
 
+/* Not yet earned. The <a> has already had its href removed in JS, so this only has to stop
+ * it *looking* clickable — dimmed, no hover lift, default cursor. Deliberately not
+ * `pointer-events: none`, so the title still explains why on hover. */
+.ps-rail-item.is-locked,
+.ps-pager-link.is-locked {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.ps-rail-item.is-locked:hover .ps-rail-label,
+.ps-pager-link.is-locked:hover {
+    color: var(--brand-text-muted);
+}
+
 /* Markdown body */
 .ps-lesson-title { font-size: 1.9rem; margin: 0.25rem 0 0.5rem; color: var(--brand-text); }
 .ps-content { color: var(--brand-text-body); line-height: 1.7; }
