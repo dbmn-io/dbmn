@@ -128,13 +128,15 @@ Two separate dials, and most people only ever find the first one:
 | **Processing Mode** — threads | How many requests are in flight at the same time |
 | **Reps** | How many records ride inside each request |
 
+> **Why a thousand?**
+>
+> Because it is this API's published maximum, not a universal answer. Every API has its own
+> limit, and the right number is the largest one it will accept without complaining.
+{: .ps-boxout}
+
 Threads make you faster. Reps make you *smaller* — fewer connections, less overhead, less
 load on the API you're being trusted with. Turning both up is how a load that took an
 afternoon takes a minute.
-
-A thousand is not a universal answer, by the way — it's this API's published maximum. Every
-API has its own limit, and the right number is the largest one it will accept without
-complaining.
 
 > **Need to start over?**
 >
