@@ -73,10 +73,13 @@ gtin,sku,description,locationGln,locationName,quantityOnHand,uom,status
 00012345600012,SKU-PUPPY-001,Premium Belly Rub Machine,0614141000012,Golden Retriever Distribution Center,12,EA,active
 ```
 
-Dobermann reads the header row, matches each column to its variable, and fills the whole
-form from the data row. A row copied straight out of Excel works the same way, and so does
-Ctrl+V in any field. Both codes are real — you saw them in Lesson 1's products and
-locations.
+> **How Paste fills the form**
+>
+> Dobermann reads the header row, matches each column to its variable, and fills the whole
+> form from the data row. A row copied straight out of Excel works the same way, and so does
+> Ctrl+V in any field. Both codes are real — you saw them in Lesson 1's products and
+> locations.
+{: .ps-boxout}
 
 Check the fields, then click **Run**.
 

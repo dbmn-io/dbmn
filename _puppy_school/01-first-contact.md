@@ -35,8 +35,11 @@ In the Hub, open {icon:nav-environments} **Environments** and add a new one:
 | Base URL | `https://api.dbmn.io/functions/v1/playground` |
 | Authentication | `DBMN` |
 
-No tokens to copy. No headers to configure by hand. Dobermann injects your authentication
-automatically at runtime, across every endpoint in this environment.
+> **Auth you never type**
+>
+> No tokens to copy, no headers to configure by hand. Dobermann injects your authentication
+> at runtime, across every endpoint in this environment.
+{: .ps-boxout}
 
 One more setting while you're here. Under **Execution Settings**, tick **Enable parallel
 batch processing** and set **Max Concurrency** to **Extreme Parallel — 16 concurrent
