@@ -523,7 +523,7 @@ footer a:hover {
 
 /* Badges — the collection every user has. One picture per badge (exported from the
  * extension into _data/dbmn_badges.json, served at /account/badges.json); a locked badge
- * is the SAME picture, greyed out. */
+ * is a generic outline, never the picture — what is on a badge is a surprise until earned. */
 .dbmn-badge-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
@@ -543,5 +543,5 @@ footer a:hover {
 .dbmn-badge-art { width: 60px; height: 60px; line-height: 0; }
 .dbmn-badge-art svg { width: 100%; height: 100%; }
 .dbmn-badge-name { font-size: 0.72rem; line-height: 1.3; color: #ffffff; }
-.dbmn-badge-locked .dbmn-badge-art { filter: grayscale(1); opacity: 0.3; }
+.dbmn-badge-locked .dbmn-badge-art { color: #a0a0b0; opacity: 0.6; }   /* a generic outline, in currentColor */
 .dbmn-badge-locked .dbmn-badge-name { color: #a0a0b0; }

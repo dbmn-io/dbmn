@@ -63,6 +63,9 @@
     gap: 0.3rem;
 }
 
+.ps-lesson-trick { color: #f2b632; }
+.ps-lesson-trick svg { width: 1.05em; height: 1.05em; }
+
 .ps-lesson-title {
     font-family: var(--brand-font-heading);
     font-size: 1.5rem;
@@ -584,6 +587,10 @@
     color: var(--brand-text-muted);
     transition: background 0.2s ease, border-color 0.2s ease;
 }
+/* The dot carries the lesson's trick (the glyph on its badge), in the dot's own colour. */
+.ps-rail-dot svg { width: 16px; height: 16px; }
+.ps-rail-trick { display: block; font-size: 0.66rem; opacity: 0.7; }
+.ps-rail-item.is-complete .ps-rail-trick { color: #f2b632; opacity: 1; }
 .ps-rail-item[aria-current="page"] { color: var(--brand-text); }
 .ps-rail-item[aria-current="page"] .ps-rail-dot { border-color: var(--brand-accent); color: var(--brand-text); }
 .ps-rail-item.is-next .ps-rail-dot { border-color: var(--brand-accent); }
@@ -708,6 +715,13 @@ blockquote.ps-callout p:last-child { margin-bottom: 0; }
 .ps-pager-link:hover { color: var(--brand-text); }
 .ps-cta { margin: 1.5rem 0; }
 .ps-cta .ps-pager-link { display: inline-block; margin-top: 0.75rem; }
+
+/* Pass screen: the badge just earned, and the trick it stands for. */
+.ps-trick-earned { display: flex; align-items: center; gap: 0.9rem; margin: 1rem 0; }
+.ps-trick-earned-art { width: 64px; height: 64px; flex: none; line-height: 0; }
+.ps-trick-earned-art svg { width: 100%; height: 100%; }
+.ps-trick-earned-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--brand-text-muted); }
+.ps-trick-earned-name { font-family: var(--brand-font-heading); font-size: 1.15rem; color: #f2b632; }
 
 /* Certificate */
 .ps-certificate { margin: 1.25rem 0 0.5rem; border-radius: 6px; overflow: hidden; box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4); }

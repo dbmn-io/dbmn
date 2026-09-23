@@ -18,13 +18,13 @@ a live REST sandbox with master data, foreign key validation and a few other tri
 
 Five lessons, about an hour end to end. Each one earns the next.
 
-| | Lesson | You'll learn |
-|---|---|---|
-| **1** | First Contact | Connect to an API, run requests, read JSON responses in the DBMN way |
-| **2** | The Big Load | Push 67,000 records through the batch engine — then make it a thousand times more efficient |
-| **3** | Handling Errors | Break it deliberately, find out why, fix the data, reprocess the failures like never before |
-| **4** | Reporting | Turn a nested API response into the exact spreadsheet so you can share data quickly |
-| **5** | Your Own Template | Build an endpoint and a nested data load from scratch — the graduation skill |
+| | Lesson | Trick | You'll learn |
+|---|---|---|---|
+| **1** | First Contact | Shake | Connect to an API, run requests, read JSON responses in the DBMN way |
+| **2** | The Big Load | Fetch | Push 67,000 records through the batch engine — then make it a thousand times more efficient |
+| **3** | Handling Errors | Roll Over | Break it deliberately, find out why, fix the data, reprocess the failures like never before |
+| **4** | Reporting | Speak | Turn a nested API response into the exact spreadsheet so you can share data quickly |
+| **5** | Your Own Template | Jump | Build an endpoint and a nested data load from scratch — the graduation skill |
 
 By the end you will be able to connect Dobermann to any REST API, load thousands of
 records in any shape it expects, deal with the failures that always happen, and get data back out in a form a human can actually use.
@@ -39,9 +39,9 @@ You don't need an API of your own, a licence, or a credit card. Your personal Tr
 
 ## How it works
 
-Each lesson is a short set of steps you carry out in Dobermann. At the end you hit **Check My Homework** and we look at what actually landed on the API — not what you say you did. Pass, and the next lesson unlocks. Miss something, and we tell you exactly what's still outstanding.
+Each lesson is a short set of steps you carry out in Dobermann. At the end you hit **Check My Homework** and we look at what actually landed on the API — not what you say you did. Pass, and you've learned that lesson's trick — there's a badge for each — and the next lesson unlocks. Miss something, and we tell you exactly what's still outstanding.
 
-Finish all five and you graduate, with a certificate to prove it.
+Finish all five and you graduate, with the Puppy School badge and a certificate to prove it.
 
 <!-- course-cta -->
 

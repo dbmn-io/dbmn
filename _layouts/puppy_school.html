@@ -15,6 +15,11 @@
 {%- assign lessons = site.puppy_school | where_exp: "d", "d.lesson_id" | sort: "number" -%}
 {%- assign kind = page.kind | default: "lesson" -%}
 {%- assign copy = site.data.puppy_school_copy -%}
+{%- comment -%} Every lesson teaches a dog trick. Names and glyphs are the extension's, exported with
+  the badge art (_data/dbmn_badges.json), keyed by badge id: "ps_" + lesson_id. {%- endcomment -%}
+{%- assign tricks = site.data.dbmn_badges.tricks -%}
+{%- assign page_badge_id = "ps_" | append: page.lesson_id -%}
+{%- assign page_trick = tricks[page_badge_id] -%}
 {%- capture paste_mount -%}{% include puppy_school/paste-it-back.html %}{%- endcapture -%}
 {%- capture share_mount -%}{% include puppy_school/share-it-back.html %}{%- endcapture -%}
 {%- capture cta_mount -%}<div id="ps-course-cta" class="ps-cta" data-auth-slot></div>{%- endcapture -%}
@@ -51,9 +56,11 @@
     <div class="ps-container">
         <nav class="ps-rail" id="ps-rail" aria-label="Course progress">
             {%- for l in lessons %}
+            {%- assign badge_id = "ps_" | append: l.lesson_id %}
+            {%- assign trick = tricks[badge_id] %}
             <a class="ps-rail-item" href="{{ l.url }}" data-lesson="{{ l.lesson_id }}"{% if l.lesson_id == page.lesson_id %} aria-current="page"{% endif %}>
-                <span class="ps-rail-dot" aria-hidden="true">{{ l.number }}</span>
-                <span class="ps-rail-label">{{ l.title }}</span>
+                <span class="ps-rail-dot" aria-hidden="true">{% if trick %}{{ trick.icon }}{% else %}{{ l.number }}{% endif %}</span>
+                <span class="ps-rail-label">{{ l.title }}{% if trick %}<span class="ps-rail-trick">{{ trick.name }}</span>{% endif %}</span>
             </a>
             {%- endfor %}
             <a class="ps-rail-item ps-rail-graduation" href="/puppy-school/graduation/" data-lesson="graduation"{% if kind == "graduation" %} aria-current="page"{% endif %}>
@@ -66,6 +73,9 @@
             {%- if kind == "lesson" %}
             <div class="ps-lesson-meta">
                 <span>Lesson {{ page.number }}</span>
+                {%- if page_trick %}
+                <span class="ps-lesson-trick">{{ page_trick.icon }} Trick: {{ page_trick.name }}</span>
+                {%- endif %}
                 <span>{{ page.estimate }}</span>
             </div>
             <h1 class="ps-lesson-title">{{ page.title }}</h1>
@@ -111,6 +121,7 @@
         "title": {{ page.title | jsonify }},
         "verifyEndpoint": {{ page.verify.endpoint | jsonify }},
         "hasReview": {% if page.review %}true{% else %}false{% endif %},
+        "trick": {{ page_trick.name | jsonify }},
         "lessons": [
             {%- for l in lessons %}
             { "id": {{ l.lesson_id | jsonify }}, "number": {{ l.number | jsonify }}, "title": {{ l.title | jsonify }}, "url": {{ l.url | jsonify }} }{% unless forloop.last %},{% endunless %}

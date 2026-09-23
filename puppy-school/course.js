@@ -296,6 +296,7 @@
                 showCheckpoint('pass', 'checkpoint-pass_heading', copyHtml('checkpoint-pass'));
                 var index = meta.lessons.map(function(l) { return l.id; }).indexOf(meta.lessonId);
                 var next = meta.lessons[index + 1];
+                showTrickEarned();
                 var onward = el('a', 'btn btn-primary ps-onward', next ? 'On to Lesson ' + next.number : 'Graduate');
                 onward.href = next ? next.url : '/puppy-school/graduation/';
                 document.getElementById('ps-checkpoint-result').appendChild(onward);
@@ -441,6 +442,12 @@
         return (art.badges && art.badges[id] && art.badges[id].svg) || art.placeholder || '';
     }
 
+    /** Not earned yet: a generic outline. None of the badge's own art goes into the page. */
+    function lockedBadgeSvg(art, id) {
+        if (!art) { return ''; }
+        return (art.badges && art.badges[id] && art.badges[id].locked) || art.lockedPlaceholder || '';
+    }
+
     async function renderBadgeGrid(mount) {
         var art = await loadBadgeArt();
         mount.textContent = '';
@@ -449,11 +456,27 @@
             var item = el('div', 'dbmn-badge' + (earned ? '' : ' dbmn-badge-locked'));
             item.title = earned ? badge.name + ' — earned ' + new Date(badge.earnedAt).toLocaleDateString() : badge.name + ' — ' + badge.description;
             var picture = el('div', 'dbmn-badge-art');
-            picture.innerHTML = badgeSvg(art, badge.id);     // our own exported artwork, keyed by id
+            picture.innerHTML = earned ? badgeSvg(art, badge.id) : lockedBadgeSvg(art, badge.id);     // our own exported artwork, keyed by id
             item.appendChild(picture);
             item.appendChild(el('div', 'dbmn-badge-name', badge.name));
             mount.appendChild(item);
         });
+    }
+
+    /** Pass screen: the lesson's badge and the trick it stands for. Decoration only — the
+     *  award itself was made by the server inside check_lesson_completion. */
+    function showTrickEarned() {
+        if (!meta.trick) { return; }
+        var box = document.getElementById('ps-checkpoint-result');
+        var row = el('div', 'ps-trick-earned');
+        var picture = el('div', 'ps-trick-earned-art');
+        var words = el('div');
+        words.appendChild(el('div', 'ps-trick-earned-label', 'New trick'));
+        words.appendChild(el('div', 'ps-trick-earned-name', meta.trick));
+        row.appendChild(picture);
+        row.appendChild(words);
+        box.appendChild(row);
+        loadBadgeArt().then(function(art) { picture.innerHTML = badgeSvg(art, 'ps_' + meta.lessonId); });   // our own exported artwork
     }
 
     // ------------------------------------------------------------------ graduation + certificate
@@ -466,7 +489,9 @@
         var date = new Date(cert.issuedAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
         var name = xml(cert.name);
         var size = cert.name.length > 34 ? 56 : cert.name.length > 24 ? 70 : 86;
-        var inner = badge.replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '');
+        // Re-rooted rather than unwrapped: the badge keeps its own viewBox and root attributes
+        // (the graduate artwork is not 64×64 and relies on fill-rule="evenodd").
+        var placed = badge.replace(/^<svg/, '<svg x="670" y="690" width="260" height="260"');
         return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1130" width="1600" height="1130" role="img" aria-label="Puppy School certificate">' +
             '<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1a1a2e"/><stop offset="1" stop-color="#16213e"/></linearGradient></defs>' +
             '<rect width="1600" height="1130" fill="url(#bg)"/>' +
@@ -481,7 +506,7 @@
             '<text x="800" y="625" font-size="30" fill="#d0d0e0">completed all five lessons of Puppy School, the hands-on Dobermann course:</text>' +
             '<text x="800" y="675" font-size="27" fill="#a0a0b0">connecting to a live API · loading at scale · handling errors · reporting · building a nested data load</text>' +
             '</g>' +
-            '<svg x="720" y="720" width="160" height="160" viewBox="0 0 64 64">' + inner + '</svg>' +
+            placed +
             '<g font-family="Georgia, \'Times New Roman\', serif" fill="#d0d0e0">' +
             '<text x="130" y="960" font-size="28">' + xml(date) + '</text>' +
             '<text x="130" y="1000" font-size="20" fill="#a0a0b0">Date of graduation</text>' +

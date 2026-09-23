@@ -16,7 +16,7 @@ verify:
   prompt: >
     Show us the report. Paste the table you just copied — headers and all.
   pass: >
-    Good dog. Every row is what the warehouse asked for, and none are missing.
+    Good dog. Every row is what the warehouse asked for.
   fail: >
     Not quite — here's what we noticed.
 note_to_reviewer: >
@@ -112,7 +112,7 @@ inside it:
       "status": "low_stock",
       "location": { "gln": "0614141000012", "name": "Golden Retriever Distribution Center", "city": "Atlanta" },
       "product": {
-        "gtin": "00012345600012", "category": "Grooming & Wellness", "unitPrice": 149.99,
+        "sku": "SKU-WOOF-001-00001", "gtin": "00012345600012", "category": "Grooming & Wellness", "unitPrice": 149.99,
         "reorderQty": 200, "supplierSku": "CTM-0001",
         "supplier": { "gln": "4012345000016", "name": "Chew Toy Manufacturing Inc" }
       }
@@ -147,7 +147,7 @@ Check the **Row Basis** is `data`, then tick these columns:
 
 | Column | Where it comes from |
 |---|---|
-| `sku` | the record |
+| `sku` | the record — `body.data.sku`, not `product.sku`, which is the same code again inside the product |
 | `description` | the record |
 | `quantityOnHand` | the record |
 | `uom` | the record |

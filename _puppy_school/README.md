@@ -18,7 +18,7 @@ extension links here, and shows progress and badges in its Account section.
 | Look | `puppy-school/course.css` (badge grid in `account/shared.css`) |
 | Copy shared by every lesson (checkpoint states, sign-in prompt, widget notices) | `_data/puppy_school_copy.yml` |
 | Reviewer notes can never reach a page: stripped before render, build fails on a leak | `_plugins/puppy_school_guard.rb` |
-| Badge artwork, exported from the extension, served to the raw-HTML pages | `_data/dbmn_badges.json` → `/account/badges.json` |
+| Badge artwork and the lessons' tricks, exported from the extension, served to the raw-HTML pages | `_data/dbmn_badges.json` → `/account/badges.json` |
 
 Rules the layout keeps:
 
@@ -156,6 +156,30 @@ The renderers rely on these, so keep to them:
 - `note_to_reviewer` in front matter is internal — it must never reach a renderer.
 - **Icons are written as `{icon:<role>}`**, never as an image or an icon name — see below.
 
+## Tricks
+
+Every lesson teaches a dog trick: 1 Shake, 2 Fetch, 3 Roll Over, 4 Speak, 5 Jump. The trick
+is the name of the lesson's badge, the glyph on it (where the placeholder rosette has a
+star), the glyph in the lesson's dot on the progress rail, "Trick: …" in the lesson head and
+"New trick" on the pass screen. Graduating earns the Puppy School badge, which is also the
+picture on the certificate.
+
+**A badge that isn't earned yet shows none of its art** — just a generic outline (`locked` in
+`dbmn_badges.json`): the bare rosette for a lesson, the bare shield for the graduate badge.
+Draw `locked` for an unearned badge; never put the real picture in the page greyed out.
+
+Names and glyphs are owned by the extension — `TRICKS` in vs-dbmn
+`src/webviews/shared/badges.js`, keyed by badge id (`ps_` + `lesson_id`) — and arrive here in
+`_data/dbmn_badges.json` with the badge art (`npm run docs:icons`). The layout reads them
+from there, so a lesson needs nothing in its front matter. The server's badge catalogue
+uses the same names; a unit test in vs-dbmn holds the two together. **The landing page's
+lesson table names the tricks in prose** (Liquid is off for lesson bodies) — change a trick
+and that table is the one place here to edit by hand.
+
+Designed badge artwork (the graduate badge) goes in through
+`node scripts/import-badge-art.js <badge_id> <file.svg>` in vs-dbmn, which shrinks the
+designer's export to something fit to bundle, then `npm run docs:icons`.
+
 ## Icons
 
 When a step says "click the paste button", the lesson shows the button's icon inline so
@@ -235,7 +259,8 @@ Extension — a release containing:
 Still open:
 
 - **Lesson 1** links a starter `.dbmn.zip` that does not exist yet.
-- **Badge artwork** is a placeholder rosette until the real designs land
-  (`src/webviews/shared/badges.js` in vs-dbmn, then `npm run docs:icons`).
+- **Lesson badge artwork** is the rosette with a trick glyph — drawn in code, not designed.
+  The graduate badge is the real design; when designed lesson badges land they go in the
+  same way (see Tricks).
 - **Most users have no profile name** (nothing creates `user_profiles` rows since the
   questionnaire was retired), so the certificate name box usually starts empty.

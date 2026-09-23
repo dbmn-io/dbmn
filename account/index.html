@@ -163,7 +163,7 @@
         }
 
         // Puppy School progress and the badge collection. The server decides what is earned;
-        // a locked badge is the same artwork greyed out (.dbmn-badge-locked).
+        // a locked badge is a generic outline — none of its artwork is drawn until it is earned.
         async function loadBadges() {
             try {
                 var result = await dbmnSupabase.rpc('get_my_badges');
@@ -193,7 +193,8 @@
                     var picture = document.createElement('div');
                     picture.className = 'dbmn-badge-art';
                     // Our own exported artwork, keyed by badge id — never markup from the API.
-                    picture.innerHTML = art ? ((art.badges[badge.id] && art.badges[badge.id].svg) || art.placeholder || '') : '';
+                    var entry = (art && art.badges[badge.id]) || {};
+                    picture.innerHTML = !art ? '' : earned ? (entry.svg || art.placeholder || '') : (entry.locked || art.lockedPlaceholder || '');
                     var name = document.createElement('div');
                     name.className = 'dbmn-badge-name';
                     name.textContent = badge.name;

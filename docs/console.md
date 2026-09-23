@@ -240,6 +240,8 @@ See the dedicated [Pagination](/docs/pagination/) guide for the complete workflo
 
 Copy data to the clipboard or export to a file. All options respect the current tab, search filter, sort order, and visible columns.
 
+Column headers are the field names your view shows: a nested column such as `location.city` is headed `city`. When two columns share a name — `location.name` and `product.supplier.name`, say — those two are headed by their path instead, so a spreadsheet never has two columns called `name`.
+
 ### Copy
 
 The **Copy** dropdown copies data straight to your clipboard — no file needed.
