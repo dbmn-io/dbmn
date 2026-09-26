@@ -137,7 +137,7 @@ Dobermann automatically splits into multiple requests if URL length or value cou
 ## Request Body
 {: #request-body }
 
-The JSON payload sent to your API. Dobermann provides a full-featured editor with syntax highlighting, autocomplete, and a toolbar for rapid template authoring.
+The JSON payload sent to your API. Dobermann provides a full-featured editor with syntax highlighting, autocomplete, and a toolbar for rapid template authoring. In a long body, the objects and arrays around the lines you're reading stay pinned at the top of the editor, up to five levels.
 
 The body editor is shown automatically for POST, PUT, and PATCH. For GET and DELETE it's hidden by default — click the **+** dropdown above the editor and choose **Request Body** if you need one.
 

@@ -31,9 +31,10 @@ note_to_reviewer: >
   rule: {{uom:string|2}} would catch BOXES and PALLETS in the loader, but SKU-BAD-004 carries
   a missing GTIN AND a bad uom, and that double fault is the point of Step 10 — it must reach
   the API. The 5-FK/4-INSERT split of Step 7 depends on it too.
-  Step 11 uses column SORT, not a filter: the Input tab's columns carry filterable:true in
-  the data but nothing renders a per-column filter, so sorting and the search box are what
-  actually exist. Step 12's four rows land as NEW inventory rows — the originals never
+  Step 11 uses the Input tab's Result filter (Error leaves the four rows) and View
+  transaction; sorting survives as a boxout. The four rows depend on each split child
+  carrying its input row (vs-dbmn fd3f697) — before that fix they showed Not processed.
+  Step 12's Export → Excel is the Input sheet under that filter. Step 12's four rows land as NEW inventory rows — the originals never
   inserted, and the table has no unique key on (gtin, location_gln) — so Lessons 4 and 5
   count four more rows than the file's thousand. Those counts are measured, not guessed.
   The "yours alone" line in Step 8 is only true once reference rows are user-scoped; until
@@ -139,7 +140,8 @@ story — **error** and **code**:
 ```
 
 Read the message, not just the code — it names the column and the value that is missing.
-Open the **Raw** tab on any row for the whole exchange, request and response. And if your
+Right-click any row → **View transaction** for the whole exchange, request and response
+side by side. And if your
 Error tab is showing different columns from these, a saved **View** is choosing them; Lesson
 4 is where you build your own.
 
@@ -258,14 +260,11 @@ your fix worked.
 The error names the constraint. It does not name the record — so before you can fix anything
 you have to work out which four rows these are.
 
-Open the **Input** tab. It holds every row you sent, exactly as the file had it. Click the
-**uom** column header to sort it: `EA`, `CS` and `PL` stack up together, and `BOXES` and
-`PALLETS` sort clear of them. Two rows, found by eye.
+Open the **Input** tab. It holds every row you sent, exactly as the file had it, and a
+**Result** column: what happened to the request that sent each row. Set **Result** to
+**Error**.
 
-Click **status** and do the same. `deleted` and `expired` fall outside the run of `active`
-and `low_stock`.
-
-Four SKUs, and one of them you have already met:
+Four rows are left, and one of them you have already met:
 
 ```text
 SKU-WOOF-003-ERR    uom BOXES
@@ -274,15 +273,24 @@ SKU-WOOF-004-ERR    status expired
 SKU-WOOF-005-ERR    status deleted
 ```
 
-Sorting a column to make the odd values fall out of line is the cheapest diagnostic you have.
-Reach for it before you write a filter.
+Right-click one → **View transaction** to see the request that carried it and the error
+beside it.
+
+> **No Result column? Sort.**
+>
+> Click a column header and the odd values fall out of line: `BOXES` and `PALLETS` sort clear
+> of `EA`, `CS` and `PL`. The cheapest diagnostic you have, on any table.
+{: .ps-boxout}
 
 ## Step 12 — Fix It at Source
 
 You cannot decide what `BOXES` was supposed to mean. Neither can Dobermann. That is a
 question for whoever produced the extract, and it is the one part of this lesson no tool
-does for you — so you ask, and the answer comes back: `BOXES` is a case, `PALLETS` is a
-pallet, and both `expired` and `deleted` mean the line is `discontinued`.
+does for you — so you ask. With **Result** still on **Error**, click **Export → Excel**: the
+Input sheet holds just those four rows. That's what you send back.
+
+The answer comes back: `BOXES` is a case, `PALLETS` is a pallet, and both `expired` and
+`deleted` mean the line is `discontinued`.
 
 *Now* you can fix it. Open your inventory endpoint, click **Run Batch**, switch to the
 **Paste Text** tab and paste the four corrected records:

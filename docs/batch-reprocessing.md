@@ -15,38 +15,40 @@ When a batch finishes with errors, you don't need to re-run the entire batch. Do
 ## Quick Start
 
 1. Run a batch from the [Console](/docs/console/)
-2. Once the batch finishes (or finishes with errors), click **Reprocess Batch** in the Console toolbar
-3. Choose what to reprocess (errors only, incomplete, etc.)
+2. Once the batch finishes (or finishes with errors), click **Reprocess** at the bottom of the Console
+3. Choose what to reprocess (errors only, incomplete, etc.) and click **Continue**
 4. Dobermann resets the selected transactions and re-executes them in the same batch
 
 ---
 
 ## Reprocess Options
 
-When you click **Reprocess Batch**, a quick pick menu offers five options:
+When you click **Reprocess**, the **Reprocess Batch** window offers five options:
 
 | Option | What it reprocesses |
 |--------|-------------------|
-| **Reprocess Errors Only** | Only transactions that returned an error response |
-| **Reprocess Incomplete** | All non-completed transactions (errors + pending) |
-| **Reprocess Pending Only** | Only transactions still in pending status |
-| **Split Array Errors** | Splits failed array transactions into individual elements (see [Split Reprocess](#split-reprocess) below) |
-| **Reprocess All** | Every transaction including completed ones — a full do-over (requires confirmation) |
+| **Incomplete** | All non-completed transactions (errors + pending) |
+| **Errors only** | Only transactions that returned an error response |
+| **Pending only** | Only transactions still in pending status |
+| **Split array errors** | Splits failed array transactions into individual elements (see [Split Reprocess](#split-reprocess) below). Not offered for a paginated batch |
+| **All** | Every transaction including completed ones — a full do-over (asks you to confirm) |
 
 Selected transactions are reset to pending and re-executed within the same batch. Completed transactions are left untouched (except with **Reprocess All**).
 
 ---
 
-## Per-Card Retry
+## Reprocess One Transaction
+{: #reprocess-one }
 
-For quick fixes — like correcting a single record in your source data — you can retry individual transactions directly from the **RAW tab** without reprocessing the whole batch.
+For quick fixes — like correcting a single record in your source data — reprocess one transaction without touching the rest of the batch. Any of these works:
 
-- Failed transaction cards show a **Retry** button
-- Click it to re-execute just that one transaction
-- The card updates in real-time as the retry executes
-- A **retry count badge** appears showing how many times the transaction has been retried
+- The **Reprocess** button on its card in the **Raw** tab
+- The **Reprocess** button in [View transaction](/docs/console/#view-transaction)
+- Right-click its row on the **Error** or **Input** tab → **Reprocess**
 
-Per-card retry works both during and after batch execution.
+The transaction updates in real time as it runs, and a **reprocess count badge** shows how many times it has been reprocessed.
+
+This works during and after a batch run, and on a single Run API transaction too — Reprocess runs it again.
 
 ---
 
@@ -64,13 +66,13 @@ This is useful for bulk data loads where a few bad records shouldn't block the r
 
 ---
 
-## Retry Count Badge
+## Reprocess Count Badge
 
-Each transaction tracks how many times it has been retried. After a retry, the RAW tab card shows a numbered badge instead of the retry icon:
+Each transaction tracks how many times it has been reprocessed. Once it has, the 🔄 on its **Reprocess** button becomes a numbered badge:
 
-- **No badge** — never retried
-- **Badge with number** — retried that many times (e.g., "2" means retried twice)
-- Completed cards that were previously retried show the badge as a disabled indicator
+- **No badge** — never reprocessed
+- **Badge with number** — reprocessed that many times (e.g., "2" means twice)
+- Completed transactions that were reprocessed keep the badge on a disabled button
 
 ---
 
@@ -84,7 +86,7 @@ Reprocessing is available when a batch has reached a terminal state:
 | **Error** | Reprocess Batch, Copy Batch |
 | **Cancelled** | Reprocess Batch |
 | **Stopped / Paused** | Resume (not Reprocess) |
-| **Running / Pending** | Per-card retry only (batch-level reprocess disabled) |
+| **Running / Pending** | [Reprocess one transaction](#reprocess-one) only (batch-level reprocess disabled) |
 | **Paginated** | Reprocess Batch (no Split Array Errors) |
 
 {: .note }

@@ -89,22 +89,23 @@ Shows the source data used to generate API requests.
 **What's displayed:**
 - All rows from your data grid or uploaded file
 - Column headers and values as loaded
-- A **Status** column: the status of the transaction that sent each row
+- A **Result** column: the status of the transaction that sent each row
 - Record count indicator
 
 **Key behaviour:**
 - Available for batch executions with loaded data
-- Exportable as CSV during or after execution
+- Copy and Export (CSV or Excel) during or after execution; both follow the search box and the Result filter
 - Views control doesn't apply to the Input tab (source data is always one row per record)
 
-#### Filter rows by status
+#### Filter rows by result
 {: #input-status }
 
-The **Status** dropdown shows only the rows whose transaction is **Completed**, **Error** or **Running**, or rows **Not processed** yet (waiting, or not sent). Each option shows its row count.
+The **Result** dropdown shows only the rows whose transaction is **Completed**, **Error** or **Running**, or rows **Not processed** yet (waiting, or not sent). Each option shows its row count.
 
 - Copy and Export follow the filter. Choose **Error** and export to Excel to get the list of rows to fix and send again.
 - Right-click a row → **View transaction** to see the request and response it belongs to.
-- When a failed request was split into smaller ones, a row takes the status of the smaller request it ended up in.
+- When a failed request was split into smaller ones, a row takes the result of the smaller request it ended up in.
+- If your file has its own `result` column, DBMN's is called **DBMN Result**.
 
 ### Raw Tab
 {: #raw-tab }
@@ -112,29 +113,30 @@ The **Status** dropdown shows only the rows whose transaction is **Completed**, 
 The Raw tab gives you complete visibility into every request and response — the full HTTP conversation for each transaction.
 
 **Features:**
+- **Transactions** — One card each: status, HTTP code and time, then its input rows, request and response. Expand All / Collapse All in the bar
 - **Status** — Show only Pending, Running, Completed, Error or Split transactions, with counts
 - **Show Input / Request / Response** — Choose what each transaction shows. Input is greyed out when there are no input rows
 - **Full request/response JSON** — Syntax-highlighted, with the parent keys pinned at the top as you scroll
 - **Request Body / Details** — Details shows the endpoint, query parameters and headers. A request with no body (blank or `{}`) shows Details only, and Request starts switched off
-- **Reprocess** — Run a failed transaction again
+- **Reprocess** — Run a failed transaction again, in a batch or on its own (see [Batch Reprocessing](/docs/batch-reprocessing/))
 - **View Logs** — Per-transaction log entries for debugging
 - **View modes** — Toggle between Raw, Rendered, and Text views (useful for HTML responses)
 - Response count indicator
 
 When a run has **one transaction**, the Raw tab shows it directly — no list to expand. Its search highlights matches in the request and response.
 
-### View a transaction from any row
-{: #view-transaction }
-
-Right-click a row on the **Input**, **Completed** or **Error** tab and choose **View transaction**. The transaction opens in a window with the same view as the Raw tab: its input rows, request and response side by side, with search and full-window editors.
-
-On an Error row the menu also offers **Reprocess**, which runs that transaction again.
-
 **Use cases:**
 - Debug a specific failed request by inspecting the exact payload sent
 - Verify variable substitution worked correctly
 - Check response headers and status codes
 - View API error messages in full detail
+
+### View a transaction from any row
+{: #view-transaction }
+
+Right-click a row on the **Input**, **Completed** or **Error** tab and choose **View transaction**. The transaction opens in a window with the same view as the Raw tab: its input rows, request and response side by side, with search and full-window editors. Esc leaves a full-window editor first, then closes the window.
+
+On an Error row the menu also offers **Reprocess**, which runs that transaction again.
 
 ### Completed Tab
 {: #completed-tab }
@@ -145,6 +147,7 @@ Shows all successful transactions (2xx responses) in a data table.
 - Tabular view of all completed requests
 - Full response data for each transaction
 - Response times and status codes
+- Right-click a row to [view its transaction](#view-transaction)
 - Count indicator
 
 **Use case:** Analyse successful patterns, extract data from responses, verify expected output.
@@ -229,7 +232,7 @@ Patterns are combinable: `active +pending,-error`, `"exact",-exclude,wild*`
 
 - Always shows the row count — total rows when no search is active, filtered/total when searching
 - Case-insensitive matching across all patterns
-- **Copy and Export respect the active search filter** — only the filtered rows are included
+- **Copy and Export respect the active search filter** — only the filtered rows are included. On the Input tab, the [Result filter](#input-status) applies too
 
 **Tips:**
 - Search for specific error messages or exclude them: `-error`
@@ -261,7 +264,7 @@ See the dedicated [Pagination](/docs/pagination/) guide for the complete workflo
 ## Copy & Export
 {: #copy-options }
 
-Copy data to the clipboard or export to a file. All options respect the current tab, search filter, sort order, and visible columns.
+Copy data to the clipboard or export to a file. All options respect the current tab, search filter, sort order, and visible columns — and, on the Input tab, the [Result filter](#input-status).
 
 Column headers are the field names your view shows: a nested column such as `location.city` is headed `city`. When two columns share a name — `location.name` and `product.supplier.name`, say — those two are headed by their path instead, so a spreadsheet never has two columns called `name`.
 
@@ -296,7 +299,7 @@ The **Export** dropdown saves data to a file.
 |--------|---------|
 | **CSV** | Plain text, streams line-by-line — handles any size |
 | **CSV (Excel)** | CSV with text fields prefixed to prevent Excel number coercion |
-| **Excel (.xlsx)** | Formatted workbook with colour-coded status codes and typed columns — guaranteed type preservation |
+| **Excel (.xlsx)** | Formatted workbook with colour-coded status codes and typed columns — guaranteed type preservation. One sheet each for Input, Success and Errors: the sheet for the tab you're on keeps your search, columns and view; the others are exported whole. Exported from the Input tab, the Input sheet keeps the Result filter |
 
 ### Limits
 
@@ -392,6 +395,15 @@ For batches over 1,000 rows:
 - Required variables are configured
 - No validation errors in endpoint
 
+### Which Input Rows Failed?
+{: #find-failed-rows }
+
+1. Open the **Input** tab and set **Result** to **Error**. Only the rows whose transaction failed are left.
+2. Right-click a row → **View transaction** to see its request and the error side by side.
+3. **Export → Excel** for the list of rows to fix and send back.
+
+One failed request can carry many rows. If the error doesn't say which, the request shows every row it sent.
+
 ### Batch Stops Unexpectedly
 
 **Check:**
@@ -411,7 +423,7 @@ For batches over 1,000 rows:
 - Check API server status
 - Test with curl/Postman
 - Verify network connectivity
-- Check the Raw tab for the last request sent
+- On the Raw tab, set **Status** to **Running** to see the requests still in flight
 
 ### Wrong Data in Requests
 

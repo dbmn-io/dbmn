@@ -119,7 +119,7 @@ The renderers rely on these, so keep to them:
 - Prose above the first `## Step` is lesson intro copy.
 - **A step is one action and one thing to notice.** Two verbs in the title means two steps.
   Aim for 60-150 words; a step over ~200 is a wall and should be split. Lesson 3 is the
-  worked example: ten steps, ~1,200 words.
+  worked example: twelve steps, ~1,450 words.
 - **Never write "Step" inside a step.** The Run Batch loader has its own numbered screens;
   call them by name (Load Data, Map & Transform, Review & Edit Data, Review JSON, Execute
   Batch) so the lesson's own numbering is the only one on the page.
@@ -206,7 +206,7 @@ says `{icon:paste-endpoint}`. Nothing in this folder needs editing.
 
 Roles used by the lessons so far: `nav-environments`, `nav-api-catalogue`, `nav-history`,
 `nav-account`, `env-switcher`, `add-endpoint`, `paste-endpoint`, `paste-row`, `run-api`,
-`run-batch`, `add-query-param`, `filters`.
+`run-batch`, `add-query-param`.
 
 ## Jekyll gotcha
 
@@ -257,6 +257,9 @@ Extension — a release containing:
 - Run API row paste, issue #302 (Lesson 2 Step 3, Lesson 5 Step 4).
 - `|opt` omitting keys in **nested** templates. Before the fix a blank part number goes out
   as `""`, and Lesson 5 Step 6's "no `supplierSku` key at all" is false.
+- Console: Show chips in the Raw bar (Lesson 1 Step 4), the Input tab's **Result** filter,
+  right-click → View transaction and split children carrying their input row (Lesson 3
+  Steps 7, 11 and 12), issues #296, #304, #306.
 
 Still open:
 

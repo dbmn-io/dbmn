@@ -233,7 +233,12 @@ Use **Get Next X Pages** as an alternative — it doesn't require total count.
 Check that:
 - Pagination settings are saved (not just opened)
 - The `{{A8:PAGE}}` template is in your endpoint's query parameters
-- The first page returned a success response (auto-fetch only triggers on success)
+- The first page returned a success response (auto-fetch only triggers on success). If it failed, reprocessing it won't then fetch the rest — run **Fetch All** again once it succeeds
+
+### Some Pages Failed
+{: #reprocess-pages }
+
+Click **Reprocess** at the bottom of the Console and choose **Errors only**. Just the failed pages run again, each with its own page number — nothing else is fetched. **Split array errors** isn't offered for a paginated batch. See [Batch Reprocessing](/docs/batch-reprocessing/).
 
 ### Wrong Page Numbers
 

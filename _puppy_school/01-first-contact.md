@@ -105,9 +105,10 @@ read [Named Views](/docs/named-views/) now.
 
 **The Raw tab** shows the full HTTP conversation: the exact request sent and the complete
 response received, syntax-highlighted. Click it now and have a look. This is where you go
-when you need to know what actually went over the wire. Click {icon:filters} **Filters** to
-show or hide the **Request** and **Response** halves. Each call's execution log is here as
-well, for the day something misbehaves.
+when you need to know what actually went over the wire. A GET sends no body, so **Request**
+starts switched off — click it under **Show** to see what was sent: the endpoint, query
+parameters and headers. Each call's execution log is here as well, for the day something
+misbehaves.
 
 ## Step 5 — Explore the Reference Data
 

@@ -98,6 +98,8 @@ Pasted values go through the same [validation](#validation) as typed ones when y
 
 The [Console](/docs/console/) opens with the response. **Completed** shows it as a table, **Raw** shows exactly what went over the wire, and **Error** appears if the API refused it. The run is kept under **History** in the Hub.
 
+A single run shows straight away in **Raw**, with no list to open. A GET sends no body, so **Request** starts switched off — switch it on for its details: endpoint, query parameters and headers. If the call failed, **Reprocess** runs it again.
+
 ---
 
 ## Related Topics
