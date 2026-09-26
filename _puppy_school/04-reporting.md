@@ -160,8 +160,9 @@ Check the **Row Basis** is `data`, then tick these columns:
 | `product.supplierSku` | the nested product object — blank for some suppliers, and that's fine |
 | `product.supplier.name` | two levels down: the supplier, inside the product |
 | `product.supplier.gln` | two levels down |
+| `location.gln` | the nested location object |
 
-The last five are for Lesson 5, which turns this report into purchase orders.
+The last six are for Lesson 5, which turns this report into purchase orders.
 
 Notice what you just did. `location.name` lives one level down in the JSON and
 `product.supplier.name` two, and you've pulled them up alongside the record's own fields as

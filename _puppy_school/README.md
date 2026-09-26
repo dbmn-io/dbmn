@@ -134,7 +134,9 @@ The renderers rely on these, so keep to them:
   straight after it and it floats to the right of the column, with the instructions running
   down its left — a newspaper boxout. Use it for the "how does this actually work" detail a
   curious learner might want and everyone else should be able to skip, so never put an
-  instruction in one: the step must read straight through without it. Its bold first line is
+  instruction in one: the step must read straight through without it. The one exception is
+  an **Extra credit** boxout: an optional thing to try, titled `Extra credit: …` so the reader
+  knows it's skippable (Lesson 5, Step 2). Its bold first line is
   the title; don't label it a note, a boxout or an aside — the box already says that. On a
   narrow screen it becomes a full-width card in the flow.
 - **A boxout needs prose after it.** Only inline content wraps around a float; a code fence,

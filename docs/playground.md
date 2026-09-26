@@ -41,7 +41,7 @@ The playground uses reference/lookup tables with foreign key constraints to vali
 | `GET /reference/carriers` | 6 carriers | SCAC code |
 | `GET /reference/locations` | 12 locations | GLN |
 | `GET /reference/products` | 20 products | GTIN |
-| `GET /reference/trading-partners` | 10 partners | GLN |
+| `GET /reference/trading-partners` | 22 partners — 10 companies, and our 12 locations as buyers | GLN |
 
 ### Nested Reference Objects
 
@@ -209,8 +209,8 @@ Paginated inventory listing. Configure this endpoint to demonstrate Dobermann's 
 
 {
   "poNumber": "{{poNumber}}",
-  "buyerName": "{{buyerName}}",
-  "supplierName": "{{supplierName}}",
+  "buyerGln": "{{buyerGln}}",
+  "supplierGln": "{{supplierGln}}",
   "status": "{{status}}",
   "currency": "USD",
   "lines": [
@@ -227,12 +227,12 @@ Paginated inventory listing. Configure this endpoint to demonstrate Dobermann's 
 }
 ```
 
-Dobermann starts a new order each time **any header field** changes — see [how rows become requests](/docs/batch-preparation/#nested-grouping) — and folds the matching rows into that order's `lines`. Optional fields the API also accepts: `supplierGln` and `buyerGln` on the header (send them and the response resolves the full trading partner), `requestedDeliveryDate` on the header, and `supplierSku` on a line.
+Dobermann starts a new order each time **any header field** changes — see [how rows become requests](/docs/batch-preparation/#nested-grouping) — and folds the matching rows into that order's `lines`. `buyerGln` and `supplierGln` must be trading partners (any of our locations can be the buyer). The API fills in `buyerName` and `supplierName` from them; a name you send is kept only when there's no GLN. Optional fields the API also accepts: `requestedDeliveryDate` on the header, and `supplierSku` on a line.
 
 ### Purchase Orders — List with Pagination (GET)
 {: #po-list }
 
-Responses include nested `buyer` and `supplier` reference objects from the trading partners table, and each order's `lines`.
+Each order comes back with its `lines`, in the same shape you POST — plus the fields the API owns (`id`, `userId`, `isSeed`, `createdAt`, `orderDate`, `totalAmount`, and `lineTotal` on each line).
 
 ```javascript
 // Name: Puppy School — List Purchase Orders
@@ -246,7 +246,7 @@ Responses include nested `buyer` and `supplier` reference objects from the tradi
 ### Purchase Orders — Get with Line Items (GET)
 {: #po-get }
 
-Returns the PO with nested `buyer`/`supplier` objects and all line items (each with nested `product` reference).
+Returns the PO and all its line items (each with nested `product` reference).
 
 ```javascript
 // Name: Puppy School — Get Purchase Order
