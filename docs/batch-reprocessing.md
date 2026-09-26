@@ -85,10 +85,10 @@ Reprocessing is available when a batch has reached a terminal state:
 | **Cancelled** | Reprocess Batch |
 | **Stopped / Paused** | Resume (not Reprocess) |
 | **Running / Pending** | Per-card retry only (batch-level reprocess disabled) |
-| **Paginated** | Reprocessing not available |
+| **Paginated** | Reprocess Batch (no Split Array Errors) |
 
 {: .note }
-Stopped and paused batches show **Resume** instead of Reprocess, since the batch hasn't finished yet. Paginated batches cannot be reprocessed due to their sequential page-dependent nature.
+Stopped and paused batches show **Resume** instead of Reprocess, since the batch hasn't finished yet. A paginated batch reprocesses its failed pages like any other batch: each page runs its own request again. **Split Array Errors** isn't offered there, because splitting would change how the next page is numbered.
 
 ---
 

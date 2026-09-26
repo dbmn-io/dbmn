@@ -89,6 +89,7 @@ Shows the source data used to generate API requests.
 **What's displayed:**
 - All rows from your data grid or uploaded file
 - Column headers and values as loaded
+- A **Status** column: the status of the transaction that sent each row
 - Record count indicator
 
 **Key behaviour:**
@@ -96,17 +97,38 @@ Shows the source data used to generate API requests.
 - Exportable as CSV during or after execution
 - Views control doesn't apply to the Input tab (source data is always one row per record)
 
+#### Filter rows by status
+{: #input-status }
+
+The **Status** dropdown shows only the rows whose transaction is **Completed**, **Error** or **Running**, or rows **Not processed** yet (waiting, or not sent). Each option shows its row count.
+
+- Copy and Export follow the filter. Choose **Error** and export to Excel to get the list of rows to fix and send again.
+- Right-click a row → **View transaction** to see the request and response it belongs to.
+- When a failed request was split into smaller ones, a row takes the status of the smaller request it ended up in.
+
 ### Raw Tab
 {: #raw-tab }
 
 The Raw tab gives you complete visibility into every request and response — the full HTTP conversation for each transaction.
 
 **Features:**
-- **Transaction navigation** — Browse through all transactions
-- **Full request/response JSON** — Syntax-highlighted in a Monaco editor
+- **Status** — Show only Pending, Running, Completed, Error or Split transactions, with counts
+- **Show Input / Request / Response** — Choose what each transaction shows. Input is greyed out when there are no input rows
+- **Full request/response JSON** — Syntax-highlighted, with the parent keys pinned at the top as you scroll
+- **Request Body / Details** — Details shows the endpoint, query parameters and headers. A request with no body (blank or `{}`) shows Details only, and Request starts switched off
+- **Reprocess** — Run a failed transaction again
 - **View Logs** — Per-transaction log entries for debugging
 - **View modes** — Toggle between Raw, Rendered, and Text views (useful for HTML responses)
 - Response count indicator
+
+When a run has **one transaction**, the Raw tab shows it directly — no list to expand. Its search highlights matches in the request and response.
+
+### View a transaction from any row
+{: #view-transaction }
+
+Right-click a row on the **Input**, **Completed** or **Error** tab and choose **View transaction**. The transaction opens in a window with the same view as the Raw tab: its input rows, request and response side by side, with search and full-window editors.
+
+On an Error row the menu also offers **Reprocess**, which runs that transaction again.
 
 **Use cases:**
 - Debug a specific failed request by inspecting the exact payload sent
@@ -136,6 +158,7 @@ Shows all failed transactions — 4xx client errors, 5xx server errors, network 
 - Error messages from the API
 - Request context that caused the error
 - Status codes and response times
+- Right-click a row to [view its transaction](#view-transaction) or **Reprocess** it
 - Automatically hidden if there are zero errors
 
 **Use case:** Debug failures, identify data quality issues, spot rate limiting or API problems.
