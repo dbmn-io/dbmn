@@ -723,9 +723,68 @@ blockquote.ps-callout p:last-child { margin-bottom: 0; }
 .ps-trick-earned-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--brand-text-muted); }
 .ps-trick-earned-name { font-family: var(--brand-font-heading); font-size: 1.15rem; color: #f2b632; }
 
+/* Graduation: the certificate leads the page. The card is wider here so the certificate has
+ * room; the prose around it keeps a readable measure. */
+body.ps-kind-graduation .ps-container { max-width: 1100px; }
+body.ps-kind-graduation .ps-content > :not(.ps-grad-hero) { max-width: 760px; }
+
+.ps-grad-hero {
+    margin: 1.75rem 0 2.5rem;
+    padding: 2rem 2rem 1.75rem;
+    border: 2px solid #f2b632;
+    border-radius: 12px;
+    background:
+        radial-gradient(ellipse at top, rgba(242, 182, 50, 0.16), transparent 60%),
+        rgba(0, 0, 0, 0.22);
+    box-shadow: 0 0 0 6px rgba(242, 182, 50, 0.08), 0 20px 60px rgba(0, 0, 0, 0.45);
+    text-align: center;
+}
+.ps-grad-heading {
+    font-family: var(--brand-font-heading);
+    font-size: 2rem !important;
+    color: #f2b632 !important;
+    margin: 1.5rem 0 0.25rem !important;
+    letter-spacing: 0.01em;
+}
+.ps-grad-caption { color: var(--brand-text-muted); font-size: 0.95rem; max-width: 640px; margin: 1.5rem auto 0; }
+
+/* The badge cluster: the graduate badge big, the five lesson badges small under it. */
+.ps-grad-badges { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.ps-grad-badges .dbmn-badge { border: none; padding: 0; gap: 0.5rem; }
+.ps-grad-logo .dbmn-badge-art { width: 170px; height: 170px; filter: drop-shadow(0 10px 28px rgba(242, 182, 50, 0.35)); }
+.ps-grad-logo .dbmn-badge-name {
+    font-family: var(--brand-font-heading);
+    font-size: 1.35rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #f2b632;
+}
+.ps-grad-lessons { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.5rem; }
+.ps-grad-lesson .dbmn-badge-art { width: 40px; height: 40px; }
+.ps-grad-lesson .dbmn-badge-name { font-size: 0.7rem; color: var(--brand-text-muted); }
+
+.ps-grad-hero .ps-name-form { max-width: 560px; margin: 0 auto; text-align: left; }
+.ps-grad-hero .ps-name-form .ps-name-input { max-width: none; font-size: 1.15rem; padding: 0.85rem 1rem; }
+.ps-grad-hero .ps-name-form .btn { font-size: 1.05rem; padding: 0.8rem 1.6rem; }
+.ps-grad-hero .ps-action-bar { justify-content: center; }
+
 /* Certificate */
-.ps-certificate { margin: 1.25rem 0 0.5rem; border-radius: 6px; overflow: hidden; box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4); }
+.ps-certificate {
+    margin: 1.25rem 0 0.5rem;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(242, 182, 50, 0.35), 0 16px 50px rgba(0, 0, 0, 0.55);
+}
 .ps-certificate svg { display: block; width: 100%; height: auto; }
+
+/* Confetti: a full-window canvas over everything, never in the way of a click. */
+.ps-confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1000; }
+
+@media (max-width: 640px) {
+    .ps-grad-hero { padding: 1.25rem 1rem; }
+    .ps-grad-logo .dbmn-badge-art { width: 120px; height: 120px; }
+    .ps-grad-heading { font-size: 1.5rem !important; }
+}
 
 @media (max-width: 640px) {
     .ps-rail-label { display: none; }
@@ -733,12 +792,8 @@ blockquote.ps-callout p:last-child { margin-bottom: 0; }
     .ps-lesson-card { padding: 1.25rem; }
 }
 
-@media print {
-    body.ps-kind-graduation * { visibility: hidden; }
-    body.ps-kind-graduation .ps-certificate, body.ps-kind-graduation .ps-certificate * { visibility: visible; }
-    body.ps-kind-graduation .ps-certificate { position: fixed; inset: 0; margin: 0; box-shadow: none; border-radius: 0; }
-    @page { size: landscape; margin: 0; }
-}
+/* Printing the certificate goes through its own iframe (printCertificate in course.js), so
+ * the page itself needs no print rules. */
 
 /* The site header styles its links with display:flex, which would defeat [hidden]. */
 .ps-body [hidden] { display: none !important; }

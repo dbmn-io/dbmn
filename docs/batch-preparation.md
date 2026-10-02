@@ -19,7 +19,7 @@ Batch preparation follows five steps:
 | 1 | **Load Data** | Choose how to get data in — upload a file, paste text, or enter data manually |
 | 2 | **Map & Transform** | Map source columns to template variables and configure data formats |
 | 3 | **Review & Edit Data** | Review, edit, add, and validate rows before generating JSON |
-| 4 | **Review JSON** | Preview the generated JSON payloads and configure batch parameters |
+| 4 | **Review & Configure** | See the first requests and how many will be sent, and set Rows per request |
 | 5 | **Execute Batch** | Review execution settings and run the batch |
 
 ### Two Entry Paths
@@ -146,6 +146,15 @@ Template Variable    | Source Column
 {{location}}        | warehouse
 ```
 
+### Remember the Mapping
+{: #remember-mapping }
+
+When you click **Next** on Map & Transform, the endpoint remembers which column each variable was mapped to. The next Run Batch on that endpoint maps them for you — as long as the new file has those columns. A column it doesn't have falls back to automatic mapping, and you can still change any of them; the new choice is remembered in turn.
+
+The mapping is kept with the endpoint's Run Batch settings. Your template — the Request Body — is not changed.
+
+**Update Endpoint Template** appears once a variable is mapped to a column with a different name. Tick it to rename those variables after their columns once the batch has run — `{{buyerGln}}` mapped to `location.gln` becomes `{{location.gln}}` — so a file with those columns maps itself. The batch you're running is not affected: it finishes on the names it started with.
+
 ### Mapping Validation
 
 Dobermann validates your mapping:
@@ -267,15 +276,26 @@ For endpoints with many template variables, the grid scrolls horizontally. Each 
 
 ---
 
-## Step 4 — Review JSON
+## Step 4 — Review & Configure
 {: #step-4-review-json }
 
-Step 4 shows a preview of the generated JSON payloads that will be sent to the API. Review the output to confirm variable substitution and structure are correct.
+Step 4 shows what the batch will send, built by the same code that sends it — for a JSON body, URL parameters, or both.
 
-**What's displayed:**
-- JSON preview with syntax highlighting
-- Total API calls to be made
-- Request size estimate
+**Configure** appears when there is something to set:
+
+| Setting | When | What it does |
+|---|---|---|
+| **Rows per request** | A flat array (`[ { … } ]`) | How many rows go into each request's array |
+| **`orders` per request** | Two or three levels (`orders[].items[]`) | How many top-level entries go into each request |
+| **Values per URL** | A repeating URL parameter (`id={{item}}[ or ]`) | How many values go into each URL — Auto fits as many as the URL length allows |
+| **Array** | A template with two or more arrays that could repeat | Which one repeats |
+| **Body** | BASE64-encoded fields | Show the bodies as sent, or unencoded |
+
+Change a setting and **Refresh** rebuilds the preview.
+
+**Summary** shows the **API calls** the batch will make, the **Rows** going into them, and the **Size** of the first request. The ⓘ beside API calls opens *How your rows become API requests*: your template with each variable marked by what it does, how the rows group into requests, and what each request holds.
+
+**Requests** shows every request, or **Request samples** the first five when there are more — each with the input rows behind it and its request: the **Body**, or **Details** (method, URL, query parameters, headers). An endpoint with no body shows its URL. **Show Input / Request** hides or shows those parts of every card.
 
 ### Batch Configuration
 
@@ -325,7 +345,7 @@ This is how one flat file becomes one order per supplier and site, with the orde
 | Wagmore | Boston | SKU-D | request 3 — same supplier, different site |
 
 {: .warning }
-> **If the header carries an identifier from your data, the other header fields must agree with it.** Put `{{poNumber}}` in the header, and every row for `PO-1` has to carry the same supplier, the same ship-to, the same everything else. If one row says Atlanta and another says Boston, that is bad data — and Dobermann will send **two requests for `PO-1`**. What happens next is up to the API: it may reject the second as a duplicate, or it may overwrite the first. Dobermann can't know which header is the right one, so it doesn't guess. Check **Total API calls** against the number of orders you expect before you execute, and fix the file if they differ.
+> **If the header carries an identifier from your data, the other header fields must agree with it.** Put `{{poNumber}}` in the header, and every row for `PO-1` has to carry the same supplier, the same ship-to, the same everything else. If one row says Atlanta and another says Boston, that is bad data — and Dobermann will send **two requests for `PO-1`**. What happens next is up to the API: it may reject the second as a duplicate, or it may overwrite the first. Dobermann can't know which header is the right one, so it doesn't guess. Check the **API calls** count against the number of orders you expect before you execute, and fix the file if they differ.
 
 - **The header is true of every line.** Only put something in the header if it holds for the whole order. A per-line value up there gives you one request per row.
 - **Rows don't need to be sorted** — matching rows are gathered wherever they sit. Dobermann sorts by the header fields first, so requests come out in that order.
@@ -333,7 +353,7 @@ This is how one flat file becomes one order per supplier and site, with the orde
 - **Generated values aren't part of it.** `{{A8:sequence}}` in the header is handed out after grouping, one number per request. `{{ENV:…}}` values are the same for every row anyway.
 - The same rule applies one level down: in a three-level template, a new shipment starts when any of the shipment's own fields changes, and a new package when any of the package's does.
 
-The **Total API calls** figure in this step is the number of requests the rule produced. If it isn't what you expected, this is why.
+The **API calls** count in this step is the number of requests the rule produced; its ⓘ shows the groups, one row per request. If it isn't what you expected, this is why.
 
 ### Maximum Repetitions (Advanced)
 

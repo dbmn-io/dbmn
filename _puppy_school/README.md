@@ -121,7 +121,7 @@ The renderers rely on these, so keep to them:
   Aim for 60-150 words; a step over ~200 is a wall and should be split. Lesson 3 is the
   worked example: twelve steps, ~1,450 words.
 - **Never write "Step" inside a step.** The Run Batch loader has its own numbered screens;
-  call them by name (Load Data, Map & Transform, Review & Edit Data, Review JSON, Execute
+  call them by name (Load Data, Map & Transform, Review & Edit Data, Review & Configure, Execute
   Batch) so the lesson's own numbering is the only one on the page.
 - **End a step with what the learner should see**, so they can check themselves before
   moving on.

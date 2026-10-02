@@ -217,22 +217,22 @@ Paginated inventory listing. Configure this endpoint to demonstrate Dobermann's 
     {
       "lineNumber": "{{lineNumber:number}}",
       "gtin": "{{gtin}}",
-      "sku": "{{sku}}",
-      "description": "{{description}}",
       "orderedQty": "{{orderedQty:number}}",
-      "unitPrice": "{{unitPrice:number}}",
-      "uom": "{{uom}}"
+      "uom": "{{uom}}",
+      "supplierSku": "{{supplierSku:string|opt}}"
     }
   ]
 }
 ```
 
-Dobermann starts a new order each time **any header field** changes — see [how rows become requests](/docs/batch-preparation/#nested-grouping) — and folds the matching rows into that order's `lines`. `buyerGln` and `supplierGln` must be trading partners (any of our locations can be the buyer). The API fills in `buyerName` and `supplierName` from them; a name you send is kept only when there's no GLN. Optional fields the API also accepts: `requestedDeliveryDate` on the header, and `supplierSku` on a line.
+Dobermann starts a new order each time **any header field** changes — see [how rows become requests](/docs/batch-preparation/#nested-grouping) — and folds the matching rows into that order's `lines`. `buyerGln` and `supplierGln` must be trading partners (any of our locations can be the buyer). The API fills in `buyerName` and `supplierName` from them; a name you send is kept only when there's no GLN.
+
+Each line names its product by `gtin`, the product's unique identifier. It's required: a line without one is refused. The API fills in the line's `sku`, `description` and `unitPrice` from the product, and ignores any you send. `supplierSku` is optional, the supplier's own part number; not every supplier has them, hence `|opt`. `requestedDeliveryDate` is an optional header field.
 
 ### Purchase Orders — List with Pagination (GET)
 {: #po-list }
 
-Each order comes back with its `lines`, in the same shape you POST — plus the fields the API owns (`id`, `userId`, `isSeed`, `createdAt`, `orderDate`, `totalAmount`, and `lineTotal` on each line).
+Each order comes back with its `lines`, in the same shape you POST — plus the fields the API fills in: `id`, `userId`, `isSeed`, `createdAt`, `orderDate`, `totalAmount`, `buyerName` and `supplierName` on the order, and `sku`, `description`, `unitPrice` and `lineTotal` on each line.
 
 ```javascript
 // Name: Puppy School — List Purchase Orders

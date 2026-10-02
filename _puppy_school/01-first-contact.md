@@ -19,6 +19,12 @@ Click the Dobermann icon in your VS Code activity bar.
 
 Not installed yet? [Get it from the VS Code Marketplace.](https://marketplace.visualstudio.com/items?itemName=dbmn.dobermann)
 
+> **Prerequisite: Dobermann {dobermann-min-version} or later**
+>
+> Check in the **Extensions** view (Ctrl+Shift+X): the version is next to **Dobermann**.
+> On something older? Click **Update** first. Some steps use features older versions don't
+> have.
+
 Sign in with the same account you used to get here. No account yet? Open {icon:nav-account}
 **Account** in the Hub and register there — it takes a minute. Once you're in, you're ready.
 

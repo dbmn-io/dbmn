@@ -9,6 +9,8 @@ title: Graduation
 
 You've finished Puppy School.
 
+<!-- certificate -->
+
 You connected to a live API, loaded 67,000 records and then worked out how to do it in 67
 requests instead of 67,000. You broke a load on purpose, read the errors properly, fixed the
 master data and reprocessed the failures. You turned a nested response into the spreadsheet
@@ -16,13 +18,6 @@ somebody asked for. And you built an endpoint and a nested data load from scratc
 you extracted yourself.
 
 That last one is the whole job. Everything else is detail.
-
-## Your certificate
-
-<!-- certificate -->
-
-It has your name on it and the date you finished. Put it wherever you like — the people who
-know what a foreign key violation costs at 4pm on a Friday will know what it means.
 
 ## Where to go next
 

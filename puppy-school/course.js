@@ -299,6 +299,10 @@
                 showTrickEarned();
                 var onward = el('a', 'btn btn-primary ps-onward', next ? 'On to Lesson ' + next.number : 'Graduate');
                 onward.href = next ? next.url : '/puppy-school/graduation/';
+                if (!next) {
+                    // Hitting Graduate is the moment: the graduation page reads this flag once and throws confetti.
+                    onward.addEventListener('click', function() { try { sessionStorage.setItem(GRADUATE_FLAG, '1'); } catch (e) { /* private mode */ } });
+                }
                 document.getElementById('ps-checkpoint-result').appendChild(onward);
                 await loadProgress();
                 renderRail();
@@ -314,8 +318,10 @@
 
     // ------------------------------------------------------------------ paste-it-back / share-it-back
     var WIDGETS = {
-        verify: { path: function() { return meta.verifyEndpoint; }, field: 'paste' },
-        review: { path: function() { return '/course/review/' + meta.lessonId; }, field: 'share_text' }
+        // A passed table paste is cleared: nothing pasted lingers. A reviewed template stays,
+        // so the learner can act on the warnings and tips and check it again.
+        verify: { path: function() { return meta.verifyEndpoint; }, field: 'paste', clearOnPass: true },
+        review: { path: function() { return '/course/review/' + meta.lessonId; }, field: 'share_text', clearOnPass: false }
     };
 
     function renderFindings(box, kind, passed, findings) {
@@ -378,7 +384,7 @@
                 var data = await response.json().catch(function() { return null; });
                 if (response.status === 200 || response.status === 422) {
                     renderFindings(box, kind, response.status === 200, data && data.findings);
-                    if (response.status === 200) { input.value = ''; }      // nothing pasted lingers
+                    if (response.status === 200 && config.clearOnPass) { input.value = ''; }
                 } else if (response.status === 429) { renderWidgetNotice(box, 'widgets-rate_limited'); }
                 else if (response.status === 413) { renderWidgetNotice(box, 'widgets-too_large'); }
                 else if (response.status === 401) { window.location.href = loginUrl(); }
@@ -448,21 +454,6 @@
         return (art.badges && art.badges[id] && art.badges[id].locked) || art.lockedPlaceholder || '';
     }
 
-    async function renderBadgeGrid(mount) {
-        var art = await loadBadgeArt();
-        mount.textContent = '';
-        state.badges.forEach(function(badge) {
-            var earned = !!badge.earnedAt;
-            var item = el('div', 'dbmn-badge' + (earned ? '' : ' dbmn-badge-locked'));
-            item.title = earned ? badge.name + ' — earned ' + new Date(badge.earnedAt).toLocaleDateString() : badge.name + ' — ' + badge.description;
-            var picture = el('div', 'dbmn-badge-art');
-            picture.innerHTML = earned ? badgeSvg(art, badge.id) : lockedBadgeSvg(art, badge.id);     // our own exported artwork, keyed by id
-            item.appendChild(picture);
-            item.appendChild(el('div', 'dbmn-badge-name', badge.name));
-            mount.appendChild(item);
-        });
-    }
-
     /** Pass screen: the lesson's badge and the trick it stands for. Decoration only — the
      *  award itself was made by the server inside check_lesson_completion. */
     function showTrickEarned() {
@@ -480,6 +471,89 @@
     }
 
     // ------------------------------------------------------------------ graduation + certificate
+    var GRADUATE_FLAG = 'ps-just-graduated';
+
+    /** Graduation page: the graduate badge big, the five lesson badges small beneath it.
+     *  Same .dbmn-badge items as the account page (six of them), laid out as a cluster. */
+    async function renderGraduateCluster(mount) {
+        var art = await loadBadgeArt();
+        mount.textContent = '';
+        var graduate = null, lessons = el('div', 'ps-grad-lessons');
+        state.badges.forEach(function(badge) {
+            var earned = !!badge.earnedAt;
+            var item = el('div', 'dbmn-badge' + (earned ? '' : ' dbmn-badge-locked'));
+            item.title = earned ? badge.name + ' — earned ' + new Date(badge.earnedAt).toLocaleDateString() : badge.name + ' — ' + badge.description;
+            var picture = el('div', 'dbmn-badge-art');
+            picture.innerHTML = earned ? badgeSvg(art, badge.id) : lockedBadgeSvg(art, badge.id);     // our own exported artwork, keyed by id
+            item.appendChild(picture);
+            item.appendChild(el('div', 'dbmn-badge-name', badge.name));
+            if (badge.id === 'ps_graduate') { item.classList.add('ps-grad-logo'); graduate = item; }
+            else { item.classList.add('ps-grad-lesson'); lessons.appendChild(item); }
+        });
+        if (graduate) { mount.appendChild(graduate); }
+        mount.appendChild(lessons);
+    }
+
+    /** Confetti on a full-window canvas: brand gold, blue and white, about three seconds,
+     *  nothing to click through (pointer-events: none). Skipped for reduced-motion users. */
+    function throwConfetti() {
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
+        var canvas = el('canvas', 'ps-confetti');
+        canvas.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(canvas);
+        var ctx = canvas.getContext('2d');
+        var dpr = window.devicePixelRatio || 1;
+        function size() { canvas.width = window.innerWidth * dpr; canvas.height = window.innerHeight * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+        size();
+        window.addEventListener('resize', size);
+
+        var colours = ['#f2b632', '#ffd60a', '#0078d4', '#4da3ff', '#ffffff', '#34c759'];
+        var W = window.innerWidth, pieces = [];
+        for (var i = 0; i < 220; i++) {
+            var fromLeft = i % 2 === 0;
+            pieces.push({
+                x: fromLeft ? -10 : W + 10,
+                y: window.innerHeight * (0.25 + Math.random() * 0.35),
+                vx: (fromLeft ? 1 : -1) * (7 + Math.random() * 9),
+                vy: -(9 + Math.random() * 10),
+                w: 6 + Math.random() * 7, h: 4 + Math.random() * 6,
+                rot: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 0.35,
+                colour: colours[Math.floor(Math.random() * colours.length)],
+                delay: Math.random() * 25
+            });
+        }
+        var frame = 0, started = performance.now();
+        function tick(now) {
+            frame++;
+            ctx.clearRect(0, 0, W, window.innerHeight);
+            var alive = 0;
+            pieces.forEach(function(p) {
+                if (frame < p.delay) { alive++; return; }
+                p.vy += 0.32; p.vx *= 0.985; p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+                if (p.y > window.innerHeight + 20) { return; }
+                alive++;
+                ctx.save();
+                ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+                ctx.globalAlpha = now - started > 3200 ? Math.max(0, 1 - (now - started - 3200) / 800) : 1;
+                ctx.fillStyle = p.colour;
+                ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.rot * 2)) + 1);
+                ctx.restore();
+            });
+            if (alive && now - started < 4000) { requestAnimationFrame(tick); }
+            else { window.removeEventListener('resize', size); canvas.remove(); }
+        }
+        requestAnimationFrame(tick);
+    }
+
+    /** True once, right after the learner arrived here by hitting Graduate. */
+    function takeGraduateFlag() {
+        try {
+            var flagged = sessionStorage.getItem(GRADUATE_FLAG) === '1';
+            sessionStorage.removeItem(GRADUATE_FLAG);
+            return flagged;
+        } catch (e) { return false; }
+    }
+
     function xml(text) {
         return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
@@ -541,6 +615,31 @@
         });
     }
 
+    /** Print from a throwaway iframe holding only the certificate: one landscape A4 page,
+     *  no margins, nothing else from the page. (Printing the page itself repeated the
+     *  certificate onto every sheet the hidden content still flowed across.) */
+    function printCertificate(svgText, cert) {
+        var frame = document.createElement('iframe');
+        frame.setAttribute('aria-hidden', 'true');
+        frame.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden';
+        document.body.appendChild(frame);
+        var doc = frame.contentDocument;
+        doc.open();
+        doc.write('<!DOCTYPE html><html><head><meta charset="utf-8"><title>Puppy School certificate \u2014 ' + xml(cert.name) + '</title>' +
+            '<style>@page{size:297mm 210mm;margin:0}' +
+            'html,body{margin:0;padding:0;width:297mm;height:210mm;overflow:hidden;background:#16213e;-webkit-print-color-adjust:exact;print-color-adjust:exact}' +
+            'svg{display:block;width:297mm;height:210mm}</style></head><body>' + svgText + '</body></html>');
+        doc.close();
+        var done = false;
+        function cleanup() { if (!done) { done = true; setTimeout(function() { frame.remove(); }, 1000); } }
+        frame.contentWindow.addEventListener('afterprint', cleanup);
+        setTimeout(function() {
+            frame.contentWindow.focus();
+            frame.contentWindow.print();
+            setTimeout(cleanup, 60000);     // afterprint does not fire everywhere
+        }, 150);
+    }
+
     function linkedInUrl(cert) {
         var issued = new Date(cert.issuedAt);
         var params = new URLSearchParams({
@@ -569,11 +668,11 @@
         download.id = 'ps-cert-download';
         download.addEventListener('click', function() {
             download.disabled = true;
-            downloadPng(svg, 'puppy-school-certificate.png').catch(function() { window.print(); }).then(function() { download.disabled = false; });
+            downloadPng(svg, 'puppy-school-certificate.png').catch(function() { printCertificate(svg, cert); }).then(function() { download.disabled = false; });
         });
         var print = el('button', 'btn btn-secondary', 'Print or save as PDF');
         print.type = 'button';
-        print.addEventListener('click', function() { window.print(); });
+        print.addEventListener('click', function() { printCertificate(svg, cert); });
         var share = el('a', 'btn btn-secondary', 'Add to LinkedIn');
         share.href = linkedInUrl(cert);
         share.target = '_blank';
@@ -651,11 +750,23 @@
 
         var certMount = document.getElementById('ps-certificate');
         if (certMount) {
-            var badgeRow = el('div', 'dbmn-badge-grid ps-no-print');
+            // The certificate leads the page: one hero block — the graduate badge over the five
+            // lesson badges, then the certificate itself (or the form that issues it).
+            var hero = el('section', 'ps-grad-hero');
+            hero.id = 'ps-grad-hero';
+            hero.setAttribute('aria-label', 'Your certificate');
+            certMount.parentNode.insertBefore(hero, certMount);
+            var badgeRow = el('div', 'ps-grad-badges ps-no-print');
             badgeRow.id = 'ps-badges';
-            certMount.parentNode.insertBefore(badgeRow, certMount);
-            renderBadgeGrid(badgeRow);
+            hero.appendChild(badgeRow);
+            hero.appendChild(el('h2', 'ps-grad-heading ps-no-print', 'Your certificate'));
+            hero.appendChild(certMount);
+            hero.appendChild(el('p', 'ps-grad-caption ps-no-print',
+                'It has your name on it and the date you finished. Put it wherever you like — the people who ' +
+                'know what a foreign key violation costs at 4pm on a Friday will know what it means.'));
+            renderGraduateCluster(badgeRow);
 
+            var justGraduated = takeGraduateFlag();
             var existing = await dbmnSupabase.from('puppy_school_certificates').select('id, name_on_certificate, issued_at').maybeSingle();
             if (existing.data) {
                 showCertificate(certMount, { certificateId: existing.data.id, name: existing.data.name_on_certificate, issuedAt: existing.data.issued_at });
@@ -663,6 +774,8 @@
                 var profile = await dbmnSupabase.from('user_profiles').select('display_name').eq('id', state.user.id).maybeSingle();
                 showNameForm(certMount, profile.data && profile.data.display_name);
             }
+            // Confetti for the arrival from Graduate — and for a first visit that came some other way.
+            if (justGraduated || !existing.data) { throwConfetti(); }
         }
     }
 

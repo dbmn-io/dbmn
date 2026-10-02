@@ -93,8 +93,8 @@ Click **Run Batch**. In **Load Data**, drop [inventory-67k.csv](/puppy-school/fi
 onto the upload area and click **Import Data**.
 
 Dobermann maps the CSV columns to your template variables automatically where the names
-match — which, here, they all do. Click **Next** through to **Review JSON** and look at the
-generated request. One record, wrapped in an array, exactly as the endpoint expects — the
+match — which, here, they all do. Click **Next** through to **Review & Configure** and look at
+the first request. One record, wrapped in an array, exactly as the endpoint expects — the
 same shape you just ran by hand.
 
 ## Step 5 — Run It the Slow Way
@@ -112,10 +112,10 @@ run the whole file properly.)
 
 ## Step 6 — One Request, A Thousand Records
 
-Click **Run Batch** again and load the same file. This time, at **Review JSON**, pick the
-array in the **Array:** dropdown and set **Reps:** to `1000`.
+Click **Run Batch** again and load the same file. This time, at **Review & Configure**, set
+**Rows per request** to `1000` and click **Refresh**.
 
-Look at what happens to the **Total API calls** figure. The same 67,000 records now go out
+Look at what happens to **API calls**. The same 67,000 records now go out
 as **67 requests** instead of 67,000 — because each request carries a thousand records in
 its array instead of one.
 
@@ -129,7 +129,7 @@ Two separate dials, and most people only ever find the first one:
 | Dial | What it changes |
 |---|---|
 | **Processing Mode** — threads | How many requests are in flight at the same time |
-| **Reps** | How many records ride inside each request |
+| **Rows per request** | How many records ride inside each request |
 
 > **Why a thousand?**
 >

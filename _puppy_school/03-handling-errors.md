@@ -15,7 +15,7 @@ note_to_reviewer: >
   Twelve steps, one action each — rewritten 2026-09-19 because seven long steps
   read as a wall and the loader's own Step 1-5 nested inside lesson Step 2. Never write
   "Step" inside a step: call the loader's screens by name (Load Data, Review & Edit Data,
-  Review JSON, Execute Batch).
+  Review & Configure, Execute Batch).
   THE REVEAL: Step 1 must NOT say how many records are broken. The learner earns the count —
   one caught by the loader, nine by the API — and the close adds it up to ten. A test asserts
   Step 1 names no number.
@@ -88,8 +88,8 @@ disk is untouched; the edit applies to this run.
 
 ## Step 4 — Send It
 
-On **Review JSON**, set **Reps:** to `100`. A thousand records go out as ten requests of a
-hundred — fast, and how you would really run a load this size.
+On **Review & Configure**, set **Rows per request** to `100` and click **Refresh**. A thousand
+records go out as ten requests of a hundred — fast, and how you would really run a load this size.
 
 On **Execute Batch**, check **Error Handling** is on **Continue processing**. **Stop on
 first error** would abandon the whole run at the first bad request.
@@ -115,7 +115,7 @@ You don't know whether it's the only one.
 
 ## Step 6 — Narrow It Down
 
-Don't set **Reps: 1** and run the thousand again. Nine hundred records went in on nine
+Don't set **Rows per request** to `1` and run the thousand again. Nine hundred records went in on nine
 requests, and that speed is worth keeping. Open up the one request that failed instead.
 
 In the Console footer click **Reprocess**, choose **Split array errors**, **Continue**, then

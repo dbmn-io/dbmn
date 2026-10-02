@@ -55,6 +55,11 @@ collections:
     output: true
     permalink: /puppy-school/:slug/
 
+# The oldest Dobermann the course works with. Pages say {dobermann-min-version}
+# (_plugins/puppy_school_version.rb). Raise it when a lesson needs something newer.
+puppy_school:
+  min_dobermann: "0.3.0"
+
 # Navigation defaults
 defaults:
   - scope:

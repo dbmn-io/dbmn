@@ -41,7 +41,7 @@ note_to_reviewer: >
   Unquoted -CS returns ZERO rows (it matches "Electronics"); the quoted form is deliberate.
   Copy -> Excel stops at 1,000 rows. 924 fits; a learner who loaded the file twice has ~1,750
   and the verifier tells them so (COPY_CAP) rather than just failing.
-  The four product.* columns marked for Lesson 5 need vs-dbmn migration
+  The product.* columns marked for Lesson 5 need vs-dbmn migration
   20260917000002_playground_product_suppliers.sql and the updated playground function.
 ---
 
@@ -106,13 +106,14 @@ inside it:
   "data": [
     {
       "sku": "SKU-WOOF-001-00001",
+      "gtin": "00012345600012",
       "description": "Premium Belly Rub Machine",
       "quantityOnHand": 12,
       "uom": "EA",
       "status": "low_stock",
       "location": { "gln": "0614141000012", "name": "Golden Retriever Distribution Center", "city": "Atlanta" },
       "product": {
-        "sku": "SKU-WOOF-001-00001", "gtin": "00012345600012", "category": "Grooming & Wellness", "unitPrice": 149.99,
+        "sku": "SKU-WOOF-001", "gtin": "00012345600012", "category": "Grooming & Wellness", "unitPrice": 149.99,
         "reorderQty": 200, "supplierSku": "CTM-0001",
         "supplier": { "gln": "4012345000016", "name": "Chew Toy Manufacturing Inc" }
       }
@@ -147,7 +148,8 @@ Check the **Row Basis** is `data`, then tick these columns:
 
 | Column | Where it comes from |
 |---|---|
-| `sku` | the record — `body.data.sku`, not `product.sku`, which is the same code again inside the product |
+| `sku` | the record — its own stock code, not `product.sku`, the catalogue's code for the product |
+| `gtin` | the record — the product's unique identifier |
 | `description` | the record |
 | `quantityOnHand` | the record |
 | `uom` | the record |
@@ -155,14 +157,13 @@ Check the **Row Basis** is `data`, then tick these columns:
 | `location.name` | the nested location object |
 | `location.city` | the nested location object |
 | `product.category` | the nested product object |
-| `product.unitPrice` | the nested product object |
 | `product.reorderQty` | the nested product object |
 | `product.supplierSku` | the nested product object — blank for some suppliers, and that's fine |
 | `product.supplier.name` | two levels down: the supplier, inside the product |
 | `product.supplier.gln` | two levels down |
 | `location.gln` | the nested location object |
 
-The last six are for Lesson 5, which turns this report into purchase orders.
+`gtin` and the last five are for Lesson 5, which turns this report into purchase orders.
 
 Notice what you just did. `location.name` lives one level down in the JSON and
 `product.supplier.name` two, and you've pulled them up alongside the record's own fields as
