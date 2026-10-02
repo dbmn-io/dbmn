@@ -8,16 +8,16 @@ has_children: true
 
 # Console
 
-When you hit **Run**, Dobermann opens the Console — your real-time window into what's happening. Single requests complete in a flash. Batches stream results as they run, with live progress, pause/resume controls, and full transaction detail.
+When you hit **Run**, Dobermann opens the Console — your real-time window into what's happening. Single requests complete in a flash. Batches stream results as they run, with live progress, pause/resume controls, and full transaction detail. The Console opens as a tab in the [Hub](/docs/hub/), and every run stays under {icon:nav-history} **History** so you can reopen it later.
 
 ## Starting an Execution
 
 Two things put results in the Console, and both open it for you:
 
 - **Run API** {icon:run-api} — one request. If the endpoint has `{{template variables}}` it asks for their values first, and you can paste a spreadsheet row to fill them. See [Run API](/docs/run-api/).
-- **Run Batch** {icon:run-batch} — the same endpoint driven from a file, through the 5-step flow: Load Data → Map & Transform → Review & Edit Data → Review & Configure → Execute. It appears once the endpoint has template variables. See [Batch Preparation](/docs/batch-preparation/).
+- **Run Batch** {icon:run-batch} — the same endpoint driven from a file, through the 5-step flow: Load Data → Map & Transform → Review & Edit Data → Review & Configure → Execute Batch. It appears once the endpoint has template variables. See [Batch Preparation](/docs/batch-preparation/).
 
-Both live in the endpoint editor's footer and on each endpoint's row in the API Catalogue. Quick Access (**Alt+D E**) reaches them from the keyboard.
+Both live in the endpoint editor's footer and on each endpoint's row in the API Catalogue.
 
 ### Execution Queue
 {: #execution-queue }
@@ -26,8 +26,8 @@ Running multiple batches? Dobermann queues them automatically.
 
 **How it works:**
 - Start a batch on one endpoint, then start another — the second batch enters the queue
-- A notification tells you: "Batch has been queued and will start when the current batch completes"
-- Queue position and wait time are displayed while waiting
+- A notification tells you: *Batch "…" has been queued and will start when the current batch completes*
+- The Console footer reads **Queued** while it waits; the header's activity chip counts it (`1 running · 1 queued`)
 - Queued batches start automatically in order when the previous batch finishes
 
 **Use cases:**
@@ -41,39 +41,35 @@ Running multiple batches? Dobermann queues them automatically.
 
 The Console is where everything happens — monitoring progress during a batch, inspecting results after completion, and exporting data for further analysis.
 
-### Execution Summary
+### Status
 {: #execution-summary }
 
-The top section displays high-level execution metrics in compact stat cards:
+The pill beside the title says where the run is:
 
-**Status Badge:**
-- **Success** — All requests succeeded (2xx responses)
-- **Partial** — Some requests failed
-- **Failed** — All requests failed
-- **Paused** — Batch paused by user
-- **Running** — Batch currently executing
-- **Queued** — Waiting for another batch to complete
+| Pill | Meaning |
+|---|---|
+| **RUNNING** | Requests are in flight |
+| **COMPLETED** | Every request succeeded (2xx) |
+| **COMPLETED WITH ERRORS** / **PARTIAL** | Finished, some requests failed |
+| **ERROR** | The run failed |
+| **PAUSED** / **STOPPED** / **CANCELLED** | Stopped by you, or by the error handling |
+| **PREPARING** / **PENDING** | Not started yet, or waiting in the queue |
 
-**Summary Statistics:**
-- **URL** — Full resolved API endpoint with query parameters
-- **HTTP Status** — Response status code (single executions only)
-- **Time** — Execution start timestamp
-- **Duration** — Total execution time in `HH:MM:SS` format
-- **ID** — Unique execution identifier for tracking
-- **Calls** (batch only) — Completed vs planned transaction count (e.g., `77/77`)
-- **Threads** (batch only) — Parallel processing level (e.g., `1` = sequential, `16` = 16 concurrent)
+The run's details — environment, organisation, endpoint, full request URL, ID, HTTP status, start time and duration, and for a batch its name, error handling and processing mode — are on the [Settings tab](#settings-tab).
 
 ### Batch Controls
 
-During a batch execution:
+During a batch execution, the footer offers:
 
 **Pause** — Halts execution after the current request completes. All progress is saved. Click **Resume** to continue from the exact position. Useful for rate limit cooling or reviewing errors mid-run.
 
-**Rename** — Edit the batch name during execution for easier identification in history.
+**Cancel** — Stops the batch. A cancelled batch can still be **Resume**d, or its failures reprocessed later.
+
+**Name** — On the Settings tab, rename the batch at any time so it is easy to find in History.
 
 ### Real-Time Progress (Batch)
 
-While a batch runs, the Console shows live progress — completion percentage, success/failure counts, throughput, and estimated time remaining. Results stream into the tabs below as each request completes, so you can start inspecting transactions before the batch finishes.
+While a batch runs, the Console footer shows live progress — the phase (Preparing, Queued, Executing, Paused, Completed, Stopped, Failed), completion, success and failure counts, and elapsed time. Results stream into the tabs below as each request completes, so you can start inspecting transactions before the batch finishes.
 
 ---
 
@@ -95,7 +91,7 @@ Shows the source data used to generate API requests.
 **Key behaviour:**
 - Available for batch executions with loaded data
 - Copy and Export (CSV or Excel) during or after execution; both follow the search box and the Result filter
-- Views control doesn't apply to the Input tab (source data is always one row per record)
+- Views don't apply to the Input tab (source data is always one row per record)
 
 #### Filter rows by result
 {: #input-status }
@@ -118,9 +114,11 @@ The Raw tab gives you complete visibility into every request and response — th
 - **Show Input / Request / Response** — Choose what each transaction shows. Input is greyed out when there are no input rows
 - **Full request/response JSON** — Syntax-highlighted, with the parent keys pinned at the top as you scroll
 - **Request Body / Details** — Details shows the endpoint, query parameters and headers. A request with no body (blank or `{}`) shows Details only, and Request starts switched off
+- **Response Body / Headers** — Headers appears when the response carried any
 - **Reprocess** — Run a failed transaction again, in a batch or on its own (see [Batch Reprocessing](/docs/batch-reprocessing/))
-- **View Logs** — Per-transaction log entries for debugging
-- **View modes** — Toggle between Raw, Rendered, and Text views (useful for HTML responses)
+- **Logs** — Per-transaction log entries for debugging, in a window you can copy from
+- **Copy All** — The whole transaction to the clipboard
+- **Raw / Render / Text** — For an HTML response, see it as source, as a page, or as plain text
 - Response count indicator
 
 When a run has **one transaction**, the Raw tab shows it directly — no list to expand. Its search highlights matches in the request and response.
@@ -169,13 +167,16 @@ Shows all failed transactions — 4xx client errors, 5xx server errors, network 
 ### Settings Tab
 {: #settings-tab }
 
-Execution metadata and configuration details.
+Everything about the run that isn't a result:
 
-**What's shown:**
-- Execution ID and timestamps
-- Endpoint and environment details
-- Execution lineage (parent/child relationships)
-- Links to request/response files saved in workspace
+| Section | What's there |
+|---|---|
+| **Sending To** | Environment, Organization, Endpoint, Request URL |
+| **Configure** (batch) | **Name** — editable, so you can rename a batch — **Error Handling** and **Processing Mode** |
+| **Execution** | ID, HTTP Status (single requests), Started, Duration |
+| **Lineage** | For a copied batch: Copied From, Original Environment, Copied At |
+| **Variables** | The values the run used |
+| **Files** | **Request**, **Response** and **Folder** links to the files saved in your [workspace](/docs/your-data/) |
 
 ---
 
@@ -186,9 +187,9 @@ The Completed and Error tabs use a powerful data table for analysing results:
 ### Named Views
 {: #named-views }
 
-The Completed and Errors tabs run on **Named Views** — saved configurations that control which columns appear and which array in the response produces one row each. Multiple views per tab; switch instantly; views save on the endpoint so they travel with it on export/share.
+The Completed and Error tabs run on **Named Views** — saved configurations that control which columns appear and which array in the response produces one row each. Multiple views per tab; switch instantly; views save on the endpoint so they travel with it on export/share.
 
-> **[→ Read the Named Views guide](/docs/named-views/)** for the View dropdown, View Editor, Row Basis, Set as Row, Save As, and how views travel with endpoints.
+> **[→ Read the Named Views guide](/docs/named-views/)** for the view button, the View Editor, row basis, Set as Row, Save As, and how views travel with endpoints.
 
 ### Search
 {: #search }
@@ -255,7 +256,7 @@ Sub-tables (rendered when expanding an `▸ N records` cell) sort independently 
 ## Pagination
 {: #pagination }
 
-Dobermann has full support for paginated APIs — configure page and size parameters, auto-detect settings from API responses, and fetch hundreds of pages with concurrent execution.
+Dobermann has full support for paginated APIs — configure page and size parameters, auto-detect settings from API responses, and fetch hundreds of pages with concurrent execution. Run a paginated endpoint once, then click **Pagination** in the Console footer.
 
 See the dedicated [Pagination](/docs/pagination/) guide for the complete workflow.
 
@@ -264,7 +265,7 @@ See the dedicated [Pagination](/docs/pagination/) guide for the complete workflo
 ## Copy & Export
 {: #copy-options }
 
-Copy data to the clipboard or export to a file. All options respect the current tab, search filter, sort order, and visible columns — and, on the Input tab, the [Result filter](#input-status).
+Copy data to the clipboard or export to a file from the toolbar above the table. All options respect the current tab, search filter, sort order, and visible columns — and, on the Input tab, the [Result filter](#input-status).
 
 Column headers are the field names your view shows: a nested column such as `location.city` is headed `city`. When two columns share a name — `location.name` and `product.supplier.name`, say — those two are headed by their path instead, so a spreadsheet never has two columns called `name`.
 
@@ -289,28 +290,27 @@ The **Copy** dropdown copies data straight to your clipboard — no file needed.
 
 **Preserving leading zeros in Excel:**
 
-When pasting into Excel, numeric-looking text fields (e.g. GLN codes like `0012345000015`) are automatically converted to numbers, losing leading zeros. Use the **Excel** or **CSV (Excel)** copy options to prevent this — they prefix text columns with an apostrophe (`'`) that tells Excel to treat the value as text. For guaranteed type preservation without any prefix characters, use **Export → Excel (.xlsx)** instead.
+When pasting into Excel, numeric-looking text fields (e.g. GLN codes like `0012345000015`) are automatically converted to numbers, losing leading zeros. Use the **Excel** or **CSV (Excel)** copy options to prevent this — they prefix text columns with an apostrophe (`'`) that tells Excel to treat the value as text. For guaranteed type preservation without any prefix characters, use **Export → Excel** instead.
 
 ### Export
 
-The **Export** dropdown saves data to a file.
+The **Export** dropdown saves data to a file. It is available once the batch has finished.
 
 | Format | Details |
 |--------|---------|
 | **CSV** | Plain text, streams line-by-line — handles any size |
 | **CSV (Excel)** | CSV with text fields prefixed to prevent Excel number coercion |
-| **Excel (.xlsx)** | Formatted workbook with colour-coded status codes and typed columns — guaranteed type preservation. One sheet each for Input, Success and Errors: the sheet for the tab you're on keeps your search, columns and view; the others are exported whole. Exported from the Input tab, the Input sheet keeps the Result filter |
+| **Excel** | Formatted `.xlsx` workbook with colour-coded status codes and typed columns — guaranteed type preservation. One sheet each for Input, Success and Errors: the sheet for the tab you're on keeps your search, columns and view; the others are exported whole. Exported from the Input tab, the Input sheet keeps the Result filter |
 
 ### Limits
 
-Large copy/export operations can overwhelm target applications or the extension host. Dobermann enforces sensible limits:
+Large copy/export operations can overwhelm target applications or the extension host. Dobermann enforces sensible limits, and greys out an option that would exceed them, saying so:
 
 | Action | Format | Limit | Reason |
 |--------|--------|-------|--------|
-| Copy | Standard / Excel | 1,000 rows | Paste crashes Excel/Outlook with large tables |
-| Copy | Markdown | 1,000 rows | Paste crashes target apps |
+| Copy | Standard / Excel / Markdown | 1,000 rows | Paste crashes Excel/Outlook with large tables |
 | Copy | CSV / CSV (Excel) | 10,000 rows | Lighter format, higher tolerance |
-| Export | Excel (.xlsx) | 2,000,000 cells | XLSX library OOM in extension host |
+| Export | Excel | 2,000,000 cells | The spreadsheet library runs out of memory beyond this |
 | Export | CSV / CSV (Excel) | Unlimited | Streams line-by-line |
 
 If you hit a limit, switch to CSV export (file) — it streams without memory constraints.
@@ -318,54 +318,49 @@ If you hit a limit, switch to CSV export (file) — it streams without memory co
 ---
 
 ## Execution History
+{: #execution-history }
 
-All executions (single and batch) are saved in the sidebar.
+Every run, single or batch, is listed under {icon:nav-history} **History** on the Hub rail, newest first. Click one to reopen its Console with full results. **Settings → Transactions** chooses whether History shows the current environment or all of them, and how runs are grouped. To remove runs, turn on **Select**, tick them, and click **Delete**. See [The Hub — History](/docs/hub/#history).
 
-### Viewing History
+A run's own actions are in its Console footer:
 
-Expand **Executions** in the sidebar to see past runs grouped by endpoint. Each entry shows its outcome at a glance — all-success, partial, all-failed, or paused. Click any run to reopen the Console with full results, or right-click for **View**, **Export Results**, **Re-run**, and **Delete**.
+- **Re-run** — a single request, sent again as a new transaction
+- **Reprocess** — a batch's failures, or any part of it; see [Batch Reprocessing](/docs/batch-reprocessing/)
+- **Copy** — a copy of a batch, to run against another environment
+- **Delete** — the run and its files
 
 ### Workspace Files
 
-Results are automatically saved to your [Dobermann workspace](/docs/your-data/#dobermann-workspace):
-
-```
-.active8/
-└── results/
-    └── {endpoint}/
-        └── {timestamp}.json
-```
-
-- Files open automatically in the editor after execution
-- Compare executions using diff tools
-- Excluded from git by default (`.active8/` in `.gitignore`)
+Every request and response is also saved as JSON in your [Dobermann workspace](/docs/your-data/#dobermann-workspace), organised by environment, endpoint and batch. The **Files** section of the Console's Settings tab links straight to them. They are yours to open, diff, or feed to anything else.
 
 ---
 
 ## Error Handling
+{: #error-handling }
 
-### Error Tolerance
+### Error Handling setting
 
-Configure how errors affect batch execution (set during batch preparation):
+Chosen on the **Execute Batch** step, and shown on the Console's Settings tab:
 
 | Setting | Behaviour |
 |---------|-----------|
-| **Stop on First Error** | Batch stops immediately on any failure |
-| **Maximum Error Count** | Stops after N failures (e.g., 5) |
-| **Percentage-Based** | Stops if error rate exceeds threshold (e.g., 10%) |
-| **Continue on All Errors** | Runs to completion regardless of failures |
+| **Continue processing** (default) | The batch runs to the end. Failed requests collect on the Error tab for you to reprocess |
+| **Stop on first error** | The batch stops at the first failed request |
 
-**Choosing a setting:**
-- **Stop on First Error** — Critical data loads where any failure is unacceptable
-- **Max Error Count** — Bulk updates where a few failures are OK
-- **Percentage-Based** — Large batches (10,000+ rows) where some failures are expected
-- **Continue on All** — Exploratory runs or data quality testing
+**Continue processing** is the right choice for most loads — you get every failure in one run, then [reprocess](/docs/batch-reprocessing/) them together. **Stop on first error** suits a run where one failure means the rest shouldn't go either.
 
-### Network Resilience
+### Critical errors
 
-- Default timeout: 30 seconds (configurable per endpoint)
-- Automatic retry (1 attempt) with exponential backoff for rate limits
-- Clear error messages for timeouts, connection issues, and SSL errors
+Some failures stop a batch regardless of the setting above, because carrying on would fail every remaining request the same way:
+
+- Responses with a **critical HTTP code** — `401` and `403` by default
+- **Network errors** — timeouts, DNS failures, connection refused
+
+Both are configurable under **Hub → Settings → Execution**. See [The Hub — Settings](/docs/hub/#settings).
+
+### Authentication
+
+A batch member refused with `401` against a DBMN-authenticated environment is retried once with a refreshed token before it counts as a failure. Other requests are not retried automatically: a failed transaction stays on the Error tab until you [reprocess](/docs/batch-reprocessing/) it.
 
 ---
 
@@ -373,14 +368,13 @@ Configure how errors affect batch execution (set during batch preparation):
 
 ### Parallel Processing
 
-Concurrency is configured per environment (see [Environments — Parallel Processing](/docs/environments/#parallel-processing)). Higher concurrency = faster batches, but more server load.
+Each batch picks a **Processing Mode** on the Execute Batch step, up to the ceiling set per environment (see [Environments — Parallel Processing](/docs/environments/#parallel-processing)). Higher concurrency = faster batches, but more server load.
 
 ### Large Batches
 
-For batches over 1,000 rows:
-- Results stream to disk incrementally (no memory buildup)
-- Progress auto-saved periodically
-- Split very large files into multiple batches if needed
+For big loads:
+- Put more rows in each request — **Rows per request** on Review & Configure — before adding threads. See [Batch Preparation](/docs/batch-preparation/#step-4-review-json)
+- Results stream to disk as they arrive, so the Console stays responsive
 - Run during off-peak hours to avoid rate limiting
 
 ---
@@ -391,9 +385,9 @@ For batches over 1,000 rows:
 
 **Check:**
 - Endpoint is saved (no unsaved changes)
-- Environment has valid authentication
-- Required variables are configured
-- No validation errors in endpoint
+- An environment is selected in the Hub header, and its authentication is valid
+- You are signed in to DBMN if the environment uses DBMN auth
+- No validation errors in the endpoint
 
 ### Which Input Rows Failed?
 {: #find-failed-rows }
@@ -407,10 +401,10 @@ One failed request can carry many rows. If the error doesn't say which, the requ
 ### Batch Stops Unexpectedly
 
 **Check:**
-- Error tolerance setting (may be "Stop on First Error")
-- Recent error messages in Error tab
+- **Error Handling** on the Settings tab — was it **Stop on first error**?
+- Recent error messages in the Error tab
+- A `401` or `403`, or a network error, stops a batch at once — see [Critical errors](#error-handling)
 - API rate limits hit (look for 429 status codes)
-- Network interruption
 
 ### Execution Hangs
 
@@ -433,14 +427,6 @@ One failed request can carry many rows. If the error doesn't say which, the requ
 - Variable names match exactly
 - No extra spaces in column headers
 
-### Results Not Saving
-
-**Check:**
-- Write permissions in `.active8/` directory
-- Disk space available
-- File not locked by another process
-- Check VS Code output panel for errors
-
 ---
 
 ## Related Topics
@@ -448,6 +434,7 @@ One failed request can carry many rows. If the error doesn't say which, the requ
 - [Named Views](/docs/named-views/) — Save column layouts and row-per-X shapes; switch and export instantly
 - [Pagination](/docs/pagination/) — Configure and run paginated API requests
 - [Batch Reprocessing](/docs/batch-reprocessing/) — Re-run failed transactions without re-executing the whole batch
+- [The Hub](/docs/hub/) — History, the activity chip, and execution settings
 - [Endpoints](/docs/endpoints/) — Configuring API requests
 - [Batch Preparation](/docs/batch-preparation/) — Data loading and column mapping
 - [Environments](/docs/environments/) — Authentication, timezone, and parallel processing

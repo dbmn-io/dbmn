@@ -7,7 +7,7 @@ parent: Documentation
 
 # Troubleshooting
 
-This guide covers common issues, error messages, and solutions for Dobermann. Issues are organized by category for easy reference.
+This guide covers common issues, error messages, and solutions for Dobermann. Issues are organised by category for easy reference. When you report an issue, the Console's Raw tab and **Logs** for the failing transaction are the most useful thing to include.
 
 ## Authentication Issues
 
@@ -30,23 +30,15 @@ See [Getting Started — First Launch](/docs/getting-started/#first-launch-what-
 
 **Symptoms:**
 - API requests return 401 Unauthorized
-- Environment shows warning icon
-- Error message: "Token expired" or "Unauthorized"
+- A batch stops at once, because 401 is a critical code
 
 **Solutions:**
 
-**For JWT authentication:**
-1. Open environment configuration
-2. Select "Manual JWT Token"
-3. Obtain fresh token from your API provider
-4. Paste new token
-5. Save environment
+**DBMN:** open {icon:nav-account} **Account** in the Hub and sign in again. Against a DBMN-authenticated environment a batch member refused with 401 is retried once with a refreshed token before it fails.
 
-**For OAuth authentication:**
-1. Open environment configuration
-2. Click "Re-authenticate with OAuth"
-3. Complete OAuth flow in browser
-4. Token refreshes automatically
+**Manual JWT Token:** open the environment, paste a fresh token into **JWT Token**, and **Save Environment**.
+
+**OAuth:** open the environment and click **Sign In (New Token)** in the footer, or **Refresh Token** if one is held.
 
 ### OAuth Flow Fails
 
@@ -72,17 +64,20 @@ See [Getting Started — First Launch](/docs/getting-started/#first-launch-what-
 - Verify can reach authorization URL
 - Test URL in browser manually
 
-### Organization Selection Required
+### Organisation Not Selected
 
 **Symptoms:**
-- Requests fail with "Organization header missing"
-- Environment shows organization warning
+- Requests fail because the API wanted an organisation header
+- The Hub header reads `(pick org)` after the environment name
 
 **Solution:**
-1. Open environment configuration
-2. Wait for organization list to load
-3. Select your organization from dropdown
-4. Headers are added automatically
+Click the {icon:env-switcher} environment selector in the Hub header and choose an organisation under the environment. See [Environments — Organisation Selection](/docs/environments/#organization-selection).
+
+### Sign in to run
+
+**Symptoms:** The Run API and Run Batch buttons read **Sign in to run**.
+
+Dobermann needs a DBMN account to run anything. Open {icon:nav-account} **Account** and sign in. A free account is enough.
 
 ## Endpoint Configuration
 
@@ -95,10 +90,8 @@ See [Getting Started — First Launch](/docs/getting-started/#first-launch-what-
 **Causes and solutions:**
 
 **Variable not mapped:**
-- Load CSV file
-- Open column mapping interface
-- Map each variable to a data column
-- Verify green checkmarks appear
+- On **Map & Transform**, every required variable needs a column
+- Point the unmapped ones at their columns; optional (`|opt`, `|null`) variables may stay unmapped
 
 **Variable name mismatch:**
 - Check spelling matches exactly
@@ -113,17 +106,18 @@ See [Getting Started — First Launch](/docs/getting-started/#first-launch-what-
 - 400 Bad Request errors
 
 **Solutions:**
-Dobermann auto-encodes query parameters and path variables. For special cases, pre-encode values in your CSV file.
+Dobermann auto-encodes query parameters and path variables. For special cases, pre-encode values in your data file.
 
 ### Type Validation Errors
 
 **Symptoms:**
-- Error: "Type mismatch for variable X"
-- Number expected but got string
+- Cells highlighted amber on **Review & Edit Data**
+- A footer message such as `"quantity" has 3 invalid records — must be ≥ 0`
 
 **Solutions:**
-- Specify type in variable: `{{qty:number}}`
-- Ensure CSV data formatting matches: numbers without quotes, booleans as `true`/`false`
+- Click **Filter Errors** to see only the rows that failed
+- Fix the cells, or fix the file — the rule is on the template variable (`{{qty:number|>=0}}`); hover the column header to see it
+- Check the **Source Format** on Map & Transform matches how the file writes numbers and dates
 
 ### Request Body Syntax Errors
 
@@ -132,40 +126,41 @@ Dobermann auto-encodes query parameters and path variables. For special cases, p
 - Red underline in JSON editor
 
 **Common mistakes:**
-- Trailing commas in JSON
 - Missing quotes around keys
 - Mismatched braces or brackets
 
 **Solutions:**
-- Use the built-in JSON validator
+- Click **Format** — it fails on the line that is wrong
 - Check matching braces and brackets
-- Use `Ctrl+/` to comment out problematic lines for testing
+- Use `Ctrl+/` to comment out problematic lines for testing; comments and trailing commas are allowed
 
 ### Endpoint Won't Save
 
 **Required fields checklist:**
 - Endpoint name provided
 - HTTP method selected
-- URL path configured
-- Valid JSON body (if POST/PUT)
+- Path configured
+- Valid JSON body (if POST/PUT/PATCH)
+
+### Run API or Run Batch is disabled
+
+Both are disabled while the endpoint has unsaved changes. **Save Endpoint** (Ctrl+S) first.
 
 ## Execution Problems
 
 ### Batch Stops Immediately
 
 **Symptoms:**
-- Batch stops after 1 request
-- Status shows stopped
+- Batch stops after one request
+- Status shows STOPPED
 
-**Check error tolerance setting:**
-1. Open endpoint configuration
-2. Review error tolerance section
-3. If "Stop on First Error" is selected, first failure stops batch
+**Check:**
+1. Open the Console's **Settings** tab. If **Error Handling** is **Stop on first error**, the first failure stopped it.
+2. Look at the Error tab. A `401` or `403` stops a batch at once whatever the setting; so does a network error. Both are configurable under **Hub → Settings → Execution**.
 
 **Solutions:**
-- Change to "Maximum Error Count: 10"
-- Or "Percentage-Based: 10%"
-- Or "Continue on All Errors"
+- Fix the cause of the first error (usually authentication), then **Resume** or **Reprocess**
+- Next time, choose **Continue processing** on Execute Batch to collect every failure in one run
 
 ### Execution Hangs
 
@@ -174,23 +169,24 @@ Dobermann auto-encodes query parameters and path variables. For special cases, p
 - Spinning indicator runs forever
 
 **Debug steps:**
-1. Check API server status
-2. Test with curl/Postman
-3. Verify network connectivity
-4. Review firewall/proxy settings
-5. Check VS Code output panel
+1. On the Raw tab, set **Status** to **Running** to see what is still in flight
+2. Check API server status
+3. Test with curl/Postman
+4. Verify network connectivity, VPN and proxy
+5. **Cancel** the batch; its completed work is kept and the rest can be reprocessed
 
 ### Slow Batch Performance
 
 **Causes:**
-- API response time (check average in progress monitor)
+- One row per request — the commonest cause by far
+- API response time
 - Large response payloads
 - Network latency (VPN, geographic distance)
 
 **Solutions:**
-- Run smaller batches (100-500 rows)
+- Raise **Rows per request** on **Review & Configure** — the API's documented maximum is the right number. See [Batch Preparation](/docs/batch-preparation/#step-4-review-json)
+- Raise **Processing Mode** on Execute Batch, within the environment's **Max Concurrency**
 - Execute during off-peak hours
-- Increase timeout if needed
 
 ### Variables Show Wrong Data
 
@@ -199,23 +195,26 @@ Dobermann auto-encodes query parameters and path variables. For special cases, p
 - Data seems shifted or misaligned
 
 **Check:**
-- Verify column mapping is correct
+- Verify column mapping is correct — the endpoint remembers the last mapping, which may not fit this file
 - Check column names match
 - Look for extra spaces in headers
 - Ensure consistent delimiter
 - Verify UTF-8 encoding
+
+### Too many requests, or too few
+
+The **API calls** count on **Review & Configure** is the number of requests the batch will send. For a nested template, a new request starts whenever any header field changes — see [How rows become requests](/docs/batch-preparation/#nested-grouping). If the count is wrong, the data or the template is: click ⓘ beside the count to see how the rows were grouped.
 
 ## Data File Issues
 
 ### File Won't Load
 
 **Check:**
-- Must be `.xlsx`, `.xls`, `.csv`, or `.txt` extension
+- Must be `.csv`, `.xlsx`, `.xls`, `.tsv` or `.txt`
 - UTF-8 encoding recommended
 - Header row required
 - Consistent delimiter (comma, tab, semicolon)
-- File isn't locked by Excel
-- Try copying to new location
+- **Open in Excel?** The browse dialog on Windows can't pick a file another program holds open. Drag it onto the drop zone instead — that always works
 
 ### Column Mapping Fails
 
@@ -234,19 +233,18 @@ Dobermann auto-encodes query parameters and path variables. For special cases, p
 - Check quote escaping
 
 **Excel CSV export issues:**
-- Excel may change date formats
-- Numbers may lose leading zeros
-- Use "Save As" -> "CSV UTF-8"
+- Excel may change date formats — set **Source Format** on Map & Transform to match
+- Numbers may lose leading zeros — paste from Excel, or load the `.xlsx` directly
+- Use "Save As" → "CSV UTF-8"
 
 ## Console and Results
 
 ### Console Not Opening
 
 **Solutions:**
-1. Check VS Code output panel
-2. Manually open from Executions sidebar
-3. Verify `.active8/results/` directory exists
-4. Reload VS Code window
+1. Open {icon:nav-history} **History** in the Hub and click the run
+2. Check **Hub → Settings → Execution → Auto-open console on completion** is on
+3. Reload the VS Code window
 
 ### Results Missing Data
 
@@ -255,12 +253,17 @@ Dobermann auto-encodes query parameters and path variables. For special cases, p
 - Connection dropped during request
 - Check API logs for server-side issues
 
-### Export Fails
+### Columns I expected aren't there
+
+The Completed and Error tabs show the columns of the active **view**. Click the view button above the table and choose another, or **Edit** it to add columns. See [Named Views](/docs/named-views/).
+
+### Export Fails or is greyed out
 
 **Check:**
-- Write permissions in target directory
+- Export waits until the batch has finished
+- Copy stops at 1,000 rows (Standard, Excel, Markdown) or 10,000 (CSV); Excel export at 2,000,000 cells — use CSV export for more. See [Console — Limits](/docs/console/#copy-options)
+- Write permissions in the target directory
 - Disk space available
-- File path length (max 255 chars)
 
 ## Environment and Network
 
@@ -282,7 +285,7 @@ Dobermann auto-encodes query parameters and path variables. For special cases, p
 
 **Production APIs:**
 - Valid certificate should work automatically
-- Update VS Code and Node.js
+- Update VS Code
 - Check system date/time is correct
 
 **Development/Staging:**
@@ -293,13 +296,14 @@ Dobermann auto-encodes query parameters and path variables. For special cases, p
 
 **Symptoms:**
 - Error: "429 Too Many Requests"
-- Batch stops mid-execution
+- Failures cluster when concurrency is high
 
 **Solutions:**
-- Pause batch to cool down
-- Reduce batch size
+- **Pause** the batch to cool down, then **Resume**
+- Lower **Processing Mode** on the next run, or the environment's **Max Concurrency**
+- Raise **Rows per request** so you need fewer requests
 - Run during off-peak hours
-- Contact API admin to increase limits
+- Contact the API admin to increase limits
 
 ## VS Code and Extension
 
@@ -310,22 +314,19 @@ Dobermann auto-encodes query parameters and path variables. For special cases, p
 3. Restart VS Code
 4. Reinstall extension if needed
 
-### Sidebar Tree Not Showing
+### The Hub Doesn't Open
 
-1. Open Command Palette -> "Dobermann: Reload"
-2. Or restart VS Code
-3. Check `.active8/` directory exists
+1. Click the Dobermann icon in the Activity Bar — the Hub opens as an editor tab and the sidebar closes
+2. Run **DBMN: Open Hub** from the Command Palette
+3. Reload the VS Code window
 
-### Webview Won't Open
+### Two Hub Tabs
 
-1. Check VS Code output panel
-2. Disable other extensions (possible conflict)
-3. Clear VS Code cache
-4. Update VS Code to latest version
+VS Code restores the Hub tab on restart and Dobermann re-attaches to it. If you ever see two, close one; nothing is lost.
 
 ### Performance Issues
 
-If VS Code feels sluggish during a large batch, clear old executions from the Executions sidebar — each retained run keeps its request/response files indexed. Splitting very large CSVs into multiple batches also helps.
+If VS Code feels sluggish during a large batch, lower **Processing Mode**, and clear old runs from **History** (turn on **Select**, tick, **Delete**). Splitting very large files into several batches also helps.
 
 ## Getting Help
 
@@ -333,20 +334,22 @@ If VS Code feels sluggish during a large batch, clear old executions from the Ex
 
 When reporting issues, include:
 
-1. **Dobermann version:** Extensions panel -> Dobermann -> Version number
-2. **VS Code version:** Help -> About
-3. **Error messages:** VS Code output panel or Developer Tools console
-4. **Reproduction steps:** What you did, expected, and actual behavior
+1. **Dobermann version:** Extensions panel → Dobermann → Version number
+2. **VS Code version:** Help → About
+3. **The transaction:** open the run under History, right-click the row → **View transaction**, and copy the request and response; the **Logs** button on the Raw tab has the execution log
+4. **Reproduction steps:** What you did, expected, and actual behaviour
 5. **Environment:** Operating system, API target, authentication method
 
 ### Reporting Issues
 
 - [GitHub Issues](https://github.com/dbmn-io/dbmn/issues) - Bug reports and feature requests
 - [GitHub Discussions](https://github.com/dbmn-io/dbmn/discussions) - Questions and community help
+- [support@dbmn.io](mailto:support@dbmn.io)
 
 ## Related Topics
 
 - [Environments](/docs/environments/) - Authentication and connection setup
 - [Endpoints](/docs/endpoints/) - API configuration
 - [Console](/docs/console/) - Running requests and analysing results
-- [Batch Preparation](/docs/batch-preparation/) - CSV and variable mapping
+- [Batch Preparation](/docs/batch-preparation/) - Loading data and mapping columns
+- [The Hub](/docs/hub/) - Settings that affect execution

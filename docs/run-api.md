@@ -20,7 +20,6 @@ Its sibling is **Run Batch**, which drives the same endpoint from a file — see
 |------|-----|
 | **Endpoint editor** | **Run API** in the footer. Disabled while there are unsaved changes — save first, so what runs is what you're looking at. |
 | **API Catalogue** | The {icon:run-api} icon on the endpoint's row. ({icon:run-batch} is Run Batch.) |
-| **Quick Access** | **Alt+D E**, pick the endpoint, choose **Run**. See [Shortcuts](/docs/shortcuts/). |
 
 The request goes to the **active environment**. If that environment is typed Production you're asked to confirm first — see [Environments](/docs/environments/#environment-type).
 
@@ -46,7 +45,6 @@ Each field follows the variable's type:
 | `boolean` | `true` / `false` dropdown |
 | `date` | Text, pre-filled with today |
 | `datetime` | Text, pre-filled with now. Enter it in your own timezone; Dobermann converts it to the environment's [target timezone](/docs/environments/#target-timezone). |
-| `time` | Text, pre-filled with the current time |
 
 With more than five variables the form switches to two columns so **Run** stays on screen.
 

@@ -19,6 +19,8 @@ logo: "/images/DBMNLogo.png"
 
 # Aux links (top right)
 aux_links:
+  "Puppy School":
+    - "/puppy-school/"
   "VS Code Marketplace":
     - "https://marketplace.visualstudio.com/items?itemName=dbmn.dobermann"
   "GitHub":
@@ -90,3 +92,5 @@ exclude:
   - .git
   - CLAUDE.md
   - _puppy_school/README.md
+  # Internal production notes — never part of the public site
+  - docs/internal

@@ -7,7 +7,9 @@ parent: Documentation
 
 # Batch Preparation
 
-Batch execution allows you to run the same API endpoint multiple times with different data. Load an Excel/CSV file, paste tabular data, or type values directly into the grid. Dobermann walks you through a 5-step flow — from data loading to execution.
+**Run Batch** runs the same endpoint once per row of your data — or once per thousand rows, if the API takes arrays. Load an Excel/CSV file, paste tabular data, or type values directly into the grid. Dobermann walks you through a 5-step flow, from data loading to execution, in a tab of the [Hub](/docs/hub/).
+
+Run Batch appears in the endpoint footer, and as the {icon:run-batch} icon on the endpoint's catalogue row, once the endpoint has `{{template variables}}`. Its sibling, [Run API](/docs/run-api/), sends one request — run that first, so you know the template and the API agree before you point a file at it.
 
 ## Overview
 {: #overview }
@@ -18,9 +20,9 @@ Batch preparation follows five steps:
 |------|------|---------|
 | 1 | **Load Data** | Choose how to get data in — upload a file, paste text, or enter data manually |
 | 2 | **Map & Transform** | Map source columns to template variables and configure data formats |
-| 3 | **Review & Edit Data** | Review, edit, add, and validate rows before generating JSON |
+| 3 | **Review & Edit Data** | Review, edit, add, and validate rows before building requests |
 | 4 | **Review & Configure** | See the first requests and how many will be sent, and set Rows per request |
-| 5 | **Execute Batch** | Review execution settings and run the batch |
+| 5 | **Execute Batch** | Name the batch, choose error handling and concurrency, and run it |
 
 ### Two Entry Paths
 
@@ -30,8 +32,8 @@ There are two ways into the batch flow, and they converge at Step 3:
 
 ```
 Step 1 → Step 2 → Step 3 → Step 4 → Step 5
-Load     Map &     Review    Review   Execute
-Data     Transform & Edit    JSON     Batch
+Load     Map &     Review    Review &   Execute
+Data     Transform & Edit    Configure  Batch
                    Data
 ```
 
@@ -39,15 +41,15 @@ Data     Transform & Edit    JSON     Batch
 
 ```
 Step 1 → Step 3 → Step 4 → Step 5
-Load     Review    Review   Execute
-Data     & Edit    JSON     Batch
+Load     Review    Review &   Execute
+Data     & Edit    Configure  Batch
          Data
 ```
 
 - **File / Paste**: Upload a file or paste tabular data, then map columns to template variables. The grid in Step 3 is pre-populated with your mapped data.
 - **Enter Data**: Click the **Enter Data** button on Step 1 to jump straight to an empty grid with columns matching your template variables. Type values directly — no file needed.
 
-Both paths merge at Step 3, where you can review and edit the data before generating JSON.
+Both paths merge at Step 3, where you can review and edit the data before the requests are built.
 
 ---
 
@@ -60,25 +62,19 @@ Step 1 is where you choose how to get data into the batch flow. There are three 
 
 Drag a file onto the upload area or click to browse. Supported formats:
 
-- `.xlsx` / `.xls` — Excel workbooks
+- `.xlsx` / `.xls` — Excel workbooks. You pick the sheet, and if the sheet has hidden rows you choose **Filtered rows** or **All rows**
 - `.csv` — Comma-separated values
-- `.txt` — Tab or comma-separated
+- `.tsv` / `.txt` — Tab or comma-separated
 - Character encoding: UTF-8 (recommended), ASCII
 
-After loading, Dobermann displays:
-- **Row count** — Total data rows (excludes header)
-- **Column list** — All column names detected
-- **Preview table** — First rows of data
+{: .note }
+> **File open in Excel?** Drag it in. On Windows the browse dialog can't pick a file another program holds open; drag and drop always works.
 
-**Review checklist:**
-- Correct number of columns
-- Data appears in correct columns
-- No missing delimiters
-- Special characters display properly
+After loading, Dobermann displays the row count (excluding the header), the columns it found, and a preview of the first rows. Check the columns are right and the values landed where you expect before going on.
 
 ### Paste Text
 
-Switch to the **Paste Text** tab and paste CSV, TSV, or tab-delimited data directly. This is useful when copying a few rows from Excel or another tool.
+Switch to the **Paste Text** tab and paste CSV, TSV, or tab-delimited data directly. This is useful when copying a few rows from Excel — or a whole table from the Console's **Copy → Excel**, which is how a GET's results become a POST's input.
 
 Dobermann auto-detects tab-delimited data (common when pasting from Excel) and converts it to CSV format internally.
 
@@ -114,7 +110,7 @@ PRE-ITEM-002,Widget Beta,250,DC02
 PRE-ITEM-003,Widget Gamma,75,DC01
 ```
 
-After loading data via file or paste, click **Read Data** to proceed to Step 2.
+After loading data via file or paste, click **Import Data** to proceed to Step 2.
 
 ---
 
@@ -122,6 +118,8 @@ After loading data via file or paste, click **Read Data** to proceed to Step 2.
 {: #step-2-map-transform }
 
 Map source data columns to template variables in your endpoint configuration. This step only appears when using the File or Paste path.
+
+The table has a **Source** side — the file's column, its **Source Format** and a sample value — and a **Target** side — the template variable, its type, the converted sample, and a status.
 
 ### Automatic Mapping
 
@@ -134,7 +132,6 @@ For columns that don't auto-map:
 1. Find the unmapped variable in the mapping table
 2. Click the dropdown next to the variable name
 3. Select the corresponding source data column
-4. Mapping is saved automatically
 
 **Example:**
 ```
@@ -159,23 +156,23 @@ The mapping is kept with the endpoint's Run Batch settings. Your template — th
 
 Dobermann validates your mapping:
 
-- **All required variables mapped** — green checkmarks
+- **All required variables mapped**
 - **No duplicate mappings** — each variable maps to one column
 - **Column exists in source data** — mapped columns must be present
 
-Unmapped required variables show a red indicator. Resolve all mapping issues before proceeding.
+Unmapped required variables are flagged in the Status column. Resolve all mapping issues before proceeding.
 
 **Optional variables don't need a column.** A variable marked `|opt` or `|null` — shown with a ○ in the mapping table — can be left unmapped when your file simply doesn't have that column. Every request then omits the key (`|opt`) or sends `null` (`|null`), exactly as it would for a blank cell. See [Template Variables](/docs/template-variables/).
 
 ### Source Format Configuration
 
-The **Source Format** column lets you specify how source values should be interpreted before conversion.
+The **Source Format** column lets you specify how source values should be interpreted before conversion. It defaults by type — **Standard Number**, **Auto-detect Date**, **Boolean**, or **No Transform** for strings.
 
 **Number Formats:**
 
 | Format | Example Input | Description |
 |--------|---------------|-------------|
-| Standard | `1234.56` | Regular decimal numbers |
+| Standard Number | `1234.56` | Regular decimal numbers |
 | COBOL | `+000000099.9900` | COBOL packed decimal with sign |
 | Scientific | `1.23E+04` | Scientific notation |
 | Currency | `$1,234.56` | Currency with symbols and separators |
@@ -184,7 +181,7 @@ The **Source Format** column lets you specify how source values should be interp
 
 | Format | Example Input | Description |
 |--------|---------------|-------------|
-| Auto-detect | Various | Attempts to parse common formats |
+| Auto-detect Date | Various | Attempts to parse common formats |
 | YYYY-MM-DD | `2024-01-04` | ISO date format |
 | MM/DD/YYYY | `01/04/2024` | US date format |
 | DD/MM/YYYY | `04/01/2024` | European date format |
@@ -201,6 +198,8 @@ To handle Excel serial dates:
 2. Change **Source Format** to "Excel Serial Date"
 3. The number will be converted to a proper date
 
+**Timezones:** if the template has a `datetime` variable, a **Source Timezone** appears above the table, alongside the environment's **Target Timezone**. Values are converted from one to the other.
+
 Click **Next** to proceed to Step 3. Dobermann validates all data type coercions before advancing.
 
 ---
@@ -213,42 +212,40 @@ Step 3 presents your data in an editable grid. Depending on how you got here:
 - **File / Paste path** — The grid is pre-populated with your mapped and transformed data
 - **Enter Data path** — The grid is empty with columns matching your template variables
 
-This is your last chance to review and modify data before JSON generation.
+This is your last chance to review and modify data before the requests are built. Edits apply to this run; your file on disk is untouched.
 
 ### Editing the Grid
 
 | Action | How |
 |--------|-----|
 | **Edit a cell** | Click the cell and type |
-| **Add a row** | Tab from the last cell in the last row, or use the Add Row button |
-| **Delete a row** | Select the row and press Delete, or use the row context menu |
+| **Add a row** | Tab from the last cell in the last row, or click **+ Add Row** (Enter Data path) |
+| **Delete a row** | Click the × at the end of the row (Enter Data path) |
 | **Paste data** | Select a cell and paste — data fills across cells and rows |
-| **Undo** | `Ctrl+Z` / `Cmd+Z` to undo the last change |
+| **Undo a paste** | `Ctrl+Z` / `Cmd+Z` |
 | **Fill down** | `Ctrl+D` to copy the value from the cell above |
+| **See only the problems** | **Filter Errors** in the footer hides every row that passed |
 
 ### Grid Keyboard Shortcuts
 
 | Shortcut | Action |
 |----------|--------|
-| `Tab` | Move to next cell. From last cell, adds a new row |
+| `Tab` | Move to next cell. From the last cell of the last row, adds a new row |
 | `Shift+Tab` | Move to previous cell |
-| `Enter` | Move down to same column in next row |
+| `Enter` | Move down to same column in next row; on the last row, adds a row |
 | `Shift+Enter` | Move up to same column in previous row |
-| `Arrow Keys` | Navigate between cells |
+| `Arrow Up / Down` | Move between rows |
 | `Ctrl+D` | Copy value from cell above (fill-down) |
 | `Escape` | Clear current cell |
 
 ### Progressive Tab Copy (Nested Templates)
 
-For templates with nested structures (e.g., orders with line items), the grid supports progressive Tab copy:
+For templates with nested structures (e.g., orders with line items), the grid speeds up repetitive entry:
 
-1. Fill first row completely
-2. Tab from last cell — adds a new row
-3. Tab again (without typing) — copies root-level values (e.g., order ID, destination)
-4. Tab again — copies next nesting level values
-5. Type to cancel progressive copy and enter unique values
-
-A hint appears to guide you through the progressive copy levels.
+1. Fill the first row completely
+2. Tab from the last cell — a new row is added
+3. A hint beside **Add Row** offers to copy the header-level values (e.g., order ID, destination) from the row above. Tab again to take them
+4. Type to enter your own values instead
 
 ### Validation
 
@@ -256,15 +253,15 @@ When you click **Next** to proceed to Step 4, Dobermann validates your data:
 
 **Blank field check:**
 - Scans for empty cells in required columns
-- Shows a warning listing which rows and columns are blank
-- You can acknowledge the warning and proceed, or go back and fill in the values
-- Fields marked with the `|opt` modifier are excluded from this check
+- Shows how many empty fields it found, with a **Continue** button
+- You can continue, or go back and fill in the values
+- Optional (`|opt`, `|null`) and boolean fields are excluded from this check
 
 **Modifier constraint validation:**
 - Validates cell values against any modifier constraints defined on the template variable
 - Checks include: minimum/maximum length, exact length, min/max numeric values, integer requirements, and date format validity
-- Invalid cells are highlighted with an amber background
-- A summary of validation errors appears in the footer
+- Invalid cells are highlighted with an amber background, and the column header shows a dotted underline — hover it to see the rule
+- The footer names the column and the rule: `"quantityOnHand" has 1 invalid record — must be ≥ 0`
 - You must fix all constraint errors before proceeding
 
 **Auto-cleaning:**
@@ -281,43 +278,28 @@ For endpoints with many template variables, the grid scrolls horizontally. Each 
 
 Step 4 shows what the batch will send, built by the same code that sends it — for a JSON body, URL parameters, or both.
 
+### Configure
+{: #batch-configuration }
+
 **Configure** appears when there is something to set:
 
 | Setting | When | What it does |
 |---|---|---|
-| **Rows per request** | A flat array (`[ { … } ]`) | How many rows go into each request's array |
+| **Rows per request** | A flat array (`[ { … } ]`) | How many rows go into each request's array, 1 to 1000. The API's documented maximum is the right number |
 | **`orders` per request** | Two or three levels (`orders[].items[]`) | How many top-level entries go into each request |
 | **Values per URL** | A repeating URL parameter (`id={{item}}[ or ]`) | How many values go into each URL — Auto fits as many as the URL length allows |
 | **Array** | A template with two or more arrays that could repeat | Which one repeats |
 | **Body** | BASE64-encoded fields | Show the bodies as sent, or unencoded |
 
-Change a setting and **Refresh** rebuilds the preview.
+Change a setting and **↻** (left of the Configure cards) rebuilds the preview.
 
 **Summary** shows the **API calls** the batch will make, the **Rows** going into them, and the **Size** of the first request. The ⓘ beside API calls opens *How your rows become API requests*: your template with each variable marked by what it does, how the rows group into requests, and what each request holds.
 
 **Requests** shows every request, or **Request samples** the first five when there are more — each with the input rows behind it and its request: the **Body**, or **Details** (method, URL, query parameters, headers). An endpoint with no body shows its URL. **Show Input / Request** hides or shows those parts of every card.
 
-### Batch Configuration
+### Rows per request — the dial most people miss
 
-**Error Tolerance:**
-
-Control how errors affect batch execution:
-
-| Setting | Behaviour |
-|---------|-----------|
-| **Stop on First Error** | Batch stops immediately on any failure (default) |
-| **Maximum Error Count** | Stops after N failures (e.g., 5) |
-| **Percentage-Based** | Stops if error rate exceeds threshold (e.g., 10%) |
-| **Continue on All Errors** | Runs to completion regardless of failures |
-
-**Choosing a setting:**
-
-| Scenario | Recommended Setting |
-|----------|-------------------|
-| Critical data migration | Stop on First Error |
-| Bulk update with validation | Max 5 errors |
-| Large import (10,000 rows) | 5% error tolerance |
-| Data quality testing | Continue on all errors |
+One row per request works, and it is the slowest possible way to load data. If the endpoint accepts an array, set **Rows per request** to what the API allows and watch **API calls** fall: 67,000 rows at 1,000 per request is 67 requests, not 67,000. Threads (Step 5) make a load faster; rows per request make it smaller — fewer connections, less overhead, less load on the API. Turn both up.
 
 ### How rows become requests (nested templates)
 {: #nested-grouping }
@@ -355,24 +337,10 @@ This is how one flat file becomes one order per supplier and site, with the orde
 
 The **API calls** count in this step is the number of requests the rule produced; its ⓘ shows the groups, one row per request. If it isn't what you expected, this is why.
 
-### Maximum Repetitions (Advanced)
+#### Sorting
+{: #nested-array-sorting }
 
-Limit how many times array values repeat in requests.
-
-**Default behaviour:**
-If CSV has fewer rows than array size in template, Dobermann repeats CSV rows:
-```
-CSV: 3 rows
-Template array: 10 items
-Result: [row1, row2, row3, row1, row2, row3, row1, row2, row3, row1]
-```
-
-**With maxRepetitions=2:**
-```
-CSV: 3 rows
-Max repetitions: 2
-Result: [row1, row2, row3, row1, row2, row3] (stops after 2 cycles)
-```
+A nested template's rows are sorted by the header fields before they are folded, so the lines of one order sit together whatever order the file had them in. When that happens, Step 4 says so: *Unsorted data detected. Sorted by: …*. A flat template — just a list of records — has nothing to group by, and is sent exactly as loaded.
 
 Click **Next** to proceed to Step 5.
 
@@ -383,26 +351,37 @@ Click **Next** to proceed to Step 5.
 
 Step 5 shows the execution summary and lets you start the batch.
 
-**Execution summary:**
-- Endpoint name, HTTP method, and URL path
-- Target environment and organization
-- Number of API calls to execute
-- Processing mode (sequential or parallel)
-- Error tolerance setting
-- Batch name (editable)
+| Section | What's there |
+|---|---|
+| **Sending To** | **Environment**, **Organization** (if one is selected), and the **Endpoint** as method and full URL |
+| **Source Data** | **Source** (the file and sheet, or *Pasted data*), **Records**, **API Calls**, and **Per Call** for a flat array |
+| **Configure** | **Name**, **Error Handling** and **Processing Mode** — below |
 
-Click **Execute** to start the batch. The Console opens automatically and results stream in real-time, with live completion percentage, success/error counts, throughput, and elapsed time.
+### Name
 
-### Pausing
+The batch name, as it will appear in History. Up to 100 characters.
 
-**Pause** — Halts execution after the current request completes. Resume from the exact position. Useful for rate limit cooling or reviewing errors mid-run.
+### Error Handling
+{: #error-handling }
 
-### Batch Results
+| Setting | Behaviour |
+|---------|-----------|
+| **Continue processing** (default) | The batch runs to the end. Failed requests collect on the Console's Error tab, ready to [reprocess](/docs/batch-reprocessing/) together |
+| **Stop on first error** | The batch stops at the first failed request |
 
-When the batch completes:
-- Console opens automatically with full results
-- Results saved to workspace (`.active8/results/`)
-- Execution remains in history sidebar
+**Continue processing** is right for most loads: you see every failure in one run instead of one at a time. Choose **Stop on first error** when one failure means the rest shouldn't go either.
+
+Some failures stop a batch regardless — a `401` or `403`, or a network error — because every remaining request would fail the same way. Those are configurable under **Hub → Settings → Execution**. See [Console — Error Handling](/docs/console/#error-handling).
+
+### Processing Mode
+
+**Sequential (Safest)** sends one request at a time. **N concurrent requests** sends 2, 4, 8 or 16 at once, up to the environment's **Max Concurrency** — see [Environments — Parallel Processing](/docs/environments/#parallel-processing). If the environment hasn't enabled parallel processing, only Sequential is offered.
+
+### Execute
+
+**Execute** is enabled once you have scrolled to the bottom of the summary. If the active environment is typed **Production**, a confirmation asks you to proceed — see [Environments — Environment Type](/docs/environments/#environment-type).
+
+The Console opens automatically and results stream in real-time, with live completion, success/error counts, and elapsed time. **Pause** halts the batch after the current request; **Resume** picks up where it left off. The run stays under {icon:nav-history} **History** in the Hub, and every request and response is saved in your [Dobermann workspace](/docs/your-data/#dobermann-workspace).
 
 See [Console](/docs/console/) for detailed results, export features, and error analysis.
 
@@ -423,30 +402,13 @@ Specify data types in template variables for validation. See [Template Variables
 | Boolean | `{{is_active:boolean}}` | `true`/`false`, `1`/`0`, `yes`/`no` |
 | Date | `{{ship_date:date}}` | Date value with optional format modifiers |
 
-### Pagination Support (A8:PAGE)
+### Pagination
 
-For APIs supporting pagination, use the special `{{A8:PAGE}}` variable:
+A GET that pages its results is driven from the Console after a single run, not from Run Batch — see [Pagination](/docs/pagination/).
 
-```
-/api/items?page={{A8:PAGE}}&limit=100
-```
+### Query Parameter Repetition
 
-- First request: `page=1`
-- Second request: `page=2`
-- Continues incrementing automatically
-
-### Batch File Organisation
-
-```
-.active8/
-├── batches/
-│   └── {endpoint-id}/
-│       ├── latest.csv
-│       └── {timestamp}.csv
-└── results/
-    └── {endpoint-id}/
-        └── {timestamp}.json
-```
+An endpoint whose query parameter repeats — `ItemId={{ITEM}}[ or ]` — runs as a batch of GETs, each URL carrying as many values as **Values per URL** allows. See [Endpoints — Query Parameter Repetition](/docs/endpoints/#query-parameter-repetition).
 
 ---
 
@@ -457,41 +419,42 @@ For APIs supporting pagination, use the special `{{A8:PAGE}}` variable:
 **Symptoms:** File browser appears but file doesn't load
 
 **Check:**
-- File extension is `.xlsx`, `.xls`, `.csv`, or `.txt`
+- File extension is `.csv`, `.xlsx`, `.xls`, `.tsv` or `.txt`
 - File encoding is UTF-8
-- File is not locked by another application
-- File size is reasonable (<10MB recommended)
+- File is open in Excel — drag it onto the drop zone instead of browsing
+- **Hub → Settings → Execution → Max CSV rows** is high enough
 
 ### Column Mapping Fails
 
 **Symptoms:** Columns don't auto-map or mapping shows errors
 
 **Solutions:**
-- Check CSV header row has column names
+- Check the header row has column names
 - Verify column names don't have special characters
-- Manually map columns using dropdowns
+- Manually map columns using the dropdowns
 - Check for extra spaces in column names
+- The endpoint remembers its last mapping — a column it remembers that this file doesn't have falls back to automatic mapping
 
 ### Validation Errors in Step 3
 
 **Symptoms:** Amber-highlighted cells in the data grid, footer showing validation errors
 
 **Solutions:**
-- Click on highlighted cells to see what's wrong
-- Check modifier constraints on the template variable (e.g., length limits, numeric ranges)
+- Click **Filter Errors** to see only the rows that failed
+- Hover the column header to see the rule the cells broke
 - Fill in blank required fields
-- Fix data format issues (e.g., text in a number column)
+- Fix data format issues (e.g., text in a number column), or set the **Source Format** on Step 2
 - Remove or fix invalid rows
 
 ### Batch Stops Immediately
 
-**Symptoms:** Batch stops after first request
+**Symptoms:** Batch stops after the first request
 
 **Check:**
-- Error tolerance setting (may be "Stop on First Error")
-- First request succeeded (check status code)
+- **Error Handling** was **Stop on first error** — the Console's Settings tab shows which
+- The first request failed with `401` or `403`, or a network error — those stop a batch whatever the setting
 - Template variables are correctly mapped
-- API endpoint is correct and accessible
+- The endpoint path and the active environment are right
 
 ### Variables Not Substituting
 
@@ -504,32 +467,27 @@ For APIs supporting pagination, use the special `{{A8:PAGE}}` variable:
 
 **Solutions:**
 - Review column mapping in Step 2
-- Ensure all variables have green checkmarks
 - Check variable names match exactly (including case)
+
+### Too Many or Too Few Requests
+
+The **API calls** count on Step 4 is the truth about what will be sent. For a nested template, click ⓘ to see how the rows were grouped — a header field that varies per row gives one request per row; see [How rows become requests](#nested-grouping). For a flat template, check **Rows per request**.
 
 ### Performance Issues
 
 **Symptoms:** Batch runs very slowly
 
 **Optimisation:**
-- Reduce file size (batch in smaller chunks)
+- Raise **Rows per request** — the single biggest lever
+- Raise **Processing Mode**, within the environment's Max Concurrency
 - Check API response times (may be server-side)
 - Ensure network connection is stable
-- Close unnecessary VS Code extensions
-
-### Memory Issues
-
-**Symptoms:** VS Code becomes slow or crashes during large batch
-
-**Solutions:**
-- Process in smaller batches (<1000 rows at a time)
-- Close other VS Code windows
-- Increase VS Code memory limit
-- Export results immediately after completion
 
 ## Related Topics
 
+- [Run API](/docs/run-api/) — One request, to prove the template first
 - [Endpoints](/docs/endpoints/) — Template variables and configuration
 - [Template Variables](/docs/template-variables/) — Variable syntax, types, modifiers, and editing
 - [Console](/docs/console/) — Running and monitoring requests
+- [Batch Reprocessing](/docs/batch-reprocessing/) — Re-run only the failures
 - [Import/Export](/docs/import-export/) — Sharing endpoint configurations

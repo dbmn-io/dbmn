@@ -15,23 +15,22 @@ Dobermann makes it easy to work with paginated APIs. Run a single request, confi
 ## Quick Start
 
 1. **Run any GET or POST** endpoint that returns paginated data
-2. In the Console, click **Configure Pagination** on the Execute tab
-3. Dobermann auto-detects your settings from the response — review and save
-4. Choose **Fetch All** or **Get Next X Pages** and hit Run
+2. In the Console footer, click **Pagination**. On its **Settings** tab, Dobermann reads the response and proposes the settings — review and **Save**
+3. On the **Execute** tab, choose **Fetch all pages** or **Get next N pages** and click **Run**
 
-That's it. Dobermann handles page iteration, total page calculation, and concurrent fetching.
+That's it. Dobermann handles page iteration, total page calculation, and concurrent fetching. Pages stream into the Console as they land, and the Completed tab shows them as one table.
 
 ---
 
 ## Setting Up Pagination
 
-### From a New Endpoint
+### The Pagination window
 
-When you run an individual request against a paginated API, the Console's Execute tab shows a **Configure Pagination** button. Click it to open the pagination settings.
+After a single run, the Console footer offers two buttons: **Next Page**, which fetches one more page, and **Pagination**, which opens a window with two tabs — **Settings** and **Execute**.
 
 ### Settings Tab
 
-The settings dialog has three sections:
+The Settings tab has two sections:
 
 #### Page Parameter
 
@@ -58,7 +57,7 @@ When you save, Dobermann writes template variables into your endpoint's query pa
 | Page | `{{A8:PAGE:start:totalCountPath}}` | `{{A8:PAGE:0:header.totalCount}}` |
 | Size | `{{A8:SIZE:value:sizePath}}` | `{{A8:SIZE:100:header.pageSize}}` |
 
-You don't need to type these manually — the settings dialog handles it. But if you prefer, you can also edit them directly in the endpoint's query parameters.
+You don't need to type these manually — the Settings tab handles it. But if you prefer, you can also edit them directly in the endpoint's query parameters, or paste an endpoint that already carries them.
 
 ---
 
@@ -74,12 +73,12 @@ Some APIs — typically POST searches — page through values in the **request b
 }
 ```
 
-Dobermann drives pagination from the body using the **same `{{A8:PAGE}}` and `{{A8:SIZE}}` templates** — just place them in the body instead of (or as well as) query parameters. Everything else works the same: first page on Run, then **Fetch All / Get Next X**, with total pages calculated from the response.
+Dobermann drives pagination from the body using the **same `{{A8:PAGE}}` and `{{A8:SIZE}}` templates** — just place them in the body instead of (or as well as) query parameters. Everything else works the same: first page on Run, then **Fetch all pages** or **Get next N pages**, with total pages calculated from the response.
 
 **Setting it up:**
 
 1. In the body editor, type `{{A8:` and pick **PAGE** (inserts `{{A8:PAGE:0}}`) and **SIZE** (inserts `{{A8:SIZE:20}}`). Both are recognised as valid templates with hover help. This alone enables **Next Page**.
-2. Run the endpoint, then open **Configure Pagination** in the Console. It detects that pagination lives in the body — the key fields show as **read-only "Body field"** and a note explains it. Pick the **Total record count** path and Save; Dobermann writes it back into the body template (`{{A8:PAGE:0}}` → `{{A8:PAGE:0:header.totalCount}}`), which enables **Fetch All**.
+2. Run the endpoint, then open **Pagination** in the Console. It detects that pagination lives in the body — the key fields show as **read-only "Body field"** and a note explains it. Pick the **Total record count** path and Save; Dobermann writes it back into the body template (`{{A8:PAGE:0}}` → `{{A8:PAGE:0:header.totalCount}}`), which enables **Fetch all pages**.
 
 **Notes:**
 
@@ -102,7 +101,7 @@ Controls page iteration. Supports several formats:
 | `{{A8:PAGE:0:path}}` | `{{A8:PAGE:0:header.totalCount}}` | 0-based with total count for auto-calculation |
 
 - **Start value** — `0` or `1`, determines the first page number
-- **Total count path** — Dot-notation path to the total record count in the API response. Used to calculate total pages and show "Page X of Y" in the UI
+- **Total count path** — Dot-notation path to the total record count in the API response. Used to calculate total pages and show "Page X of Y"
 
 ### {{A8:SIZE}}
 
@@ -120,9 +119,9 @@ Declares the page size so Dobermann can calculate total pages.
 
 ## Fetching Pages
 
-Once pagination is configured and you've run the first page, the Execute tab shows your fetch options.
+Once pagination is configured and you've run the first page, the **Execute** tab of the Pagination window shows the current page, page size, total records and total pages, and two choices.
 
-### Fetch All
+### Fetch all pages
 
 Fetches every remaining page. Dobermann calculates the total from the `totalCount` and `pageSize` values extracted from your first response.
 
@@ -130,20 +129,19 @@ Fetches every remaining page. Dobermann calculates the total from the `totalCoun
 1. First page executes and returns response metadata
 2. Dobermann extracts total count and page size from the response
 3. Calculates remaining pages
-4. Creates and executes all remaining pages concurrently (default 4 threads)
+4. Creates and executes all remaining pages concurrently
 
-### Get Next X Pages
+### Get next N pages
 
-Fetch a specific number of additional pages. Enter the count (e.g., 50) and Dobermann fetches the next 50 pages from where you left off.
+Fetch a specific number of additional pages. Enter the count (e.g., 50) and Dobermann fetches the next 50 pages from where you left off. Use it when the total can't be worked out, or when you only want a sample.
+
+### Next Page
+
+The **Next Page** button in the Console footer fetches one more page without opening the window.
 
 ### Concurrency
 
-When fetching multiple pages:
-
-- **Auto-triggered** (Fetch All / Get Next X from first run) — defaults to 4 concurrent threads
-- **Manual** (clicking Get Pages on an existing batch) — prompts you to choose: 1 (sequential), 2, 4, or 8 threads
-
-Higher concurrency means faster completion, but more load on the target API. Start with 4 and adjust based on your API's rate limits.
+Pages are fetched several at a time, within the environment's **Max Concurrency** (see [Environments — Parallel Processing](/docs/environments/#parallel-processing)). Higher concurrency means faster completion, but more load on the target API.
 
 ---
 
@@ -176,9 +174,9 @@ totalPages = ceil(totalCount / pageSize)
 - **totalCount** — Read from the path you specified (e.g., `header.totalCount`)
 - **pageSize** — Read from the `{{A8:SIZE}}` value, or extracted from the response using the size path
 
-The Console shows this as **"Page X of Y"** with the count of remaining pages.
+The Execute tab shows these as **Total records** and **Total pages**.
 
-If either value can't be determined, the "Fetch All" option won't be available — use "Get Next X Pages" instead.
+If either value can't be determined, **Fetch all pages** isn't offered — use **Get next N pages** instead.
 
 ---
 
@@ -211,29 +209,29 @@ A typical paginated endpoint:
 **Workflow:**
 1. Run the endpoint — fetches page 0 with `?page=0&size=100`
 2. Response shows `totalCount=20480`, `pageSize=100` — so 205 total pages
-3. Click **Fetch All** — Dobermann creates pages 1-204 and runs them 4 at a time
-4. Results stream into the Console as each page completes
+3. Click **Pagination**, choose **Fetch all pages**, click **Run** — Dobermann creates pages 1-204 and runs them concurrently
+4. Results stream into the Console as each page completes; the Completed tab is one table across every page
 5. Export all 20,480 records to Excel or CSV when done
 
 ---
 
 ## Troubleshooting
 
-### "Fetch All" Not Available
+### "Fetch all pages" Not Available
 
 The total count or page size couldn't be extracted from the response. Check:
 - The **total count field** path matches your API's response structure
 - The response actually contains a numeric value at that path
 - Page size is configured (either via `{{A8:SIZE}}` or found in the response)
 
-Use **Get Next X Pages** as an alternative — it doesn't require total count.
+Use **Get next N pages** as an alternative — it doesn't require total count.
 
 ### Only First Page Fetched
 
 Check that:
 - Pagination settings are saved (not just opened)
 - The `{{A8:PAGE}}` template is in your endpoint's query parameters
-- The first page returned a success response (auto-fetch only triggers on success). If it failed, reprocessing it won't then fetch the rest — run **Fetch All** again once it succeeds
+- The first page returned a success response. If it failed, reprocessing it won't then fetch the rest — run **Fetch all pages** again once it succeeds
 
 ### Some Pages Failed
 {: #reprocess-pages }
@@ -247,6 +245,10 @@ Check the **start value** setting:
 - APIs using `page=1` for the first page need start value **1**
 
 Dobermann tries to auto-detect this from the response, but you can override it in the settings.
+
+### Rows missing or doubled across pages
+
+If the API doesn't order records stably, two pages can overlap. Ask for a sort parameter the API honours (`?sort=created_at`) so every page is cut from the same ordering.
 
 ---
 

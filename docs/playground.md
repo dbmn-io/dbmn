@@ -1,14 +1,14 @@
 ---
-title: Puppy School
+title: The Training Ground
 layout: default
 nav_order: 7
 parent: Documentation
 ---
 
-# DBMN Puppy School
+# The Training Ground
 {: #playground }
 
-A live REST API sandbox for puppy training. Use it to learn Dobermann's features — batch uploads, pagination, nested data — without needing access to a production API.
+A live REST API sandbox, hosted by DBMN, for learning Dobermann's features — batch uploads, pagination, nested data — without needing access to a production API. It is the API that [**Puppy School**](/puppy-school/), the five-lesson course, runs on; this page is its reference. If you are new to Dobermann, take the course first and come back here when you want to see everything the API offers.
 
 All seed data is dog-themed because we're Dobermann and we think that's hilarious.
 
@@ -91,29 +91,22 @@ If you POST data with an invalid SCAC, GLN, or GTIN, you'll get a helpful error:
 
 ### 1. Sign In to DBMN
 
-Click the DBMN icon in the VS Code status bar and sign in (or register for a free account).
+In the Hub, open {icon:nav-account} **Account** and sign in, or register for a free account there.
 
 ### 2. Create an Environment
 
-1. Open Dobermann, go to **Environments**
-2. Create a new environment
-3. Set the **Name** to: `DBMN Puppy School`
-4. Set the **Base URL** to: `https://api.dbmn.io/functions/v1/playground`
+1. Open {icon:nav-environments} **Environments** and click **Add Environment**
+2. Set the **Name** to: `DBMN Puppy School`
+3. Set the **Base URL** to: `https://api.dbmn.io/functions/v1/playground`
+4. On the **Authentication** tab, select **DBMN** — Dobermann injects your DBMN token automatically at execution time
+5. Under **Execution Settings**, tick **Enable parallel batch processing** and set **Max Concurrency** to **Extreme Parallel** if you want to try 16 concurrent requests
+6. Click **Save Environment**, then pick it in the {icon:env-switcher} environment selector at the top of the Hub
 
-### 3. Set Authentication to DBMN
+No manual headers or token copy/paste required. If your session expires, Dobermann prompts you to sign in again before execution.
 
-1. In the environment's **Authentication** section, select **DBMN** from the dropdown
-2. That's it — Dobermann injects your DBMN token automatically at execution time
+### 3. Create Endpoints
 
-No manual headers or token copy/paste required. If your session expires, Dobermann prompts you to re-authenticate before execution.
-
-### 4. Create Endpoints
-
-Use the ready-to-paste templates below. For each one:
-
-1. Create a new endpoint
-2. Click **Paste**
-3. Paste the template — Dobermann populates everything automatically
+Use the ready-to-paste templates below. For each one, copy it, open {icon:nav-api-catalogue} **API Catalogue** and click {icon:paste-endpoint} **New Endpoint from Clipboard** — Dobermann fills in the name, method, path, parameters and body. Save, then **Run API**.
 
 ---
 

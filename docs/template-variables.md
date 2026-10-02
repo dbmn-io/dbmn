@@ -20,7 +20,7 @@ The fastest way to build templates is with the **body editor toolbar** — no ne
 
 ### Ctrl+M — Line Variable Cycling
 
-Place your cursor on any JSON key-value line and press **Ctrl+M** (or Cmd+M on Mac). Dobermann cycles through four states:
+Place your cursor on any JSON key-value line and press **Ctrl+M** (or Cmd+M on Mac). Dobermann cycles through four states. The **Line Variable** dropdown on the toolbar jumps straight to one — **Input**, **Environment** or **Generated (A8)**.
 
 **State 1 → Input Variable:**
 ```javascript
@@ -38,7 +38,7 @@ Dobermann infers the variable name from the key and the type from the value. The
 ```
 Cursor lands after `ENV:` with autocomplete ready — type to pick from your environment's variables.
 
-**State 3 → Auto Variable:**
+**State 3 → Generated (A8) Variable:**
 ```javascript
 "quantity": "{{A8:}}", //100
 ```
@@ -128,7 +128,7 @@ Reference values from your active environment using the `ENV:` prefix:
 - They're resolved automatically from your active environment's variable list
 - If a variable is missing, execution fails with a clear error
 
-Set environment variables in your Environment settings (Environments tree → select environment → Variables section).
+Set environment variables on the environment's **Headers & Variables** tab — see [Environments — Variables](/docs/environments/#variables).
 
 ---
 
@@ -138,7 +138,7 @@ System-generated values computed at execution time. You're never prompted for th
 
 | Variable | Output | Description |
 |----------|--------|-------------|
-| `{{A8:sequence}}` | `1001`, `1002`, ... | Auto-incrementing number per endpoint |
+| `{{A8:sequence}}` | `1`, `2`, `3`, ... | Auto-incrementing number per endpoint. Every number drawn is spent — a preview or a batch moves it on, so a number is never reused, but there can be gaps |
 | `{{A8:date}}` | `20260217` | Current date (YYYYMMDD) |
 | `{{A8:datetime}}` | `2026-02-17T14:30:00` | Current UTC timestamp |
 | `{{A8:PAGE}}` | `0`, `1`, `2`, ... | Page number for [pagination](/docs/pagination/) |

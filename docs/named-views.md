@@ -8,7 +8,7 @@ grand_parent: Documentation
 
 # Named Views
 
-Modern REST responses are deeply nested — a Manhattan shipment GET can wrap shipments inside a body, lines inside shipments, taxes inside lines. The same response can be presented many useful ways: one row per shipment, one row per line, one row per tax. **Named Views** lets you save each of those layouts, switch between them in a click, and export from any of them — all without changing your endpoint or re-running anything.
+Modern REST responses are deeply nested — a shipment GET can wrap shipments inside a body, lines inside shipments, taxes inside lines. The same response can be presented many useful ways: one row per shipment, one row per line, one row per tax. **Named Views** lets you save each of those layouts, switch between them in a click, and export from any of them — all without changing your endpoint or re-running anything.
 
 A view is a saved configuration that controls:
 
@@ -37,9 +37,9 @@ Save once, switch with a dropdown, export the right shape every time. **Save As*
 ## The Views Dropdown
 {: #the-views-dropdown }
 
-Click the `View: <name> ▼` button in the toolbar to switch views or create a new one.
+The button in the toolbar above the table is named after the active view — `PO Lines ▼`, or `no views` until you have one. Click it to switch views or create a new one.
 
-- The active view's name and row basis are shown in the dropdown.
+- Each view in the list shows its name, its row basis and how many columns it has.
 - Click a row to **switch** to that view.
 - Click the **Edit** button on a row to open the editor for that view.
 - Click **+ Create View…** to start a new view (defaulted to `View1`, `View2`, etc.).
@@ -65,7 +65,7 @@ Click **+ Create View…** or **Edit** to open the editor. Three regions:
 - Or drag-reorder with the mouse — same scope-local rule (you can reorder siblings within a wrapper, but can't drag a leaf out of its parent group).
 - Click `×` to remove.
 
-**3. Row Basis** — sits in the Selected panel header. The dropdown lists every selected array path plus `root`. The deepest selected array is picked by default; choose `root` to get one row per response. Changing the row basis re-derives which columns are *current* (read per-row) vs *ancestor* (read from the parent object and repeated per row).
+**3. Row basis** — the dropdown in the Selected panel header. It lists every selected array path plus `root`. The deepest selected array is picked by default; choose `root` to get one row per response. Changing the row basis re-derives which columns are *current* (read per-row) vs *ancestor* (read from the parent object and repeated per row).
 
 **Save** writes the view to the endpoint. The saved view becomes the **default** for that tab — opening the console later lands on it.
 
@@ -135,7 +135,7 @@ Click the `×` on a column header to remove it from the active view. The change 
 
 Because views save on the endpoint definition, they're included whenever you:
 
-- **Share an endpoint** (Share button → clipboard → paste in a teammate's Dobermann)
+- **Share an endpoint** (**Copy to Share** → clipboard → paste in a teammate's Dobermann)
 - **Export endpoints** to a `.dbmn.zip` file via Import/Export
 - **Duplicate an endpoint**
 

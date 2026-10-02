@@ -22,7 +22,7 @@ Your endpoints and environments will be migrated via export/import (Step 1–4 b
 While the FlexionTech extension is still installed, export everything:
 
 1. Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`)
-2. Run **Dobermann: Export Workspace**
+2. Run `Dobermann: Export Workspace` (the old extension's command)
 3. Save the file somewhere easy to find
 
 This exports all your endpoints, folders, and environments into a single file. Sensitive data (tokens, secrets) is excluded for security.
@@ -40,18 +40,18 @@ Or install directly from the [VS Code Marketplace](https://marketplace.visualstu
 
 ## Step 3: Open Dobermann
 
-In the Activity Bar (left sidebar), click **Dobermann** — the icon tooltip now reads "Dobermann".
+In the Activity Bar, click **Dobermann** — the icon tooltip now reads "Dobermann". The [Hub](/docs/hub/) opens as an editor tab.
 
-The extension will be empty — this is expected. Your data is coming in the next step.
+The catalogue will be empty — this is expected. Your data is coming in the next step.
 
 ## Step 4: Import Your Data
 
-1. Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`)
-2. Run **Dobermann: Import Workspace**
-3. Select the export file from Step 1
-4. Choose **Merge** to import without overwriting
+1. In the Hub, open {icon:nav-import} **Import**
+2. Drag the export file from Step 1 onto the drop zone, or click **Browse Computer**
+3. Review the list — every item should be marked **CREATE** on a fresh install
+4. Click **Import Configuration**
 
-See [Import/Export](/docs/import-export/) for details on import modes.
+See [Import/Export](/docs/import-export/#import) for what the badges mean.
 
 ## Step 5: Re-enter Credentials
 

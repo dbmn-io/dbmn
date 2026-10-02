@@ -8,50 +8,47 @@ has_children: true
 
 # Environments
 
-Environments represent different API targets — production, staging, development, or anything else — each with their own authentication, configuration, and variables. Switch between targets instantly without reconfiguring endpoints.
+Environments represent different API targets — production, staging, development, or anything else — each with their own authentication, configuration, and variables. Switch between targets from the Hub header without reconfiguring endpoints.
 
 ## Overview
 
 Each environment contains:
-- **Connection details** — Base URL and environment metadata
-- **Authentication** — DBMN, JWT tokens, OAuth, or Google Service Account
+- **Connection details** — Base URL, type, System and description
+- **Authentication** — DBMN, JWT token, OAuth, Google Service Account, or none
 - **Target timezone** — Timezone for datetime operations
-- **Parallel processing** — Concurrency level for batch execution
-- **Variables** — Key-value pairs available in templates via `ENV:` prefix
+- **Parallel processing** — How many requests a batch sends at once
+- **Variables** — Key-value pairs available in templates via the `ENV:` prefix
 - **Headers** — Environment-level headers included in every request
 
 ## Managing Environments
 
-### Adding Environments
+### Adding an Environment
 
-1. Click the **+** icon next to "Environments" in the sidebar
-2. Fill in environment details
-3. Configure authentication method
+1. In the Hub, open {icon:nav-environments} **Environments** and click **Add Environment**
+2. Fill in the **General** tab: name, base URL, type
+3. On the **Authentication** tab, choose a method and configure it
 4. Click **Save Environment**
 
-The environment will appear in the sidebar tree view, grouped by type.
+The environment appears in the Environments list and in the header's {icon:env-switcher} environment selector.
 
-### Editing Environments
+### Editing an Environment
 
-1. Click an environment name in the sidebar
-2. Modify any details in the webview
-3. Changes are saved automatically
+Click an environment in the Environments list to open it in a tab. Change what you need and click **Save Environment**. **Run API** and **Run Batch** elsewhere in the Hub keep using the saved version until you do.
 
-### Deleting Environments
+### Setting the Active Environment
 
-1. Right-click an environment in the sidebar
-2. Select **Delete Environment**
-3. Confirm the deletion
+Every request goes to the **active environment**. Two ways to choose it:
 
-**Note:** Deleting an environment does not delete associated endpoints — they will remain but show as disconnected until assigned to another environment.
+- Click the {icon:env-switcher} environment selector at the top of the Hub and pick from the list. It reads `No environment` until you have chosen one.
+- In a saved environment's editor, click **Set as Active** in the footer.
 
-### Setting Active Environment
+Production environments are red in the selector, and the Hub header turns red while one is active. The paw print in the Environments list marks the active one.
 
-1. Right-click an environment in the sidebar
-2. Select **Set as Active**
-3. The active environment is used for all endpoint executions
+### Deleting an Environment
 
-The currently active environment is shown with a checkmark in the tree view.
+Open the environment and click **Delete Environment** in the footer. If runs have been recorded against it, Dobermann tells you how many transactions are linked before you confirm.
+
+Endpoints are not tied to an environment, so deleting one deletes no endpoints. Endpoints belong to a **System**, and so does each environment — see [The Hub — Systems](/docs/hub/#systems).
 
 ## General
 {: #general }
@@ -67,7 +64,7 @@ A descriptive name for the environment (e.g., "Production US", "Staging Europe",
 
 #### Base URL
 
-The primary API endpoint for this environment.
+The root of the API for this environment.
 
 **Examples:**
 - `https://api.example.com` — Generic API
@@ -77,9 +74,32 @@ The primary API endpoint for this environment.
 
 **Important:**
 - Must include protocol (`https://` or `http://`)
-- Do not include trailing slash
-- This URL is prepended to all endpoint paths
-- **URL is immutable after creation** — Once an environment is saved, the Base URL cannot be changed. This ensures batch executions always target the correct server. If you need a different URL, create a new environment.
+- Do not include a trailing slash
+- This URL is prepended to every endpoint path
+- **The URL is locked once saved.** The field is read-only after the first save, so a batch can never quietly start going to a different server. For a different URL, create a new environment.
+
+#### Environment Type
+{: #environment-type }
+
+Pick a type from the dropdown: Production, Staging, UAT, QA/Testing, Development (the default), Sandbox, Training, Integration, Performance or Local. Type is how environments are grouped, and it drives the production safeguards.
+
+Setting an environment to **Production** turns on two protections automatically — there's no separate setting to enable:
+
+- The **Hub header turns red** whenever that environment is active, and the environment is red in the selector, so there's no mistaking what you're connected to.
+- A **confirmation appears before any live execution** — both **Run API** and the final **Execute** step of a batch run. The dialog offers to stop warning for 15, 30 or 60 minutes when doing repeated work; the snooze ends when you reload the window.
+
+If the warnings get in the way, change the environment's type. Unless it's protected — see below.
+
+#### Prod Protect
+{: #prod-protect }
+
+For environments DBMN manages for your organisation, the type is set centrally and the dropdown is read-only — so the production safeguards above cannot be switched off by reclassifying the environment.
+
+[Read about Prod Protect](/docs/prod-protect/)
+
+#### System
+
+Which API this environment belongs to — `wms`, `erp`, and so on. Endpoints carry the same System, and the API Catalogue can show only the endpoints of the active environment's System. Choose one, or create one with **+ Add new System…**. See [The Hub — Systems](/docs/hub/#systems).
 
 #### Description
 
@@ -89,9 +109,9 @@ Optional field for notes about the environment:
 - Tenant or customer information
 - Maintenance windows
 
-#### Mock Requests
+#### Enable Mock Requests
 
-When enabled, API requests use mock responses instead of calling real endpoints.
+When ticked, runs return mock responses instead of calling the API.
 
 **Use cases:**
 - Testing endpoint configuration without hitting real APIs
@@ -99,63 +119,26 @@ When enabled, API requests use mock responses instead of calling real endpoints.
 - Development when backend is unavailable
 
 **Limitations:**
-- Mock responses are simplified and may not reflect actual API behavior
+- Mock responses are simplified and may not reflect actual API behaviour
 - Only basic success scenarios are mocked
 - Not suitable for integration testing
 
-### Environment Type
-{: #environment-type }
-
-Pick a type from the dropdown — Production, Staging, UAT, Dev, Sandbox, etc. Type controls how environments are grouped and sorted, and it drives the production safeguards.
-
-Setting an environment to **Production** turns on two protections automatically — there's no separate setting to enable:
-
-- The **Hub header turns red** with a `● PROD` marker whenever that environment is active, so there's no mistaking what you're connected to.
-- A **confirmation appears before any live execution** — both **Run API** and the final **Execute** step of a batch run. You can suppress the warning for 15, 30 or 60 minutes when doing repeated work; it comes back after a reload.
-
-If the warnings get in the way, change the environment's type. Unless it's protected — see below.
-
-### Prod Protect
-{: #prod-protect }
-
-For environments DBMN manages for your organisation, the type is set centrally and the dropdown is read-only — so the production safeguards above cannot be switched off by reclassifying the environment.
-
-[Read about Prod Protect](/docs/prod-protect/)
-
 ### Execution Settings
-
-#### Target Timezone
-{: #target-timezone }
-
-Set the timezone used for all datetime operations in this environment. This affects how `A8:date`, `A8:datetime`, and date math modifiers resolve.
-
-**Configuration:**
-- Select a timezone from the dropdown (e.g., `America/New_York`, `Europe/London`, `Asia/Tokyo`)
-- Default: **UTC**
-
-**How it works:**
-- All `A8:datetime` values are generated in the selected timezone
-- Date math modifiers (`+2d`, `-1d`, `+4h`, `+30m`) operate relative to the target timezone
-- Useful when your API expects timestamps in a specific timezone
-
-**Example:**
-With timezone set to `America/New_York`:
-- `{{A8:datetime}}` → `2026-02-18T09:30:00` (Eastern Time, not UTC)
 
 #### Parallel Processing
 {: #parallel-processing }
 
-Configure concurrency for batch execution — how many API requests Dobermann sends simultaneously.
+How many requests a batch sends at the same time. Tick **Enable parallel batch processing** and choose a **Max Concurrency**:
 
-**Concurrency levels:**
+| Level | Requests in flight |
+|-------|--------------------|
+| **Sequential** | 1 — one request at a time (safest) |
+| **Light Parallel** | 2 |
+| **Moderate Parallel** | 4 |
+| **Heavy Parallel** | 8 |
+| **Extreme Parallel** | 16 |
 
-| Level | Threads | Description |
-|-------|---------|-------------|
-| **Sequential** | 1 | One request at a time — safest, slowest |
-| **Light** | 2 | Gentle parallelism for sensitive APIs |
-| **Moderate** | 4 | Good balance of speed and safety |
-| **Heavy** | 8 | Fast execution for robust APIs |
-| **Extreme** | 16 | Maximum throughput — use with caution |
+This is the ceiling. Each batch picks its own **Processing Mode** on the Execute Batch step, up to this limit — see [Batch Preparation](/docs/batch-preparation/#step-5-execute-batch).
 
 **Choosing a level:**
 - Start with **Sequential** when testing a new API
@@ -163,41 +146,50 @@ Configure concurrency for batch execution — how many API requests Dobermann se
 - APIs with strict rate limits may need Sequential or Light
 - APIs designed for bulk operations can typically handle Heavy or Extreme
 
-**Impact:**
-- Higher concurrency = faster batch completion
-- Higher concurrency = more load on the target API
-- If you see 429 errors, reduce the concurrency level
+Higher concurrency means faster batches and more load on the target API. If you see 429 errors, come down a level.
+
+#### Target Timezone
+{: #target-timezone }
+
+The timezone used for all datetime operations in this environment. It affects how `A8:date`, `A8:datetime`, and date math modifiers resolve, and how a `datetime` value you type into the Run API form is converted.
+
+- Select a timezone from the dropdown (e.g., `America/New_York`, `Europe/London`, `Asia/Tokyo`)
+- Default: **UTC**
+
+**Example:**
+With timezone set to `America/New_York`:
+- `{{A8:datetime}}` → `2026-02-18T09:30:00` (Eastern Time, not UTC)
 
 ## Authentication
 {: #authentication }
 
-Dobermann supports four authentication methods:
+The **Authentication** tab offers five methods:
 
 ### DBMN
 
-Authenticate using your DBMN account. This is the simplest method — sign in once and your token is managed automatically.
+Authenticate using your DBMN account. Sign in once, in the Hub's {icon:nav-account} **Account** section, and the Authorization header is injected automatically at execution time.
 
 **How to use:**
-1. Select "DBMN" as the authentication method
-2. If you're already signed in to DBMN (status bar icon), authentication is immediate
-3. If not signed in, you'll be prompted to sign in when you execute an API
+1. Select **DBMN** as the authentication method
+2. If you're already signed in to DBMN, that's it
+3. If not, Dobermann asks you to sign in when you run
 
 **Token management:**
 - Tokens are acquired and refreshed automatically
 - No manual copy/paste needed
-- If your session expires, Dobermann prompts you to re-authenticate before execution
+- If your session expires, Dobermann prompts you to sign in again before execution
 
 {: .note }
-> **DBMN auth is required for [Puppy School](/docs/playground/)** — the playground API authenticates using your DBMN session.
+> **DBMN auth is how you reach [The Training Ground](/docs/playground/)**, the practice API that [Puppy School](/puppy-school/) runs on.
 
 ### Manual JWT Token
 
 Direct authentication using a JWT (JSON Web Token).
 
 **How to use:**
-1. Select "Manual JWT Token" as authentication method
+1. Select **Manual JWT Token** as the authentication method
 2. Obtain a JWT token from your API provider
-3. Paste the token in the text area
+3. Paste the token in the **JWT Token** field
 4. Click **Save Environment**
 
 **Token format:**
@@ -211,32 +203,31 @@ Dobermann shows token expiry when the JWT carries an `exp` claim, and warns you 
 
 OAuth 2.0 authentication flow for secure, delegated access.
 
-**Required fields:**
+**Fields:**
 - **Client ID** — Your OAuth application identifier
+- **Client Secret** — Optional; required for confidential clients
 - **Authorization URL** — OAuth provider's authorization endpoint
 - **Token URL** — OAuth provider's token endpoint
-- **Redirect URI** — Callback URL (usually provided by Dobermann)
-
-**Optional fields:**
-- **Client Secret** — Required for confidential clients (toggle visibility with eye button)
-- **Scopes** — Space-separated list of requested permissions
+- **OAuth Flow** — **Authorization Code with PKCE** (recommended), **Authorization Code**, or **Client Credentials**
+- **Scopes** — Optional, space-separated
 
 **OAuth flow:**
-1. Configure OAuth settings
-2. Click **Sign In**
-3. Browser opens to authorization URL
+1. Configure the fields and click **Save Environment**
+2. Click **Sign In** in the footer
+3. Your browser opens to the authorization URL
 4. Log in and grant permissions
-5. Dobermann receives token automatically
+5. Dobermann receives the token automatically
 
-Access tokens are stored in VS Code's encrypted secret storage and refreshed automatically when they expire. Two sign-in buttons:
+Access tokens are stored in VS Code's encrypted secret storage and refreshed automatically when they expire. The footer offers:
 
 - **Sign In** — uses your existing browser session with the identity provider; you may be signed in without re-entering credentials.
 - **Sign In (New Token)** — forces fresh credentials. Use this when your roles or permissions have changed on the server and the current token has stale claims.
+- **Refresh Token** — when a refresh token is held, fetches a new access token without the browser.
+- **Sign Out** — drops the stored tokens.
 
 **Relative URLs:**
-Dobermann supports relative URLs for OAuth endpoints. If authorization URL or token URL starts with `/`, it will be automatically prepended with the environment's base URL.
+If the authorization URL or token URL starts with `/`, Dobermann prepends the environment's base URL.
 
-**Example:**
 ```
 Base URL: https://api.example.com
 Authorization URL: /oauth/authorize
@@ -254,15 +245,15 @@ For detailed setup instructions including provider configuration, see the [OAuth
 Authenticate using a Google Cloud service account for Google APIs (Cloud Platform, Pub/Sub, Storage, BigQuery, and more).
 
 **How to use:**
-1. Select "Google Service Account" as authentication method
-2. Upload or paste your service account JSON key file
-3. Select the appropriate scope preset:
-   - **Cloud Platform** — Full access to Google Cloud APIs
-   - **Pub/Sub** — Google Cloud Pub/Sub messaging
-   - **Storage** — Google Cloud Storage (read/write)
-   - **BigQuery** — BigQuery data and job management
-   - **Custom** — Enter your own scopes
-4. Click **Test Authentication** to verify credentials
+1. Select **Google Service Account** as the authentication method
+2. Paste your service account JSON key into **Service Account JSON**, or use the upload button
+3. Select an **OAuth Scopes** preset:
+   - **Cloud Platform (Full Access)**
+   - **Pub/Sub**
+   - **Cloud Storage**
+   - **BigQuery**
+   - **Custom Scopes** — enter your own
+4. Click **Test Authentication** to verify the credentials
 5. Click **Save Environment**
 
 **Service account JSON format:**
@@ -279,9 +270,13 @@ Authenticate using a Google Cloud service account for Google APIs (Cloud Platfor
 }
 ```
 
+### No Authentication
+
+For APIs that need none, or where the only credential is a header you set yourself under **Headers & Variables**.
+
 ### Token Details
 
-After authenticating, the Token Details section appears below the authentication method. It shows a read-only view of the active token — switch between decoded JWT payload and encoded form, copy the full token, and see at-a-glance whether it's valid, expiring soon, or expired. The same panel is used for whichever auth method is active.
+Once a token is held, the **Token Details** panel shows it read-only: a **Valid** / expiring / expired pill, **Decoded** and **Encoded** views, **Copy**, and a **Raw JSON** expander. The same panel serves whichever method is active.
 
 ## Headers & Variables
 {: #headers-variables }
@@ -291,14 +286,12 @@ The Headers & Variables tab manages environment-level request headers and reusab
 ### Headers
 {: #headers }
 
-Environment-level headers are automatically included in every request. Toggle **Include environment-level headers** on any endpoint to inherit them.
-
-Add custom headers in the environment's header configuration for values that should apply across all endpoints (e.g., API keys, content types, custom identifiers).
+Environment-level headers go out with every request made against this environment, on any endpoint that has **Include environment-level headers** ticked (it is, by default). Put values here that apply across all endpoints — API keys, content types, tenant identifiers — rather than repeating them on each endpoint.
 
 ### Variables
 {: #variables }
 
-Environment variables are key-value pairs accessible in templates via the `ENV:` prefix (e.g. `{{ENV:warehouse}}`). Set them in the Variables section of your environment configuration.
+Environment variables are key-value pairs accessible in templates via the `ENV:` prefix (e.g. `{{ENV:warehouse}}`).
 
 Common uses:
 - Organisation codes, warehouse IDs, tenant identifiers
@@ -308,33 +301,17 @@ Common uses:
 **How they work:**
 - ENV variables are **not** prompted during Run API
 - ENV variables **don't** appear in the data entry grid during Run Batch
-- They're resolved automatically from your active environment's variable list
+- They're resolved automatically from the active environment's variable list
 - If a variable is missing, execution fails with a clear error
 
 See [Template Variables — ENV](/docs/template-variables/#environment-variables-env) for usage syntax.
 
-## Organization Selection (Manhattan Active)
+## Organisation Selection
 {: #organization-selection }
 
-{: .note }
-> This section applies specifically to Manhattan Active APIs, which require organization headers.
+Some APIs issue one token for several organisations and expect each request to say which one it is for. When the token Dobermann holds lists organisations, they appear as sub-rows under the environment in the Hub's {icon:env-switcher} environment selector. Pick one and the selector reads `Environment · Org`; until you do it reads `(pick org)`.
 
-Manhattan Active APIs require organization headers. Dobermann automatically detects available organizations and provides a selection interface.
-
-**How it works:**
-1. After authentication, Dobermann fetches available organizations
-2. Select your organization from the dropdown
-3. Organization headers are automatically added to all requests
-4. Switch organizations anytime without re-authenticating
-
-**Organization headers added:**
-- `X-Organization-Id`
-- `X-Tenant-Id`
-- Other Manhattan Active-specific headers
-
-## Environment Tree View
-
-Environments appear in the sidebar tree view, grouped by type. Click a name to open the editor, right-click for the context menu, and drag endpoints between environments to move them.
+The chosen organisation is sent as environment headers — `Organization`, `SelectedOrganization`, `Location` and `SelectedLocation` — on every request. Switch organisations from the selector at any time without signing in again.
 
 ## Troubleshooting
 
@@ -343,45 +320,40 @@ Environments appear in the sidebar tree view, grouped by type. Click a name to o
 **Symptoms:** API requests return 401 Unauthorized
 
 **Solutions:**
-- **DBMN:** Click **Sign In** when prompted — your DBMN session will be refreshed automatically
-- **JWT:** Paste a new token in environment settings
-- **OAuth:** Click **Sign In (New Token)** to force fresh credentials and get an updated token
-- **Google Service Account:** Check key expiry, re-upload if needed
+- **DBMN:** Sign in again when prompted — your session is refreshed automatically
+- **JWT:** Paste a new token and save
+- **OAuth:** Click **Sign In (New Token)** to force fresh credentials
+- **Google Service Account:** Check the key hasn't been revoked; paste a fresh key if needed
 
 ### OAuth Flow Fails
 
 **Symptoms:** Browser opens but authentication doesn't complete
 
 **Check:**
-- Redirect URI matches OAuth provider configuration
+- Redirect URI matches the OAuth provider configuration
 - Client ID and secret are correct
 - Authorization URL and token URL are valid
-- Network connectivity to OAuth provider
+- Network connectivity to the OAuth provider
 
 See the [OAuth Setup Guide](/docs/oauth-setup/) for detailed configuration help.
 
-### Environment Not Selectable
+### Set as Active is disabled
 
-**Symptoms:** Cannot set environment as active
+**Set as Active** is only offered on a saved environment that isn't already active. Save your changes first, or use the header selector.
 
-**Solutions:**
-- Ensure environment has valid authentication
-- Check that base URL is accessible
-- Verify environment is saved (not in unsaved state)
+### API Calls Use the Wrong URL
 
-### API Calls Use Wrong URL
-
-**Symptoms:** Requests go to incorrect server
+**Symptoms:** Requests go to the wrong server
 
 **Check:**
-- Correct environment is set as active (checkmark)
-- Base URL in environment settings is correct
-- Base URL does not have trailing slash
+- The header selector shows the environment you meant
+- The Base URL is correct and has no trailing slash
 - Endpoint paths start with `/`
 
 ## Related Topics
 
 - [OAuth Setup Guide](/docs/oauth-setup/) — Detailed OAuth and Google auth configuration
+- [Prod Protect](/docs/prod-protect/) — Centrally pinned environment types
+- [The Hub](/docs/hub/) — The environment selector and Systems
 - [Endpoints](/docs/endpoints/) — Configure and manage API endpoints
-- [Console](/docs/console/) — Execute requests against environments
-- [Import/Export](/docs/import-export/) — Share environment configurations (excludes sensitive data)
+- [Import/Export](/docs/import-export/) — Share environment configurations (credentials stripped by default)

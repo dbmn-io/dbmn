@@ -9,21 +9,15 @@ grand_parent: Documentation
 # Sharing Endpoints
 {: #sharing-endpoints }
 
-Share any endpoint with your team in seconds. The recipient gets the full configuration — method, path, headers, body, variables — ready to paste and use.
-
----
-
-<!-- VIDEO PLACEHOLDER: Replace the div below with your embed once recorded -->
-<!-- YouTube:  <iframe width="100%" height="400" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe> -->
-<!-- Loom:     <div style="position:relative;padding-bottom:56.25%;height:0;"><iframe src="https://www.loom.com/embed/VIDEO_ID" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div> -->
+Share any endpoint with your team in seconds. The recipient gets the full configuration — method, path, headers, body, variables, tags — ready to paste and use.
 
 ---
 
 ## How It Works
 
-### Step 1 — Share
+### Step 1 — Copy to Share
 
-The sender opens an existing endpoint and clicks **Share**.
+The sender opens a saved endpoint and clicks **Copy to Share** in the footer.
 
 Dobermann copies the endpoint to the clipboard in two formats simultaneously:
 
@@ -34,37 +28,34 @@ Dobermann copies the endpoint to the clipboard in two formats simultaneously:
 
 Paste it wherever your team communicates. The recipient sees the full endpoint configuration — styled and readable.
 
-### Step 2 — Create a New Endpoint
+### Step 2 — Paste
 
-The recipient opens Dobermann and creates a **new endpoint** (the Paste button only appears on unsaved endpoints).
-
-### Step 3 — Paste
-
-Click **Paste**. Dobermann reads the clipboard, parses the JSONC metadata, and populates everything:
+The recipient copies the shared text, opens Dobermann, and in {icon:nav-api-catalogue} **API Catalogue** clicks {icon:paste-endpoint} **New Endpoint from Clipboard**. A new endpoint opens with everything filled in:
 
 - Endpoint name, HTTP method, and path
-- Description
+- Description and tags
 - All headers (with enabled/disabled state preserved)
 - All query parameters
 - The complete request body with template variables
 
-If the shared endpoint includes headers the recipient doesn't have, a confirmation modal appears asking whether to add them.
+**Paste Endpoint** at the top of a new, unsaved endpoint does the same, and so does **Ctrl+V** anywhere on one.
 
-### Step 4 — Save and Run
+### Step 3 — Save and Run
 
-Review the imported configuration, adjust anything if needed, and save. The endpoint is ready to use.
+Review the configuration, adjust anything if needed, and **Save Endpoint**. The endpoint is ready to use against whichever environment the recipient has active.
 
 ---
 
 ## What Gets Shared
 
-When you click Share, the clipboard contains structured JSONC like this:
+When you click Copy to Share, the clipboard contains structured JSONC like this:
 
 ```javascript
 // Name: Create Order
 // Method: POST
 // Path: /api/orders
 // Description: Create a new order
+// Tags: orders, onboarding
 // Header: Authorization: Bearer {{ENV:API_TOKEN}} [enabled]
 // Header: Content-Type: application/json [enabled]
 // QueryParam: sendEmail: true [enabled]
@@ -80,7 +71,9 @@ When you click Share, the clipboard contains structured JSONC like this:
 }
 ```
 
-Everything is preserved — variable types, modifiers, header state, query parameters. The recipient gets the exact same endpoint.
+Everything is preserved — variable types, modifiers, header state, query parameters, tags. The recipient gets the exact same endpoint. Headers the endpoint inherits from its environment are not copied; they stay on the environment, where the recipient has their own.
+
+Any `// Key:` line the parser doesn't know is ignored, so notes you add above the body do no harm.
 
 ---
 
@@ -90,6 +83,7 @@ Everything is preserved — variable types, modifiers, header state, query param
 - **Paste into wikis** — The rich HTML format looks great in Confluence and Notion
 - **Version your endpoints** — Share updated configurations when API contracts change
 - **Combine with environments** — The shared endpoint uses environment variables (`ENV:API_TOKEN`), so each team member resolves them against their own environment
+- **Several at once** — For a whole set of endpoints with their environments and Console views, use [Export](/docs/import-export/) instead
 
 ---
 
@@ -97,4 +91,4 @@ Everything is preserved — variable types, modifiers, header state, query param
 
 - [Endpoints](/docs/endpoints/) — Full endpoint configuration reference
 - [Template Variables](/docs/template-variables/) — Variable syntax, types, and modifiers
-- [Import/Export](/docs/import-export/) — Bulk workspace and endpoint import/export
+- [Import/Export](/docs/import-export/) — Many endpoints and environments in one file
