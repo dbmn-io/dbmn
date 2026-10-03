@@ -35,7 +35,7 @@ The selector is the main way to set the active environment. The other is the **S
 ### Activity chip
 {: #activity-chip }
 
-The chip on the right of the header reads `Idle`, `N running`, `N running · N queued`, or `Recent failure`. Click it for a drawer listing what is running, what is queued, and what finished recently. Click an entry to open its Console.
+The chip on the right of the header reads `Idle`, `N running`, `N running · N queued`, `N paused`, or `Recent failure`. Click it for a drawer listing what is running, what is queued, the newest paused batches, and what finished recently. Click an entry to open its Console.
 
 ### Collapse
 {: #collapse }
@@ -85,7 +85,7 @@ Every run, single or batch, newest first. Each row shows its status, the endpoin
 | **Settings → Transactions → Show** | `Current Environment` or `All Environments` |
 | **Settings → Transactions → Group by** | `Date`, `Endpoint`, `Environment`, `Status` or `None (flat)` |
 
-A run's own actions live in its Console: **Re-run** for a single request, and **Reprocess** for a batch. See [Console](/docs/console/) and [Batch Reprocessing](/docs/batch-reprocessing/).
+Right-click a row for the actions its Console footer would show for that state: **Pause** a running batch, **Resume** a paused or stopped one, **Cancel** a queued one, **Delete**, and **Open**. **Reprocess…** and **Re-run** open the Console, where their options are. See [Console](/docs/console/) and [Batch Reprocessing](/docs/batch-reprocessing/).
 
 ---
 

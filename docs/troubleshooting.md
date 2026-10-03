@@ -324,6 +324,11 @@ The Completed and Error tabs show the columns of the active **view**. Click the 
 
 VS Code restores the Hub tab on restart and Dobermann re-attaches to it. If you ever see two, close one; nothing is lost.
 
+### A Batch Was Running When VS Code Closed
+{: #batch-after-restart }
+
+Nothing is lost. On the next start, the batch that was running is paused, and so is any batch that was queued behind it. The Hub tells you which ones, with an **Open History** link; each shows **Paused** and has **Resume** on its right-click menu and in its Console footer. Resume continues from the transactions that had not run, and asks you to sign in first if the environment's token has expired. A single request that was in flight is cancelled; run it again.
+
 ### Performance Issues
 
 If VS Code feels sluggish during a large batch, lower **Processing Mode**, and clear old runs from **History** (turn on **Select**, tick, **Delete**). Splitting very large files into several batches also helps.

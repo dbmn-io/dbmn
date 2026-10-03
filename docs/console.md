@@ -27,8 +27,10 @@ Running multiple batches? Dobermann queues them automatically.
 **How it works:**
 - Start a batch on one endpoint, then start another — the second batch enters the queue
 - A notification tells you: *Batch "…" has been queued and will start when the current batch completes*
-- The Console footer reads **Queued** while it waits; the header's activity chip counts it (`1 running · 1 queued`)
+- The Console footer reads **Queued** while it waits, with **Starts in ~4m** once the running batch has an estimate, or **After** its name; the header's activity chip counts it (`1 running · 1 queued`)
 - Queued batches start automatically in order when the previous batch finishes
+- **Cancel** in a queued batch's footer takes it out of the queue; it never starts
+- A single request — a paginated **Run API** before any further pages are fetched — runs straight away beside a batch; only batches queue behind batches
 
 **Use cases:**
 - Prepare several batches across different endpoints, then kick them all off
@@ -40,6 +42,8 @@ Running multiple batches? Dobermann queues them automatically.
 ## Console Layout
 
 The Console is where everything happens — monitoring progress during a batch, inspecting results after completion, and exporting data for further analysis.
+
+A large batch opens on its first transactions within a second; the rest stream in behind them while the progress bar reads **Loading transactions**, and results that land meanwhile are merged in.
 
 ### Status
 {: #execution-summary }
@@ -109,8 +113,8 @@ The **Result** dropdown shows only the rows whose transaction is **Completed**, 
 The Raw tab gives you complete visibility into every request and response — the full HTTP conversation for each transaction.
 
 **Features:**
-- **Transactions** — One card each: status, HTTP code and time, then its input rows, request and response. Expand All / Collapse All in the bar
-- **Status** — Show only Pending, Running, Completed, Error or Split transactions, with counts
+- **Transactions** — One card each: status, HTTP code and time, then its input rows, request and response. Expand All / Collapse All in the bar. A long list shows a window of cards with **Scroll for more** at the end
+- **Status** — Show only Pending, Running, Completed, Error or Split transactions, with counts. While the batch runs, the tab opens on **Running**; it goes back to All when the batch finishes unless you picked a status yourself
 - **Show Input / Request / Response** — Choose what each transaction shows. Input is greyed out when there are no input rows
 - **Full request/response JSON** — Syntax-highlighted, with the parent keys pinned at the top as you scroll
 - **Request Body / Details** — Details shows the endpoint, query parameters and headers. A request with no body (blank or `{}`) shows Details only, and Request starts switched off
@@ -172,7 +176,7 @@ Everything about the run that isn't a result:
 | Section | What's there |
 |---|---|
 | **Sending To** | Environment, Organization, Endpoint, Request URL |
-| **Configure** (batch) | **Name** — editable, so you can rename a batch — **Error Handling** and **Processing Mode** |
+| **Configure** (batch) | **Name** — editable, so you can rename a batch — **Error Handling** and **Processing Mode**. A change to threads applies to the next transactions prepared, within the environment's maximum |
 | **Execution** | ID, HTTP Status (single requests), Started, Duration |
 | **Lineage** | For a copied batch: Copied From, Original Environment, Copied At |
 | **Variables** | The values the run used |
