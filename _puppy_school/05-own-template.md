@@ -55,15 +55,17 @@ note_to_reviewer: >
   (10) Run Batch remembering the mapping per endpoint (vs-dbmn #307): Step 6 relies on Step 5's
   mapping being pre-filled, and (11) the Run Batch preview/JIT counting groups on every
   header field, and counting EVERY row rather than the 50-row typed preview sample — before
-  them, Step 6's Review & Configure said one API call for three orders, (12) Chain and the
+  them, Step 6's Review said one API call for three orders, (12) Chain and the
   Run Batch skip-ahead (vs-dbmn #247). Measured with the real chain-target-ranker on the
   course's endpoints and Lesson 4's view columns: Step 5's dialog SUGGESTS (and pre-selects)
   Bulk Inventory Upload, 8 of 8 by name (locationGln/locationName match location.gln/.name
   ignoring punctuation); My Replenishment Orders is 2 of 6, missing buyerGln, supplierGln,
   orderedQty, and supplierSku's partial guess is `sku` (hence the copy). Step 6, after the
   remembered mapping, suggests both, Bulk Inventory Upload first (8 matches beat 6), so the
-  copy says to select ours. Step 6 skipping to Review & Configure relies on every mapping being
-  remembered and every row valid (supplierSku blanks are |opt).
+  copy says to select ours. Step 6 walking through to Review relies on every mapping being
+  remembered and every row valid (supplierSku blanks are |opt). Step 5's walk stops on Map
+  (three variables have no column); Next there lands on Validate, NOT Review: a stopped walk
+  does not resume (vs-dbmn dt-auto-advance.js), so the copy has the learner click Next twice.
   GROUPING RULE (changed 2026-09-17, needs the extension release): Dobermann starts a new
   request when ANY header variable changes. It used to be the FIRST one only, in template
   order — `buyerName` above `supplierName` gave ONE order with every line under the first
@@ -92,9 +94,16 @@ and click **Run API**:
 // QueryParam: size: 1 [enabled]
 ```
 
-In the Console, open the **Raw** tab. A GET returns a **page**: `totalCount` and the paging
-fields, with the orders inside the `data` array. A POST creates **one** order. You'll send
-the one order, not the page around it.
+The Console gives you two ways to look at what came back:
+
+| Where | What you see |
+|---|---|
+| The **Raw** tab | The whole run, transaction by transaction: request and response |
+| The **Completed** tab: right-click a row → **View transaction** | The transaction behind that one row, request and response side by side. Handy when a run has thousands |
+
+Try both. A GET returns a **page**: `totalCount` and the paging fields, with the orders
+inside the `data` array. A POST creates **one** order. You'll send the one order, not the
+page around it.
 
 ## Step 2 — Send One Back
 
@@ -185,7 +194,9 @@ In the header:
 | `buyerGln` | Who's buying: the warehouse's GLN |
 | `supplierGln` | Who's supplying: the supplier's GLN |
 | `orderDate` | When it was ordered. Keep it, but commented out (below) |
-| `requestedDeliveryDate`, `status`, `currency` | Leave as they are |
+| `requestedDeliveryDate` | When it should arrive. Leave the value as it is |
+| `status` | `draft`: not sent to the supplier yet. Leave it |
+| `currency` | `USD`. Leave it |
 | `lines` | The order line you kept |
 
 In the order line:
@@ -202,10 +213,12 @@ In the order line:
 isn't sent, so the API dates each order today. The line stays in the template, ready to
 become a generated date later.
 
-**Make them variables.** Put your cursor on `buyerGln`, `supplierGln`, `gtin`, `orderedQty`,
-`uom` and `supplierSku` in turn and press **Ctrl+M** on each. Dobermann turns each value into
-a typed `{{variable}}` and keeps the original as a comment. `supplierSku` is `null`, and
-Ctrl+M can't type a null, so type any part number over it first (`"KP-0004"`).
+**Make them variables.** Put your cursor on `buyerGln`, `supplierGln`, `gtin`, `orderedQty`
+and `uom` in turn and press **Ctrl+M** on each. Dobermann turns each value into a typed
+`{{variable}}` and keeps the original as a comment.
+
+`supplierSku` is `null`, and Ctrl+M can't tell what type a null should be. Put your cursor on
+it and use the toolbar instead: **Line Variable** → **Input**. That makes it a `string`.
 
 **Three edits by hand:**
 
@@ -232,7 +245,7 @@ Your **Request Body** is now:
       "gtin": "{{gtin:string}}", //00012345600081
       "lineNumber": "{{A8:sequence:local}}",
       "orderedQty": "{{orderedQty:number}}", //404
-      "supplierSku": "{{supplierSku:string|opt}}" //KP-0004
+      "supplierSku": "{{supplierSku:string|opt}}" //null
     }
   ]
 }
@@ -290,9 +303,9 @@ has a column here, so the rows would fit, but you'd be reloading stock. A fit is
 purpose. In **Send them to endpoint:**, type `Replenishment`, select **My Replenishment
 Orders** and click **Chain**.
 
-Run Batch opens with the rows already loaded, **Chained from** your report run, on
-**Map & Transform**. Two match by name and map themselves — `gtin`, `uom`. The other four
-came out of a nested response with dotted names, so point each one at its column:
+Run Batch opens with the rows already loaded, **Chained from** your report run, and stops on
+**Map**. Two match by name and map themselves — `gtin`, `uom`. The other four came out of a
+nested response with dotted names, so point each one at its column:
 
 | Variable | Column |
 |---|---|
@@ -310,7 +323,7 @@ Click **Next**, and Dobermann remembers this mapping: the next batch on this end
 these columns for you. Leave **Update Endpoint Template** unticked: it would rename your
 variables after the columns, and `buyerGln` says what the field means to the API.
 
-Click **Next** through to **Review & Configure**.
+You're on **Validate**, and every row passes. Click **Next** again, to **Review**.
 
 - **1 API call.** About two hundred rows, one request.
 - It's **one purchase order**: the header once, and your one line repeated for every row,
@@ -346,8 +359,8 @@ Everyone except the two suppliers you've already ordered from. Around 540 rows, 
 suppliers. Click **Chain**.
 
 **My Replenishment Orders** is under **Suggested** now: it remembered Step 5's mapping.
-Select it and click **Chain**. With every column mapped and every row valid, Run Batch skips
-ahead to **Review & Configure**:
+Select it and click **Chain**. Every column is mapped and every row is valid, so Run Batch
+walks through **Map** and **Validate** by itself and lands on **Review**:
 
 - **3 API calls.** Five hundred-odd rows, three requests — one per supplier. Click the ⓘ
   beside **API calls** to see why: your rows grouped by `buyerGln` and `supplierGln`, one

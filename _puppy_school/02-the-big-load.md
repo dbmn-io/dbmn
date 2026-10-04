@@ -89,17 +89,17 @@ here is the same thing, more times.
 
 ## Step 4 — Load Your Data
 
-Click **Run Batch**. In **Load Data**, drop [inventory-67k.csv](/puppy-school/files/inventory-67k.csv){:download="inventory-67k.csv"}
+Click **Run Batch**. In **Source**, drop [inventory-67k.csv](/puppy-school/files/inventory-67k.csv){:download="inventory-67k.csv"}
 onto the upload area and click **Import Data**.
 
-Dobermann maps the CSV columns to your template variables automatically where the names
-match — which, here, they all do. Click **Next** through to **Review & Configure** and look at
-the first request. One record, wrapped in an array, exactly as the endpoint expects — the
-same shape you just ran by hand.
+Every column matches a variable by name and every row is valid, so Run Batch walks through
+**Map** and **Validate** by itself and lands on **Review**. Look at the first request. One
+record, wrapped in an array, exactly as the endpoint expects — the same shape you just ran by
+hand.
 
 ## Step 5 — Run It the Slow Way
 
-Click **Next** once more, to **Execute Batch**. Set **Processing Mode** to
+Click **Next**, to **Execute**. Set **Processing Mode** to
 `4 concurrent requests` and hit **Execute**.
 
 Watch the counter. Every single record is going out as its own HTTP request — 67,000 of
@@ -112,14 +112,14 @@ run the whole file properly.)
 
 ## Step 6 — One Request, A Hundred Records
 
-Click **Run Batch** again and load the same file. This time, at **Review & Configure**, set
+Click **Run Batch** again and load the same file. It lands on **Review** again. This time, set
 **Rows per request** to `100`. The requests below rebuild as you type.
 
 Look at what happens to **API calls**. The same 67,000 records now go out
 as **670 requests** instead of 67,000 — because each request carries a hundred records in
 its array instead of one.
 
-At **Execute Batch**, set **Processing Mode** to `16 concurrent requests` and hit
+At **Execute**, set **Processing Mode** to `16 concurrent requests` and hit
 **Execute**.
 
 That's the whole file, done, while you were reading this sentence.

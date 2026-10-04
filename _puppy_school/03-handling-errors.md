@@ -14,8 +14,9 @@ checkpoint:
 note_to_reviewer: >
   Twelve steps, one action each — rewritten 2026-09-19 because seven long steps
   read as a wall and the loader's own Step 1-5 nested inside lesson Step 2. Never write
-  "Step" inside a step: call the loader's screens by name (Load Data, Review & Edit Data,
-  Review & Configure, Execute Batch).
+  "Step" inside a step: call the loader's screens by name (Source, Map, Validate, Review,
+  Execute). Since 2026-10-05 Run Batch walks forward by itself after Import Data: Map passes
+  (all eight columns match by name) and the walk stops on Validate, filtered to row 999.
   THE REVEAL: Step 1 must NOT say how many records are broken. The learner earns the count —
   one caught by the loader, nine by the API — and the close adds it up to ten. A test asserts
   Step 1 names no number.
@@ -56,24 +57,21 @@ not a contrived exercise — it is what a real extract looks like the first time
 Open the **Puppy School — Bulk Inventory Upload** endpoint you built in Lesson 2 and click
 **Run Batch**.
 
-In **Load Data**, drop the file onto the upload area and click **Import Data**.
+In **Source**, drop the file onto the upload area and click **Import Data**.
 
-**Map & Transform** matches your file's columns to the template's variables by name. All
-eight match, so there is nothing to do here. Click **Next**.
-
-You land on **Review & Edit Data**, a thousand rows in a grid. Most people click straight
-through. Don't.
+Run Batch walks forward by itself. All eight columns match the template's variables by name,
+so it passes **Map**. Then it stops on **Validate**: something in this file needs you.
 
 ## Step 3 — Fix What Dobermann Caught
 
-One cell is amber, and the footer names it:
+The grid shows a single row, and the footer names the problem:
 
 ```text
 "quantityOnHand" has 1 invalid record — must be ≥ 0
 ```
 
-Click **Filter Errors** to hide every row that is fine. One is left: row 999,
-`SKU-WOOF-006-ERR`, with a quantity of `-50`.
+Row 999, `SKU-WOOF-006-ERR`, with a quantity of `-50` in an amber cell. **Filter Errors** is
+already on, hiding every row that is fine; the button reads **Show All**.
 
 Dobermann knows stock cannot be negative because you told it, back in Lesson 2:
 
@@ -84,15 +82,15 @@ Dobermann knows stock cannot be negative because you told it, back in Lesson 2:
 That is also why the column header carries a dotted underline — hover it and Dobermann names
 the rule.
 
-Click the cell, change `-50` to `50`, and click **Next**. The highlight clears. Your file on
-disk is untouched; the edit applies to this run.
+Click the cell, change `-50` to `50`, and click **Next**. The check passes and you land on
+**Review**. Your file on disk is untouched; the edit applies to this run.
 
 ## Step 4 — Send It
 
-On **Review & Configure**, set **Rows per request** to `10`; the requests rebuild as you type. A thousand
+On **Review**, set **Rows per request** to `10`; the requests rebuild as you type. A thousand
 records go out as a hundred requests of ten.
 
-On **Execute Batch**, check **Error Handling** is on **Continue processing**. **Stop on
+On **Execute**, check **Error Handling** is on **Continue processing**. **Stop on
 first error** would abandon the whole run at the first bad request.
 
 Hit **Execute**. Ninety-nine requests succeed. One fails.
@@ -205,7 +203,7 @@ the value, and kept the original in a comment. Do the same for every line:
 It worked out `unitPrice:number` on its own, from the value. The footer has grown a **Run
 Batch** button beside **Run API**.
 
-Save, click **Run Batch**, and in **Load Data** switch to the **Paste Text** tab. Paste this
+Save, click **Run Batch**, and in **Source** switch to the **Paste Text** tab. Paste this
 and click **Import Data** — no file needed:
 
 ```csv
