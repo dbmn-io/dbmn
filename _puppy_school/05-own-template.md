@@ -28,8 +28,9 @@ note_to_reviewer: >
   Shape (decided 2026-09-17): ONE PURCHASE ORDER PER SUPPLIER. Step 2 copies ONE order out of the
   GET response, trims it and POSTs it back to prove the endpoint (it links the look to the
   build, and teaches "what an API returns is not what it accepts"); the first real order (supplier A, one line) goes through Run API; the
-  other four go through two batches: Wagmore alone (Step 5: one request, ~196 lines — one order,
-  many lines), then the last three in one file (Step 6: three requests, 170-187 lines each —
+  other four go through two batches, both CHAINED from the learner's Lesson 4 Inventory Report
+  run (no Copy, no paste): Wagmore alone (Step 5: one request, ~196 lines — one order,
+  many lines), then the last three in one chain (Step 6: three requests, 170-187 lines each —
   many orders). Seven POSTs. The grouping rule is taught in Step 6, after the learner has seen
   one order fill up.
   Why it works out: the Golden Retriever DC's low-stock rows in inventory-67k.csv cover exactly
@@ -54,7 +55,15 @@ note_to_reviewer: >
   (10) Run Batch remembering the mapping per endpoint (vs-dbmn #307): Step 6 relies on Step 5's
   mapping being pre-filled, and (11) the Run Batch preview/JIT counting groups on every
   header field, and counting EVERY row rather than the 50-row typed preview sample — before
-  them, Step 6's Review JSON said one API call for three orders.
+  them, Step 6's Review & Configure said one API call for three orders, (12) Chain and the
+  Run Batch skip-ahead (vs-dbmn #247). Measured with the real chain-target-ranker on the
+  course's endpoints and Lesson 4's view columns: Step 5's dialog SUGGESTS (and pre-selects)
+  Bulk Inventory Upload, 8 of 8 by name (locationGln/locationName match location.gln/.name
+  ignoring punctuation); My Replenishment Orders is 2 of 6, missing buyerGln, supplierGln,
+  orderedQty, and supplierSku's partial guess is `sku` (hence the copy). Step 6, after the
+  remembered mapping, suggests both, Bulk Inventory Upload first (8 matches beat 6), so the
+  copy says to select ours. Step 6 skipping to Review & Configure relies on every mapping being
+  remembered and every row valid (supplierSku blanks are |opt).
   GROUPING RULE (changed 2026-09-17, needs the extension release): Dobermann starts a new
   request when ANY header variable changes. It used to be the FIRST one only, in template
   order — `buyerName` above `supplierName` gave ONE order with every line under the first
@@ -263,8 +272,8 @@ Chew Toy Manufacturing has its order, with one line. Next, one order with many.
 
 The lines are already sitting in Dobermann: you fetched them in Lesson 4. Open
 {icon:nav-history} **History** and open your **Puppy School — Inventory Report** run.
-Nothing is re-fetched; the Console reopens with every row you pulled. Make sure the
-**View:** dropdown shows `Low Stock by Location`, then search:
+Nothing is re-fetched; the Console reopens with every row you pulled. On the **Completed**
+tab, make sure the view button shows `Low Stock by Location`, then search:
 
 ```text
 low_stock +Golden +"Wagmore Components Ltd"
@@ -272,15 +281,18 @@ low_stock +Golden +"Wagmore Components Ltd"
 
 Low stock, at this warehouse, from one supplier. About 200 rows.
 
-Open the **Copy** menu and choose **Excel**. The whole filtered table — headers included —
-is on your clipboard. No file, no spreadsheet.
+In Lesson 4 you copied rows out. This time you **chain** them: click **Chain**, beside
+**Copy** and **Export**. It sends the rows on screen, in the view's columns, straight into
+another endpoint's Run Batch. No clipboard, no file.
 
-Back on **My Replenishment Orders**, click **Run Batch**. In **Load Data**, switch to the
-**Paste Text** tab, paste, and click **Import Data**.
+**Suggested** offers **Puppy School — Bulk Inventory Upload**. Every one of its variables
+has a column here, so the rows would fit, but you'd be reloading stock. A fit isn't a
+purpose. In **Send them to endpoint:**, type `Replenishment`, select **My Replenishment
+Orders** and click **Chain**.
 
-**Map & Transform** is where your columns meet your variables. Two match by name and map
-themselves — `gtin`, `uom`. The other four came out of a nested response with dotted names,
-so point each one at its column:
+Run Batch opens with the rows already loaded, **Chained from** your report run, on
+**Map & Transform**. Two match by name and map themselves — `gtin`, `uom`. The other four
+came out of a nested response with dotted names, so point each one at its column:
 
 | Variable | Column |
 |---|---|
@@ -289,9 +301,10 @@ so point each one at its column:
 | `supplierSku` | `product.supplierSku` |
 | `orderedQty` | `product.reorderQty` |
 
-The columns you don't use — `status`, `quantityOnHand` and the rest — are simply ignored.
-No `gtin` or `location.gln` column? Your view is older than this lesson: tick them in the
-view (Lesson 4, Step 3) and copy again.
+`supplierSku` arrives as a guess, `sku`. That's the product's own code, not the supplier's,
+so change it. The columns you don't use — `status`, `quantityOnHand` and the rest — are
+simply ignored. No `gtin` or `location.gln` column? Your view is older than this lesson:
+tick them in the view (Lesson 4, Step 3) and chain again.
 
 Click **Next**, and Dobermann remembers this mapping: the next batch on this endpoint maps
 these columns for you. Leave **Update Endpoint Template** unticked: it would rename your
@@ -308,7 +321,7 @@ That's the one line from Step 3 at work.
 
 Click **Next**, and **Execute**. One request, one order, a couple of hundred lines.
 
-## Step 6 — Many Orders, One File
+## Step 6 — Many Orders, One Chain
 
 **How Dobermann decides where one order ends and the next begins.** Everything above
 `lines` is the order's **header**, and a header is a statement about every line beneath it.
@@ -322,18 +335,19 @@ that's true of the whole order. Put a per-line value up there by mistake — a q
 `gtin` — and you'll get one order per row. That's Dobermann being right and the template
 being wrong.
 
-Three suppliers to go, in one file. Back in the Console, search:
+Three suppliers to go, in one batch. Back in the report's Console (the **Chained from** link
+takes you there), search:
 
 ```text
 low_stock +Golden -"Chew Toy Manufacturing Inc" -"Wagmore Components Ltd"
 ```
 
 Everyone except the two suppliers you've already ordered from. Around 540 rows, three
-suppliers. **Copy** → **Excel** again.
+suppliers. Click **Chain**.
 
-On **My Replenishment Orders**, click **Run Batch**, paste into **Paste Text**, click
-**Import Data**. **Map & Transform** remembered Step 5: all six variables are already
-mapped. Check them, then go on to **Review & Configure**:
+**My Replenishment Orders** is under **Suggested** now: it remembered Step 5's mapping.
+Select it and click **Chain**. With every column mapped and every row valid, Run Batch skips
+ahead to **Review & Configure**:
 
 - **3 API calls.** Five hundred-odd rows, three requests — one per supplier. Click the ⓘ
   beside **API calls** to see why: your rows grouped by `buyerGln` and `supplierGln`, one
@@ -345,8 +359,8 @@ mapped. Check them, then go on to **Review & Configure**:
   no `supplierSku` key at all. Find `4012345000030`, Boop & Snoot Supply Co. Every line has
   one. That's `opt`.
 
-You copied a flat table and Dobermann rebuilt the nesting from it. That is the trick the
-whole course has been walking towards. Nested APIs, flat source data, no scripting.
+A flat table went in, and Dobermann rebuilt the nesting from it. That is the trick the whole
+course has been walking towards. Nested APIs, flat source data, no scripting.
 
 Click **Next**, and **Execute**. Three requests. Boom.
 
@@ -358,6 +372,11 @@ Your orders are there, newest first: the three from Step 6 and the one from Step
 their lines nested underneath, the one-line order from Run API, and the copy you sent back in Step 2. Every
 line has its `sku`, `description` and `unitPrice`, filled in by the API from its `gtin`. Build a
 view over it if you want to see them properly — you know how now.
+
+Now open your Step 6 batch from {icon:nav-history} **History**. Its Console has a **Links**
+tab: **Came From** names your Inventory Report run, the view, and how many rows it sent.
+Open the report run and its **Links** tab lists both batches under **Sent To**. When someone
+asks where an order's lines came from, that's the answer.
 
 ---
 

@@ -3,14 +3,14 @@ lesson_id: lesson_2
 number: 2
 slug: the-big-load
 title: The Big Load
-goal: Load 67,000 records into The Training Ground — then load them a thousand times more efficiently
+goal: Load 67,000 records into The Training Ground — then load them a hundred times more efficiently
 estimate: ~15 minutes
 completion:
   criteria: Cumulative successful POST /inventory record count of 60,000 or more
   summary: 60,000 inventory records loaded
 checkpoint:
   pass: Good dog. That's what Dobermann was built for. Lesson 3 is unlocked.
-  fail: The bulk upload didn't quite make it. Check your file is loaded, your Reps are set, and the batch has finished running.
+  fail: The bulk upload didn't quite make it. Check your file is loaded, Rows per request is set, and the batch has finished running.
 ---
 
 ## Step 1 — Download the Inventory File
@@ -110,13 +110,13 @@ Let it run for about thirty seconds, then hit **Pause**. You've made your point,
 it. (The paused batch stays in {icon:nav-history} **History**. Leave it — you're about to
 run the whole file properly.)
 
-## Step 6 — One Request, A Thousand Records
+## Step 6 — One Request, A Hundred Records
 
 Click **Run Batch** again and load the same file. This time, at **Review & Configure**, set
-**Rows per request** to `1000` and click **Refresh**.
+**Rows per request** to `100`. The requests below rebuild as you type.
 
 Look at what happens to **API calls**. The same 67,000 records now go out
-as **67 requests** instead of 67,000 — because each request carries a thousand records in
+as **670 requests** instead of 67,000 — because each request carries a hundred records in
 its array instead of one.
 
 At **Execute Batch**, set **Processing Mode** to `16 concurrent requests` and hit
@@ -131,13 +131,14 @@ Two separate dials, and most people only ever find the first one:
 | **Processing Mode** — threads | How many requests are in flight at the same time |
 | **Rows per request** | How many records ride inside each request |
 
-> **Why a thousand?**
+> **Why a hundred?**
 >
-> Because it is this API's published maximum, not a universal answer. Every API has its own
-> limit, and the right number is the largest one it will accept without complaining.
+> Because most APIs will take it. Plenty time out or refuse a request long before a thousand
+> records. Start at a hundred, and go higher only when the API's documentation, or the team
+> that runs it, says it can take more.
 {: .ps-boxout}
 
-Threads make you faster. Reps make you *smaller* — fewer connections, less overhead, less
+Threads make you faster. Rows per request makes you *smaller* — fewer connections, less overhead, less
 load on the API you're being trusted with. Turning both up is how a load that took an
 afternoon takes a minute.
 

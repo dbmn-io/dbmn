@@ -21,10 +21,11 @@ note_to_reviewer: >
   Step 1 names no number.
   The Step 3 check only fires because Lesson 2's template declares
   {{quantityOnHand:number|>=0}}; with a bare :number there is no rule, no dotted underline
-  and no amber cell. Reps is 100, so all nine bad rows (the last ten rows of the file, minus
-  the one corrected in the loader) land in ONE request and the API reports a single
-  uom_check error for the hundred — which is what makes Split array errors worth teaching.
-  After the split: 91 through, 9 individual errors (5 FK_VIOLATION + 4 INSERT_ERROR), then
+  and no amber cell. Rows per request is 10 (decided 2026-10-04: 1000 and even 100 are more
+  than many real APIs take), and the broken rows are exactly the file's last ten, so all nine
+  bad rows plus the one corrected in the loader land in ONE request and the API reports a
+  single uom_check error for the ten — which is what makes Split array errors worth teaching.
+  After the split: 1 through, 9 individual errors (5 FK_VIOLATION + 4 INSERT_ERROR), then
   5 clear on reprocess and 4 fail again. vs-dbmn `npm run test:e2e:lessons` plays exactly
   this and checks every number.
   Steps 11-12 close the loop (added 2026-09-20). Deliberately NOT solved with a template
@@ -88,17 +89,17 @@ disk is untouched; the edit applies to this run.
 
 ## Step 4 — Send It
 
-On **Review & Configure**, set **Rows per request** to `100` and click **Refresh**. A thousand
-records go out as ten requests of a hundred — fast, and how you would really run a load this size.
+On **Review & Configure**, set **Rows per request** to `10`; the requests rebuild as you type. A thousand
+records go out as a hundred requests of ten.
 
 On **Execute Batch**, check **Error Handling** is on **Continue processing**. **Stop on
 first error** would abandon the whole run at the first bad request.
 
-Hit **Execute**. Nine requests succeed. One fails.
+Hit **Execute**. Ninety-nine requests succeed. One fails.
 
-## Step 5 — One Error for a Hundred Records
+## Step 5 — One Error for Ten Records
 
-Nine hundred records are in. The **Error** tab holds a single row:
+Nine hundred and ninety records are in. The **Error** tab holds a single row:
 
 ```json
 {
@@ -107,21 +108,22 @@ Nine hundred records are in. The **Error** tab holds a single row:
 }
 ```
 
-The API validates the array and rejects it as a unit, so one bad record takes the ninety-nine
+The API validates the array and rejects it as a unit, so one bad record takes the nine
 around it down with it — and names only itself.
 
-So you know a `uom` is wrong somewhere in the last hundred rows. You don't know which row.
+So you know a `uom` is wrong somewhere in the last ten rows. You don't know which row.
 You don't know whether it's the only one.
 
 ## Step 6 — Narrow It Down
 
-Don't set **Rows per request** to `1` and run the thousand again. Nine hundred records went in on nine
-requests, and that speed is worth keeping. Open up the one request that failed instead.
+Don't set **Rows per request** to `1` and run the thousand again. Nine hundred and ninety records
+went in on ninety-nine requests, and that speed is worth keeping. Open up the one request that
+failed instead.
 
 In the Console footer click **Reprocess**, choose **Split array errors**, **Continue**, then
 **Split**. Every element of the failed array becomes a transaction of its own.
 
-Ninety-one go through. Nine fail — not one. Each carries its own error, against its own
+One goes through. Nine fail — not one. Each carries its own error, against its own
 record.
 
 **Run coarse, split on failure.** You get the speed of big requests and the precision of
@@ -243,7 +245,7 @@ Run it. Any endpoint becomes a batch endpoint the moment its values become `{{va
 
 Open {icon:nav-history} **History** and open the failed inventory batch. In the Console
 footer click **Reprocess**, choose **Errors only**, then **Continue**. It reprocesses the
-nine transactions the split left behind, not the whole hundred.
+nine transactions the split left behind, not all ten.
 
 Five clear. The products and locations they pointed at now exist.
 

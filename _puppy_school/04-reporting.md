@@ -136,7 +136,7 @@ leaving you with bare codes.
 The table shows everything, which is not the same as showing what was asked for. Nobody
 wants forty columns of internal identifiers.
 
-Click the **View:** dropdown in the toolbar, then **+ Create View…**
+Click the view button in the toolbar, then **+ Create View…**
 
 The **View Editor** opens with three regions:
 
