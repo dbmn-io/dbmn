@@ -18,11 +18,24 @@ Batch preparation follows five steps:
 
 | Step | Name | Purpose |
 |------|------|---------|
-| 1 | **Load Data** | Choose how to get data in — upload a file, paste text, or enter data manually |
-| 2 | **Map & Transform** | Map source columns to template variables and configure data formats |
-| 3 | **Review & Edit Data** | Review, edit, add, and validate rows before building requests |
-| 4 | **Review & Configure** | See the first requests and how many will be sent, and set Rows per request |
-| 5 | **Execute Batch** | Name the batch, choose error handling and concurrency, and run it |
+| 1 | **Source** | Choose how to get data in — upload a file, paste text, or enter data manually |
+| 2 | **Map** | Map source columns to template variables and configure data formats |
+| 3 | **Validate** | Review, edit, add, and validate rows before building requests |
+| 4 | **Review** | See the first requests and how many will be sent, and set Rows per request |
+| 5 | **Execute** | Name the batch, choose error handling and concurrency, and run it |
+
+### The step bar
+{: #step-bar }
+
+The five steps run across the top of Run Batch. Each one shows what it decided —
+`replenishment.csv · 295 rows`, `6 of 6 mapped`, `295 rows valid`, `3 API calls` — and the
+step you are on is the highlighted one. **Back** and **Next** stay at the bottom left.
+
+- **Click a step you have done** to go back to it.
+- **Click a later step** to go forward. Every step on the way runs its own checks, exactly as
+  **Next** would, so nothing is skipped unchecked. A later step can only be clicked when nothing
+  before it needs you; one that can't says what it **Waits for**.
+- A step that needs you shows **!** and what's wrong: `2 not mapped`, `3 rows need fixing`.
 
 ### Two Entry Paths
 
@@ -31,19 +44,13 @@ There are two ways into the batch flow, and they converge at Step 3:
 **File / Paste path** (all 5 steps):
 
 ```
-Step 1 → Step 2 → Step 3 → Step 4 → Step 5
-Load     Map &     Review    Review &   Execute
-Data     Transform & Edit    Configure  Batch
-                   Data
+Source → Map → Validate → Review → Execute
 ```
 
 **Enter Data path** (skips file loading and mapping):
 
 ```
-Step 1 → Step 3 → Step 4 → Step 5
-Load     Review    Review &   Execute
-Data     & Edit    Configure  Batch
-         Data
+Source → Validate → Review → Execute
 ```
 
 - **File / Paste**: Upload a file or paste tabular data, then map columns to template variables. The grid in Step 3 is pre-populated with your mapped data.
@@ -53,7 +60,7 @@ Both paths merge at Step 3, where you can review and edit the data before the re
 
 ---
 
-## Step 1 — Load Data
+## Step 1 — Source
 {: #step-1-load-data }
 
 Step 1 is where you choose how to get data into the batch flow. There are three options:
@@ -120,23 +127,28 @@ After loading data via file or paste, click **Import Data** to proceed to Step 2
 ### Skipping ahead
 {: #skip-ahead }
 
-After **Import Data**, Dobermann presses **Next** for you while nothing needs your attention:
+After **Import Data**, Dobermann presses **Next** for you while nothing needs your attention,
+and you watch it go in the [step bar](#step-bar): each step it passes stays on screen for a
+moment and ticks off.
 
-- **Map & Transform** is skipped when every required variable maps to a column with confidence:
+- **Map** is passed when every required variable maps to a column with confidence:
   a column this endpoint [remembered](#remember-mapping), or one with the same name ignoring case
-  and punctuation. A match on part of a name always stops on Map & Transform for you to check.
-- **Review & Edit Data** is skipped too, only when every row passes its checks.
+  and punctuation. A match on part of a name stops on Map for you to check the first time;
+  once you click **Next** on it, the mapping is remembered and the next run passes it.
+- **Validate** is passed only when every row passes its checks.
 
-You land on **Review & Configure**, with a note saying what was skipped; **Back** shows the
-skipped steps. Anything that needs you (a missing column, a type problem, blank cells, a sort
-question) stops on its step as before. Click anything while it runs and you take over.
+You land on **Review**, so you always see the requests before they go, with **Execute** one
+click away. Anything that needs you (a missing column, a type problem, blank cells, a sort
+question) stops on its step. A stop on Validate shows only the rows that need fixing
+(**Filter Errors** is on; **Show All** shows the rest). Click anything while it runs and you take
+over.
 
-## Step 2 — Map & Transform
+## Step 2 — Map
 {: #step-2-map-transform }
 
 Map source data columns to template variables in your endpoint configuration. This step only appears when using the File or Paste path.
 
-The table has a **Source** side — the file's column, its **Source Format** and a sample value — and a **Target** side — the template variable, its type, the converted sample, and a status.
+The table has one row per template variable, grouped by where the variable is used — **Body** (with a sub-section for each nested array, such as `lines[]`), **URL path**, **Query** and **Header** — with the row count above it. Each row shows the **Variable**, the **CSV Column** it maps to, a **Sample** (the file's value, and the converted value when the two differ), and a status glyph. A variable used in more than one place says so: *Also in: …*.
 
 ### Automatic Mapping
 
@@ -147,8 +159,8 @@ Dobermann automatically maps columns when the column name matches a template var
 For columns that don't auto-map:
 
 1. Find the unmapped variable in the mapping table
-2. Click the dropdown next to the variable name
-3. Select the corresponding source data column
+2. Click **Select column...** on its row
+3. Choose the source data column
 
 **Example:**
 ```
@@ -163,7 +175,7 @@ Template Variable    | Source Column
 ### Remember the Mapping
 {: #remember-mapping }
 
-When you click **Next** on Map & Transform, the endpoint remembers which column each variable was mapped to. The next Run Batch on that endpoint maps them for you — as long as the new file has those columns. A column it doesn't have falls back to automatic mapping, and you can still change any of them; the new choice is remembered in turn.
+When you click **Next** on Map, the endpoint remembers which column each variable was mapped to. The next Run Batch on that endpoint maps them for you — as long as the new file has those columns. A column it doesn't have falls back to automatic mapping, and you can still change any of them; the new choice is remembered in turn.
 
 The mapping is kept with the endpoint's Run Batch settings. Your template — the Request Body — is not changed.
 
@@ -177,13 +189,13 @@ Dobermann validates your mapping:
 - **No duplicate mappings** — each variable maps to one column
 - **Column exists in source data** — mapped columns must be present
 
-Unmapped required variables are flagged in the Status column. Resolve all mapping issues before proceeding.
+Each row ends in a status glyph: **✓** mapped and converting cleanly, **!** a warning worth a look, **✕** a required variable with no column or samples that fail to convert. Hover the glyph for the detail. Resolve every ✕ before proceeding.
 
 **Optional variables don't need a column.** A variable marked `|opt` or `|null` — shown with a ○ in the mapping table — can be left unmapped when your file simply doesn't have that column. Every request then omits the key (`|opt`) or sends `null` (`|null`), exactly as it would for a blank cell. See [Template Variables](/docs/template-variables/).
 
 ### Source Format Configuration
 
-The **Source Format** column lets you specify how source values should be interpreted before conversion. It defaults by type — **Standard Number**, **Auto-detect Date**, **Boolean**, or **No Transform** for strings.
+The **Source format** select, under each chosen column, lets you specify how source values should be interpreted before conversion. It defaults by type — **Standard Number**, **Auto-detect Date**, **Boolean**, or **No Transform** for strings.
 
 **Number Formats:**
 
@@ -215,13 +227,13 @@ To handle Excel serial dates:
 2. Change **Source Format** to "Excel Serial Date"
 3. The number will be converted to a proper date
 
-**Timezones:** if the template has a `datetime` variable, a **Source Timezone** appears above the table, alongside the environment's **Target Timezone**. Values are converted from one to the other.
+**Timezones:** if the template has a `datetime` variable, a **Source timezone** select appears above the table, beside the environment's **Target** timezone. Values are converted from one to the other.
 
 Click **Next** to proceed to Step 3. Dobermann validates all data type coercions before advancing.
 
 ---
 
-## Step 3 — Review & Edit Data
+## Step 3 — Validate
 {: #step-3-review-edit-data }
 
 Step 3 presents your data in an editable grid. Depending on how you got here:
@@ -241,7 +253,7 @@ This is your last chance to review and modify data before the requests are built
 | **Paste data** | Select a cell and paste — data fills across cells and rows |
 | **Undo a paste** | `Ctrl+Z` / `Cmd+Z` |
 | **Fill down** | `Ctrl+D` to copy the value from the cell above |
-| **See only the problems** | **Filter Errors** in the footer hides every row that passed |
+| **See only the problems** | **Filter Errors** in the footer hides every row that passed. It is on when Validate opens with errors; **Show All** brings back the rest |
 
 ### Grid Keyboard Shortcuts
 
@@ -290,7 +302,7 @@ For endpoints with many template variables, the grid scrolls horizontally. Each 
 
 ---
 
-## Step 4 — Review & Configure
+## Step 4 — Review
 {: #step-4-review-json }
 
 Step 4 shows what the batch will send, built by the same code that sends it — for a JSON body, URL parameters, or both.
@@ -303,7 +315,7 @@ Step 4 shows what the batch will send, built by the same code that sends it — 
 | Setting | When | What it does |
 |---|---|---|
 | **Rows per request** | A flat array (`[ { … } ]`) | How many rows go into each request's array, 1 to 1000. Start at 100: many APIs refuse or time out well before 1000. Go higher only when the API's documentation says it can take more |
-| **`orders` per request** | Two or three levels (`orders[].items[]`) | How many top-level entries go into each request |
+| **Orders per request** | Two or three levels (`orders[].items[]`); named after the outer array | How many top-level entries go into each request |
 | **Values per URL** | A repeating URL parameter (`id={{item}}[ or ]`) | How many values go into each URL — Auto fits as many as the URL length allows |
 | **Array** | A template with two or more arrays that could repeat | Which one repeats |
 | **Body** | BASE64-encoded fields | Show the bodies as sent, or unencoded |
@@ -363,7 +375,7 @@ Click **Next** to proceed to Step 5.
 
 ---
 
-## Step 5 — Execute Batch
+## Step 5 — Execute
 {: #step-5-execute-batch }
 
 Step 5 shows the execution summary and lets you start the batch.

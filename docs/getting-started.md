@@ -23,7 +23,7 @@ Dobermann enables bulk data migration through REST APIs — load, extract, and m
 4. **Run a Batch** — point the same endpoint at a file, map the columns, execute
 5. **Watch it Go** — the Console opens with results streaming in. Don't go for a coffee, you'll miss it.
 
-Everything happens in the [Hub](/docs/hub/), the single tab that opens when you click the Dobermann icon in the VS Code Activity Bar.
+Everything happens in the [Hub](/docs/hub/), the single tab that opens when you click the Dobermann icon in the VS Code Activity Bar. Stuck on what a button does? Press <kbd>?</kbd> for [help mode](/docs/help-mode/): every documented control gets an outline, and clicking one opens its page here.
 
 ## First Launch: What to Expect
 
@@ -121,14 +121,14 @@ One request proves the endpoint, the template and the API agree. See [Run API](/
 ### Step 4: Run a Batch
 
 1. Click **Run Batch** in the endpoint footer (or the {icon:run-batch} icon on its catalogue row). It opens as a tab.
-2. **Load Data** — drop an Excel or CSV file onto the upload area, paste rows on the **Paste Text** tab, or click **Enter Data** to type values directly. Click **Import Data**.
-3. **Map & Transform** — columns whose names match your variables map themselves. Point the rest at their columns:
+2. **Source** — drop an Excel or CSV file onto the upload area, paste rows on the **Paste Text** tab, or click **Enter Data** to type values directly. Click **Import Data**.
+3. **Map** — columns whose names match your variables map themselves. Point the rest at their columns:
    - `orderId` → `ORDER_ID`
    - `customerName` → `CUSTOMER_NAME`
    - `quantity` → `QUANTITY`
-4. **Review & Edit Data** — fix anything highlighted in the grid
-5. **Review & Configure** — check the first requests and how many **API calls** will be made
-6. **Execute Batch** — name the batch, choose **Error Handling** and **Processing Mode**, and click **Execute**
+4. **Validate** — fix anything highlighted in the grid
+5. **Review** — check the first requests and how many **API calls** will be made
+6. **Execute** — name the batch, choose **Error Handling** and **Processing Mode**, and click **Execute**
 
 ### Step 5: Watch it Go
 

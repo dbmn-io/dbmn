@@ -12,6 +12,7 @@ shape more than once; the rules below exist so the docs change with it.
 - `docs/` — User documentation (Markdown, processed by Jekyll)
 - `docs/index.md` — Documentation hub with quick links
 - `docs/hub.md` — The Hub: rail, list panel, header, tabs, Settings. Link here for anything about *where* a control is
+- `docs/help-mode.md` — Help mode: the help button, `?`, the dotted outline, where it works. Every page the extension links to is reached through it
 - `docs/changelog.md` — Release history (generated; see Changelog)
 - `docs/internal/` — Production notes, excluded from the build
 - `_puppy_school/` — The Puppy School course (own rules: `_puppy_school/README.md`)
@@ -74,15 +75,15 @@ What the product calls things now. Use these; the guard rejects most of the reti
 | **History** | Executions, Executions sidebar | Rail label. Settings panel is "Transactions" |
 | **Import** / **Export** → one `.dbmn.zip` | Export Workspace, Export Endpoint, Merge/Replace | |
 | **Run API** / **Run Batch** | play icon | Footer buttons and catalogue row icons |
-| Run Batch steps: **Load Data**, **Map & Transform**, **Review & Edit Data**, **Review & Configure**, **Execute Batch** | Review JSON | |
-| **Import Data** | Read Data | Load Data button |
-| **Rows per request** | Reps, Maximum Repetitions | Review & Configure |
-| **Error Handling**: **Stop on first error** / **Continue processing** (default) | Stop on First Error, Max Error Count, Percentage-Based | Execute Batch, and the Console Settings tab |
+| Run Batch steps: **Source**, **Map**, **Validate**, **Review**, **Execute** | Load Data, Map & Transform, Review & Edit Data, Review & Configure, Execute Batch, Review JSON | Shown in the **step bar** across the top (renamed 2026-10-05) |
+| **Import Data** | Read Data | Source button |
+| **Rows per request** | Reps, Maximum Repetitions | Review |
+| **Error Handling**: **Stop on first error** / **Continue processing** (default) | Stop on First Error, Max Error Count, Percentage-Based | Execute, and the Console Settings tab |
 | **Processing Mode** / **Max Concurrency** | threads | Per batch / per environment ceiling |
 | **Pagination** (Console footer) → **Fetch all pages**, **Get next N pages**, **Next Page** | Configure Pagination, Fetch All, Execute tab | |
 | Console tabs: **Links**, **Input**, **Raw**, **Completed**, **Error**, **Settings** | Execute tab, Request tab | **Links** only on a chained run |
 | **Chain** (Console toolbar, Completed tab) → **Chain from …**, **Send them to endpoint:** | | Run Batch banner: **Chained from** |
-| **help mode** (help button at the right end of the Hub header, or <kbd>?</kbd>) | help icon, ? icon | No screen has per-control help icons; help mode covers the Hub and every tab |
+| **help mode** (help button at the right end of the Hub header, or <kbd>?</kbd>) | help icon, ? icon, dashed outline | No screen has per-control help icons; help mode covers the Hub and every tab; the outline is **dotted**. Page: `docs/help-mode.md` |
 | **Reprocess**, **Re-run**, **Copy**, **Delete**, **Pause**, **Resume**, **Cancel** | Copy Batch, Rename, Stop | Console footer |
 | **Logs**, **Raw / Render / Text** | View Logs, Rendered | Raw tab |
 | the view button, named after the active view | `View: <name>` | Named Views |

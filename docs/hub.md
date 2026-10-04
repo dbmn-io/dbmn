@@ -46,10 +46,11 @@ The {icon:nav-collapse} button hides the rail's labels, leaving the icons. The r
 {: #help-mode }
 
 Every control in DBMN links to its section of these docs. Click the {icon:help} help button at the
-right end of the header, or press <kbd>?</kbd> anywhere you are not typing. Help mode covers the Hub and
-every open tab: each documented control gets a dashed outline, and clicking one opens its docs
-instead of doing its job. Nothing else runs while help mode is on. Press <kbd>Esc</kbd>, or the
-help button again, to leave.
+right end of the header, or press <kbd>?</kbd> anywhere you are not typing. A banner at the top
+reads **Help mode** while it is on. It covers the Hub and every open tab: each documented control
+gets a dotted outline, and clicking one opens its docs instead of doing its job. Nothing else runs
+while help mode is on. Press <kbd>Esc</kbd>, or the help button again, to leave. See
+[Help Mode](/docs/help-mode/).
 
 ---
 
@@ -65,7 +66,7 @@ Your endpoints. Grouped by the URL path they share by default; **Settings → AP
 | {icon:add-endpoint} **Add Endpoint** | Opens a blank endpoint editor in a new tab |
 | {icon:paste-endpoint} **New Endpoint from Clipboard** | Opens a new endpoint filled from an endpoint a teammate shared — see [Sharing Endpoints](/docs/sharing-endpoints/) |
 | **Select** | Turns on checkboxes for bulk actions on the selection. **Delete** names what goes and asks first; their History is kept. **Export** writes them to a `.dbmn.zip`. **Update** sets their System, adds tags, and removes any of the tags they carry, all at once |
-| **Recent** | The five endpoints you last opened, edited or ran, pinned above the groups. Turn it off in Settings |
+| **Recent** | The five endpoints you last saved or ran, pinned above the groups. Turn it off in Settings |
 
 Each row shows the method, name and path, with {icon:run-api} **Run API** on the right. Endpoints with `{{template variables}}` also show {icon:run-batch} **Run Batch**. Both read `Sign in to run` until you are signed in. Click the row to open the endpoint in a tab.
 
@@ -94,7 +95,7 @@ Every run, single or batch, newest first. Each row shows its status, the endpoin
 | **Settings → Transactions → Show** | `Current Environment` or `All Environments` |
 | **Settings → Transactions → Group by** | `Date`, `Endpoint`, `Environment`, `Status` or `None (flat)` |
 
-Right-click a row for the actions its Console footer would show for that state: **Pause** a running batch, **Resume** a paused or stopped one, **Cancel** a queued one, **Delete**, and **Open**. **Reprocess…** and **Re-run** open the Console, where their options are. See [Console](/docs/console/) and [Batch Reprocessing](/docs/batch-reprocessing/).
+Right-click a row for the actions its Console footer would show for that state: **Pause** a running batch, **Resume** a paused, stopped or cancelled one, **Cancel** a queued batch or a single request still in flight, **Delete**, and **Open**. **Reprocess…** and **Re-run** open the Console, where their options are. See [Console](/docs/console/) and [Batch Reprocessing](/docs/batch-reprocessing/).
 
 ---
 

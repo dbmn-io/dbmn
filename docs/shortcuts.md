@@ -14,7 +14,8 @@ Dobermann's shortcuts work inside the Hub and its tabs. On a Mac, read Cmd for C
 | Shortcut | Action |
 |----------|--------|
 | `Ctrl+W` | Close the active Hub tab (endpoint editor, Console, Run Batch, and so on) |
-| `Esc` | Leave a full-window editor; in a transaction window, close it |
+| `?` | Turn [help mode](/docs/help-mode/) on or off, when you are not typing in a field |
+| `Esc` | Leave help mode; leave a full-window editor; in a transaction window, close it |
 
 `Ctrl+W` honours unsaved changes — if the active tab is dirty, you'll get the standard **Save / Discard / Cancel** dialog before it closes. The shortcut only fires when the Hub itself is focused; in any other editor it falls back to VS Code's built-in close-editor behaviour.
 
@@ -77,7 +78,7 @@ The editor supports JSONC (JSON with Comments). Use comments to:
 
 ## Run Batch Data Grid
 
-When using the data entry grid on **Review & Edit Data**, these shortcuts enable fast data entry:
+When using the data entry grid on **Validate**, these shortcuts enable fast data entry:
 
 | Shortcut | Action |
 |----------|--------|

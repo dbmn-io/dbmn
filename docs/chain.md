@@ -55,8 +55,8 @@ first row's value:
 | Badge | Meaning |
 |---|---|
 | *(none)* | The column matches the variable's name |
-| **guess** | Matched on part of the name. Check it on [Map & Transform](/docs/batch-preparation/#step-2-map-transform) |
-| **⚠ missing** | No column fills this required variable. You map it on Map & Transform |
+| **guess** | Matched on part of the name. Check it on [Map](/docs/batch-preparation/#step-2-map-transform) |
+| **⚠ missing** | No column fills this required variable. You map it on Map |
 | **empty** | Optional variable (<code>&#124;opt</code>, <code>&#124;null</code>) with no column. It is left out of the request |
 
 Generated `{{A8:…}}` and environment `{{ENV:…}}` variables fill themselves and are not listed.
@@ -65,13 +65,13 @@ Columns no variable uses are not listed either.
 ## The chained Run Batch
 {: #chained-run-batch }
 
-A chained Run Batch has no **Load Data** step: the rows are its input. A line at the top reads
+A chained Run Batch's **Source** step is set: the rows are its input. A line at the top reads
 **Chained from** the source run, and links back to its Console.
 
 It then skips ahead the way every Run Batch does (see
-[Skipping ahead](/docs/batch-preparation/#skip-ahead)): straight to **Review & Configure** when
+[Skipping ahead](/docs/batch-preparation/#skip-ahead)): straight to **Review** when
 every column maps and every row is valid, otherwise to the step that needs you. **Back** stops at
-**Map & Transform**. To use different data, start a normal Run Batch.
+**Map**. To use different data, start a normal Run Batch.
 
 If a Run Batch for that endpoint is already open, Dobermann asks before replacing what it holds.
 
@@ -90,8 +90,9 @@ A run that has been chained, in either direction, has a **Links** tab in front o
 |---|---|
 | **Batch** | The linked run's ID. Click it to open that run's Console |
 | **Endpoint** | Click it to open the endpoint |
-| **Environment**, **When**, **Status** | The linked run's |
+| **Environment**, **When** | The linked run's |
 | **View**, **Rows** | The view the rows were taken from, and how many were sent |
+| **Status** | The linked run's status |
 | **Differences** | Where the linked run differs from this one |
 
 ### Differences
@@ -99,7 +100,7 @@ A run that has been chained, in either direction, has a **Links** tab in front o
 
 **Differences** shows, as a warning, anything that changed between the two runs: the environment,
 the organisation, or a request header both runs sent with different values (a **Location**, say).
-**Same environment and headers** means nothing changed. Secrets such as `Authorization` are never
+**Same environment and headers** means nothing changed: environment, organisation and headers all match. Secrets such as `Authorization` are never
 compared or shown.
 
 ## Related Topics

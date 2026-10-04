@@ -90,7 +90,7 @@ Dobermann needs a DBMN account to run anything. Open {icon:nav-account} **Accoun
 **Causes and solutions:**
 
 **Variable not mapped:**
-- On **Map & Transform**, every required variable needs a column
+- On **Map**, every required variable needs a column
 - Point the unmapped ones at their columns; optional (`|opt`, `|null`) variables may stay unmapped
 
 **Variable name mismatch:**
@@ -111,13 +111,13 @@ Dobermann auto-encodes query parameters and path variables. For special cases, p
 ### Type Validation Errors
 
 **Symptoms:**
-- Cells highlighted amber on **Review & Edit Data**
+- Cells highlighted amber on **Validate**
 - A footer message such as `"quantity" has 3 invalid records — must be ≥ 0`
 
 **Solutions:**
 - Click **Filter Errors** to see only the rows that failed
 - Fix the cells, or fix the file — the rule is on the template variable (`{{qty:number|>=0}}`); hover the column header to see it
-- Check the **Source Format** on Map & Transform matches how the file writes numbers and dates
+- Check the **Source Format** on Map matches how the file writes numbers and dates
 
 ### Request Body Syntax Errors
 
@@ -160,7 +160,7 @@ Both are disabled while the endpoint has unsaved changes. **Save Endpoint** (Ctr
 
 **Solutions:**
 - Fix the cause of the first error (usually authentication), then **Resume** or **Reprocess**
-- Next time, choose **Continue processing** on Execute Batch to collect every failure in one run
+- Next time, choose **Continue processing** on Execute to collect every failure in one run
 
 ### Execution Hangs
 
@@ -184,8 +184,8 @@ Both are disabled while the endpoint has unsaved changes. **Save Endpoint** (Ctr
 - Network latency (VPN, geographic distance)
 
 **Solutions:**
-- Raise **Rows per request** on **Review & Configure** — the API's documented maximum is the right number. See [Batch Preparation](/docs/batch-preparation/#step-4-review-json)
-- Raise **Processing Mode** on Execute Batch, within the environment's **Max Concurrency**
+- Raise **Rows per request** on **Review** — the API's documented maximum is the right number. See [Batch Preparation](/docs/batch-preparation/#step-4-review-json)
+- Raise **Processing Mode** on Execute, within the environment's **Max Concurrency**
 - Execute during off-peak hours
 
 ### Variables Show Wrong Data
@@ -203,7 +203,7 @@ Both are disabled while the endpoint has unsaved changes. **Save Endpoint** (Ctr
 
 ### Too many requests, or too few
 
-The **API calls** count on **Review & Configure** is the number of requests the batch will send. For a nested template, a new request starts whenever any header field changes — see [How rows become requests](/docs/batch-preparation/#nested-grouping). If the count is wrong, the data or the template is: click ⓘ beside the count to see how the rows were grouped.
+The **API calls** count on **Review** is the number of requests the batch will send. For a nested template, a new request starts whenever any header field changes — see [How rows become requests](/docs/batch-preparation/#nested-grouping). If the count is wrong, the data or the template is: click ⓘ beside the count to see how the rows were grouped.
 
 ## Data File Issues
 
@@ -233,7 +233,7 @@ The **API calls** count on **Review & Configure** is the number of requests the 
 - Check quote escaping
 
 **Excel CSV export issues:**
-- Excel may change date formats — set **Source Format** on Map & Transform to match
+- Excel may change date formats — set **Source Format** on Map to match
 - Numbers may lose leading zeros — paste from Excel, or load the `.xlsx` directly
 - Use "Save As" → "CSV UTF-8"
 
@@ -332,6 +332,10 @@ Nothing is lost. On the next start, the batch that was running is paused, and so
 ### Performance Issues
 
 If VS Code feels sluggish during a large batch, lower **Processing Mode**, and clear old runs from **History** (turn on **Select**, tick, **Delete**). Splitting very large files into several batches also helps.
+
+### I can't find help for a control
+
+There are no "?" icons beside controls any more. Click the {icon:help} help button at the right end of the Hub header, or press `?`, and every documented control gets an outline; click one and its page opens here. `Esc` leaves. See [Help Mode](/docs/help-mode/).
 
 ## Getting Help
 

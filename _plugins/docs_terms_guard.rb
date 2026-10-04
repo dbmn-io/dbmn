@@ -10,6 +10,7 @@
 #
 # Code spans and blocks are ignored, so the syntax itself can still be documented.
 # docs/changelog.md is skipped: it is immutable history and is generated from vs-dbmn.
+# Puppy School lessons (_puppy_school/) are checked too: they describe the same product.
 #
 # When the product retires a label, add the old phrase here (with the replacement, so the
 # message tells the writer what to say instead) and the next build finds every page that
@@ -29,16 +30,24 @@ module DocsTermsGuard
     [/Configure Pagination|\bFetch All\b(?! pages)|Get Next X Pages/, 'the Console footer button is "Pagination"; the options are "Fetch all pages" and "Get next N pages"'],
     [/Maximum Error Count|Percentage-Based|Continue on All Errors|Stop on First Error/, 'Error Handling is "Stop on first error" or "Continue processing" (default)'],
     [/\bstatus bar\b/i, 'there is no DBMN status bar item; sign in under Hub → Account, switch environments in the header'],
-    [/\bRead Data\b/, 'the Load Data button is "Import Data"'],
-    [/\bReps\b|Maximum Repetitions|maxRepetitions/, 'the Step 4 setting is "Rows per request"'],
-    [/Review JSON\b/, 'Step 4 is "Review & Configure"'],
+    [/\bRead Data\b/, 'the Source step\'s button is "Import Data"'],
+    [/\bReps\b|Maximum Repetitions|maxRepetitions/, 'the Review setting is "Rows per request"'],
+    [/Review JSON\b/, 'Step 4 is "Review"'],
+    # Run Batch steps, renamed 2026-10-05 (the step bar): Source, Map, Validate, Review, Execute
+    [/\bLoad Data\b/, 'Run Batch step 1 is "Source" (its button is still "Import Data")'],
+    [/Map (&|&amp;|and) Transform/, 'Run Batch step 2 is "Map"'],
+    [/Review (&|&amp;|and) Edit Data/, 'Run Batch step 3 is "Validate"'],
+    [/Review (&|&amp;|and) Configure/, 'Run Batch step 4 is "Review"'],
+    [/Execute Batch\b/, 'Run Batch step 5 is "Execute"'],
     [/Share button|clicks? \*\*Share\*\*|the \*\*Share\*\*/, 'the footer button is "Copy to Share"'],
     [/More Actions/, 'footer buttons; "More" only holds the overflow'],
     [/\bExecutions sidebar\b|\bhistory sidebar\b|Executions in the sidebar/i, '{icon:nav-history} History on the Hub rail'],
     [/Set as Active\*\* from (a |the )?(context )?menu|Select \*\*Set as Active\*\*/i, 'the header environment selector, or Set as Active in the environment editor footer'],
     [/View Logs|\bRendered\b(?= view)/, 'the Raw tab buttons are "Logs" and "Raw / Render / Text"'],
     [/Copy Batch\b/, 'the Console footer button is "Copy"'],
-    [/↻/, 'Review & Configure rebuilds its requests by itself; there is no Refresh button'],
+    [/↻/, 'Review rebuilds its requests by itself; there is no Refresh button'],
+    [/\bLoad Data\b|Map & Transform|Review & Edit Data|Review & Configure|\bExecute Batch\b/, 'the Run Batch steps are Source, Map, Validate, Review, Execute'],
+    [/dashed outline/, 'help mode draws a dotted outline'],
     [/Set System…/, 'the API Catalogue Select footer button is "Update" (System, add tags, remove tags)'],
     [/`View: /, 'the view button is named after the active view, with no "View:" prefix'],
     [/\bhelp icons?\b|\(i\) icon|\? icon/i, 'there are no per-control help icons; turn on help mode (help button in the Hub header, or ?)'],
@@ -72,6 +81,17 @@ if defined?(Jekyll)
 
     lines = hits.map { |text, hint| "  \"#{text}\" — #{hint}" }
     raise "docs_terms_guard: #{page.relative_path} uses retired vocabulary:\n#{lines.join("\n")}"
+  end
+
+  # The lessons describe the same product; the same words retire there too.
+  Jekyll::Hooks.register :documents, :post_render do |doc|
+    next unless doc.collection.label == 'puppy_school'
+
+    hits = DocsTermsGuard.scan(doc.output.to_s)
+    next if hits.empty?
+
+    lines = hits.map { |text, hint| "  \"#{text}\" — #{hint}" }
+    raise "docs_terms_guard: #{doc.relative_path} uses retired vocabulary:\n#{lines.join("\n")}"
   end
 end
 

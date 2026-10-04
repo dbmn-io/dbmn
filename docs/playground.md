@@ -428,7 +428,7 @@ Remove all your playground data (seed data is preserved).
 ## Sample CSV Files
 {: #sample-csv }
 
-Download these CSV files to use with the endpoint templates above.
+Copy these rows into **Paste Text** on Run Batch's Source step, or save them as CSV files, to use with the endpoint templates above.
 
 ### Flat Bulk — Inventory
 

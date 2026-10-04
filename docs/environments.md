@@ -138,7 +138,7 @@ How many requests a batch sends at the same time. Tick **Enable parallel batch p
 | **Heavy Parallel** | 8 |
 | **Extreme Parallel** | 16 |
 
-This is the ceiling. Each batch picks its own **Processing Mode** on the Execute Batch step, up to this limit — see [Batch Preparation](/docs/batch-preparation/#step-5-execute-batch).
+This is the ceiling. Each batch picks its own **Processing Mode** on the Execute step, up to this limit — see [Batch Preparation](/docs/batch-preparation/#step-5-execute-batch).
 
 **Choosing a level:**
 - Start with **Sequential** when testing a new API

@@ -23,7 +23,7 @@ The catalogue groups endpoints for you — by the path they share, by System, or
 ### Recent
 {: #recent }
 
-**Recent**, at the top of the catalogue, pins the five endpoints you last opened, edited or ran, so the ones you are working on today are one click away whatever group they live in. Collapse it with its chevron, or turn it off under **Settings → API Catalogue → Recent**. Searching or filtering hides it: when you are looking for something specific, Recent is just noise.
+**Recent**, at the top of the catalogue, pins the five endpoints you last saved or ran, so the ones you are working on today are one click away whatever group they live in. Opening an endpoint to look at it does not move it. Collapse it with its chevron, or turn it off under **Settings → API Catalogue → Recent**. Searching, or filtering by method or tag, hides it: when you are looking for something specific, Recent is just noise.
 
 ### Tags
 {: #tags }
@@ -134,7 +134,7 @@ Combine multiple source data values into a single GET request — useful for API
 - Separator goes inside `[]` — spaces are preserved (`[ or ]` vs `[or]`)
 - Empty brackets `[]` default to `&`
 
-In Run Batch, **Values per URL** on the Review & Configure step decides how many values go into each URL; **Auto** fits as many as the URL length allows. See [Batch Preparation](/docs/batch-preparation/#step-4-review-json).
+In Run Batch, **Values per URL** on the Review step decides how many values go into each URL; **Auto** fits as many as the URL length allows. See [Batch Preparation](/docs/batch-preparation/#step-4-review-json).
 
 ---
 

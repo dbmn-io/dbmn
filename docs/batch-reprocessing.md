@@ -82,14 +82,12 @@ Reprocessing is available when a batch has reached a terminal state:
 
 | Batch Status | Available Actions |
 |-------------|-------------------|
-| **Completed** | Reprocess, Copy |
-| **Error** | Reprocess, Copy |
+| **Completed** | Reprocess |
+| **Error** | Reprocess |
 | **Cancelled** | Reprocess, Resume |
 | **Stopped / Paused** | Resume (not Reprocess) |
 | **Running / Pending** | [Reprocess one transaction](#reprocess-one) only (batch-level reprocess disabled) |
 | **Paginated** | Reprocess (no Split Array Errors) |
-
-**Copy** makes a new batch from this one's input rows, so you can run the same load against another environment. Its Settings tab records where it was copied from.
 
 {: .note }
 Stopped and paused batches show **Resume** instead of Reprocess, since the batch hasn't finished yet. A paginated batch reprocesses its failed pages like any other batch: each page runs its own request again. **Split Array Errors** isn't offered there, because splitting would change how the next page is numbered.

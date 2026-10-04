@@ -20,6 +20,7 @@ Welcome to the Dobermann documentation. Dobermann enables bulk data migration th
 | [Puppy School](/puppy-school/) | The course: five lessons on a live API, free |
 | [Getting Started](/docs/getting-started/) | Installation and your first run |
 | [The Hub](/docs/hub/) | Where everything lives: rail, lists, tabs, settings |
+| [Help Mode](/docs/help-mode/) | Press `?` or click the help button: every control links to its page here |
 | [Environments](/docs/environments/) | Configure API connections, authentication, and environment types |
 | [↳ OAuth Setup Guide](/docs/oauth-setup/) | OAuth and Google Service Account configuration |
 | [↳ Prod Protect](/docs/prod-protect/) | Production environment types set centrally and locked |

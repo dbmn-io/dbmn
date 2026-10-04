@@ -15,7 +15,7 @@ When you hit **Run**, Dobermann opens the Console — your real-time window into
 Two things put results in the Console, and both open it for you:
 
 - **Run API** {icon:run-api} — one request. If the endpoint has `{{template variables}}` it asks for their values first, and you can paste a spreadsheet row to fill them. See [Run API](/docs/run-api/).
-- **Run Batch** {icon:run-batch} — the same endpoint driven from a file, through the 5-step flow: Load Data → Map & Transform → Review & Edit Data → Review & Configure → Execute Batch. It appears once the endpoint has template variables. See [Batch Preparation](/docs/batch-preparation/).
+- **Run Batch** {icon:run-batch} — the same endpoint driven from a file, through the 5-step flow: Source → Map → Validate → Review → Execute. It appears once the endpoint has template variables. See [Batch Preparation](/docs/batch-preparation/).
 
 Both live in the endpoint editor's footer and on each endpoint's row in the API Catalogue.
 
@@ -188,9 +188,9 @@ Everything about the run that isn't a result:
 | **Sending To** | Environment, Organization, Endpoint, Request URL |
 | **Configure** (batch) | **Name** — editable, so you can rename a batch — **Error Handling** and **Processing Mode**. A change to threads applies to the next transactions prepared, within the environment's maximum |
 | **Execution** | ID, HTTP Status (single requests), Started, Duration |
-| **Lineage** | For a copied batch: Copied From, Original Environment, Copied At |
+| **Lineage** | Only on a batch copied with an older version of Dobermann: Copied From, Original Environment, Copied At |
 | **Variables** | The values the run used |
-| **Files** | **Request**, **Response** and **Folder** links to the files saved in your [workspace](/docs/your-data/) |
+| **Files** | Links to the files saved in your [workspace](/docs/your-data/): **Request** and **Response** for a single run, **CSV** and **Folder** for a batch |
 
 ---
 
@@ -341,8 +341,8 @@ the rows to another API? [Chain](/docs/chain/) has no limit.
 
 Every control in the Console links to its section of these docs. Turn on
 [help mode](/docs/hub/#help-mode) with the {icon:help} help button at the right end of the Hub header, or
-press <kbd>?</kbd>: documented controls get a dashed outline, and clicking one opens its docs.
-<kbd>Esc</kbd> leaves.
+press <kbd>?</kbd>: documented controls get a dotted outline, and clicking one opens its docs.
+<kbd>Esc</kbd> leaves. See [Help Mode](/docs/help-mode/).
 
 ---
 
@@ -355,7 +355,6 @@ A run's own actions are in its Console footer:
 
 - **Re-run** — a single request, sent again as a new transaction
 - **Reprocess** — a batch's failures, or any part of it; see [Batch Reprocessing](/docs/batch-reprocessing/)
-- **Copy** — a copy of a batch, to run against another environment
 - **Delete** — the run and its files
 
 ### Workspace Files
@@ -369,7 +368,7 @@ Every request and response is also saved as JSON in your [Dobermann workspace](/
 
 ### Error Handling setting
 
-Chosen on the **Execute Batch** step, and shown on the Console's Settings tab:
+Chosen on the **Execute** step, and shown on the Console's Settings tab:
 
 | Setting | Behaviour |
 |---------|-----------|
@@ -397,12 +396,12 @@ A batch member refused with `401` against a DBMN-authenticated environment is re
 
 ### Parallel Processing
 
-Each batch picks a **Processing Mode** on the Execute Batch step, up to the ceiling set per environment (see [Environments — Parallel Processing](/docs/environments/#parallel-processing)). Higher concurrency = faster batches, but more server load.
+Each batch picks a **Processing Mode** on the Execute step, up to the ceiling set per environment (see [Environments — Parallel Processing](/docs/environments/#parallel-processing)). Higher concurrency = faster batches, but more server load.
 
 ### Large Batches
 
 For big loads:
-- Put more rows in each request — **Rows per request** on Review & Configure — before adding threads. See [Batch Preparation](/docs/batch-preparation/#step-4-review-json)
+- Put more rows in each request — **Rows per request** on Review — before adding threads. See [Batch Preparation](/docs/batch-preparation/#step-4-review-json)
 - Results stream to disk as they arrive, so the Console stays responsive
 - Run during off-peak hours to avoid rate limiting
 
