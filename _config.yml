@@ -12,7 +12,7 @@ plugins:
   - jekyll-seo-tag
 
 # Color scheme
-color_scheme: dark
+color_scheme: dbmn
 
 # Logo
 logo: "/images/DBMNLogo.png"

@@ -64,7 +64,7 @@ Your endpoints. Grouped by the URL path they share by default; **Settings → AP
 | {icon:filters} **Filters** | Narrow the list by **System**, **Method** and **Tags**. The button shows how many filters are on; × clears them all |
 | {icon:add-endpoint} **Add Endpoint** | Opens a blank endpoint editor in a new tab |
 | {icon:paste-endpoint} **New Endpoint from Clipboard** | Opens a new endpoint filled from an endpoint a teammate shared — see [Sharing Endpoints](/docs/sharing-endpoints/) |
-| **Select** | Turns on checkboxes for bulk actions: **Export** the selection, or **Set System…** on all of them at once |
+| **Select** | Turns on checkboxes for bulk actions on the selection. **Delete** names what goes and asks first; their History is kept. **Export** writes them to a `.dbmn.zip`. **Update** sets their System, adds tags, and removes any of the tags they carry, all at once |
 | **Recent** | The five endpoints you last opened, edited or ran, pinned above the groups. Turn it off in Settings |
 
 Each row shows the method, name and path, with {icon:run-api} **Run API** on the right. Endpoints with `{{template variables}}` also show {icon:run-batch} **Run Batch**. Both read `Sign in to run` until you are signed in. Click the row to open the endpoint in a tab.
@@ -127,7 +127,7 @@ Sign in to DBMN, see your licence and weekly usage, and find **Puppy School & Ba
 ### Systems
 {: #systems }
 
-A **System** is a short name for one API you work with: `wms`, `erp`, `crm`. Environments and endpoints both carry one, and it is how the catalogue knows which endpoints belong with the active environment. A new endpoint inherits the System of the active environment. Names are lowercase letters and digits, up to 16 characters. Pick one in the **System** field of either editor, or create one there with **+ Add new System…**.
+A **System** is a short name for one API you work with: `wms`, `erp`, `crm`. Environments and endpoints both carry one, and it is how the catalogue knows which endpoints belong with the active environment. A new endpoint inherits the System of the active environment. Names are lowercase letters and digits, up to 16 characters. Pick one in the **System** field of either editor, or create one there with **+ Add new System…**. To change many endpoints at once, tick them in **Select** mode and click **Update**.
 
 ---
 

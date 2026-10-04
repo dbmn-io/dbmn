@@ -10,3 +10,42 @@
   height: 2rem;
   flex-shrink: 0;
 }
+
+// --- Align with the marketing site (index.html + css/brand.css) ---------
+
+// Cooper Black on page titles, like the hero headline.
+.main-content h1,
+.main-content .fs-9 {
+  font-family: var(--brand-font-heading);
+}
+
+// Sidebar carries the same navy gradient as the site's nav bar.
+.side-bar {
+  background: linear-gradient(135deg, var(--brand-bg-start) 0%, var(--brand-bg-end) 100%);
+}
+
+// brand.css is loaded after the theme and sets every `a` to white. Restore
+// the theme's link colour for docs content and navigation.
+.main-content a,
+.nav-list a,
+.breadcrumb-nav a,
+.search-result {
+  color: $link-color;
+}
+
+// Top-right links behave like the site nav: muted, no underline, white on hover.
+.aux-nav a {
+  color: var(--brand-text-muted);
+  text-decoration: none;
+  &:hover { color: var(--brand-text); }
+}
+
+// Sidebar nav like the site nav: muted, no underline, white when hovered or current.
+.site-title,
+.nav-list .nav-list-item .nav-list-link {
+  text-decoration: none;
+}
+.nav-list .nav-list-item .nav-list-link {
+  color: var(--brand-text-muted);
+  &:hover, &.active { color: var(--brand-text); }
+}

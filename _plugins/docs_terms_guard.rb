@@ -38,6 +38,8 @@ module DocsTermsGuard
     [/Set as Active\*\* from (a |the )?(context )?menu|Select \*\*Set as Active\*\*/i, 'the header environment selector, or Set as Active in the environment editor footer'],
     [/View Logs|\bRendered\b(?= view)/, 'the Raw tab buttons are "Logs" and "Raw / Render / Text"'],
     [/Copy Batch\b/, 'the Console footer button is "Copy"'],
+    [/↻/, 'Review & Configure rebuilds its requests by itself; there is no Refresh button'],
+    [/Set System…/, 'the API Catalogue Select footer button is "Update" (System, add tags, remove tags)'],
     [/`View: /, 'the view button is named after the active view, with no "View:" prefix'],
     [/\bhelp icons?\b|\(i\) icon|\? icon/i, 'there are no per-control help icons; turn on help mode (help button in the Hub header, or ?)'],
   ].freeze

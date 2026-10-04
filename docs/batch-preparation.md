@@ -302,13 +302,13 @@ Step 4 shows what the batch will send, built by the same code that sends it — 
 
 | Setting | When | What it does |
 |---|---|---|
-| **Rows per request** | A flat array (`[ { … } ]`) | How many rows go into each request's array, 1 to 1000. The API's documented maximum is the right number |
+| **Rows per request** | A flat array (`[ { … } ]`) | How many rows go into each request's array, 1 to 1000. Start at 100: many APIs refuse or time out well before 1000. Go higher only when the API's documentation says it can take more |
 | **`orders` per request** | Two or three levels (`orders[].items[]`) | How many top-level entries go into each request |
 | **Values per URL** | A repeating URL parameter (`id={{item}}[ or ]`) | How many values go into each URL — Auto fits as many as the URL length allows |
 | **Array** | A template with two or more arrays that could repeat | Which one repeats |
 | **Body** | BASE64-encoded fields | Show the bodies as sent, or unencoded |
 
-Change a setting and **↻** (left of the Configure cards) rebuilds the preview.
+Change a setting and the requests below rebuild by themselves: at once for a dropdown, once you stop typing for a number.
 
 **Summary** shows the **API calls** the batch will make, the **Rows** going into them, and the **Size** of the first request. The ⓘ beside API calls opens *How your rows become API requests*: your template with each variable marked by what it does, how the rows group into requests, and what each request holds.
 
@@ -316,7 +316,7 @@ Change a setting and **↻** (left of the Configure cards) rebuilds the preview.
 
 ### Rows per request — the dial most people miss
 
-One row per request works, and it is the slowest possible way to load data. If the endpoint accepts an array, set **Rows per request** to what the API allows and watch **API calls** fall: 67,000 rows at 1,000 per request is 67 requests, not 67,000. Threads (Step 5) make a load faster; rows per request make it smaller — fewer connections, less overhead, less load on the API. Turn both up.
+One row per request works, and it is the slowest possible way to load data. If the endpoint accepts an array, set **Rows per request** to what the API allows and watch **API calls** fall: 67,000 rows at 100 per request is 670 requests, not 67,000. Threads (Step 5) make a load faster; rows per request make it smaller — fewer connections, less overhead, less load on the API. Turn both up.
 
 ### How rows become requests (nested templates)
 {: #nested-grouping }

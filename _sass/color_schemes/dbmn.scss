@@ -1,0 +1,17 @@
+// DBMN colour scheme: the theme's dark scheme, re-tinted to the brand tokens
+// in css/brand.css (navy gradient, #0078d4 accent, #7ab8ff inline links).
+// SCSS variables need opaque colours, so the rgba surfaces are approximated.
+@import "./color_schemes/dark";
+
+$body-background-color: #1a1a2e;      // --brand-bg-start
+$sidebar-color: #16213e;              // --brand-bg-end
+$body-heading-color: #fff;            // --brand-text
+$body-text-color: #e0e0e0;            // --brand-text-body
+$link-color: #7ab8ff;                 // index.html inline-link blue
+$nav-child-link-color: #a0a0b0;       // --brand-text-muted
+$btn-primary-color: #0078d4;          // --brand-accent
+$base-button-color: #23233f;
+$border-color: #2b2b47;               // ≈ rgba(255,255,255,.1) over navy
+$search-background-color: #22223b;
+$table-background-color: #20203a;
+$feedback-color: #141430;
