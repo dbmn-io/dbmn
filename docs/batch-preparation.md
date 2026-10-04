@@ -59,6 +59,7 @@ Both paths merge at Step 3, where you can review and edit the data before the re
 Step 1 is where you choose how to get data into the batch flow. There are three options:
 
 ### Upload File
+{: #upload-file }
 
 Drag a file onto the upload area or click to browse. Supported formats:
 
@@ -73,12 +74,14 @@ Drag a file onto the upload area or click to browse. Supported formats:
 After loading, Dobermann displays the row count (excluding the header), the columns it found, and a preview of the first rows. Check the columns are right and the values landed where you expect before going on.
 
 ### Paste Text
+{: #paste-text }
 
-Switch to the **Paste Text** tab and paste CSV, TSV, or tab-delimited data directly. This is useful when copying a few rows from Excel — or a whole table from the Console's **Copy → Excel**, which is how a GET's results become a POST's input.
+Switch to the **Paste Text** tab and paste CSV, TSV, or tab-delimited data directly. This is useful when copying a few rows from Excel. To make a GET's results a POST's input, [Chain](/docs/chain/) them from the Console instead: no clipboard, and no row limit.
 
 Dobermann auto-detects tab-delimited data (common when pasting from Excel) and converts it to CSV format internally.
 
 ### Enter Data (Manual Entry)
+{: #enter-data }
 
 Click the **Enter Data** button to skip file loading and column mapping entirely. Dobermann creates an empty grid with columns matching your endpoint's template variables. You type values directly into the grid in Step 3.
 
@@ -113,6 +116,20 @@ PRE-ITEM-003,Widget Gamma,75,DC01
 After loading data via file or paste, click **Import Data** to proceed to Step 2.
 
 ---
+
+### Skipping ahead
+{: #skip-ahead }
+
+After **Import Data**, Dobermann presses **Next** for you while nothing needs your attention:
+
+- **Map & Transform** is skipped when every required variable maps to a column with confidence:
+  a column this endpoint [remembered](#remember-mapping), or one with the same name ignoring case
+  and punctuation. A match on part of a name always stops on Map & Transform for you to check.
+- **Review & Edit Data** is skipped too, only when every row passes its checks.
+
+You land on **Review & Configure**, with a note saying what was skipped; **Back** shows the
+skipped steps. Anything that needs you (a missing column, a type problem, blank cells, a sort
+question) stops on its step as before. Click anything while it runs and you take over.
 
 ## Step 2 — Map & Transform
 {: #step-2-map-transform }
@@ -358,6 +375,7 @@ Step 5 shows the execution summary and lets you start the batch.
 | **Configure** | **Name**, **Error Handling** and **Processing Mode** — below |
 
 ### Name
+{: #batch-name }
 
 The batch name, as it will appear in History. Up to 100 characters.
 
@@ -374,10 +392,12 @@ The batch name, as it will appear in History. Up to 100 characters.
 Some failures stop a batch regardless — a `401` or `403`, or a network error — because every remaining request would fail the same way. Those are configurable under **Hub → Settings → Execution**. See [Console — Error Handling](/docs/console/#error-handling).
 
 ### Processing Mode
+{: #processing-mode }
 
 **Sequential (Safest)** sends one request at a time. **N concurrent requests** sends 2, 4, 8 or 16 at once, up to the environment's **Max Concurrency** — see [Environments — Parallel Processing](/docs/environments/#parallel-processing). If the environment hasn't enabled parallel processing, only Sequential is offered.
 
 ### Execute
+{: #execute }
 
 **Execute** is enabled once you have scrolled to the bottom of the summary. If the active environment is typed **Production**, a confirmation asks you to proceed — see [Environments — Environment Type](/docs/environments/#environment-type).
 

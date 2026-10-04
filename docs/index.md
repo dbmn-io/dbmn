@@ -31,6 +31,7 @@ Welcome to the Dobermann documentation. Dobermann enables bulk data migration th
 | [Console](/docs/console/) | Run requests, monitor progress, analyse results |
 | [↳ Named Views](/docs/named-views/) | Save column layouts and row-per-X shapes; one response, many lenses |
 | [↳ Pagination](/docs/pagination/) | Configure and run paginated API requests |
+| [↳ Chain](/docs/chain/) | Send a run's results into another endpoint's Run Batch, and trace the link |
 | [↳ Batch Reprocessing](/docs/batch-reprocessing/) | Re-run only failed transactions from a previous batch |
 | [Import/Export](/docs/import-export/) | Share configurations with your team |
 | [The Training Ground](/docs/playground/) | The practice API behind Puppy School: endpoints, data, limits |

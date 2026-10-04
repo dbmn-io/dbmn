@@ -39,6 +39,7 @@ module DocsTermsGuard
     [/View Logs|\bRendered\b(?= view)/, 'the Raw tab buttons are "Logs" and "Raw / Render / Text"'],
     [/Copy Batch\b/, 'the Console footer button is "Copy"'],
     [/`View: /, 'the view button is named after the active view, with no "View:" prefix'],
+    [/\bhelp icons?\b|\(i\) icon|\? icon/i, 'there are no per-control help icons; turn on help mode (help button in the Hub header, or ?)'],
   ].freeze
 
   PROTECTED = %r{(<pre\b.*?</pre>|<code\b.*?</code>)}mi.freeze

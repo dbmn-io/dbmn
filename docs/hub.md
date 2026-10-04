@@ -42,6 +42,15 @@ The chip on the right of the header reads `Idle`, `N running`, `N running · N q
 
 The {icon:nav-collapse} button hides the rail's labels, leaving the icons. The rail also shows labels only while no tab is open, and the list panel yields to the tabs on a narrow window: the tab area keeps at least 600px, and the header button shows or hides the panel.
 
+### Help mode
+{: #help-mode }
+
+Every control in DBMN links to its section of these docs. Click the {icon:help} help button at the
+right end of the header, or press <kbd>?</kbd> anywhere you are not typing. Help mode covers the Hub and
+every open tab: each documented control gets a dashed outline, and clicking one opens its docs
+instead of doing its job. Nothing else runs while help mode is on. Press <kbd>Esc</kbd>, or the
+help button again, to leave.
+
 ---
 
 ## API Catalogue

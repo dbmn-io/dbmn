@@ -62,6 +62,7 @@ The pill beside the title says where the run is:
 The run's details — environment, organisation, endpoint, full request URL, ID, HTTP status, start time and duration, and for a batch its name, error handling and processing mode — are on the [Settings tab](#settings-tab).
 
 ### Batch Controls
+{: #batch-controls }
 
 During a batch execution, the footer offers:
 
@@ -79,7 +80,14 @@ While a batch runs, the Console footer shows live progress — the phase (Prepar
 
 ## Tabs
 
-The Console organises data across five tabs:
+The Console organises data across these tabs. **Links** appears only on a run that has been
+[chained](/docs/chain/):
+
+### Links Tab
+{: #links-tab }
+
+The runs this one's rows came from (**Came From**) and went to (**Sent To**), with where they
+differ. See [The Links tab](/docs/chain/#links-tab).
 
 ### Input Tab
 {: #input-tab }
@@ -153,6 +161,8 @@ Shows all successful transactions (2xx responses) in a data table.
 - Count indicator
 
 **Use case:** Analyse successful patterns, extract data from responses, verify expected output.
+
+**Chain** in the toolbar sends the rows this tab shows into another endpoint's **Run Batch**. See [Chain](/docs/chain/).
 
 ### Error Tab
 {: #error-tab }
@@ -248,6 +258,7 @@ Patterns are combinable: `active +pending,-error`, `"exact",-exclude,wild*`
 - Match exact cell values with quotes: `"New York"`
 
 ### Sorting
+{: #sorting }
 
 Click any column header to sort. Sort is saved on the active view, so it persists across tab switches and console reloads.
 
@@ -269,11 +280,13 @@ See the dedicated [Pagination](/docs/pagination/) guide for the complete workflo
 ## Copy & Export
 {: #copy-options }
 
-Copy data to the clipboard or export to a file from the toolbar above the table. All options respect the current tab, search filter, sort order, and visible columns — and, on the Input tab, the [Result filter](#input-status).
+Copy data to the clipboard or export to a file from the toolbar above the table. To use the
+rows as another API's input, [Chain](/docs/chain/) them instead: no clipboard, no file, no limit. All options respect the current tab, search filter, sort order, and visible columns — and, on the Input tab, the [Result filter](#input-status).
 
 Column headers are the field names your view shows: a nested column such as `location.city` is headed `city`. When two columns share a name — `location.name` and `product.supplier.name`, say — those two are headed by their path instead, so a spreadsheet never has two columns called `name`.
 
 ### Copy
+{: #copy }
 
 The **Copy** dropdown copies data straight to your clipboard — no file needed.
 
@@ -297,6 +310,7 @@ The **Copy** dropdown copies data straight to your clipboard — no file needed.
 When pasting into Excel, numeric-looking text fields (e.g. GLN codes like `0012345000015`) are automatically converted to numbers, losing leading zeros. Use the **Excel** or **CSV (Excel)** copy options to prevent this — they prefix text columns with an apostrophe (`'`) that tells Excel to treat the value as text. For guaranteed type preservation without any prefix characters, use **Export → Excel** instead.
 
 ### Export
+{: #export }
 
 The **Export** dropdown saves data to a file. It is available once the batch has finished.
 
@@ -317,7 +331,18 @@ Large copy/export operations can overwhelm target applications or the extension 
 | Export | Excel | 2,000,000 cells | The spreadsheet library runs out of memory beyond this |
 | Export | CSV / CSV (Excel) | Unlimited | Streams line-by-line |
 
-If you hit a limit, switch to CSV export (file) — it streams without memory constraints.
+If you hit a limit, switch to CSV export (file) — it streams without memory constraints. Sending
+the rows to another API? [Chain](/docs/chain/) has no limit.
+
+---
+
+## Help mode
+{: #help-mode }
+
+Every control in the Console links to its section of these docs. Turn on
+[help mode](/docs/hub/#help-mode) with the {icon:help} help button at the right end of the Hub header, or
+press <kbd>?</kbd>: documented controls get a dashed outline, and clicking one opens its docs.
+<kbd>Esc</kbd> leaves.
 
 ---
 
@@ -437,6 +462,7 @@ One failed request can carry many rows. If the error doesn't say which, the requ
 
 - [Named Views](/docs/named-views/) — Save column layouts and row-per-X shapes; switch and export instantly
 - [Pagination](/docs/pagination/) — Configure and run paginated API requests
+- [Chain](/docs/chain/) — Send a run's results into another endpoint's Run Batch
 - [Batch Reprocessing](/docs/batch-reprocessing/) — Re-run failed transactions without re-executing the whole batch
 - [The Hub](/docs/hub/) — History, the activity chip, and execution settings
 - [Endpoints](/docs/endpoints/) — Configuring API requests

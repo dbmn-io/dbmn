@@ -80,7 +80,9 @@ What the product calls things now. Use these; the guard rejects most of the reti
 | **Error Handling**: **Stop on first error** / **Continue processing** (default) | Stop on First Error, Max Error Count, Percentage-Based | Execute Batch, and the Console Settings tab |
 | **Processing Mode** / **Max Concurrency** | threads | Per batch / per environment ceiling |
 | **Pagination** (Console footer) → **Fetch all pages**, **Get next N pages**, **Next Page** | Configure Pagination, Fetch All, Execute tab | |
-| Console tabs: **Input**, **Raw**, **Completed**, **Error**, **Settings** | Execute tab, Request tab | |
+| Console tabs: **Links**, **Input**, **Raw**, **Completed**, **Error**, **Settings** | Execute tab, Request tab | **Links** only on a chained run |
+| **Chain** (Console toolbar, Completed tab) → **Chain from …**, **Send them to endpoint:** | | Run Batch banner: **Chained from** |
+| **help mode** (help button at the right end of the Hub header, or <kbd>?</kbd>) | help icon, ? icon | No screen has per-control help icons; help mode covers the Hub and every tab |
 | **Reprocess**, **Re-run**, **Copy**, **Delete**, **Pause**, **Resume**, **Cancel** | Copy Batch, Rename, Stop | Console footer |
 | **Logs**, **Raw / Render / Text** | View Logs, Rendered | Raw tab |
 | the view button, named after the active view | `View: <name>` | Named Views |
