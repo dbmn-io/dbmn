@@ -206,7 +206,7 @@ says `{icon:paste-endpoint}`. Nothing in this folder needs editing.
 
 Roles used by the lessons so far: `nav-environments`, `nav-api-catalogue`, `nav-history`,
 `nav-account`, `env-switcher`, `add-endpoint`, `paste-endpoint`, `paste-row`, `run-api`,
-`run-batch`, `add-query-param`.
+`run-batch`, `add-query-param`, `help`.
 
 ## Jekyll gotcha
 

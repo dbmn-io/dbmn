@@ -11,7 +11,7 @@ You've finished Puppy School.
 
 <!-- certificate -->
 
-You connected to a live API, loaded 67,000 records and then worked out how to do it in 67
+You connected to a live API, loaded 67,000 records and then worked out how to do it in 670
 requests instead of 67,000. You broke a load on purpose, read the errors properly, fixed the
 master data and reprocessed the failures. You turned a nested response into the spreadsheet
 somebody asked for. And you built an endpoint and a nested data load from scratch, from data

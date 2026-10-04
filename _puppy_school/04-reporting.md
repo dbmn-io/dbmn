@@ -62,7 +62,7 @@ Dobermann has a trick up its sleeve. It will walk the pages for you — and as e
 back, its rows are added to the **Completed** tab. One click, one table, all of it.
 
 Let's see it in action. Copy this, open {icon:nav-api-catalogue} **API Catalogue**, and click
-{icon:paste-endpoint} **Paste Endpoint**:
+{icon:paste-endpoint} **New Endpoint from Clipboard**:
 
 ```json
 // Name: Puppy School — Inventory Report
@@ -142,9 +142,9 @@ The **View Editor** opens with three regions:
 
 - **Available Columns** on the left — the full response tree, searchable
 - **Selected Columns** on the right — what ends up in your table
-- **Row Basis** at the top of the Selected panel — which array produces one row each
+- The **row basis** dropdown in the Selected panel header — which array produces one row each
 
-Check the **Row Basis** is `data`, then tick these columns:
+Check the row basis is `data`, then tick these columns:
 
 | Column | Where it comes from |
 |---|---|

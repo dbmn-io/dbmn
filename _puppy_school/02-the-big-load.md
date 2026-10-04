@@ -24,7 +24,7 @@ project, usually with no warning and a deadline attached.
 ## Step 2 — Create the Upload Endpoint
 
 Copy the template below, then in the Hub open {icon:nav-api-catalogue} **API Catalogue**
-and click {icon:paste-endpoint} **Paste Endpoint** — the same button you used in Lesson 1.
+and click {icon:paste-endpoint} **New Endpoint from Clipboard** — the same button you used in Lesson 1.
 
 ```json
 // Name: Puppy School — Bulk Inventory Upload
@@ -164,7 +164,7 @@ afternoon takes a minute.
 
 > **🦴 Dig Deeper**
 >
-> Sending 67,000 requests instead of 67 doesn't just cost time — every request carries its
+> Sending 67,000 requests instead of 670 doesn't just cost time — every request carries its
 > own connection setup, headers and round trip, and most APIs are rate limited on requests
 > rather than records. The speed gain from threads is never linear either; latency, server
 > capacity and connection overhead all get a vote.

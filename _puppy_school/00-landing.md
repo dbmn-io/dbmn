@@ -21,7 +21,7 @@ Five lessons, about an hour end to end. Each one earns the next.
 | | Lesson | Trick | You'll learn |
 |---|---|---|---|
 | **1** | First Contact | Shake | Connect to an API, run requests, read JSON responses in the DBMN way |
-| **2** | The Big Load | Fetch | Push 67,000 records through the batch engine — then make it a thousand times more efficient |
+| **2** | The Big Load | Fetch | Push 67,000 records through the batch engine — then make it a hundred times more efficient |
 | **3** | Handling Errors | Roll Over | Break it deliberately, find out why, fix the data, reprocess the failures like never before |
 | **4** | Reporting | Speak | Turn a nested API response into the exact spreadsheet so you can share data quickly |
 | **5** | Your Own Template | Jump | Build an endpoint and a nested data load from scratch — the graduation skill |

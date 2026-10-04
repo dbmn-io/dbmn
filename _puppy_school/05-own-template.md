@@ -84,7 +84,7 @@ Flat data in, nested data out. That is the job, on every project, forever.
 ## Step 1 — Look Before You Build
 
 Never write a template against an API you haven't looked at. Copy this, open
-{icon:nav-api-catalogue} **API Catalogue**, click {icon:paste-endpoint} **Paste Endpoint**, save,
+{icon:nav-api-catalogue} **API Catalogue**, click {icon:paste-endpoint} **New Endpoint from Clipboard**, save,
 and click **Run API**:
 
 ```json
@@ -107,7 +107,7 @@ page around it.
 
 ## Step 2 — Send One Back
 
-Now the endpoint that becomes your template. Copy this and click **Paste Endpoint** again:
+Now the endpoint that becomes your template. Copy this and click {icon:paste-endpoint} **New Endpoint from Clipboard** again:
 
 ```json
 // Name: My Replenishment Orders

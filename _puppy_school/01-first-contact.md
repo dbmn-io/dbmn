@@ -15,7 +15,15 @@ checkpoint:
 
 ## Step 1 — Install and Sign In
 
-Click the Dobermann icon in your VS Code activity bar.
+Click the Dobermann icon in your VS Code activity bar. The **Hub** opens: Dobermann's one window,
+with its sections down the left.
+
+> **Lost at any point? Press ?**
+>
+> Every control in Dobermann is documented. Click {icon:help} at the right end of the Hub header,
+> or press **?** when you're not typing, and every documented control gets a dotted outline. Click
+> one and its page on dbmn.io opens. **Esc** leaves. Whenever a step here names a button you can't
+> place, that's the way to find it.
 
 Not installed yet? [Get it from the VS Code Marketplace.](https://marketplace.visualstudio.com/items?itemName=dbmn.dobermann)
 
@@ -56,17 +64,10 @@ environment selector {icon:env-switcher} — it reads `No environment` until you
 one — and choose `DBMN Puppy School`. Whatever that selector shows is where every request
 you run will go.
 
-> **In a hurry?**
->
-> You can [download the starter file](/puppy-school/files/puppy-school-starter.dbmn.zip)
-> and import via the dbmn hub menu — it creates this environment and every endpoint in
-> the course. Do it by hand first if you can, though. Knowing how an environment is put
-> together is worth the two minutes.
-
 ## Step 3 — Your First Request
 
 Copy the template below. Then, in the Hub, open {icon:nav-api-catalogue} **API Catalogue**
-and click {icon:paste-endpoint} **Paste Endpoint** — the clipboard button beside
+and click {icon:paste-endpoint} **New Endpoint from Clipboard** — the clipboard button beside
 {icon:add-endpoint} **Add Endpoint**. Dobermann reads the clipboard and fills in the name,
 method and path for you. (Ctrl+V on any new, unsaved endpoint does the same.)
 
@@ -119,7 +120,7 @@ misbehaves.
 ## Step 5 — Explore the Reference Data
 
 Create an endpoint for each of the following. Copy each template, click
-{icon:paste-endpoint} **Paste Endpoint** in the API Catalogue, save, then hit **Run API**.
+{icon:paste-endpoint} **New Endpoint from Clipboard** in the API Catalogue, save, then hit **Run API**.
 
 ```json
 // Name: Get Locations
