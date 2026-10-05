@@ -32,6 +32,8 @@ If an environment's token carries more than one organisation, each organisation 
 
 The selector is the main way to set the active environment. The other is the **Set as Active** button in the footer of a saved environment's editor.
 
+Signed out of DBMN, the header shows **Sign in to DBMN** where the selector was. It opens the same sign-in as [Account](#account): enter your email, and a new address is registered as it signs in. The selector comes back once you are signed in.
+
 ### Activity chip
 {: #activity-chip }
 

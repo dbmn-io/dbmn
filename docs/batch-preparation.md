@@ -138,7 +138,7 @@ moment and ticks off.
 - **Validate** is passed only when every row passes its checks.
 
 You land on **Review**, so you always see the requests before they go, with **Execute** one
-click away. Anything that needs you (a missing column, a type problem, blank cells, a sort
+click away. Anything that needs you (a missing column, a type problem, empty cells, a sort
 question) stops on its step. A stop on Validate shows only the rows that need fixing
 (**Filter Errors** is on; **Show All** shows the rest). Click anything while it runs and you take
 over.
@@ -158,9 +158,11 @@ Dobermann automatically maps columns when the column name matches a template var
 
 For columns that don't auto-map:
 
-1. Find the unmapped variable in the mapping table
+1. Find the unmapped variable in the mapping table (its **Select column...** is highlighted)
 2. Click **Select column...** on its row
 3. Choose the source data column
+
+**Next** is always enabled. If a required variable still has no column, it says which.
 
 **Example:**
 ```
@@ -249,7 +251,7 @@ This is your last chance to review and modify data before the requests are built
 |--------|-----|
 | **Edit a cell** | Click the cell and type |
 | **Add a row** | Tab from the last cell in the last row, or click **+ Add Row** (Enter Data path) |
-| **Delete a row** | Click the × at the end of the row (Enter Data path) |
+| **Delete a row** | Hover the row number (or Tab to it) and click the bin. **Ctrl+Z** puts it back. Any source: the file, or the run the rows came from, is not changed |
 | **Paste data** | Select a cell and paste — data fills across cells and rows |
 | **Undo a paste** | `Ctrl+Z` / `Cmd+Z` |
 | **Fill down** | `Ctrl+D` to copy the value from the cell above |
@@ -277,21 +279,33 @@ For templates with nested structures (e.g., orders with line items), the grid sp
 4. Type to enter your own values instead
 
 ### Validation
+{: #validation }
 
-When you click **Next** to proceed to Step 4, Dobermann validates your data:
+Every row is checked when the grid loads, and again after you edit a cell or delete a row:
 
-**Blank field check:**
-- Scans for empty cells in required columns
-- Shows how many empty fields it found, with a **Continue** button
-- You can continue, or go back and fill in the values
-- Optional (`|opt`, `|null`) and boolean fields are excluded from this check
+- **Empty required cells.** Optional (`|opt`, `|null`) and boolean fields are never counted.
+- **Each column's rules:** minimum/maximum length, exact length, min/max numeric values,
+  integer requirements, and date format validity. The column header shows a dotted underline;
+  hover it to see the rule.
 
-**Modifier constraint validation:**
-- Validates cell values against any modifier constraints defined on the template variable
-- Checks include: minimum/maximum length, exact length, min/max numeric values, integer requirements, and date format validity
-- Invalid cells are highlighted with an amber background, and the column header shows a dotted underline — hover it to see the rule
-- The footer names the column and the rule: `"quantityOnHand" has 1 invalid record — must be ≥ 0`
-- You must fix all constraint errors before proceeding
+Cells that break a check are highlighted amber, and the grid shows only the rows to fix
+(**Filter Errors** is on; **Show All** shows the rest). The line under the grid says how many,
+and the [step bar](#step-bar) shows **!** on Validate, with Review and Execute waiting.
+
+**Next** is always enabled. It runs the checks again; if anything is left to fix, a
+**Can't continue yet** window lists it, column by column:
+
+```text
+3 rows need fixing:
+  product.supplier.gln — empty in 3 rows
+  reorderQty — empty in 3 rows
+```
+
+Fix the cells, or delete the rows, and press **Next** again. Rows with empty required cells or
+broken rules can't be sent.
+
+**Ctrl+Z** undoes your changes one at a time — cell edits, deleted rows and pastes — back to
+the data as it loaded. Pressed while you are typing in a cell, it first puts that cell back.
 
 **Auto-cleaning:**
 - Completely empty rows are automatically removed before validation
@@ -469,14 +483,14 @@ An endpoint whose query parameter repeats — `ItemId={{ITEM}}[ or ]` — runs a
 
 ### Validation Errors in Step 3
 
-**Symptoms:** Amber-highlighted cells in the data grid, footer showing validation errors
+**Symptoms:** Amber-highlighted cells in the data grid; **Next** says **Can't continue yet**
 
 **Solutions:**
-- Click **Filter Errors** to see only the rows that failed
+- The grid already shows only the rows to fix; **Show All** shows the rest
 - Hover the column header to see the rule the cells broke
-- Fill in blank required fields
-- Fix data format issues (e.g., text in a number column), or set the **Source Format** on Step 2
-- Remove or fix invalid rows
+- Fill in empty required cells
+- Fix data format issues (e.g., text in a number column), or set the **Source Format** on Map
+- Delete rows you don't want to send: hover the row number and click the bin
 
 ### Batch Stops Immediately
 
