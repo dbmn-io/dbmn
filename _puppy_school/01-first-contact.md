@@ -47,6 +47,7 @@ In the Hub, open {icon:nav-environments} **Environments** and add a new one:
 |---|---|
 | Name | `DBMN Puppy School` |
 | Base URL | `https://api.dbmn.io/functions/v1/playground` |
+| System | `dbmn`: pick **+ Add new System…** and name it |
 | Authentication | `DBMN` |
 
 > **Auth you never type**

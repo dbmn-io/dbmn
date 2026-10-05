@@ -64,13 +64,8 @@ so it passes **Map**. Then it stops on **Validate**: something in this file need
 
 ## Step 3 — Fix What Dobermann Caught
 
-The grid shows a single row, and the footer names the problem:
-
-```text
-"quantityOnHand" has 1 invalid record — must be ≥ 0
-```
-
-Row 999, `SKU-WOOF-006-ERR`, with a quantity of `-50` in an amber cell. **Filter Errors** is
+The step bar says **Validate**: `1 row needs fixing`, and the grid shows just that row:
+row 999, `SKU-WOOF-006-ERR`, with a quantity of `-50` in an amber cell. **Filter Errors** is
 already on, hiding every row that is fine; the button reads **Show All**.
 
 Dobermann knows stock cannot be negative because you told it, back in Lesson 2:
