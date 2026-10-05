@@ -26,7 +26,8 @@ came from.
 
 **Run Batch** opens for that endpoint with the rows already loaded. Execute it as usual.
 
-**Chain** is only on the **Completed** tab, and only once the run has completed.
+**Chain** is only on the **Completed** tab. While the run is still running, queued or paused it
+is disabled, and its tooltip says why (Can't chain "Paused"); it comes on once the run has ended.
 
 ## Choose the endpoint
 {: #choose-endpoint }
