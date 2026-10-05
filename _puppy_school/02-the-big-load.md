@@ -99,6 +99,9 @@ hand.
 
 ## Step 5 — Run It the Slow Way
 
+Still on **Review**, check **Rows per request** is `1` and **Rows** shows `67,000`. That
+makes **API calls** `67,000` too: one request per record.
+
 Click **Next**, to **Execute**. Set **Processing Mode** to
 `4 concurrent requests` and hit **Execute**.
 
@@ -106,9 +109,9 @@ Watch the counter. Every single record is going out as its own HTTP request — 
 them, four at a time. It works. It is also the single most common way people misuse a batch
 tool, and it is worth seeing with your own eyes.
 
-Let it run for about thirty seconds, then hit **Pause**. You've made your point, and so has
-it. (The paused batch stays in {icon:nav-history} **History**. Leave it — you're about to
-run the whole file properly.)
+Wait for **Remaining** to swap `calculating...` for a real estimate. It will be hours. Then
+hit **Pause**. You've made your point, and so has it. (The paused batch stays in
+{icon:nav-history} **History**. Leave it — you're about to run the whole file properly.)
 
 ## Step 6 — One Request, A Hundred Records
 
