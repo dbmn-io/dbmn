@@ -91,7 +91,7 @@ What the product calls things now. Use these; the guard rejects most of the reti
 | `~/Dobermann-Workspace`, `{environment}/{endpoint}/` | `.active8/results/` | `.active8/` holds only the database |
 | Ctrl+W | Alt+D E, Quick Access | The only VS Code keybinding |
 
-Never name a customer platform (Manhattan Active or any other) in public copy.
+Never name a customer platform, or any vendor whose systems DBMN loads into, in public copy.
 
 ## Adding a New Doc Page
 1. Create `docs/page-name.md` with front matter:
