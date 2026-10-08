@@ -9,6 +9,21 @@ parent: Documentation
 
 All notable changes to Dobermann are documented here.
 
+## v0.3.1 — 2026-10-08
+
+### Added
+- **Home** — With no tab open the Hub shows Home, and it opens there: Puppy School first, Quick start, what's new since your last version, this week's usage and tips. [Docs](https://dbmn.io/docs/hub/#home) (GitHub Issue #348)
+- **Lists slide out over the tabs** — Environments, API Catalogue and History open over the tabs and close once you pick something, so tabs keep their full width. The rail is icons only. [Docs](https://dbmn.io/docs/hub/#list-panel) (GitHub Issue #349)
+- **Full window on Review** — A request on Run Batch's Review step goes full window, as on the Console's Raw tab; **Esc** exits. [Docs](https://dbmn.io/docs/hub/#tabs) (GitHub Issue #352)
+
+### Changed
+- **Review names what repeats** — Configure shows **Grouped by**, the columns that start a new request, with the ⓘ beside it; and **Array**, the array your rows are packed into, once Rows per request is above 1. [Docs](https://dbmn.io/docs/batch-preparation/#batch-configuration) (GitHub Issue #354)
+- **Your last tabs wait on Home** — **Behaviour change:** the Hub no longer reopens the previous session's tabs by itself; **Re-open** on Home brings them back. [Docs](https://dbmn.io/docs/hub/#home) (GitHub Issue #348)
+- **Close all keeps a Run Batch you haven't run** — Along with unsaved editors, Close all tabs keeps a Run Batch holding data, and closing one by itself asks first. [Docs](https://dbmn.io/docs/hub/#tabs) (GitHub Issue #348)
+
+### Fixed
+- **Execute sends what Review shows** — An array inside an object (`{ "Payload": { "Documents": [ … ] } }`) now gets **Rows per request** on Review; Execute no longer packs rows from a saved setting Review never showed. **Behaviour change:** that setting is now visible — set it to 1 for one call per row. [Docs](https://dbmn.io/docs/batch-preparation/#batch-configuration) (GitHub Issue #354)
+
 ## v0.3.0 — 2026-10-05
 
 ### Added
