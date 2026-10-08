@@ -203,7 +203,7 @@ Both are disabled while the endpoint has unsaved changes. **Save Endpoint** (Ctr
 
 ### Too many requests, or too few
 
-The **API calls** count on **Review** is the number of requests the batch will send. For a nested template, a new request starts whenever any header field changes — see [How rows become requests](/docs/batch-preparation/#nested-grouping). If the count is wrong, the data or the template is: click ⓘ beside the count to see how the rows were grouped.
+The **API calls** count on **Review** is the number of requests the batch will send. For a nested template, a new request starts whenever any header field changes — see [How rows become requests](/docs/batch-preparation/#nested-grouping). If the count is wrong, the data or the template is: check **Grouped by** under Configure and click its ⓘ to see how the rows were grouped.
 
 ## Data File Issues
 
