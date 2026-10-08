@@ -7,7 +7,7 @@ parent: Documentation
 
 # The Hub
 
-Everything in Dobermann happens in one editor tab: the **Hub**. Click the Dobermann icon in the VS Code Activity Bar and the Hub opens; the VS Code sidebar closes, because the Hub has its own navigation. By default the Hub also opens itself when VS Code starts (the `dbmn.preloadHubOnStartup` setting).
+Everything in Dobermann happens in one editor tab: the **Hub**. Click the Dobermann icon in the VS Code Activity Bar and the Hub opens; the VS Code sidebar closes, because the Hub has its own navigation. By default the Hub also opens itself when VS Code starts (the `dbmn.preloadHubOnStartup` setting), on [Home](#home).
 
 The Hub has four parts, left to right and top to bottom:
 
@@ -15,8 +15,8 @@ The Hub has four parts, left to right and top to bottom:
 |---|---|
 | **Header** | The DBMN mark, the environment selector, and the activity chip |
 | **Rail** | Sections: {icon:nav-environments} Environments, {icon:nav-api-catalogue} API Catalogue, {icon:nav-history} History, {icon:nav-import} Import, {icon:nav-export} Export, and pinned at the bottom {icon:nav-account} Account and {icon:nav-settings} Settings |
-| **List panel** | The list for the section you picked: your endpoints, your environments, your past runs |
-| **Tabs** | Where things open: endpoint editors, environment editors, Run Batch, and the Console |
+| **List panel** | Slides out over the tabs when you click a rail item: your endpoints, your environments, your past runs |
+| **Tabs** | Where things open: endpoint editors, environment editors, Run Batch, and the Console. With no tab open, [Home](#home) |
 
 ---
 
@@ -38,11 +38,6 @@ Signed out of DBMN, the header shows **Sign in to DBMN** where the selector was.
 {: #activity-chip }
 
 The chip on the right of the header reads `Idle`, `N running`, `N running · N queued`, `N paused`, or `Recent failure`. Click it for a drawer listing what is running, what is queued, the newest paused batches, and what finished recently. Click an entry to open its Console.
-
-### Collapse
-{: #collapse }
-
-The {icon:nav-collapse} button hides the rail's labels, leaving the icons. The rail also shows labels only while no tab is open, and the list panel yields to the tabs on a narrow window: the tab area keeps at least 600px, and the header button shows or hides the panel.
 
 ### Help mode
 {: #help-mode }
@@ -134,15 +129,42 @@ A **System** is a short name for one API you work with: `wms`, `erp`, `crm`. Env
 
 ---
 
+## Home
+{: #home }
+
+With no tab open, the tab area shows **Home**, and the Hub opens on it every time VS Code starts:
+
+- **Pick up where you left off** lists the tabs you had open last time. **Re-open** brings them back; the Hub does not reopen them by itself.
+- **Puppy School** shows the five lessons and the badges you have earned. **Start Puppy School** (or **Continue**) opens the course on dbmn.io. Once you graduate, it shows your graduate badge.
+- **Quick start**: **Add Endpoint**, **New Endpoint from Clipboard**, **Add Environment** and **Import**.
+- **What's new** counts the new features and fixes since the version you used before, with a link to the [Changelog](/docs/changelog/).
+- **This week** shows your API calls, batches, rows processed and run time, while you are signed in.
+- A tip, changing every 15 seconds.
+
+The rail's names sit beside its icons on Home. Everywhere else the rail is icons only; hover one for its name.
+
+---
+
+<a id="collapse"></a>
+
+## List panel
+{: #list-panel }
+
+Click {icon:nav-environments} **Environments**, {icon:nav-api-catalogue} **API Catalogue** or {icon:nav-history} **History** in the rail and its list slides out over the tabs. Click the same item again to close it, or another to switch lists. The tabs underneath keep their width.
+
+The panel closes by itself when you open something from it: an endpoint, an environment, a run, **Add Endpoint**. Searching, filters, **Select** and collapsing a group leave it open. **Esc**, or a click on the dimmed tabs, also closes it. Drag its right edge to make it wider; the Hub remembers the width.
+
+---
+
 ## Tabs
 {: #tabs }
 
 Endpoints, environments, Run Batch and the Console open as tabs in the Hub's tab area, not as separate VS Code editors. Each opens once; clicking it again brings its tab forward.
 
 - Drag tabs to reorder them.
-- **Close all** appears once two or more tabs are open. Tabs with unsaved changes stay open; the rest close.
-- **Ctrl+W** (Cmd+W on Mac) closes the active tab while the Hub has focus. A tab with unsaved changes asks **Save / Discard / Cancel** first.
-- Full-window editors (a request body, a Raw pane) keep the footer as a thin strip at the bottom; hover it to reach the buttons. **Esc** exits.
+- **Close all** appears once two or more tabs are open. Anything unsaved stays open: an edited endpoint or environment, and a Run Batch holding data you haven't run. The rest close, Consoles included; a running batch carries on, and [History](#history) opens its Console again.
+- **Ctrl+W** (Cmd+W on Mac) closes the active tab while the Hub has focus. A tab with unsaved changes asks **Save / Discard / Cancel** first; a Run Batch holding data asks **Close and lose it** or **Keep open**.
+- Full-window editors (a request body, a Raw pane, a request on Run Batch's Review step) keep the footer as a thin strip at the bottom; hover it to reach the buttons. **Esc** exits.
 
 ---
 
