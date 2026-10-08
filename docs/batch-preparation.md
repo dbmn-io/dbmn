@@ -328,7 +328,9 @@ Step 4 shows what the batch will send, built by the same code that sends it — 
 
 | Setting | When | What it does |
 |---|---|---|
-| **Rows per request** | A flat array (`[ { … } ]`) | How many rows go into each request's array, 1 to 1000. Start at 100: many APIs refuse or time out well before 1000. Go higher only when the API's documentation says it can take more |
+| **Grouped by** | A header + lines or nested template | The columns that start a new request — a new request whenever any of them changes. Its ⓘ shows how the rows were grouped |
+| **Array** | Rows per request above 1, on a template with one array | The array the rows are packed into |
+| **Rows per request** | A flat array — at the top (`[ { … } ]`), or inside objects (`{ "Payload": { "Documents": [ { … } ] } }`) | How many rows go into each request's array, 1 to 1000. Start at 100: many APIs refuse or time out well before 1000. Go higher only when the API's documentation says it can take more |
 | **Orders per request** | Two or three levels (`orders[].items[]`); named after the outer array | How many top-level entries go into each request |
 | **Values per URL** | A repeating URL parameter (`id={{item}}[ or ]`) | How many values go into each URL — Auto fits as many as the URL length allows |
 | **Array** | A template with two or more arrays that could repeat | Which one repeats |
@@ -336,7 +338,7 @@ Step 4 shows what the batch will send, built by the same code that sends it — 
 
 Change a setting and the requests below rebuild by themselves: at once for a dropdown, once you stop typing for a number.
 
-**Summary** shows the **API calls** the batch will make, the **Rows** going into them, and the **Size** of the first request. The ⓘ beside API calls opens *How your rows become API requests*: your template with each variable marked by what it does, how the rows group into requests, and what each request holds.
+**Summary** shows the **API calls** the batch will make, the **Rows** going into them, and the **Size** of the first request. The ⓘ — beside **Grouped by** when the rows are grouped, beside **API calls** otherwise — opens *How your rows become API requests*: your template with each variable marked by what it does, how the rows group into requests, and what each request holds.
 
 **Requests** shows every request, or **Request samples** the first five when there are more — each with the input rows behind it and its request: the **Body**, or **Details** (method, URL, query parameters, headers). An endpoint with no body shows its URL. **Show Input / Request** hides or shows those parts of every card.
 
@@ -378,7 +380,7 @@ This is how one flat file becomes one order per supplier and site, with the orde
 - **Generated values aren't part of it.** `{{A8:sequence}}` in the header is handed out after grouping, one number per request. `{{ENV:…}}` values are the same for every row anyway.
 - The same rule applies one level down: in a three-level template, a new shipment starts when any of the shipment's own fields changes, and a new package when any of the package's does.
 
-The **API calls** count in this step is the number of requests the rule produced; its ⓘ shows the groups, one row per request. If it isn't what you expected, this is why.
+The **API calls** count in this step is the number of requests the rule produced; **Grouped by** in Configure names the columns, and its ⓘ shows the groups, one row per request. If it isn't what you expected, this is why.
 
 #### Sorting
 {: #nested-array-sorting }
@@ -517,7 +519,7 @@ An endpoint whose query parameter repeats — `ItemId={{ITEM}}[ or ]` — runs a
 
 ### Too Many or Too Few Requests
 
-The **API calls** count on Step 4 is the truth about what will be sent. For a nested template, click ⓘ to see how the rows were grouped — a header field that varies per row gives one request per row; see [How rows become requests](#nested-grouping). For a flat template, check **Rows per request**.
+The **API calls** count on Step 4 is the truth about what will be sent. For a nested template, check **Grouped by** and click its ⓘ to see how the rows were grouped — a header field that varies per row gives one request per row; see [How rows become requests](#nested-grouping). For a flat template, check **Rows per request**.
 
 ### Performance Issues
 

@@ -64,7 +64,7 @@ Press <kbd>Esc</kbd>, or click the {icon:help} help button again. The outlines a
 
 ## The one in-app explainer
 
-Help mode links out to these docs. The one piece of help that stays inside Dobermann is the ⓘ beside **API calls** on Run Batch's Review step, which opens *How your rows become API requests* for the batch you are about to send. See [Batch Preparation](/docs/batch-preparation/#nested-grouping).
+Help mode links out to these docs. The one piece of help that stays inside Dobermann is the ⓘ on Run Batch's Review step — beside **Grouped by**, or **API calls** when nothing is grouped — which opens *How your rows become API requests* for the batch you are about to send. See [Batch Preparation](/docs/batch-preparation/#nested-grouping).
 
 ---
 
