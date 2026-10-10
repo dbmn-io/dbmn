@@ -131,6 +131,7 @@ The Raw tab gives you complete visibility into every request and response — th
 - **Logs** — Per-transaction log entries for debugging, in a window you can copy from
 - **Copy All** — The whole transaction to the clipboard
 - **Raw / Render / Text** — For an HTML response, see it as source, as a page, or as plain text
+- **Lines / Pretty** — For a [JSON Lines](#jsonl) response, see it as it came (one record per line) or as one indented JSON array
 - Response count indicator
 
 When a run has **one transaction**, the Raw tab shows it directly — no list to expand. Its search highlights matches in the request and response.
@@ -159,6 +160,7 @@ Shows all successful transactions (2xx responses) in a data table.
 - Response times and status codes
 - Right-click a row to [view its transaction](#view-transaction)
 - Count indicator
+- A [JSON Lines](#jsonl) response gives one row per line
 
 **Use case:** Analyse successful patterns, extract data from responses, verify expected output.
 
@@ -191,6 +193,41 @@ Everything about the run that isn't a result:
 | **Lineage** | Only on a batch copied with an older version of Dobermann: Copied From, Original Environment, Copied At |
 | **Variables** | The values the run used |
 | **Files** | Links to the files saved in your [workspace](/docs/your-data/): **Request** and **Response** for a single run, **CSV** and **Folder** for a batch |
+
+---
+
+## JSON Lines (JSONL) responses
+{: #jsonl }
+
+Some APIs answer with **JSON Lines** (also called JSONL or NDJSON): one JSON record per line
+instead of one JSON document. Bulk exports and data feeds often do, and they usually stream it,
+so a big one takes a while to arrive.
+
+DBMN reads a response as JSON Lines when:
+
+- the API says so: `Content-Type: application/x-ndjson`, `application/jsonl` or
+  `application/x-jsonlines`
+- the URL ends in `.jsonl` or `.ndjson`
+- the body is plainly one JSON object per line, even if it's labelled JSON or text
+
+**One request is still one transaction.** Its lines become records:
+
+- **Completed** shows one row per line, so search, views, Copy, Export and **Chain** work on the
+  records.
+- **Raw** labels the response **RESPONSE (JSONL · 95,121 records)**. **Lines** shows the body as
+  it came; **Pretty** shows the records as one indented array.
+- A line that isn't JSON (often the last line of a feed that broke off) is counted in the label,
+  "· 1 line not JSON", so a short download never goes unnoticed. The good lines are kept.
+
+**While it downloads**, the Console footer counts as the body arrives:
+
+- **Receiving 76,097 / 95,121 records** with a percentage and the time left, when the API says
+  how much is coming (an `X-Total-Count` header, or `Content-Length`)
+- **Receiving 88,809 records** with the MB so far, a moving bar and the download speed, when it
+  doesn't
+- then **100%** and **Processing 95,121 records** while DBMN reads and saves it
+
+To try it, the Training Ground has an [export that answers in JSON Lines](/docs/playground/#inventory-export).
 
 ---
 

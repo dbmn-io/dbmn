@@ -156,6 +156,21 @@ Paginated inventory listing. Configure this endpoint to demonstrate Dobermann's 
 // QueryParam: order: desc [enabled]
 ```
 
+### Inventory — Export as JSON Lines (GET)
+{: #inventory-export }
+
+Your whole inventory in one request, streamed back as [JSON Lines](/docs/console/#jsonl): one
+item per line (`application/x-ndjson`), the way bulk-export APIs answer. The `X-Total-Count`
+header says how many lines are coming, so the Console shows a real percentage. Add `limit` to
+take fewer, and any of the list's filters (`status`, `locationGln`, …) to narrow it.
+
+```javascript
+// Name: Puppy School — Export Inventory (JSONL)
+// Method: GET
+// Path: /inventory/export
+// QueryParam: limit: 20000 [enabled]
+```
+
 ### Inventory — Get by ID (GET)
 {: #inventory-get }
 
