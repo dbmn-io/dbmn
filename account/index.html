@@ -376,7 +376,9 @@
             // Sign out handlers (card button + header link)
             async function handleSignOut(e) {
                 if (e) e.preventDefault();
-                await dbmnSupabase.auth.signOut();
+                // This browser's sign-in only. The default ends every session the account has,
+                // which signed the VS Code extension out as well (vs-dbmn issue #396).
+                await dbmnSupabase.auth.signOut({ scope: 'local' });
                 window.location.reload();
             }
             document.getElementById('signOutBtn').addEventListener('click', handleSignOut);

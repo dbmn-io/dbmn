@@ -37,13 +37,52 @@ const VSCODE_CALLBACK_URI = 'vscode://dbmn.dobermann/dbmn-auth-callback';
 // Edge function base URL
 const FUNCTIONS_URL = SUPABASE_URL + '/functions/v1';
 
+// One sign-in, one holder per session (vs-dbmn issue #396).
+//
+// A sign-in started from the VS Code extension lands on this site, which hands the session
+// to VS Code. The site used to keep that same session too. Refresh tokens are single-use, so
+// two holders drift apart; the next time the older copy was presented (an open tab
+// refreshing, a later visit) the auth server revoked the whole session and the extension
+// was signed out behind the user's back.
+//
+// Now each holder has its own session, from the one sign-in:
+//   - a page opened for VS Code (?redirect=vscode) signs in with a client that never stores
+//     or refreshes anything — it only carries that session to VS Code;
+//   - the site gets a second, separate session from the handoff-session function, kept
+//     under DBMN_SITE_AUTH_KEY.
+// The key is not supabase-js's default on purpose: copies stored by the old site are shared
+// with an extension, so they are removed, never read and never presented.
+var DBMN_SITE_AUTH_KEY = 'dbmn-site-auth-v2';
+
+function forgetSessionsStoredByTheOldSite() {
+    try {
+        Object.keys(window.localStorage).forEach(function(key) {
+            if (/^sb-.+-auth-token/.test(key)) window.localStorage.removeItem(key);
+        });
+    } catch (e) { /* storage unavailable: nothing was stored either */ }
+}
+
+/** The site's own sign-in. */
+function createSiteClient() {
+    forgetSessionsStoredByTheOldSite();
+    return window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { storageKey: DBMN_SITE_AUTH_KEY } });
+}
+
+/** A sign-in on its way to VS Code: held in memory, never stored, never refreshed here. */
+function createCourierClient() {
+    forgetSessionsStoredByTheOldSite();
+    return window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: true }
+    });
+}
+
 // Initialize Supabase client (loaded from CDN in each page)
 // Note: CDN exposes global `supabase` — we use `dbmnSupabase` to avoid collision
 var dbmnSupabase;
 
 function initSupabase() {
     if (typeof window.supabase !== 'undefined' && typeof window.supabase.createClient === 'function') {
-        dbmnSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        dbmnSupabase = isVSCodeRedirect() ? createCourierClient() : createSiteClient();
     } else {
         console.error('Supabase JS SDK not loaded');
     }
@@ -120,6 +159,47 @@ function redirectToVSCode(session) {
     });
     window.location.href = VSCODE_CALLBACK_URI + '?' + params.toString();
 }
+
+/**
+ * Hand a fresh sign-in to VS Code, and sign this browser in with a session of its own, so
+ * the user signs in once and neither app can end the other's sign-in (vs-dbmn issue #396).
+ *
+ * `session` is the one the courier client holds: it goes to VS Code and is kept nowhere
+ * here. The site's own session comes from the handoff-session function. If that cannot be
+ * had, VS Code still gets its sign-in and this browser simply stays signed out — it never
+ * falls back to keeping VS Code's.
+ *
+ * @param {object} session - the session just signed in with (from the courier client)
+ * @returns {Promise<boolean>} true when this browser is signed in too
+ */
+async function handOffToVSCode(session) {
+    var siteSignedIn = false;
+    try {
+        var site = createSiteClient();
+        var existing = (await site.auth.getSession()).data.session;
+        if (existing) {
+            siteSignedIn = true;    // the site already has its own; leave it alone
+        } else {
+            var response = await fetch(FUNCTIONS_URL + '/handoff-session', {
+                method: 'POST',
+                headers: { 'Authorization': 'Bearer ' + session.access_token, 'apikey': SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
+                body: '{}'
+            });
+            var separate = response.ok ? await response.json() : null;
+            if (separate && separate.access_token && separate.refresh_token) {
+                var stored = await site.auth.setSession({ access_token: separate.access_token, refresh_token: separate.refresh_token });
+                siteSignedIn = !stored.error;
+            }
+        }
+    } catch (e) {
+        console.warn('Could not sign this browser in separately:', e);
+    }
+    redirectToVSCode(session);
+    return siteSignedIn;
+}
+
+/** What a page says once VS Code has the sign-in and this browser has none of its own. */
+var VSCODE_ONLY_MESSAGE = 'You are signed in to DBMN in VS Code. You can close this tab.';
 
 /**
  * Check if this page was opened from VS Code (has ?redirect=vscode param).

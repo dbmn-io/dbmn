@@ -192,8 +192,13 @@
 
                     if (isVSCodeRedirect()) {
                         showAlert('alert', 'Signed in! Redirecting to VS Code...', 'success');
-                        redirectToVSCode(result.data.session);
-                        setTimeout(function() { window.location.href = '/account/index.html'; }, 1500);
+                        // VS Code gets this session; the browser gets one of its own (see shared.js).
+                        var siteSignedIn = await handOffToVSCode(result.data.session);
+                        if (siteSignedIn) {
+                            setTimeout(function() { window.location.href = '/account/index.html'; }, 1500);
+                        } else {
+                            showAlert('alert', VSCODE_ONLY_MESSAGE, 'success');
+                        }
                         return;
                     }
 

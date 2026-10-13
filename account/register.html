@@ -235,7 +235,13 @@
                         var session = await getCurrentSession();
                         if (session) {
                             showAlert('alert', 'Account created! Redirecting to VS Code...', 'success');
-                            setTimeout(function() { redirectToVSCode(session); }, 1000);
+                            // VS Code gets this session; the browser gets one of its own (see shared.js).
+                            var siteSignedIn = await handOffToVSCode(session);
+                            if (siteSignedIn) {
+                                setTimeout(function() { window.location.href = '/account/index.html'; }, 1500);
+                            } else {
+                                showAlert('alert', VSCODE_ONLY_MESSAGE, 'success');
+                            }
                         } else {
                             window.location.href = '/account/login.html?redirect=vscode';
                         }

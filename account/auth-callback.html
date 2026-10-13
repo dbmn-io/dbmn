@@ -106,9 +106,14 @@
             if (isVSCodeRedirect()) {
                 document.getElementById('callbackTitle').textContent = 'Signed in';
                 document.getElementById('callbackStatus').textContent = 'Returning to VS Code...';
-                redirectToVSCode(session);
-                // After the vscode:// URI fires, leave the user on /account/index.html
-                setTimeout(function() { window.location.href = '/account/index.html'; }, 1500);
+                // VS Code gets this session; the browser gets one of its own (see shared.js).
+                var siteSignedIn = await handOffToVSCode(session);
+                if (siteSignedIn) {
+                    // After the vscode:// URI fires, leave the user on /account/index.html
+                    setTimeout(function() { window.location.href = '/account/index.html'; }, 1500);
+                } else {
+                    document.getElementById('callbackStatus').textContent = VSCODE_ONLY_MESSAGE;
+                }
                 return;
             }
 
