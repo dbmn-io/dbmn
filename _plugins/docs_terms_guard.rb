@@ -33,6 +33,8 @@ module DocsTermsGuard
     [/\bRead Data\b/, 'the Source step\'s button is "Import Data"'],
     [/\bReps\b|Maximum Repetitions|maxRepetitions/, 'the Review setting is "Rows per request"'],
     [/Review JSON\b/, 'Step 4 is "Review"'],
+    # Production's highlight follows the theme (2026-10-14): it is red in only some of them
+    [/\b(header|selector)\b[^.]{0,20}\bred\b|\bred\b[^.]{0,20}\b(header|selector)\b|\b(shown|is|are) (in )?red\b/i, 'production is "highlighted as a warning"; the colour comes from the theme'],
     # Run Batch steps, renamed 2026-10-05 (the step bar): Source, Map, Validate, Review, Execute
     [/\bLoad Data\b/, 'Run Batch step 1 is "Source" (its button is still "Import Data")'],
     [/Map (&|&amp;|and) Transform/, 'Run Batch step 2 is "Map"'],

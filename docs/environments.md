@@ -42,7 +42,7 @@ Every request goes to the **active environment**. Two ways to choose it:
 - Click the {icon:env-switcher} environment selector at the top of the Hub and pick from the list. It reads `No environment` until you have chosen one.
 - In a saved environment's editor, click **Set as Active** in the footer.
 
-Production environments are red in the selector, and the Hub header turns red while one is active. The paw print in the Environments list marks the active one.
+Production environments are highlighted in the selector, and the Hub header is highlighted as a warning while one is active. The colour comes from your theme. The paw print in the Environments list marks the active one.
 
 ### Deleting an Environment
 
@@ -85,7 +85,7 @@ Pick a type from the dropdown: Production, Staging, UAT, QA/Testing, Development
 
 Setting an environment to **Production** turns on two protections automatically — there's no separate setting to enable:
 
-- The **Hub header turns red** whenever that environment is active, and the environment is red in the selector, so there's no mistaking what you're connected to.
+- The **Hub header is highlighted as a warning** whenever that environment is active, and the environment is highlighted in the selector, so there's no mistaking what you're connected to.
 - A **confirmation appears before any live execution** — both **Run API** and the final **Execute** step of a batch run. The dialog offers to stop warning for 15, 30 or 60 minutes when doing repeated work; the snooze ends when you reload the window.
 
 If the warnings get in the way, change the environment's type. Unless it's protected — see below.

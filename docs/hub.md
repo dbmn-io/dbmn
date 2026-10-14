@@ -26,7 +26,7 @@ The Hub has four parts, left to right and top to bottom:
 ### Environment selector
 {: #environment-selector }
 
-The {icon:env-switcher} selector in the header shows which environment every request will go to. It reads `No environment` until you pick one. Click it and choose from the list; environments typed **Production** are shown in red, and the whole header turns red while one is active, so there is no mistaking what you are connected to. See [Environments — Environment Type](/docs/environments/#environment-type).
+The {icon:env-switcher} selector in the header shows which environment every request will go to. It reads `No environment` until you pick one. Click it and choose from the list; environments typed **Production** are highlighted, and the whole header is highlighted as a warning while one is active, so there is no mistaking what you are connected to. See [Environments — Environment Type](/docs/environments/#environment-type).
 
 If an environment's token carries more than one organisation, each organisation is a sub-row under it. Pick one and the selector reads `Environment · Org`; until you do it reads `(pick org)`.
 

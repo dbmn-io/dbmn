@@ -10,7 +10,7 @@ grand_parent: Documentation
 
 ![The DBMN Dobermann standing guard over a production environment, with the Hub header turned red.](/images/prod-protect-hero.jpg)
 
-Any environment you set to type **Production** gets the [production safeguards](/docs/environments/#environment-type) automatically — a red Hub header, and a confirmation before every live execution.
+Any environment you set to type **Production** gets the [production safeguards](/docs/environments/#environment-type) automatically — the Hub header highlighted as a warning, and a confirmation before every live execution.
 
 Those safeguards are driven by the environment's type, which normally means anyone can turn them off by changing the type.
 
@@ -28,7 +28,7 @@ The **Environment Type dropdown is read-only**, with a note beneath it explainin
 
 If DBMN has recorded who manages the environment, the note names them instead — "Prod Protection enabled by Acme IT".
 
-Production environments are also shown in **red in the environment selector**, so the risky choice stands out before you pick it, not just after.
+Production environments are also **highlighted in the environment selector**, so the risky choice stands out before you pick it, not just after.
 
 ## How environments are matched
 {: #how-environments-are-matched }
