@@ -34,6 +34,8 @@ The selector is the main way to set the active environment. The other is the **S
 
 Signed out of DBMN, the header shows **Sign in to DBMN** where the selector was. It opens the same sign-in as [Account](#account): enter your email, and a new address is registered as it signs in. The selector comes back once you are signed in.
 
+If your DBMN sign-in expires, the header shows **DBMN sign-in expired**. Endpoints and batches keep running on your last known licence for up to 4 weeks. Click it to sign in again before then.
+
 ### Activity chip
 {: #activity-chip }
 
