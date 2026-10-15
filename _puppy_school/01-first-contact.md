@@ -13,10 +13,10 @@ checkpoint:
   fail: Did the dog eat your homework? Looks like you haven't fetched all the reference data yet.
 ---
 
-## Step 1 — Install and Sign In
+## Step 1 — Open Dobermann
 
-Click the Dobermann icon in your VS Code activity bar. The **Hub** opens: Dobermann's one window,
-with its sections down the left.
+Open [app.dbmn.io](https://app.dbmn.io). If it asks you to sign in, use the same account you used
+to get here. The **Hub** opens: Dobermann's one window, with its sections down the left.
 
 > **Lost at any point? Press ?**
 >
@@ -24,17 +24,6 @@ with its sections down the left.
 > or press **?** when you're not typing, and every documented control gets a dotted outline. Click
 > one and its page on dbmn.io opens. **Esc** leaves. Whenever a step here names a button you can't
 > place, that's the way to find it.
-
-Not installed yet? [Get it from the VS Code Marketplace.](https://marketplace.visualstudio.com/items?itemName=dbmn.dobermann)
-
-> **Prerequisite: Dobermann {dobermann-min-version} or later**
->
-> Check in the **Extensions** view (Ctrl+Shift+X): the version is next to **Dobermann**.
-> On something older? Click **Update** first. Some steps use features older versions don't
-> have.
-
-Sign in with the same account you used to get here. No account yet? Open {icon:nav-account}
-**Account** in the Hub and register there — it takes a minute. Once you're in, you're ready.
 
 ## Step 2 — Create Your Environment
 
