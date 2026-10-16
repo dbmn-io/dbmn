@@ -12,6 +12,12 @@ nav_exclude: true
     <title>{{ page.title }}</title>
     <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
     <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
+    <link rel="stylesheet" href="/css/brand.css">
+    <!-- The theme: the app's themes, worn before the page paints, and the picker (assets/js/site-theme.js) -->
+    <link rel="stylesheet" href="/assets/css/theme-picker.css">
+    <script src="/assets/js/dbmn-themes.js"></script>
+    <script src="/assets/js/site-theme.js"></script>
+    <script defer src="/assets/js/theme-picker.js"></script>
     <style>
         @font-face {
             font-family: 'Cooper Black';
@@ -23,13 +29,13 @@ nav_exclude: true
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: linear-gradient(135deg, var(--brand-bg-start) 0%, var(--brand-bg-end) 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #fff;
+            color: var(--brand-text);
             text-align: center;
             padding: 2rem;
         }
@@ -50,8 +56,8 @@ nav_exclude: true
         }
         .cta {
             display: inline-block;
-            background: #0078d4;
-            color: #fff;
+            background: var(--brand-accent);
+            color: var(--brand-accent-text);
             padding: 1rem 2rem;
             border-radius: 8px;
             text-decoration: none;
@@ -61,15 +67,16 @@ nav_exclude: true
         }
         .cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,120,212,0.3);
+            box-shadow: 0 10px 20px color-mix(in srgb, var(--brand-accent) 30%, transparent);
         }
         .cta-secondary {
-            background: rgba(255,255,255,0.1);
-            border: 2px solid rgba(255,255,255,0.3);
+            color: var(--brand-text);
+            background: color-mix(in srgb, var(--brand-text) 10%, transparent);
+            border: 2px solid color-mix(in srgb, var(--brand-text) 30%, transparent);
         }
         .cta-secondary:hover {
-            background: rgba(255,255,255,0.2);
-            box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+            background: color-mix(in srgb, var(--brand-text) 20%, transparent);
+            box-shadow: 0 10px 20px color-mix(in srgb, var(--brand-text) 10%, transparent);
         }
         footer {
             margin-top: 3rem;
@@ -77,13 +84,13 @@ nav_exclude: true
             font-size: 0.9rem;
         }
         footer a {
-            color: #fff;
+            color: var(--brand-text);
             text-decoration: none;
-            border-bottom: 1px solid rgba(255,255,255,0.3);
+            border-bottom: 1px solid color-mix(in srgb, var(--brand-text) 30%, transparent);
             transition: border-color 0.2s;
         }
         footer a:hover {
-            border-color: #fff;
+            border-color: var(--brand-text);
         }
     </style>
 </head>

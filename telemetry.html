@@ -15,6 +15,11 @@ permalink: /telemetry.html
     <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
     <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
     <link rel="stylesheet" href="/css/brand.css">
+    <!-- The theme: the app's themes, worn before the page paints, and the picker (assets/js/site-theme.js) -->
+    <link rel="stylesheet" href="/assets/css/theme-picker.css">
+    <script src="/assets/js/dbmn-themes.js"></script>
+    <script src="/assets/js/site-theme.js"></script>
+    <script defer src="/assets/js/theme-picker.js"></script>
     <link rel="canonical" href="https://dbmn.io/telemetry.html">
     <meta property="og:title" content="Data Transparency - Dobermann">
     <meta property="og:description" content="Exactly what data Dobermann collects, what it doesn't, and how it works.">
@@ -112,18 +117,18 @@ permalink: /telemetry.html
         }
         .content code {
             font-size: 0.85em;
-            background: rgba(255,255,255,0.06);
+            background: color-mix(in srgb, var(--brand-text) 6%, transparent);
             padding: 0.15em 0.4em;
             border-radius: 4px;
         }
         .highlight-box {
-            background: rgba(52,199,89,0.08);
-            border: 1px solid rgba(52,199,89,0.2);
+            background: color-mix(in srgb, var(--brand-success) 8%, transparent);
+            border: 1px solid color-mix(in srgb, var(--brand-success) 20%, transparent);
             border-radius: 8px;
             padding: 1rem 1.25rem;
             margin: 1rem 0;
         }
-        .highlight-box strong { color: #5bd77a; }
+        .highlight-box strong { color: var(--brand-success); }
         .highlight-box ul { margin-bottom: 0; }
 
         footer {
@@ -135,7 +140,7 @@ permalink: /telemetry.html
         footer a {
             color: var(--brand-text);
             text-decoration: none;
-            border-bottom: 1px solid rgba(255,255,255,0.3);
+            border-bottom: 1px solid color-mix(in srgb, var(--brand-text) 30%, transparent);
             transition: border-color 0.2s;
             margin: 0 0.75rem;
         }
@@ -154,7 +159,7 @@ permalink: /telemetry.html
         <div class="nav-right">
             <a href="/docs/">Docs</a>
             <a href="/pricing.html">Pricing</a>
-            <a href="/account/">Account</a>
+            <span class="theme-picker-anchor"><button type="button" class="site-theme-btn" data-site-theme hidden></button></span>            <a href="/account/">Account</a>
         </div>
     </nav>
 

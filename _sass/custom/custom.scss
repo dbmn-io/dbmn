@@ -1,3 +1,15 @@
+// The docs keep the old navy until they wear the site's themes (css/brand.css now defaults to
+// Retro 82 and the pages theme themselves; the docs' colours are fixed when the site is built).
+html:root {
+  --brand-bg-start: #1a1a2e;
+  --brand-bg-end: #16213e;
+  --brand-text: #fff;
+  --brand-text-muted: #a0a0b0;
+  --brand-text-body: #e0e0e0;
+  --brand-link: #fff;
+  --brand-link-underline: rgba(255, 255, 255, 0.4);
+}
+
 // Cooper Black heading font for site title
 .site-title {
   font-family: var(--brand-font-heading);

@@ -8,6 +8,11 @@
     <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
     <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
     <link rel="stylesheet" href="/css/brand.css">
+    <!-- The theme: the app's themes, worn before the page paints, and the picker (assets/js/site-theme.js) -->
+    <link rel="stylesheet" href="/assets/css/theme-picker.css">
+    <script src="/assets/js/dbmn-themes.js"></script>
+    <script src="/assets/js/site-theme.js"></script>
+    <script defer src="/assets/js/theme-picker.js"></script>
     <link rel="stylesheet" href="/account/shared.css">
 </head>
 <body>
@@ -17,6 +22,7 @@
             <h1>DBMN</h1>
         </a>
         <div class="header-right">
+            <span class="theme-picker-anchor"><button type="button" class="site-theme-btn" data-site-theme hidden></button></span>
             <span id="headerEmail"></span>
             <a href="#" id="headerSignOut">Sign Out</a>
         </div>
@@ -26,7 +32,7 @@
 
         <div class="card" id="loadingCard">
             <h2>Loading...</h2>
-            <p style="color: #a0a0b0;"><span class="spinner"></span> Fetching account details</p>
+            <p style="color: var(--brand-text-muted);"><span class="spinner"></span> Fetching account details</p>
         </div>
 
         <div class="card" id="dashboardCard" style="display: none;">
@@ -48,16 +54,16 @@
                  loads, and stays hidden if the backend does not have it yet. -->
             <div id="badgeSection" style="display: none;">
                 <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;">
-                    <h3 style="font-size: 0.875rem; color: #a0a0b0; margin: 0;">Puppy School &amp; Badges</h3>
+                    <h3 style="font-size: 0.875rem; color: var(--brand-text-muted); margin: 0;">Puppy School &amp; Badges</h3>
                     <a id="courseLink" href="/puppy-school/" style="font-size: 0.875rem;">Start Puppy School</a>
                 </div>
-                <p id="courseProgress" style="color: #d0d0e0; margin: 0.5rem 0 0;"></p>
+                <p id="courseProgress" style="color: var(--brand-text-body); margin: 0.5rem 0 0;"></p>
                 <div id="badgeGrid" class="dbmn-badge-grid"></div>
                 <hr class="divider">
             </div>
 
             <!-- Weekly Usage -->
-            <h3 style="font-size: 0.875rem; color: #a0a0b0; margin-bottom: 0.75rem;">This Week</h3>
+            <h3 style="font-size: 0.875rem; color: var(--brand-text-muted); margin-bottom: 0.75rem;">This Week</h3>
             <div class="stat-grid">
                 <div class="stat-card">
                     <div class="stat-value" id="weeklyApiCalls">-</div>
@@ -78,7 +84,7 @@
             </div>
 
             <!-- Total Usage -->
-            <h3 style="font-size: 0.875rem; color: #a0a0b0; margin: 1.25rem 0 0.75rem;">All Time</h3>
+            <h3 style="font-size: 0.875rem; color: var(--brand-text-muted); margin: 1.25rem 0 0.75rem;">All Time</h3>
             <div class="stat-grid">
                 <div class="stat-card">
                     <div class="stat-value" id="totalApiCalls">-</div>
@@ -100,7 +106,7 @@
 
             <!-- License Details -->
             <hr class="divider">
-            <h3 style="font-size: 0.875rem; color: #a0a0b0; margin-bottom: 0.75rem;">License</h3>
+            <h3 style="font-size: 0.875rem; color: var(--brand-text-muted); margin-bottom: 0.75rem;">License</h3>
             <div id="licenseDetails"></div>
 
             <!-- Manage Subscription (shown for active paid subscribers only) -->
@@ -112,14 +118,14 @@
             <div id="expiredTrialAlert" class="alert alert-warning" style="display: none; margin-top: 1rem;">
                 <strong>Free tier</strong> — Upgrade for unlimited batches and concurrency.
                 <div style="margin-top: 0.5rem;">
-                    <a href="/pricing.html" style="color: #ffd60a; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(255,214,10,0.3);">View Plans &rarr;</a>
+                    <a href="/pricing.html" style="color: var(--brand-warning); font-weight: 600; text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--brand-warning) 30%, transparent);">View Plans &rarr;</a>
                 </div>
             </div>
 
             <hr class="divider">
 
             <!-- Account details -->
-            <h3 style="font-size: 0.875rem; color: #a0a0b0; margin-bottom: 0.75rem;">Account</h3>
+            <h3 style="font-size: 0.875rem; color: var(--brand-text-muted); margin-bottom: 0.75rem;">Account</h3>
             <p style="font-size: 0.875rem; margin-bottom: 0.5rem;"><strong>Email:</strong> <span id="userEmail">-</span></p>
             <p style="font-size: 0.875rem; margin-bottom: 0.5rem;"><strong>Member since:</strong> <span id="memberSince">-</span></p>
 
@@ -133,7 +139,7 @@
 
         <div class="card" id="signInCard" style="display: none;">
             <h2>Not Signed In</h2>
-            <p style="color: #a0a0b0; margin-bottom: 1.5rem;">Sign in to view your account details.</p>
+            <p style="color: var(--brand-text-muted); margin-bottom: 1.5rem;">Sign in to view your account details.</p>
             <a href="/account/login.html" class="btn btn-primary" style="display: block;">Sign In</a>
             <div class="link-text">
                 Don't have an account? <a href="/account/register.html">Register</a>
@@ -280,7 +286,7 @@
                     detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">Type</span><span class="license-detail-value">Individual License</span></div>';
                     if (license.subscriptionEndsAt) {
                         var subLabel = license.cancelAtPeriodEnd ? 'Cancels on' : 'Renews on';
-                        var subStyle = license.cancelAtPeriodEnd ? ' style="color: #ff6b6b;"' : '';
+                        var subStyle = license.cancelAtPeriodEnd ? ' style="color: var(--brand-danger);"' : '';
                         detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">' + subLabel + '</span><span class="license-detail-value"' + subStyle + '>' + new Date(license.subscriptionEndsAt).toLocaleDateString() + '</span></div>';
                     }
                 } else if (license.licenseType === 'trial') {

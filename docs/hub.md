@@ -51,6 +51,23 @@ gets a dotted outline, and clicking one opens its docs instead of doing its job.
 while help mode is on. Press <kbd>Esc</kbd>, or the help button again, to leave. See
 [Help Mode](/docs/help-mode/).
 
+### Theme
+{: #theme }
+
+The {icon:theme-picker} palette button beside the help button shows the themes one at a time,
+each as a Dobermann screen in its own colours. Step through them with the arrows (or the arrow
+keys), or click the theme either side; **Use** (or <kbd>Enter</kbd>) applies the one in the middle.
+Closing changes nothing. **Follow
+system** comes first:
+
+- In the web app and the desktop app it switches between a light theme and a dark one when your
+  computer does (pick which in **Settings → UI**). In a browser the theme is shared with dbmn.io,
+  so the website wears it too.
+- In VS Code it is VS Code's own theme. Any other theme colours Dobermann's panels (the Hub, its
+  tabs and the Console), not the rest of VS Code.
+
+The theme belongs to the device, or to this VS Code.
+
 ---
 
 ## API Catalogue
@@ -120,7 +137,7 @@ Sign in to DBMN, see your licence and weekly usage, and find **Puppy School & Ba
 | **API Catalogue** | **Show** `Current Environment` (only endpoints in the active environment's System) or `All Systems`. **Group by**. **Recent** on or off. **Manage Tags…** to rename, merge or delete tags across every endpoint |
 | **Transactions** | **Show** and **Group by** for History |
 | **Execution** | **Auto-open console on completion**. **Treat network errors as critical**: timeouts, DNS and connection failures stop a batch at once, whatever its error handling. **Critical HTTP codes**, default `401, 403`, which also stop a batch at once. **Max CSV rows** for batch uploads |
-| **UI** | **Confirm transaction deletion** |
+| **UI** | **Confirm transaction deletion**. **Theme**: see [Theme](#theme) |
 | **Workspace** | The **DBMN workspace folder**, with **Open folder** and **Change folder…**, and the path of the executions database. See [Your Data](/docs/your-data/#dobermann-workspace) |
 | **Systems** | Your Systems, and **Add System** |
 

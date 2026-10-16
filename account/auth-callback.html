@@ -8,6 +8,11 @@
     <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
     <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
     <link rel="stylesheet" href="/css/brand.css">
+    <!-- The theme: the app's themes, worn before the page paints, and the picker (assets/js/site-theme.js) -->
+    <link rel="stylesheet" href="/assets/css/theme-picker.css">
+    <script src="/assets/js/dbmn-themes.js"></script>
+    <script src="/assets/js/site-theme.js"></script>
+    <script defer src="/assets/js/theme-picker.js"></script>
     <link rel="stylesheet" href="/account/shared.css">
 </head>
 <body>
@@ -16,13 +21,14 @@
             <img src="/images/DBMNLogo.png" alt="DBMN">
             <h1>DBMN</h1>
         </a>
+        <div class="header-right header-theme"><span class="theme-picker-anchor"><button type="button" class="site-theme-btn" data-site-theme hidden></button></span></div>
     </header>
 
     <div class="container">
         <div class="card">
             <h2 id="callbackTitle">Signing you in...</h2>
             <div id="alert" class="alert"></div>
-            <p id="callbackStatus" style="color: #a0a0b0;"><span class="spinner"></span> Verifying your sign-in link</p>
+            <p id="callbackStatus" style="color: var(--brand-text-muted);"><span class="spinner"></span> Verifying your sign-in link</p>
         </div>
 
         <footer>
