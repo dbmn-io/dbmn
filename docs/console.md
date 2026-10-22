@@ -66,9 +66,11 @@ The run's details — environment, organisation, endpoint, full request URL, ID,
 
 During a batch execution, the footer offers:
 
-**Pause** — Halts execution after the current request completes. All progress is saved. Click **Resume** to continue from the exact position. Useful for rate limit cooling or reviewing errors mid-run.
+**Pause** — Halts execution once the requests being sent have finished. All progress is saved. Click **Resume** to continue from the exact position. Useful for rate limit cooling or reviewing errors mid-run.
 
-**Cancel** — Stops the batch. A cancelled batch can still be **Resume**d, or its failures reprocessed later.
+**Cancel** — Stops the batch now, cutting off the requests being sent. Those may or may not have reached the API, so on a running batch DBMN asks first: **Keep running**, **Pause instead**, or **Cancel batch**. The cut-off transactions are marked Cancelled, never as errors.
+
+**Resume** — Carries on a paused or cancelled batch from the next row, making the transactions still to come. If Cancel cut any off, Resume sends them again unless you choose **Skip them**. Skip them when a repeat would do something twice: they may already have reached the API.
 
 **Name** — On the Settings tab, rename the batch at any time so it is easy to find in History.
 

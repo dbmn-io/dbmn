@@ -53,6 +53,7 @@ module DocsTermsGuard
     [/Set System…/, 'the API Catalogue Select footer button is "Update" (System, add tags, remove tags)'],
     [/`View: /, 'the view button is named after the active view, with no "View:" prefix'],
     [/\bhelp icons?\b|\(i\) icon|\? icon/i, 'there are no per-control help icons; turn on help mode (help button in the Hub header, or ?)'],
+    [/\bPending only\b|\bReprocess Incomplete\b/i, 'Reprocess offers Errors only, Split array errors and All; a paused or cancelled batch is Resumed'],
   ].freeze
 
   PROTECTED = %r{(<pre\b.*?</pre>|<code\b.*?</code>)}mi.freeze

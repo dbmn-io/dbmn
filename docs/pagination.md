@@ -20,6 +20,10 @@ Dobermann makes it easy to work with paginated APIs. Run a single request, confi
 
 That's it. Dobermann handles page iteration, total page calculation, and concurrent fetching. Pages stream into the Console as they land, and the Completed tab shows them as one table.
 
+A page that fails for a moment (the server busy or failing for now, or no answer at all) is asked
+for again, twice at most, a second and then three seconds apart. A page that still fails shows on
+the Errors tab, and **Reprocess** fetches it again.
+
 ---
 
 ## Setting Up Pagination

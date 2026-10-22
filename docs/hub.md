@@ -134,7 +134,7 @@ Sign in to DBMN, see your licence and weekly usage, and find **Puppy School & Ba
 
 | Panel | Settings |
 |---|---|
-| **API Catalogue** | **Show** `Current Environment` (only endpoints in the active environment's System) or `All Systems`. **Group by**. **Recent** on or off. **Manage Tags…** to rename, merge or delete tags across every endpoint |
+| **API Catalogue** | **Show** `Current System` (only endpoints in the active environment's System) or `All Systems`. **Group by**. **Recent** on or off. **Manage Tags…** to rename, merge or delete tags across every endpoint |
 | **Transactions** | **Show** and **Group by** for History |
 | **Execution** | **Auto-open console on completion**. **Treat network errors as critical**: timeouts, DNS and connection failures stop a batch at once, whatever its error handling. **Critical HTTP codes**, default `401, 403`, which also stop a batch at once. **Max CSV rows** for batch uploads |
 | **UI** | **Confirm transaction deletion**. **Theme**: see [Theme](#theme) |

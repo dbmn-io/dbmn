@@ -17,6 +17,7 @@ Each environment contains:
 - **Authentication** — DBMN, JWT token, OAuth, Google Service Account, or none
 - **Target timezone** — Timezone for datetime operations
 - **Parallel processing** — How many requests a batch sends at once
+- **Run in** — Where the web app sends this environment's requests from
 - **Variables** — Key-value pairs available in templates via the `ENV:` prefix
 - **Headers** — Environment-level headers included in every request
 
@@ -159,6 +160,29 @@ The timezone used for all datetime operations in this environment. It affects ho
 **Example:**
 With timezone set to `America/New_York`:
 - `{{A8:datetime}}` → `2026-02-18T09:30:00` (Eastern Time, not UTC)
+
+#### Run in
+{: #run-in }
+
+Where this environment's requests are sent from. **For now, only the web app uses this setting.** DBMN for VS Code and the desktop app are local agents themselves: they send every request, whatever it says. It's saved with the environment, so all three show it.
+
+| Option | In the web app |
+|--------|----------------|
+| **Browser** | Requests go straight from your browser tab. |
+| **Local agent** | The web app hands each request to DBMN for VS Code on your computer, which sends it. |
+| **Cloud worker** | Coming soon. |
+
+**When to choose Local agent:**
+- The API doesn't accept requests from a browser. Many business APIs don't, and the web app says so when it meets one. Sent from DBMN for VS Code, it answers.
+- You'd rather keep the environment's secrets out of the browser. A Local agent environment's token, client secret or key is entered in DBMN for VS Code (**Environments** → the environment → **Authentication**), and the web app never holds it.
+
+**What it needs:** DBMN for VS Code installed and open, signed in to the same DBMN account. A run started while VS Code is closed waits, saying **Please open VS Code**, and starts by itself once it's open. In the Hub header, the VS Code icon beside the environment's name is in the text colour while VS Code is connected, and grey while it isn't.
+
+**If VS Code closes during a batch,** the requests it was sending at that moment may or may not have reached the API. They're listed under **Errors**: check them before running them again. A batch set to **Stop on first error** stops there; **Resume** it once VS Code is open. Otherwise the batch waits for VS Code and carries on when it's back.
+
+**In DBMN for VS Code and the desktop app** the setting changes nothing: each is a local agent and sends every request itself. The web app can't use the desktop app as its local agent; if you have the desktop app, run from it. An environment set to Local agent and opened in the desktop app signs in there and keeps its secrets there, so enter them once on its **Authentication** tab.
+
+**Managed environments.** Your organisation can require that an environment's requests are never sent from a browser. In the web app, **Run in** then shows **Local agent**, locked, with who set it.
 
 ## Authentication
 {: #authentication }
