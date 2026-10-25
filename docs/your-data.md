@@ -23,6 +23,31 @@ A Dobermann workspace is a **folder on your machine**. This is where all executi
 
 ---
 
+## DBMN in the browser
+{: #web-app }
+
+The web app at [app.dbmn.io](https://app.dbmn.io) keeps the same things, in one of two places.
+
+**In the browser.** Until you choose a folder, **Settings → Workspace** reads **History is kept in this browser only**. Runs, their request and response files and the executions database live in the browser's own storage for app.dbmn.io. They survive a reload and a restart, and they are lost if you clear the site's data. DBMN for VS Code does not see them.
+
+**In your DBMN workspace folder.** **Use a folder…** connects the web app to the same folder DBMN for VS Code uses, `~/Dobermann-Workspace` by default. From then on both write to the same executions database and the same files, so **History** is the same in both, and anything made in the browser before that moves across. The browser asks once whether DBMN may edit files in the folder: choose **Allow**. After a restart it may ask again, and **Settings → Workspace** reads **Reconnect folder** until you do. Only Chrome and Edge can do this: in other browsers the button answers **Using a folder needs Chrome or Edge**, and History stays in the browser.
+
+**Where an environment runs makes no difference.** An environment set to **Run in: Local agent** sends its requests through DBMN for VS Code, but the web app records the run, in whichever of the two places it is using. VS Code itself writes nothing for it. See [Environments — Run in](/docs/environments/#run-in).
+
+### Which browser
+{: #browsers }
+
+| Browser | Run from the browser | **Run in: Local agent** (through DBMN for VS Code) | **Use a folder…** (History shared with VS Code) |
+|---|---|---|---|
+| **Chrome**, **Edge** | yes | yes, after a one-time **Local network access** prompt | yes |
+| **Firefox** | yes | yes | no, History stays in the browser |
+| **Brave** | yes | yes, once Brave's **Localhost access** permission is allowed for app.dbmn.io | no, History stays in the browser |
+| **Safari** | yes | **no**: Safari does not let a secure page reach an app on your computer | no, History stays in the browser |
+
+On a Mac where Safari is the only browser allowed, use the desktop app, which sends every request itself and keeps History in a folder, with no VS Code and no browser involved.
+
+---
+
 ## What's Stored & Where
 
 ### Workspace folder structure

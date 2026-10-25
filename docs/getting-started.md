@@ -15,6 +15,8 @@ Dobermann enables bulk data migration through REST APIs — load, extract, and m
 
 **Or read on** for the five-minute version against your own API.
 
+**In the browser or in VS Code.** [app.dbmn.io](https://app.dbmn.io) needs nothing installed and works in any current browser. Two things need Chrome or Edge, or at least not Safari: sharing History with DBMN for VS Code, and running through it. See [Your Data — Which browser](/docs/your-data/#browsers).
+
 ## Quick Start
 
 1. **Create an Environment** — where your API lives: base URL and authentication

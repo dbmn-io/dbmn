@@ -26,6 +26,24 @@ This guide covers common issues, error messages, and solutions for Dobermann. Is
 
 See [Getting Started — First Launch](/docs/getting-started/#first-launch-what-to-expect) for more detail.
 
+### Web App Can't Reach VS Code
+{: #web-app-cant-reach-vs-code }
+
+**Symptoms:**
+- A run on a **Run in: Local agent** environment waits with **Please open VS Code** although VS Code is open
+- **Your browser is blocking DBMN from reaching VS Code**
+- **Safari can't reach DBMN for VS Code**
+- The VS Code icon in the Hub header stays grey
+
+**Check, in order:**
+
+1. **Same account.** DBMN for VS Code must be open and signed in to the same DBMN account as the web app ({icon:nav-account} **Account** in each). A signed-out VS Code is invisible to the web app.
+2. **The browser's permission.** The web app reaches VS Code on your computer, and the browser decides whether a website may. Chrome and Edge: the icon to the left of the address → **Site settings** → **Local network access** → **Allow**, then run again. Brave: `brave://settings/content/localhostAccess`, add app.dbmn.io. Firefox needs nothing.
+3. **Safari.** Safari does not let a secure page reach an app on your computer, and there is no setting for it. Use Chrome, Edge or Firefox for environments that run through VS Code, or the desktop app.
+4. **Still waiting.** Reload the web app tab. The run picks up where it was once VS Code answers.
+
+See [Environments — Run in](/docs/environments/#run-in) and [Your Data — Which browser](/docs/your-data/#browsers).
+
 ### Token Expired
 
 **Symptoms:**

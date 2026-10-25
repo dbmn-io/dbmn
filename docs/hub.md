@@ -138,7 +138,7 @@ Sign in to DBMN, see your licence and weekly usage, and find **Puppy School & Ba
 | **Transactions** | **Show** and **Group by** for History |
 | **Execution** | **Auto-open console on completion**. **Treat network errors as critical**: timeouts, DNS and connection failures stop a batch at once, whatever its error handling. **Critical HTTP codes**, default `401, 403`, which also stop a batch at once. **Max CSV rows** for batch uploads |
 | **UI** | **Confirm transaction deletion**. **Theme**: see [Theme](#theme) |
-| **Workspace** | The **DBMN workspace folder**, with **Open folder** and **Change folder…**, and the path of the executions database. See [Your Data](/docs/your-data/#dobermann-workspace) |
+| **Workspace** | The **DBMN workspace folder**, with **Open folder** and **Change folder…**, and the path of the executions database. In the web app: **History is kept in this browser only** and **Use a folder…** until a folder is chosen (Chrome and Edge). See [Your Data](/docs/your-data/#dobermann-workspace) and [DBMN in the browser](/docs/your-data/#web-app) |
 | **Systems** | Your Systems, and **Add System** |
 
 ### Systems

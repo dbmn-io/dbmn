@@ -178,6 +178,15 @@ Where this environment's requests are sent from. **For now, only the web app use
 
 **What it needs:** DBMN for VS Code installed and open, signed in to the same DBMN account. A run started while VS Code is closed waits, saying **Please open VS Code**, and starts by itself once it's open. In the Hub header, the VS Code icon beside the environment's name is in the text colour while VS Code is connected, and grey while it isn't.
 
+**The first run asks your browser.** The web app reaches DBMN for VS Code on your own computer, and browsers ask before letting a website do that. The first time, DBMN shows **Connect to DBMN for VS Code** and explains the prompt that follows; click **Continue**, then allow it in the browser. The prompt is the browser's, so it differs:
+
+- **Chrome and Edge** ask once per site whether app.dbmn.io may look for and connect to devices on your local network. Choose **Allow**. To change it later: the icon to the left of the address → **Site settings** → **Local network access**.
+- **Firefox** does not ask.
+- **Brave** does not ask by default. Allow it first: `brave://settings/content/localhostAccess`, add app.dbmn.io, then run again.
+- **Safari** cannot reach VS Code at all, and the web app says so: **Safari can't reach DBMN for VS Code. Use Chrome, Edge or Firefox for environments that run through VS Code.** On a Mac, use another browser, or the desktop app.
+
+If the browser is blocking it, the web app says **Your browser is blocking DBMN from reaching VS Code** and the run waits; allow it in the browser's site settings and run again. The full table of what each browser can do is on [Your Data — Which browser](/docs/your-data/#browsers).
+
 **If VS Code closes during a batch,** the requests it was sending at that moment may or may not have reached the API. They're listed under **Errors**: check them before running them again. A batch set to **Stop on first error** stops there; **Resume** it once VS Code is open. Otherwise the batch waits for VS Code and carries on when it's back.
 
 **In DBMN for VS Code and the desktop app** the setting changes nothing: each is a local agent and sends every request itself. The web app can't use the desktop app as its local agent; if you have the desktop app, run from it. An environment set to Local agent and opened in the desktop app signs in there and keeps its secrets there, so enter them once on its **Authentication** tab.
