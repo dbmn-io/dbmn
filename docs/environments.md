@@ -100,7 +100,7 @@ For environments DBMN manages for your organisation, the type is set centrally a
 
 #### System
 
-Which API this environment belongs to — `wms`, `erp`, and so on. Endpoints carry the same System, and the API Catalogue can show only the endpoints of the active environment's System. Choose one, or create one with **+ Add new System…**. See [The Hub — Systems](/docs/hub/#systems).
+Which API this environment belongs to — `wms`, `erp`, and so on. Endpoints carry the same System, and the API Catalogue can show only the endpoints of the active environment's System. A new environment starts from its System and base URL: **Standard Systems**, configured by DBMN, are listed first, then your own, then **+ Add new System…**. A base URL that matches a Standard System picks it, and the environment's sign-in URLs and token settings come from that System; anything you set on the environment itself still wins. See [The Hub — Systems](/docs/hub/#systems).
 
 #### Description
 
@@ -110,26 +110,12 @@ Optional field for notes about the environment:
 - Tenant or customer information
 - Maintenance windows
 
-#### Enable Mock Requests
-
-When ticked, runs return mock responses instead of calling the API.
-
-**Use cases:**
-- Testing endpoint configuration without hitting real APIs
-- Demonstrating functionality without credentials
-- Development when backend is unavailable
-
-**Limitations:**
-- Mock responses are simplified and may not reflect actual API behaviour
-- Only basic success scenarios are mocked
-- Not suitable for integration testing
-
 ### Execution Settings
 
 #### Parallel Processing
 {: #parallel-processing }
 
-How many requests a batch sends at the same time. Tick **Enable parallel batch processing** and choose a **Max Concurrency**:
+How many requests a batch sends at the same time: **Max Concurrency**, **Sequential** being one at a time.
 
 | Level | Requests in flight |
 |-------|--------------------|

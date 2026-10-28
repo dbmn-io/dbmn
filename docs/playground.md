@@ -99,7 +99,7 @@ In the Hub, open {icon:nav-account} **Account** and sign in, or register for a f
 2. Set the **Name** to: `DBMN Puppy School`
 3. Set the **Base URL** to: `https://api.dbmn.io/functions/v1/playground`
 4. On the **Authentication** tab, select **DBMN** — Dobermann injects your DBMN token automatically at execution time
-5. Under **Execution Settings**, tick **Enable parallel batch processing** and set **Max Concurrency** to **Extreme Parallel** if you want to try 16 concurrent requests
+5. Under **Execution Settings**, set **Max Concurrency** to **Extreme Parallel** if you want to try 16 concurrent requests
 6. Click **Save Environment**, then pick it in the {icon:env-switcher} environment selector at the top of the Hub
 
 No manual headers or token copy/paste required. If your session expires, Dobermann prompts you to sign in again before execution.
