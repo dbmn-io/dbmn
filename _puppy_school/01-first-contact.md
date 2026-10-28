@@ -45,9 +45,8 @@ In the Hub, open {icon:nav-environments} **Environments** and add a new one:
 > at runtime, across every endpoint in this environment.
 {: .ps-boxout}
 
-One more setting while you're here. Under **Execution Settings**, tick **Enable parallel
-batch processing** and set **Max Concurrency** to **Extreme Parallel — 16 concurrent
-requests**. You'll find out why in Lesson 2.
+One more setting while you're here. Under **Execution Settings**, set **Max Concurrency**
+to **Extreme Parallel — 16 concurrent requests**. You'll find out why in Lesson 2.
 
 Click **Save Environment**. Then tell Dobermann to use it: at the top of the Hub, click the
 environment selector {icon:env-switcher} — it reads `No environment` until you've picked
