@@ -91,12 +91,6 @@ See [Environments — Run in](/docs/environments/#run-in) and [Your Data — Whi
 **Solution:**
 Click the {icon:env-switcher} environment selector in the Hub header and choose an organisation under the environment. See [Environments — Organisation Selection](/docs/environments/#organization-selection).
 
-### Sign in to run
-
-**Symptoms:** The Run API and Run Batch buttons read **Sign in to run**.
-
-Dobermann needs a DBMN account to run anything. Open {icon:nav-account} **Account** and sign in. A free account is enough.
-
 ## Endpoint Configuration
 
 ### Template Variables Not Replaced

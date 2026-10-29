@@ -84,7 +84,7 @@ Your endpoints. Grouped by the URL path they share by default; **Settings → AP
 | **Select** | Turns on checkboxes for bulk actions on the selection. **Delete** names what goes and asks first; their History is kept. **Export** writes them to a `.dbmn.zip`. **Update** sets their System, adds tags, and removes any of the tags they carry, all at once |
 | **Recent** | The five endpoints you last saved or ran, pinned above the groups. Turn it off in Settings |
 
-Each row shows the method, name and path, with {icon:run-api} **Run API** on the right. Endpoints with `{{template variables}}` also show {icon:run-batch} **Run Batch**. Both read `Sign in to run` until you are signed in. Click the row to open the endpoint in a tab.
+Each row shows the method, name and path, with {icon:run-api} **Run API** on the right. Endpoints with `{{template variables}}` also show {icon:run-batch} **Run Batch**. Click the row to open the endpoint in a tab.
 
 Endpoints are not filed in folders. They carry **tags**, and the catalogue is grouped for you. See [Endpoints — Tags](/docs/endpoints/#tags).
 

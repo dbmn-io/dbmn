@@ -43,6 +43,7 @@ module DocsTermsGuard
     [/Execute Batch\b/, 'Run Batch step 5 is "Execute"'],
     [/Enable\s+parallel\s+batch\s+processing/i, 'the checkbox is gone; Max Concurrency alone sets how many requests a batch sends at once (Sequential = 1)'],
     [/\bMock Requests?\b/, 'Enable Mock Requests was removed; the Training Ground does that job (the endpoint editor\'s Mock Response tab is a different thing)'],
+    [/Sign in to run/, 'nothing needs a DBMN sign-in to run (0.4.0); an account adds storage, Standard Systems and Weekly Usage'],
     [/Share button|clicks? \*\*Share\*\*|the \*\*Share\*\*/, 'the footer button is "Copy to Share"'],
     [/More Actions/, 'footer buttons; "More" only holds the overflow'],
     [/\bExecutions sidebar\b|\bhistory sidebar\b|Executions in the sidebar/i, '{icon:nav-history} History on the Hub rail'],
