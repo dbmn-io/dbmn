@@ -326,12 +326,16 @@ Common uses:
 
 See [Template Variables — ENV](/docs/template-variables/#environment-variables-env) for usage syntax.
 
+**Options and the header.** A variable can carry a list of **Options** (comma-separated in the table). The value must then be one of them, and the Hub's {icon:env-switcher} environment selector offers them. Tick **Header** and the variable shows beside the environment name in the header, as `Staging · 840-SIT`, where you switch it in one click. That is how the organisation works, and it works the same for a company, a client or a tenant on any API: put `{{ENV:company}}` in a path, a header or a query string and switch the value from the header.
+
+For `org` and `location`, leaving Options empty means the list comes from the token, as the Standard System reads it. Type your own list to override it.
+
 ## Organisation Selection
 {: #organization-selection }
 
 Some APIs issue one token for several organisations and expect each request to say which one it is for. When the token Dobermann holds lists organisations, they appear as sub-rows under the environment in the Hub's {icon:env-switcher} environment selector. Pick one and the selector reads `Environment · Org`; until you do it reads `(pick org)`.
 
-The chosen organisation is sent as environment headers — `Organization`, `SelectedOrganization`, `Location` and `SelectedLocation` — on every request. Switch organisations from the selector at any time without signing in again.
+The organisation is the `org` environment variable with **Header** ticked and its options from the token; the environment's headers carry it as `{{ENV:org}}`. Switch organisations from the selector at any time without signing in again, and give any other variable the same treatment under [Variables](#variables).
 
 ## Troubleshooting
 
