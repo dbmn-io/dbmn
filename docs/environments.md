@@ -40,7 +40,7 @@ Click an environment in the Environments list to open it in a tab. Change what y
 
 Every request goes to the **active environment**. Two ways to choose it:
 
-- Click the {icon:env-switcher} environment selector at the top of the Hub and pick from the list. It reads `No environment` until you have chosen one.
+- Click the {icon:env-switcher} environment selector at the top of the Hub and pick from the list. It reads `No environment` until you have chosen one. At the foot of the list, **Edit** opens the active environment and **New environment** adds one.
 - In a saved environment's editor, click **Set as Active** in the footer.
 
 Production environments are highlighted in the selector, and the Hub header is highlighted as a warning while one is active. The colour comes from your theme. The paw print in the Environments list marks the active one.
@@ -326,7 +326,7 @@ Common uses:
 
 See [Template Variables — ENV](/docs/template-variables/#environment-variables-env) for usage syntax.
 
-**Options and the header.** A variable can carry a list of **Options** (comma-separated in the table). The value must then be one of them, and the Hub's {icon:env-switcher} environment selector offers them. Tick **Header** and the variable shows beside the environment name in the header, as `Staging · 840-SIT`, where you switch it in one click. That is how the organisation works, and it works the same for a company, a client or a tenant on any API: put `{{ENV:company}}` in a path, a header or a query string and switch the value from the header.
+**Options and the header.** A variable can carry a list of **Options** (comma-separated in the table). The value must then be one of them, and the Hub's {icon:env-switcher} environment selector offers them. Tick **Header** and the variable gets its own segment beside the environment name in the header, reading its value (or `pick region` until it has one); click it to switch, and **Add…** at the foot of its list adds a value to the options and picks it. That is how the organisation works, and it works the same for a company, a client or a tenant on any API: put `{{ENV:company}}` in a path, a header or a query string and switch the value from the header.
 
 For `org` and `location`, leaving Options empty means the list comes from the token, as the Standard System reads it. Type your own list to override it.
 
@@ -335,7 +335,7 @@ Before a run, a header variable whose value is not one of its options is asked f
 ## Organisation Selection
 {: #organization-selection }
 
-Some APIs issue one token for several organisations and expect each request to say which one it is for. When the token Dobermann holds lists organisations, they appear as sub-rows under the environment in the Hub's {icon:env-switcher} environment selector. Pick one and the selector reads `Environment · Org`; until you do it reads `(pick org)`.
+Some APIs issue one token for several organisations and expect each request to say which one it is for. When the token Dobermann holds lists organisations, the active environment gets an organisation segment beside its name in the Hub header, with the list under it. Pick one and the segment reads the organisation; until you do it reads `pick org`.
 
 The organisation is the `org` environment variable with **Header** ticked and its options from the token; the environment's headers carry it as `{{ENV:org}}`. Switch organisations from the selector at any time without signing in again, and give any other variable the same treatment under [Variables](#variables).
 
