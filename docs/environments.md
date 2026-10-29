@@ -330,6 +330,8 @@ See [Template Variables — ENV](/docs/template-variables/#environment-variables
 
 For `org` and `location`, leaving Options empty means the list comes from the token, as the Standard System reads it. Type your own list to override it.
 
+Before a run, a header variable whose value is not one of its options is asked for: one dialog names the variable and offers the options, **Use** saves the pick and the run goes on, **Cancel** stops it. A variable without options is never asked for.
+
 ## Organisation Selection
 {: #organization-selection }
 
