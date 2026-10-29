@@ -72,6 +72,7 @@ You need two URLs from your provider:
 3. Enter:
    - **Client ID** — from step 1
    - **Client Secret** — from step 1 (if applicable)
+   - **Client authentication** — leave **In the request body** unless your provider documents HTTP Basic authentication for the token endpoint
    - **Authorization URL** — from step 4
    - **Token URL** — from step 4
    - **Scopes** — from step 3

@@ -228,6 +228,7 @@ OAuth 2.0 authentication flow for secure, delegated access.
 - **Authorization URL** — OAuth provider's authorization endpoint
 - **Token URL** — OAuth provider's token endpoint
 - **OAuth Flow** — **Authorization Code with PKCE** (recommended), **Authorization Code**, or **Client Credentials**
+- **Client authentication** — how the client secret reaches the token endpoint: **In the request body** (`client_secret_post`, the default) or **Basic header** (`client_secret_basic`). A Standard System sets the default for its environments; change it if your provider refuses the token request with 401.
 - **Scopes** — Optional, space-separated
 
 **OAuth flow:**
