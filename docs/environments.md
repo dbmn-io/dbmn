@@ -352,7 +352,7 @@ Some APIs serve several organisations with one sign-in and expect each request t
 2. Under **Headers**, add the header the API reads with the variable as its value: `Organization` set to `{{ENV:org}}`. Add any others (a `Location`, say) the same way
 3. Switch organisation from the Hub header whenever you like, without signing in again
 
-A new environment on a Standard System starts with that System's headers already in place, written `{{org}}`; in an environment's headers, `{{org}}` and `{{ENV:org}}` are the same. Add the `org` variable and its options.
+A new environment on a Standard System that works this way has steps 1 and 2 done already: its headers are in place, written `{{org}}` (the same as `{{ENV:org}}` in an environment's headers), and it has an empty `org` variable in the header. Select the environment, and the header reads `pick org`; click it and **Add…** your first organisation.
 
 Dobermann doesn't look inside your token for organisations, or check the header against it: if the value is wrong, the API says so. Environments from earlier versions keep their headers, and their organisation is already the `org` variable; tick **Header** on it and add its options to switch it from the header.
 
