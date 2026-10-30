@@ -341,6 +341,8 @@ See [Template Variables — ENV](/docs/template-variables/#environment-variables
 
 **Header.** Tick **Header** to switch the variable from the Hub header without opening the editor. It gets its own segment after the environment name, outlined together with it, reading its value; with options, it reads `pick <name>` until it holds one of them. Click the segment for its options, or **Add…** to type a new value, which is added to the options and picked. See [The Hub — Environment selector](/docs/hub/#environment-selector).
 
+**An editor left open** follows a change made elsewhere (a pick in the header, a save in another tab or on another device): with no edits of your own it updates and says what moved; with edits, **Save** stops and offers **Reload** or **Keep editing**, so nothing is written over the change.
+
 **Before a run,** a header variable whose value isn't one of its options is asked for. One dialog offers the options of each such variable: **Use** saves the pick and the run goes on, **Cancel** stops it. A variable without options is never asked for. On Run Batch's **Execute** step, **Sending To** lists each header variable with its value.
 
 ## Organisation Selection
