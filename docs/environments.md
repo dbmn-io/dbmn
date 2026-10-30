@@ -46,7 +46,7 @@ Click an environment in the Environments list to open it in a tab. Change what y
 
 Every request goes to the **active environment**. Two ways to choose it:
 
-- Click the {icon:env-switcher} environment selector at the top of the Hub and pick from the list. It reads `No environment` until you have chosen one. At the foot of the list, **Edit** opens the active environment and **New environment** adds one.
+- Click the {icon:env-switcher} environment selector at the top of the Hub and pick from the list. It reads `No environment` until you have chosen one. The pencil beside each environment opens it, and **New environment…** at the foot of the list adds one.
 - In a saved environment's editor, click **Set as Active** in the footer.
 
 Production environments are highlighted in the selector, and the Hub header is highlighted as a warning while one is active. The colour comes from your theme. The paw print in the Environments list marks the active one.
@@ -337,18 +337,26 @@ Common uses:
 
 See [Template Variables — ENV](/docs/template-variables/#environment-variables-env) for usage syntax.
 
-**Options and the header.** A variable can carry a list of **Options** (comma-separated in the table). The value must then be one of them, and the Hub's {icon:env-switcher} environment selector offers them. Tick **Header** and the variable gets its own segment beside the environment name in the header, reading its value (or `pick region` until it has one); click it to switch, and **Add…** at the foot of its list adds a value to the options and picks it. That is how the organisation works, and it works the same for a company, a client or a tenant on any API: put `{{ENV:company}}` in a path, a header or a query string and switch the value from the header.
+**Options.** Give a variable a list of **Options**, comma-separated in the table, and its **Value** becomes a dropdown of them. A value that isn't one of them reads **Pick one…**, highlighted as a warning, until you choose one. Leave Options empty and the value is whatever you type.
 
-For `org` and `location`, leaving Options empty means the list comes from the token, as the Standard System reads it. Type your own list to override it.
+**Header.** Tick **Header** to switch the variable from the Hub header without opening the editor. It gets its own segment after the environment name, outlined together with it, reading its value; with options, it reads `pick <name>` until it holds one of them. Click the segment for its options, or **Add…** to type a new value, which is added to the options and picked. See [The Hub — Environment selector](/docs/hub/#environment-selector).
 
-Before a run, a header variable whose value is not one of its options is asked for: one dialog names the variable and offers the options, **Use** saves the pick and the run goes on, **Cancel** stops it. A variable without options is never asked for.
+**Before a run,** a header variable whose value isn't one of its options is asked for. One dialog offers the options of each such variable: **Use** saves the pick and the run goes on, **Cancel** stops it. A variable without options is never asked for. On Run Batch's **Execute** step, **Sending To** lists each header variable with its value.
 
 ## Organisation Selection
 {: #organization-selection }
 
-Some APIs issue one token for several organisations and expect each request to say which one it is for. When the token Dobermann holds lists organisations, the active environment gets an organisation segment beside its name in the Hub header, with the list under it. Pick one and the segment reads the organisation; until you do it reads `pick org`.
+Some APIs serve several organisations with one sign-in and expect each request to say which one it is for, usually in a header. In Dobermann the organisation is an ordinary environment variable:
 
-The organisation is the `org` environment variable with **Header** ticked and its options from the token; the environment's headers carry it as `{{ENV:org}}`. Switch organisations from the selector at any time without signing in again, and give any other variable the same treatment under [Variables](#variables).
+1. Under **Variables**, add `org` with your organisations as its **Options**, and tick **Header**
+2. Under **Headers**, add the header the API reads with the variable as its value: `Organization` set to `{{ENV:org}}`. Add any others (a `Location`, say) the same way
+3. Switch organisation from the Hub header whenever you like, without signing in again
+
+A new environment on a Standard System starts with that System's headers already in place, written `{{org}}`; in an environment's headers, `{{org}}` and `{{ENV:org}}` are the same. Add the `org` variable and its options.
+
+Dobermann doesn't look inside your token for organisations, or check the header against it: if the value is wrong, the API says so. Environments from earlier versions keep their headers, and their organisation is already the `org` variable; tick **Header** on it and add its options to switch it from the header.
+
+The same works for a company, a client or a tenant on any API: `/companies({{ENV:company}})/orders` in a path, `?client={{ENV:client}}` in a query string, or a header.
 
 ## Troubleshooting
 

@@ -85,11 +85,11 @@ See [Environments — Run in](/docs/environments/#run-in) and [Your Data — Whi
 ### Organisation Not Selected
 
 **Symptoms:**
-- Requests fail because the API wanted an organisation header
-- The Hub header reads `(pick org)` after the environment name
+- The API refuses requests because the organisation header is missing or wrong
+- The Hub header reads `pick org` after the environment name
 
 **Solution:**
-Click the {icon:env-switcher} environment selector in the Hub header and choose an organisation under the environment. See [Environments — Organisation Selection](/docs/environments/#organization-selection).
+Click the `pick org` segment in the Hub header and choose an organisation, or **Add…** one. With no segment there, the environment has no `org` header variable yet: set one up as in [Environments — Organisation Selection](/docs/environments/#organization-selection), and check its headers carry `{{ENV:org}}`.
 
 ## Endpoint Configuration
 

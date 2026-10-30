@@ -28,7 +28,9 @@ The Hub has four parts, left to right and top to bottom:
 
 The {icon:env-switcher} selector in the header shows which environment every request will go to. It reads `No environment` until you pick one. Click it and choose from the list; environments typed **Production** are highlighted, and the whole header is highlighted as a warning while one is active, so there is no mistaking what you are connected to. See [Environments — Environment Type](/docs/environments/#environment-type).
 
-A variable the environment shows in its header (the organisation, a company, a client: see [Environments — Variables](/docs/environments/#variables)) has its options as sub-rows under the environment. Pick one and the selector reads `Environment · Value`; until you do it reads `(pick org)`, naming the variable. With more than one such variable, each group of options is headed by the variable's name.
+The pencil beside each environment in the list opens it in the editor, and **New environment…** at the foot of the list adds one.
+
+Variables the environment shows in its header (an organisation, a company, a client: see [Environments — Variables](/docs/environments/#variables)) follow its name, one segment each, and the environment and its variables are outlined together. A segment reads the variable's value; a variable with options reads `pick org`, naming the variable and highlighted as a warning, until it holds one of them. Click a segment for its options, with a tick by the current one, and **Add…** at the foot to type a new value: it's added to the options and picked.
 
 The selector is the main way to set the active environment. The other is the **Set as Active** button in the footer of a saved environment's editor.
 

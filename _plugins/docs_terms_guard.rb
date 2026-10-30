@@ -57,6 +57,10 @@ module DocsTermsGuard
     [/`View: /, 'the view button is named after the active view, with no "View:" prefix'],
     [/\bhelp icons?\b|\(i\) icon|\? icon/i, 'there are no per-control help icons; turn on help mode (help button in the Hub header, or ?)'],
     [/\bPending only\b|\bReprocess Incomplete\b/i, 'Reprocess offers Errors only, Split array errors and All; a paused or cancelled batch is Resumed'],
+    # An organisation is an ordinary environment variable (vs-dbmn #424, 2026-10-30)
+    [/(organi[sz]ations?|locations?|options|the list)[^.]{0,40}\bfrom (the|your) token\b/i, 'nothing is read from the token: an organisation is an ordinary variable whose Options you type (environments#organization-selection)'],
+    [/\(pick \w+\)/, 'the header segment reads `pick <name>`, with no brackets'],
+    [/At the foot of the list, \*\*Edit\*\*/, 'each environment in the selector has its own pencil; the foot has only New environment…'],
   ].freeze
 
   PROTECTED = %r{(<pre\b.*?</pre>|<code\b.*?</code>)}mi.freeze

@@ -398,7 +398,7 @@ Step 5 shows the execution summary and lets you start the batch.
 
 | Section | What's there |
 |---|---|
-| **Sending To** | **Environment**, **Organization** (if one is selected), and the **Endpoint** as method and full URL |
+| **Sending To** | **Environment**, each variable the environment shows in its header (its organisation, say) with its value, and the **Endpoint** as method and full URL |
 | **Source Data** | **Source** (the file and sheet, or *Pasted data*), **Records**, **API Calls**, and **Per Call** for a flat array |
 | **Configure** | **Name**, **Error Handling** and **Processing Mode** — below |
 
