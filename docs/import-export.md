@@ -24,7 +24,7 @@ To export a handful of endpoints from the catalogue instead, turn on **Select** 
 ### What's in the file
 
 - Endpoints: method, path, description, tags, System, headers, query parameters, body template, and their saved [Console views](/docs/named-views/)
-- Environments: name, type, System, base URL, description, mock setting, authentication method and its configuration, headers and variables
+- Environments: name, type, System, base URL, description, authentication method and its configuration, headers and variables
 - Your Console display settings
 
 Endpoints and environments carry their **System by name**, so a System is recreated on import if the other machine doesn't have it.

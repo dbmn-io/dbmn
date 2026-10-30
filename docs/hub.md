@@ -139,12 +139,12 @@ Sign in to DBMN, see your licence and weekly usage, and find **Puppy School & Ba
 | **Execution** | **Auto-open console on completion**. **Treat network errors as critical**: timeouts, DNS and connection failures stop a batch at once, whatever its error handling. **Critical HTTP codes**, default `401, 403`, which also stop a batch at once. **Max CSV rows** for batch uploads |
 | **UI** | **Confirm transaction deletion**. **Theme**: see [Theme](#theme) |
 | **Workspace** | The **DBMN workspace folder**, with **Open folder** and **Change folder…**, and the path of the executions database. In the web app: **History is kept in this browser only** and **Use a folder…** until a folder is chosen (Chrome and Edge). See [Your Data](/docs/your-data/#dobermann-workspace) and [DBMN in the browser](/docs/your-data/#web-app) |
-| **Systems** | Your Systems, and **Add System** |
+| **Systems** | The Standard Systems and your own, and **Add System**. Click one of yours to rename it; **Merge** moves its endpoints and environments into another System and deletes it; **Delete** is offered once nothing uses it. Standard Systems are set up by DBMN and can't be changed here |
 
 ### Systems
 {: #systems }
 
-A **System** is a short name for one API you work with: `wms`, `erp`, `crm`. Environments and endpoints both carry one, and it is how the catalogue knows which endpoints belong with the active environment. A new endpoint inherits the System of the active environment. Names are lowercase letters and digits, up to 16 characters. Pick one in the **System** field of either editor, or create one there with **+ Add new System…**. To change many endpoints at once, tick them in **Select** mode and click **Update**.
+A **System** is a short name for one API you work with: `wms`, `erp`, `crm`. Environments and endpoints both carry one, and it is how the catalogue knows which endpoints belong with the active environment. A new endpoint inherits the System of the active environment. Names are lowercase letters and digits, up to 16 characters. **Standard Systems** are set up by DBMN and carry the settings for an API many people use, such as how to sign in to it; your own Systems are names only. A new environment picks its System in the **New environment** dialog, and keeps it (see [Environments — System](/docs/environments/#system)). An endpoint's System can be changed in its editor, or created there with **+ Add new System…**. To change many endpoints at once, tick them in **Select** mode and click **Update**.
 
 ---
 

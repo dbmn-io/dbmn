@@ -25,10 +25,16 @@ Each environment contains:
 
 ### Adding an Environment
 
-1. In the Hub, open {icon:nav-environments} **Environments** and click **Add Environment**
-2. Fill in the **General** tab: name, base URL, type
-3. On the **Authentication** tab, choose a method and configure it
-4. Click **Save Environment**
+1. In the Hub, open {icon:nav-environments} **Environments** and click **Add Environment**, or choose **New environment** at the foot of the header's {icon:env-switcher} environment selector
+2. The **New environment** dialog asks for the [System](#system) first, then the **Base URL**. Click **Continue**
+3. The environment opens in a tab with a name taken from the URL. On the **General** tab, change the name if you like and pick a type
+4. On the **Authentication** tab, choose a method and configure it
+5. Click **Save Environment**
+
+The System comes first so that a Standard System's settings apply from the start. Two checks happen on **Continue**:
+
+- **The address belongs to a different Standard System.** Dobermann asks **Use** that System, or **Keep** the one you chose. Nothing switches without you seeing it.
+- **An environment already has this URL.** Dobermann says so and offers to **Open** it. **New** adds another environment for the same URL anyway; two can differ in sign-in or settings. When the existing one is on a different System from the one you chose, **Move** moves it to yours. This is the only way a saved environment changes System.
 
 The environment appears in the Environments list and in the header's {icon:env-switcher} environment selector.
 
@@ -77,7 +83,7 @@ The root of the API for this environment.
 - Must include protocol (`https://` or `http://`)
 - Do not include a trailing slash
 - This URL is prepended to every endpoint path
-- **The URL is locked once saved.** The field is read-only after the first save, so a batch can never quietly start going to a different server. For a different URL, create a new environment.
+- **The URL is fixed once the environment exists.** It can't be edited after creation, so a batch can never quietly start going to a different server. For a different URL, create a new environment.
 
 #### Environment Type
 {: #environment-type }
@@ -99,8 +105,13 @@ For environments DBMN manages for your organisation, the type is set centrally a
 [Read about Prod Protect](/docs/prod-protect/)
 
 #### System
+{: #system }
 
-Which API this environment belongs to — `wms`, `erp`, and so on. Endpoints carry the same System, and the API Catalogue can show only the endpoints of the active environment's System. A new environment starts from its System and base URL: **Standard Systems**, configured by DBMN, are listed first, then your own, then **+ Add new System…**. A base URL that matches a Standard System picks it, and the environment's sign-in URLs and token settings come from that System; anything you set on the environment itself still wins. See [The Hub — Systems](/docs/hub/#systems).
+Which API this environment belongs to — `wms`, `erp`, and so on. Endpoints carry the same System, and the API Catalogue can show only the endpoints of the active environment's System. See [The Hub — Systems](/docs/hub/#systems).
+
+You choose it in the **New environment** dialog, before the URL. **Standard Systems**, set up by DBMN, are listed first, then your own, then **+ Add new System…**. Leave it unpicked and a base URL that matches a Standard System picks it. On a Standard System, the environment's sign-in URLs and token settings come from that System; anything you set on the environment itself still wins.
+
+**The System is fixed once the environment exists,** like its URL: the editor shows them together at the top, `System: URL`. For a different System, create a new environment. An older environment saved without a System can still be given one; it's fixed from its next save. To move every environment and endpoint from one of your Systems to another, use **Merge** under {icon:nav-settings} **Settings** → **Systems**.
 
 #### Description
 
