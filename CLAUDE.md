@@ -91,6 +91,7 @@ What the product calls things now. Use these; the guard rejects most of the reti
 | `~/Dobermann-Workspace`, `{environment}/{endpoint}/` | `.active8/results/` | `.active8/` holds only the database |
 | Ctrl+W | Alt+D E, Quick Access | The only VS Code keybinding |
 | header variable: **Options**, **Header** (Variables table), `pick <name>`, **Add…** (header segment) | organisation picker, organisations from the token, `(pick org)` | An organisation is an ordinary environment variable; nothing is read from the token (vs-dbmn #424) |
+| option label: `840 = Brisbane` in **Options**; **Value** and **Label** in **Add…**; a variable in the Base URL's path (`{{version}}`), the path changed from the pencil beside the `System: URL` heading | "the URL is fixed once the environment exists", "a variable without options is never asked for" | Only the host is fixed; an empty header variable, or one the Base URL uses, is asked for before a run (vs-dbmn #424) |
 
 Never name a customer platform, or any vendor whose systems DBMN loads into, in public copy.
 

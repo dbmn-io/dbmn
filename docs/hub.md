@@ -30,7 +30,7 @@ The {icon:env-switcher} selector in the header shows which environment every req
 
 The pencil beside each environment in the list opens it in the editor, and **New environment…** at the foot of the list adds one.
 
-Variables the environment shows in its header (an organisation, a company, a client: see [Environments — Variables](/docs/environments/#variables)) follow its name, one segment each, and the environment and its variables are outlined together. A segment reads the variable's value; a variable with options reads `pick org`, naming the variable and highlighted as a warning, until it holds one of them. Click a segment for its options, with a tick by the current one, and **Add…** at the foot to type a new value: it's added to the options and picked.
+Variables the environment shows in its header (an organisation, a company, a client: see [Environments — Variables](/docs/environments/#variables)) follow its name, one segment each, and the environment and its variables are outlined together. A segment reads the variable's value, or its label (`840 = Brisbane` reads **Brisbane**); it reads `pick org`, naming the variable and highlighted as a warning, while it's empty or, with options, until it holds one of them. A run waits for it. Click a segment for its options, with a tick by the current one and the value beside a label, and **Add…** at the foot to type a new **Value** and, if you like, a **Label**: it's added to the options and picked.
 
 The selector is the main way to set the active environment. The other is the **Set as Active** button in the footer of a saved environment's editor.
 

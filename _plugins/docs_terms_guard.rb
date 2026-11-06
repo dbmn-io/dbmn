@@ -61,6 +61,9 @@ module DocsTermsGuard
     [/(organi[sz]ations?|locations?|options|the list)[^.]{0,40}\bfrom (the|your) token\b/i, 'nothing is read from the token: an organisation is an ordinary variable whose Options you type (environments#organization-selection)'],
     [/\(pick \w+\)/, 'the header segment reads `pick <name>`, with no brackets'],
     [/At the foot of the list, \*\*Edit\*\*/, 'each environment in the selector has its own pencil; the foot has only New environment…'],
+    # The URL's path can change after creation; an empty header variable is asked for (vs-dbmn #424, 2026-11-06)
+    [/URL is fixed once the environment exists|can't be edited after creation/i, "only the host is fixed; the path changes from the heading's pencil (environments#base-url-variables)"],
+    [/without options is never asked for/i, 'an empty header variable, or one the Base URL uses, is asked for before a run (environments#variables)'],
   ].freeze
 
   PROTECTED = %r{(<pre\b.*?</pre>|<code\b.*?</code>)}mi.freeze

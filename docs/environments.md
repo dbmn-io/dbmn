@@ -83,7 +83,21 @@ The root of the API for this environment.
 - Must include protocol (`https://` or `http://`)
 - Do not include a trailing slash
 - This URL is prepended to every endpoint path
-- **The URL is fixed once the environment exists.** It can't be edited after creation, so a batch can never quietly start going to a different server. For a different URL, create a new environment.
+- **The host is fixed once the environment exists:** `https://api.example.com` is that environment's address. For a different host, create a new environment. The path can change: click the pencil beside the `System: URL` heading. A batch already running keeps the URL it started with, so a change never moves it to a different place.
+
+#### Variables in the Base URL
+{: #base-url-variables }
+
+Part of the path can be a variable, filled from the environment's variable of that name each time a request goes:
+
+- `https://api.example.com/v2.0/{{tenant}}/{{company}}`: the tenant and company are the environment's `tenant` and `company` variables
+- `https://api.example.com/functions/{{version}}/playground`: `v1` becomes the `version` variable
+
+Write it `{{name}}` or `{{ENV:name}}`. The name must match the variable's exactly, case included, and the value is sent exactly as you typed it: `V1` and `v1` are different paths to most servers. Give the variable **Options** and tick **Header** to switch it from the Hub header (see [Variables](#variables)).
+
+A variable can't be part of the host (`https://{{env}}.example.com`). The host is what the environment is: its licence, its [Prod Protect](#prod-protect) setting and its System all go by it, so one environment per host.
+
+Before a run, a variable the URL uses that has no value is asked for, and the run waits for it.
 
 #### Environment Type
 {: #environment-type }
@@ -111,7 +125,7 @@ Which API this environment belongs to — `wms`, `erp`, and so on. Endpoints car
 
 You choose it in the **New environment** dialog, before the URL. **Standard Systems**, set up by DBMN, are listed first, then your own, then **+ Add new System…**. Leave it unpicked and a base URL that matches a Standard System picks it. On a Standard System, the environment's sign-in URLs and token settings come from that System; anything you set on the environment itself still wins.
 
-**The System is fixed once the environment exists,** like its URL: the editor shows them together at the top, `System: URL`. For a different System, create a new environment. An older environment saved without a System can still be given one; it's fixed from its next save. To move every environment and endpoint from one of your Systems to another, use **Merge** under {icon:nav-settings} **Settings** → **Systems**.
+**The System is fixed once the environment exists,** like its URL's host: the editor shows them together at the top, `System: URL`, with a pencil to change the URL's path. For a different System, create a new environment. An older environment saved without a System can still be given one; it's fixed from its next save. To move every environment and endpoint from one of your Systems to another, use **Merge** under {icon:nav-settings} **Settings** → **Systems**.
 
 #### Description
 
@@ -339,11 +353,13 @@ See [Template Variables — ENV](/docs/template-variables/#environment-variables
 
 **Options.** Give a variable a list of **Options**, comma-separated in the table, and its **Value** becomes a dropdown of them. A value that isn't one of them reads **Pick one…**, highlighted as a warning, until you choose one. Leave Options empty and the value is whatever you type.
 
-**Header.** Tick **Header** to switch the variable from the Hub header without opening the editor. It gets its own segment after the environment name, outlined together with it, reading its value; with options, it reads `pick <name>` until it holds one of them. Click the segment for its options, or **Add…** to type a new value, which is added to the options and picked. See [The Hub — Environment selector](/docs/hub/#environment-selector).
+**Labels.** A code that means little on its own can have a name: type the option as `840 = Brisbane, 880 = Melbourne`. The Value dropdown and the Hub header show **Brisbane**, with `840` beside it in the list; requests always send `840`.
+
+**Header.** Tick **Header** to switch the variable from the Hub header without opening the editor. It gets its own segment after the environment name, outlined together with it, reading its value (or its label); it reads `pick <name>` while it's empty or, with options, until it holds one of them. Click the segment for its options, or **Add…** to type a new **Value**, with a **Label** if you like: it's added to the options and picked. See [The Hub — Environment selector](/docs/hub/#environment-selector).
 
 **An editor left open** follows a change made elsewhere (a pick in the header, a save in another tab or on another device): with no edits of your own it updates and says what moved; with edits, **Save** stops and offers **Reload** or **Keep editing**, so nothing is written over the change.
 
-**Before a run,** a header variable whose value isn't one of its options is asked for. One dialog offers the options of each such variable: **Use** saves the pick and the run goes on, **Cancel** stops it. A variable without options is never asked for. On Run Batch's **Execute** step, **Sending To** lists each header variable with its value.
+**Before a run,** every variable the run needs must have a value: each variable in the header, and each variable the [Base URL](#base-url-variables) uses. One that's empty, or, with options, not one of them, is asked for: one dialog lists them all, a dropdown for a variable with options and a box for one without. **Use** saves the answers and the run goes on; **Cancel** stops it, and so does leaving a box empty. A value typed for a header variable joins its options. A header variable the run doesn't need is never in the way: untick **Header**. On Run Batch's **Execute** step, **Sending To** lists each header variable with its value.
 
 ## Organisation Selection
 {: #organization-selection }
@@ -354,7 +370,7 @@ Some APIs serve several organisations with one sign-in and expect each request t
 2. Under **Headers**, add the header the API reads with the variable as its value: `Organization` set to `{{ENV:org}}`. Add any others (a `Location`, say) the same way
 3. Switch organisation from the Hub header whenever you like, without signing in again
 
-A new environment on a Standard System that works this way has steps 1 and 2 done already: its headers are in place, written `{{org}}` (the same as `{{ENV:org}}` in an environment's headers), and it has an empty `org` variable in the header. Select the environment, and the header reads `pick org`; click it and **Add…** your first organisation.
+A new environment on a Standard System that works this way has steps 1 and 2 done already: its headers are in place, written `{{org}}` (the same as `{{ENV:org}}` in an environment's headers), and it has an empty `org` variable in the header. Select the environment, and the header reads `pick org`; click it and **Add…** your first organisation. A run before then stops and asks for one.
 
 Dobermann doesn't look inside your token for organisations, or check the header against it: if the value is wrong, the API says so. Environments from earlier versions keep their headers, and their organisation is already the `org` variable; tick **Header** on it and add its options to switch it from the header.
 
@@ -395,6 +411,7 @@ See the [OAuth Setup Guide](/docs/oauth-setup/) for detailed configuration help.
 **Check:**
 - The header selector shows the environment you meant
 - The Base URL is correct and has no trailing slash
+- A variable in the Base URL has the value you meant, case included: `{{version}}` set to `V1` sends `/V1/`, not `/v1/`
 - Endpoint paths start with `/`
 
 ## Related Topics
