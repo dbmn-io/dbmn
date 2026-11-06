@@ -329,7 +329,7 @@ Step 4 shows what the batch will send, built by the same code that sends it — 
 | Setting | When | What it does |
 |---|---|---|
 | **Grouped by** | A header + lines or nested template | The columns that start a new request — a new request whenever any of them changes. Its ⓘ shows how the rows were grouped |
-| **Array** | Rows per request above 1, on a template with one array | The array the rows are packed into |
+| **Array** | A template with one array | The array the rows are packed into |
 | **Rows per request** | A flat array — at the top (`[ { … } ]`), or inside objects (`{ "Payload": { "Documents": [ { … } ] } }`) | How many rows go into each request's array, 1 to 1000. Start at 100: many APIs refuse or time out well before 1000. Go higher only when the API's documentation says it can take more |
 | **Orders per request** | Two or three levels (`orders[].items[]`); named after the outer array | How many top-level entries go into each request |
 | **Values per URL** | A repeating URL parameter (`id={{item}}[ or ]`) | How many values go into each URL — Auto fits as many as the URL length allows |

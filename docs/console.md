@@ -124,7 +124,8 @@ The Raw tab gives you complete visibility into every request and response — th
 
 **Features:**
 - **Transactions** — One card each: status, HTTP code and time, then its input rows, request and response. Expand All / Collapse All in the bar. A long list shows a window of cards with **Scroll for more** at the end
-- **Status** — Show only Pending, Running, Completed, Error or Split transactions, with counts. While the batch runs, the tab opens on **Running**; it goes back to All when the batch finishes unless you picked a status yourself
+- **Status** — Show only Pending, Running, Completed, Error, Test failed or Split transactions, with counts; each transaction counts under one of them. While the batch runs, the tab opens on **Running**; it goes back to All when the batch finishes unless you picked a status yourself
+- **TEST FAILED** — The server answered, but the endpoint's test turned the answer down. The card says which test failed and why, under its header; an error from the server says its HTTP status there instead
 - **Show Input / Request / Response** — Choose what each transaction shows. Input is greyed out when there are no input rows
 - **Full request/response JSON** — Syntax-highlighted, with the parent keys pinned at the top as you scroll
 - **Request Body / Details** — Details shows the endpoint, query parameters and headers. A request with no body (blank or `{}`) shows Details only, and Request starts switched off
@@ -171,9 +172,10 @@ Shows all successful transactions (2xx responses) in a data table.
 ### Error Tab
 {: #error-tab }
 
-Shows all failed transactions — 4xx client errors, 5xx server errors, network errors, and timeouts.
+Shows all failed transactions — 4xx client errors, 5xx server errors, network errors, timeouts, and answers the endpoint's test turned down.
 
 **Features:**
+- **Reason**, the first column — why each transaction is an error: the test that failed and why, or the HTTP status and message
 - Error messages from the API
 - Request context that caused the error
 - Status codes and response times
