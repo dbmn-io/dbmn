@@ -54,17 +54,20 @@ On a Mac where Safari is the only browser allowed, use the desktop app, which se
 
 ```
 {your-workspace}/
-├── .active8/
-│   └── executions.db          ← execution metadata (SQLite)
+├── .dbmn/
+│   ├── executions.db          ← History: each run's status, timestamps, counts (SQLite)
+│   └── workspace.json         ← says this folder is a DBMN workspace
 ├── {environment}/
 │   └── {endpoint}/
-│       ├── transaction-{timestamp}.json           ← request
-│       ├── transaction-{timestamp}-response.json  ← response
+│       ├── run-content.dbmn                       ← the requests, responses and logs, compressed
 │       └── batch/{batchId}/
 │           ├── input.csv                          ← the rows you loaded
-│           ├── transaction-001.json
-│           └── transaction-001-response.json
+│           └── run-content.dbmn
 ```
+
+A workspace from an older version has an `.active8` folder: it is renamed `.dbmn` at start-up and
+left as a link, so an older version sharing the folder keeps working. Older runs keep their
+transaction files, one per request and response, and still open in the Console.
 
 The Console's Settings tab links each run to its files.
 
@@ -76,14 +79,16 @@ The Console's Settings tab links each run to its files.
 
 ### Transaction Files (Audit Trail)
 
-- Every API call produces request and response files; a batch keeps its input rows beside them
+- Every API call keeps its request, response and log; a batch keeps its input rows beside them
 - Organised by environment, then endpoint, then batch
-- Human-readable JSON — open in any text editor
+- Kept in one compressed archive per run folder (`run-content.dbmn`), not a file per request: a big
+  workspace takes a fraction of the space. Open a run's Console to read them, or **Export** them
 - Files persist until you delete them — full audit trail. Deleting a run from **History** deletes its files too
 
 ### Configuration (VS Code Storage)
 
-- Endpoints, environments and Systems are stored in VS Code's global state
+- Endpoints, environments and Systems are kept in your DBMN account, or on this computer only if
+  you chose that. See [Settings](/docs/hub/#settings)
 - Credentials (tokens, secrets, service-account keys) are stored in VS Code's **encrypted secret storage**
 - Never written to disk as plain text — and stripped from exports unless you ask. See [Import/Export](/docs/import-export/#credentials)
 

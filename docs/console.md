@@ -169,6 +169,8 @@ Shows all successful transactions (2xx responses) in a data table.
 
 **Chain** in the toolbar sends the rows this tab shows into another endpoint's **Run Batch**. See [Chain](/docs/chain/).
 
+**Compare** (Beta), beside it, lines this result up against up to three other results of the same endpoint: another environment, or the same one last week. It reads them through the view this tab shows. See [Compare](/docs/compare/).
+
 ### Error Tab
 {: #error-tab }
 
@@ -503,6 +505,7 @@ One failed request can carry many rows. If the error doesn't say which, the requ
 - [Named Views](/docs/named-views/) — Save column layouts and row-per-X shapes; switch and export instantly
 - [Pagination](/docs/pagination/) — Configure and run paginated API requests
 - [Chain](/docs/chain/) — Send a run's results into another endpoint's Run Batch
+- [Compare](/docs/compare/) — This result against other results of the endpoint, cell by cell
 - [Batch Reprocessing](/docs/batch-reprocessing/) — Re-run failed transactions without re-executing the whole batch
 - [The Hub](/docs/hub/) — History, the activity chip, and execution settings
 - [Endpoints](/docs/endpoints/) — Configuring API requests

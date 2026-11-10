@@ -65,7 +65,7 @@ What the product calls things now. Use these; the guard rejects most of the reti
 | Say | Not | Notes |
 |---|---|---|
 | the **Hub** | sidebar, tree view, panel | One editor tab; the VS Code sidebar closes when it opens |
-| **rail** / **list panel** / **tabs** | | Rail sections: Environments, API Catalogue, History, Import, Export; pinned: Account, Settings |
+| **rail** / **list panel** / **tabs** | | Rail sections: Environments, API Catalogue, History, Compare, Import, Export; pinned: Account, Settings |
 | **environment selector** (header) | status bar, right-click → Set as Active | Also **Set as Active** in the environment editor footer |
 | **Add Endpoint**, **Add Environment** | + icon, New Endpoint | |
 | **New Endpoint from Clipboard** / **Paste Endpoint** | Paste | Catalogue button / new-endpoint button |
@@ -83,6 +83,7 @@ What the product calls things now. Use these; the guard rejects most of the reti
 | **Pagination** (Console footer) → **Fetch all pages**, **Get next N pages**, **Next Page** | Configure Pagination, Fetch All, Execute tab | |
 | Console tabs: **Links**, **Input**, **Raw**, **Completed**, **Error**, **Settings** | Execute tab, Request tab | **Links** only on a chained run |
 | **Chain** (Console toolbar, Completed tab) → **Chain from …**, **Send them to endpoint:** | | Run Batch banner: **Chained from** |
+| **Compare** (Console toolbar, Completed tab; Beta) → steps **Match**, **Compare**, **Results**; **Baseline** / **BL**, then **C1**–**C3**; **Strict** / **Relaxed** / **Don't compare**; Status **Same** / **DIFF** / **Missing**; **Side by side** / **Compact** | A/B, Left/Right, Pick step, Differences only, Select all (Status filter) | Starts only from the Console; the Hub's Compare list reopens saved compares (vs-dbmn #298) |
 | **help mode** (help button at the right end of the Hub header, or <kbd>?</kbd>) | help icon, ? icon, dashed outline | No screen has per-control help icons; help mode covers the Hub and every tab; the outline is **dotted**. Page: `docs/help-mode.md` |
 | **Reprocess**, **Re-run**, **Copy**, **Delete**, **Pause**, **Resume**, **Cancel** | Copy Batch, Rename, Stop | Console footer |
 | **Logs**, **Raw / Render / Text** | View Logs, Rendered | Raw tab |

@@ -14,7 +14,7 @@ The Hub has four parts, left to right and top to bottom:
 | Part | What it is |
 |---|---|
 | **Header** | The DBMN mark, the environment selector, and the activity chip |
-| **Rail** | Sections: {icon:nav-environments} Environments, {icon:nav-api-catalogue} API Catalogue, {icon:nav-history} History, {icon:nav-import} Import, {icon:nav-export} Export, and pinned at the bottom {icon:nav-account} Account and {icon:nav-settings} Settings |
+| **Rail** | Sections: {icon:nav-environments} Environments, {icon:nav-api-catalogue} API Catalogue, {icon:nav-history} History, {icon:nav-compare} Compare, {icon:nav-import} Import, {icon:nav-export} Export, and pinned at the bottom {icon:nav-account} Account and {icon:nav-settings} Settings |
 | **List panel** | Slides out over the tabs when you click a rail item: your endpoints, your environments, your past runs |
 | **Tabs** | Where things open: endpoint editors, environment editors, Run Batch, and the Console. With no tab open, [Home](#home) |
 
@@ -136,7 +136,7 @@ Sign in to DBMN, see your licence and weekly usage, and find **Puppy School & Ba
 
 | Panel | Settings |
 |---|---|
-| **API Catalogue** | **Show** `Current System` (only endpoints in the active environment's System) or `All Systems`. **Group by**. **Recent** on or off. **Manage Tags…** to rename, merge or delete tags across every endpoint. **Stored**: where your endpoints, environments and Systems live, **On this computer only** or **In your DBMN account**; **Save to my account…** moves them to your account, after a copy is exported to a folder you pick. Secrets never leave this computer |
+| **API Catalogue** | **Show** `Current System` (only endpoints in the active environment's System) or `All Systems`. **Group by**. **Recent** on or off. **Manage Tags…** to rename, merge or delete tags across every endpoint. **Stored**: where your endpoints, environments and Systems live, **On this computer only** or **In your DBMN account**; **Save to my account…** moves them to your account, after a copy is exported to a folder you pick. Signed out, it says **On this computer, from your DBMN account**: you keep working on this computer's copy, and your changes go to your account when you sign in again (changed in both places, the newer one is kept and the other saved as a copy). **Remove from this computer** takes the copy off a shared computer. Secrets never leave this computer |
 | **Transactions** | **Show** and **Group by** for History |
 | **Execution** | **Auto-open console on completion**. **Treat network errors as critical**: timeouts, DNS and connection failures stop a batch at once, whatever its error handling. **Critical HTTP codes**, default `401, 403`, which also stop a batch at once. **Max CSV rows** for batch uploads |
 | **UI** | **Confirm transaction deletion**. **Theme**: see [Theme](#theme) |
@@ -171,7 +171,7 @@ The rail's names sit beside its icons on Home. Everywhere else the rail is icons
 ## List panel
 {: #list-panel }
 
-Click {icon:nav-environments} **Environments**, {icon:nav-api-catalogue} **API Catalogue** or {icon:nav-history} **History** in the rail and its list slides out over the tabs. Click the same item again to close it, or another to switch lists. The tabs underneath keep their width.
+Click {icon:nav-environments} **Environments**, {icon:nav-api-catalogue} **API Catalogue**, {icon:nav-history} **History** or {icon:nav-compare} **Compare** in the rail and its list slides out over the tabs. Click the same item again to close it, or another to switch lists. The tabs underneath keep their width.
 
 The panel closes by itself when you open something from it: an endpoint, an environment, a run, **Add Endpoint**. Searching, filters, **Select** and collapsing a group leave it open. **Esc**, or a click on the dimmed tabs, also closes it. Drag its right edge to make it wider; the Hub remembers the width.
 
@@ -180,7 +180,7 @@ The panel closes by itself when you open something from it: an endpoint, an envi
 ## Tabs
 {: #tabs }
 
-Endpoints, environments, Run Batch and the Console open as tabs in the Hub's tab area, not as separate VS Code editors. Each opens once; clicking it again brings its tab forward.
+Endpoints, environments, Run Batch, the Console and Compare open as tabs in the Hub's tab area, not as separate VS Code editors. Each opens once; clicking it again brings its tab forward.
 
 - Drag tabs to reorder them.
 - **Close all** appears once two or more tabs are open. Anything unsaved stays open: an edited endpoint or environment, and a Run Batch holding data you haven't run. The rest close, Consoles included; a running batch carries on, and [History](#history) opens its Console again.
@@ -195,4 +195,5 @@ Endpoints, environments, Run Batch and the Console open as tabs in the Hub's tab
 - [Environments](/docs/environments/) — Base URL, authentication, concurrency
 - [Endpoints](/docs/endpoints/) — The endpoint editor
 - [Console](/docs/console/) — Results, live progress, export
+- [Compare](/docs/compare/) — The saved compares in the rail's Compare list
 - [Shortcuts](/docs/shortcuts/) — Keyboard shortcuts

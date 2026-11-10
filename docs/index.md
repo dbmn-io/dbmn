@@ -34,6 +34,7 @@ Welcome to the Dobermann documentation. Dobermann enables bulk data migration th
 | [↳ Pagination](/docs/pagination/) | Configure and run paginated API requests |
 | [↳ Chain](/docs/chain/) | Send a run's results into another endpoint's Run Batch, and trace the link |
 | [↳ Batch Reprocessing](/docs/batch-reprocessing/) | Re-run only failed transactions from a previous batch |
+| [Compare](/docs/compare/) | A result against up to three others, cell by cell: environments, or one environment over time (Beta) |
 | [Import/Export](/docs/import-export/) | Share configurations with your team |
 | [The Training Ground](/docs/playground/) | The practice API behind Puppy School: endpoints, data, limits |
 | [Shortcuts](/docs/shortcuts/) | Keyboard shortcuts |
@@ -52,6 +53,7 @@ Every enterprise system speaks REST. But migrating data through REST APIs still 
 - **Environment Management** — Manage connections, authentication (DBMN, JWT, OAuth, Google Service Account), and per-environment variables
 - **Batch Execution** — Process thousands of rows with parallel processing and live progress
 - **Live Results** — Watch results stream in as your batch executes, then shape them with Named Views and export
+- **Compare** — Line up saved results from DEV, UAT and PROD, or from last week and today, and see cell by cell what changed
 
 ## Installation
 
