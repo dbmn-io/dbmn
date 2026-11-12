@@ -64,9 +64,10 @@ Match decides which record in one result is the same record in another.
 **Comparing**, on the left, lists the results, BL first, and the view. **Back** returns to
 **Select**, to pick a different Baseline or other results.
 
-Under **Match on**, tick the columns that identify a record, then click **Check**. Choose a
-business key such as `sku` or `itemCode`, or a few columns together. A database id usually won't
-work: each environment numbers its records for itself.
+Under **Match on**, tick the columns that identify a record: a business key such as `sku` or
+`itemCode`, or a few columns together. Each column shows a sample value from BL. A database id
+usually won't work: each environment numbers its records for itself. Compare checks the match as
+you tick, and the step bar shows how far it has got.
 
 **How BL matches C1** (or **each result**, with more than one) shows what the key does, over every
 record:
@@ -79,10 +80,7 @@ record:
 
 If the key finds more than one record on either side, a second box lists them under **Match more
 than one record: can't be compared**: **One BL to many C1**, **Many BL to one C1** and **Many to
-many**. Click **Show** to see them, then tick another column so each record matches one.
-
-The **Example** below the match shows one key's record from each side, so you can check the pairing
-looks right. Step through keys with ◀ ▶, or type in **Find a key**.
+many**. Tick another column so each record matches one.
 
 Compare goes on only when the key is one to one in every result and pairs at least one record.
 
