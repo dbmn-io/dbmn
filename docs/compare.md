@@ -145,7 +145,7 @@ The toolbar:
   change with it.
 - **Search** finds rows, with the same syntax as the [Console's search](/docs/console/#search).
 - The count of rows shown.
-- **Export** (see [Export](#export)).
+- {icon:compare-export} **Export** saves to Excel (see [Export](#export)).
 
 Click a column heading to sort.
 
@@ -178,7 +178,7 @@ formatted, as in the Console.
 ## Export
 {: #export }
 
-**Export** › **Excel** saves what Results shows: a **Summary** sheet (the results compared, the key,
+{icon:compare-export} **Export** saves what Results shows, as an Excel workbook: a **Summary** sheet (the results compared, the key,
 the columns and the counts), then the **Details**, one row per record shown, with the filters and
 search applied. Past Excel's row limit, the rows run on into **Details 2**, **Details 3** and so on.
 
