@@ -35,16 +35,17 @@ A compare always starts from a result.
 1. Open a finished run's Console and go to the **Completed** tab.
 2. Choose the [view](/docs/named-views/) whose columns you want compared. Compare reads every
    result through this view, so pick or edit it first.
-3. Click **Compare**, beside **Chain**.
-4. In the **Compare** dialog, choose **Other results from this endpoint**, then tick up to three
-   results to compare with this one.
-5. Click **Compare**.
+3. Click **Compare**, beside **Chain**. The Compare tab opens on its first step, **Select**.
+4. Choose **Other results from this endpoint**, then tick up to three results to compare.
+5. Click **Next**.
 
-The result you started from is the **Baseline**, **BL**: everything is measured against it. The
-others are **C1**, **C2** and **C3**, in the order you ticked them. The tray at the top of the
-dialog shows the four places as you fill them.
+The result you started from is the **Baseline**, **BL**: everything is measured against it. Pick
+another in the **Baseline** column if you'd rather. The others are **C1**, **C2** and **C3**, in the
+order you ticked them. The tray under the list shows the four places as you fill them.
 
-The Compare tab opens on its first step, **Match**.
+Compare reads the results, then opens **Match**. While it works, **Loading compare** lists each
+piece of work and ticks it off as it finishes. **Back** and **Next**, at the bottom, move between
+the steps.
 
 - A run's environment shows beside each result, with any [header values](/docs/environments/#variables)
   it ran with (`DEV 880`, `DEV 840`), so one environment run for two companies is two results you
@@ -61,8 +62,8 @@ The Compare tab opens on its first step, **Match**.
 
 Match decides which record in one result is the same record in another.
 
-**Comparing** lists the results, BL first, and the view. **Select results** opens the dialog
-again, to pick a different Baseline or other results.
+**Comparing**, on the left, lists the results, BL first, and the view. **Back** returns to
+**Select**, to pick a different Baseline or other results.
 
 Under **Match on**, tick the columns that identify a record, then click **Check**. Choose a
 business key such as `sku` or `itemCode`, or a few columns together. A database id usually won't
@@ -135,8 +136,8 @@ The toolbar:
   {icon:compare-open-result} opens a result in its own Console.
 - **Side by side** gives each column one sub-column per result. **Compact** gives each column one
   cell, with the values that differ in pills. Hover over the headings to see which result is which.
-- **All columns** or **With differences**. **With differences** hides the compared columns that no
-  row differs in, so a wide record shows only what changed. It only hides them from view: they are
+- **All columns** or **Diffs**. **Diffs** hides the compared columns that no row differs in, so a
+  wide record shows only what changed. It only hides them from view: they are
   still compared, and one comes back as soon as a row differs in it. The key and the columns you
   set to **Don't compare** always show.
 - {icon:filters} clears every filter. It's lit while a filter is on.
@@ -187,14 +188,14 @@ Values keep their type: text stays text, leading zeros and all, and numbers stay
 ## Saved compares
 {: #saved }
 
-A compare is saved as you build it: the results, the key, the columns, Strict or Relaxed, which
+A compare is saved once **Next** on **Select** picks its results, then as you build it: the results, the key, the columns, Strict or Relaxed, which
 rows, and the columns you hid.
 
 In the Hub, {icon:nav-compare} **Compare** lists them. Click one to open its **Results**, with the
 same results. Right-click it for:
 
 - **Open**.
-- **Edit**: pick the Baseline and the results again.
+- **Edit**: opens on **Select**, to pick the Baseline and the results again.
 - **Duplicate**: a copy to change.
 - **Delete**: removes the compare only. The results stay in **History**.
 
