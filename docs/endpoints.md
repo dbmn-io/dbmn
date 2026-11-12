@@ -28,7 +28,7 @@ The catalogue groups endpoints for you — by the path they share, by System, or
 ### Tags
 {: #tags }
 
-Endpoints carry **tags** rather than living in folders. Type them into the **Tags** field in the editor — `orders`, `migration-q3`, `legacy` — and filter the catalogue by them. **Manage Tags…** in Settings renames, merges or deletes a tag across every endpoint. Tags travel with the endpoint when you share or export it.
+Endpoints carry **tags** rather than living in folders. Type them into the **Tags** field in the editor — `orders`, `migration-q3`, `legacy` — and filter the catalogue by them. As you type, the tags already in use are offered, with **New tag** last. **Manage tags…** beside the field, or **Manage Tags…** in Settings, renames, merges or deletes a tag across every endpoint; an editor that's open shows the change at once. Tags travel with the endpoint when you share or export it.
 
 ### Deleting an Endpoint
 
