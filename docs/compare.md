@@ -43,9 +43,8 @@ The result you started from is the **Baseline**, **BL**: everything is measured 
 another in the **Baseline** column if you'd rather. The others are **C1**, **C2** and **C3**, in the
 order you ticked them. The tray under the list shows the four places as you fill them.
 
-Compare reads the results, then opens **Match**. While it works, **Loading compare** lists each
-piece of work and ticks it off as it finishes. **Back** and **Next**, at the bottom, move between
-the steps.
+Compare reads the results, then opens **Match**. The step bar at the bottom shows how far it has
+got, on the step it leads to. **Back** and **Next**, beside it, move between the steps.
 
 - A run's environment shows beside each result, with any [header values](/docs/environments/#variables)
   it ran with (`DEV 880`, `DEV 840`), so one environment run for two companies is two results you
@@ -191,11 +190,12 @@ Values keep their type: text stays text, leading zeros and all, and numbers stay
 A compare is saved once **Next** on **Select** picks its results, then as you build it: the results, the key, the columns, Strict or Relaxed, which
 rows, and the columns you hid.
 
-In the Hub, {icon:nav-compare} **Compare** lists them. Click one to open its **Results**, with the
-same results. Right-click it for:
+In the Hub, {icon:nav-compare} **Compare** lists them. Click one to open it on **Select**, with
+everything as saved. Nothing is read until you move on: pick other results if you like, or click
+**Results** in the step bar to go straight there. Compare reads, matches and compares the results
+on the way, and the steps before Results tick as it goes. Right-click a compare for:
 
 - **Open**.
-- **Edit**: opens on **Select**, to pick the Baseline and the results again.
 - **Duplicate**: a copy to change.
 - **Delete**: removes the compare only. The results stay in **History**.
 
