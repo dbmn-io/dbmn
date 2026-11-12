@@ -23,7 +23,10 @@ module DocsTermsGuard
     [/Manhattan/i, 'never name a customer platform in public copy (CLAUDE.md branding rule)'],
     [/\btree view\b|\bsidebar tree\b|\bEndpoints tree\b|\bEnvironments tree\b/i, 'the Hub: rail → list panel → tabs'],
     [/\bsidebar\b(?! closes)/i, 'the Hub rail or list panel (the VS Code sidebar closes when the Hub opens)'],
-    [/right-click (an |the |your )?(environment|endpoint|folder|run)\b/i, 'there are no context menus on Hub lists; name the button'],
+    # API Catalogue rows and History rows have right-click menus (vs-dbmn #444, #314); other Hub lists don't
+    [/right-click (an |the |your )?(environment|folder)\b/i, 'there are no context menus on the Environments list; name the button'],
+    # The Hub's search, 2026-11-12 (vs-dbmn #444): one box, the query builder writes it
+    [/Search across everything|Search endpoint, path, status, body content/, 'the box is "Search" (see hub#search); the button beside it is "Build a search"'],
     [/\bAlt\+D\b|Quick Access/, 'removed; the only VS Code keybinding is Ctrl+W in the Hub'],
     [/\.active8\/(results|batches)/, 'files are saved under {workspace}/{environment}/{endpoint}/ (see your-data)'],
     [/Dobermann: (Export|Import) Workspace|Import Endpoint\b|Export Endpoint\b|Export Folder\b/, 'Hub → Import / Export, one .dbmn.zip'],

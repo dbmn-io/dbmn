@@ -18,12 +18,12 @@ In the Hub, open {icon:nav-api-catalogue} **API Catalogue** and click {icon:add-
 
 ### Finding Endpoints
 
-The catalogue groups endpoints for you — by the path they share, by System, or by method (**Settings → API Catalogue → Group by**). Type in **Search across everything…** to filter by name, method, path, description or tag, or use {icon:filters} **Filters** for System, Method and Tags. See [The Hub — API Catalogue](/docs/hub/#api-catalogue).
+The catalogue groups endpoints for you — by the path they share, by System, or by method (**Settings → API Catalogue → Group by**). Search by any words in the endpoint, a method, `#tag` or `@System`; {icon:build-search} **Build a search** writes one for you. See [The Hub — Search](/docs/hub/#search).
 
 ### Recent
 {: #recent }
 
-**Recent**, at the top of the catalogue, pins the five endpoints you last saved or ran, so the ones you are working on today are one click away whatever group they live in. Opening an endpoint to look at it does not move it. Collapse it with its chevron, or turn it off under **Settings → API Catalogue → Recent**. Searching, or filtering by method or tag, hides it: when you are looking for something specific, Recent is just noise.
+**Recent**, at the top of the catalogue, pins the five endpoints you last saved or ran, so the ones you are working on today are one click away whatever group they live in. Opening an endpoint to look at it does not move it. Collapse it with its chevron, or turn it off under **Settings → API Catalogue → Recent**. While you search it shows the recent ones that match, so two letters of something you just ran find it.
 
 ### Tags
 {: #tags }

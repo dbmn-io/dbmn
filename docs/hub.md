@@ -79,14 +79,16 @@ Your endpoints. Grouped by the URL path they share by default; **Settings → AP
 
 | Control | What it does |
 |---|---|
-| **Search across everything…** | Filters by name, method, path, description and tags as you type |
-| {icon:filters} **Filters** | Narrow the list by **System**, **Method** and **Tags**. The button shows how many filters are on; × clears them all |
+| **Search** | Finds endpoints as you type: words in any order, a method, `#tag` and `@System`. See [Search](#search) |
+| {icon:build-search} **Build a search** | Pick a **System**, **Method** and **Tags**, and it writes the search for you |
 | {icon:add-endpoint} **Add Endpoint** | Opens a blank endpoint editor in a new tab |
 | {icon:paste-endpoint} **New Endpoint from Clipboard** | Opens a new endpoint filled from an endpoint a teammate shared — see [Sharing Endpoints](/docs/sharing-endpoints/) |
 | **Select** | Turns on checkboxes for bulk actions on the selection. **Delete** names what goes and asks first; their History is kept. **Export** writes them to a `.dbmn.zip`. **Update** sets their System, adds tags, and removes any of the tags they carry, all at once |
-| **Recent** | The five endpoints you last saved or ran, pinned above the groups. Turn it off in Settings |
+| **Recent** | The five endpoints you last saved or ran, pinned above the groups. While you search, the recent ones that match. Turn it off in Settings |
 
 Each row shows the method, name and path, with {icon:run-api} **Run API** on the right. Endpoints with `{{template variables}}` also show {icon:run-batch} **Run Batch**. Click the row to open the endpoint in a tab.
+
+Right-click an endpoint for **Open**, **Run API**, **Run Batch**, **Show history** (History with only its runs) and **Delete**.
 
 Endpoints are not filed in folders. They carry **tags**, and the catalogue is grouped for you. See [Endpoints — Tags](/docs/endpoints/#tags).
 
@@ -104,16 +106,50 @@ See [Environments](/docs/environments/).
 ## History
 {: #history }
 
-Every run, single or batch, newest first. Each row shows its status, the endpoint and path, and a line with the method, how long ago, the environment, the HTTP status and the run time. Click a row to reopen its Console with full results.
+Every run, single or batch, newest first. Each row shows its status, the batch's name (or the endpoint's), the endpoint and path, and a line with the method, how long ago, the environment, the HTTP status and the run time. Click a row to reopen its Console with full results.
 
 | Control | What it does |
 |---|---|
-| **Search endpoint, path, status, body content…** | Filters the list as you type, including on what was sent and received |
+| **Search** | Finds runs as you type, in what was sent and received too: words in any order, a method, `#tag`, `@System`, `!status`, `~environment` and `7d`. See [Search](#search) |
+| {icon:build-search} **Build a search** | Pick the scope, dates, endpoint, statuses and methods, and it writes the search for you |
 | **Select** | Turns on checkboxes; the red **Delete** removes the selected runs and their files. Settings → UI can ask you to confirm first |
 | **Settings → Transactions → Show** | `Current Environment` or `All Environments` |
 | **Settings → Transactions → Group by** | `Date`, `Endpoint`, `Environment`, `Status` or `None (flat)` |
 
 Right-click a row for the actions its Console footer would show for that state: **Pause** a running batch, **Resume** a paused, stopped or cancelled one, **Cancel** a queued batch or a single request still in flight, **Delete**, and **Open**. **Reprocess…** and **Re-run** open the Console, where their options are. See [Console](/docs/console/) and [Batch Reprocessing](/docs/batch-reprocessing/).
+
+---
+
+## Search
+{: #search }
+
+The API Catalogue, History and the Compare list have one search box each, and all three read it the same way. What you type is the whole search: change it or delete it right there.
+
+| Type | Finds |
+|---|---|
+| words, in any order | rows with every word somewhere in them: name, path, description, body, tags, status, environment |
+| `"two words"` | the words together |
+| `-word` | rows without it |
+| `get` `post` `put` `patch` `delete` | that method (`"get"` in quotes is the word) |
+| `#inventory` | that tag (`#"puppy school"` for one with a space) |
+| `@` / `@dbmn` | the active environment's System / that System |
+| `!error` `!paused` | that status (History) |
+| `~` / `~prod` | the active environment / that one (History; in Compare, any of its results) |
+| `24h` `7d` `2w` | since then (History and Compare); `2026-11-01..2026-11-12` between two days |
+
+The same kind twice is either of them: `get post` is GET or POST, `#a #b` either tag. Different kinds all apply: `@ get #inventory` is the active System's GET endpoints tagged inventory.
+
+Typing suggests as you go: `#` lists your tags, `@` the Systems, `!` the statuses and `~` the environments, the most used first; a word lists the tags, Systems and methods that hold it. ↑ ↓ and **Enter** (or a click) write it into the box. **Esc** closes the list, and a second **Esc** clears the box.
+
+{icon:build-search} **Build a search**, inside the box, opens on what the box says and shows the search it builds as you pick. **Use search** puts it in the box, so you can type it yourself next time.
+
+| You type | You get |
+|---|---|
+| `post bulk` | POST endpoints with "bulk" in them |
+| `@ get #puppy-school` | The active System's GET endpoints tagged puppy-school |
+| `#inventory -report` | Endpoints tagged inventory, without "report" |
+| `~ !error 7d 404` | This week's failed runs in the active environment with 404 in them (History) |
+| `"Get Carriers" !completed` | That endpoint's completed runs (History; **Show history** writes the name for you) |
 
 ---
 
@@ -136,7 +172,7 @@ Sign in to DBMN, see your licence and weekly usage, and find **Puppy School & Ba
 
 | Panel | Settings |
 |---|---|
-| **API Catalogue** | **Show** `Current System` (only endpoints in the active environment's System) or `All Systems`. **Group by**. **Recent** on or off. **Manage Tags…** to rename, merge or delete tags across every endpoint. **Stored**: where your endpoints, environments and Systems live, **On this computer only** or **In your DBMN account**; **Save to my account…** moves them to your account, after a copy is exported to a folder you pick. Signed out, it says **On this computer, from your DBMN account**: you keep working on this computer's copy, and your changes go to your account when you sign in again (changed in both places, the newer one is kept and the other saved as a copy). **Remove from this computer** takes the copy off a shared computer. Secrets never leave this computer |
+| **API Catalogue** | **Group by**. **Recent** on or off. **Manage Tags…** to rename, merge or delete tags across every endpoint. **Stored**: where your endpoints, environments and Systems live, **On this computer only** or **In your DBMN account**; **Save to my account…** moves them to your account, after a copy is exported to a folder you pick. Signed out, it says **On this computer, from your DBMN account**: you keep working on this computer's copy, and your changes go to your account when you sign in again (changed in both places, the newer one is kept and the other saved as a copy). **Remove from this computer** takes the copy off a shared computer. Secrets never leave this computer |
 | **Transactions** | **Show** and **Group by** for History |
 | **Execution** | **Auto-open console on completion**. **Treat network errors as critical**: timeouts, DNS and connection failures stop a batch at once, whatever its error handling. **Critical HTTP codes**, default `401, 403`, which also stop a batch at once. **Max CSV rows** for batch uploads |
 | **UI** | **Confirm transaction deletion**. **Theme**: see [Theme](#theme) |
