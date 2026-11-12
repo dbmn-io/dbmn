@@ -135,13 +135,17 @@ The toolbar:
   {icon:compare-open-result} opens a result in its own Console.
 - **Side by side** gives each column one sub-column per result. **Compact** gives each column one
   cell, with the values that differ in pills. Hover over the headings to see which result is which.
+- **All columns** or **With differences**. **With differences** hides the compared columns that no
+  row differs in, so a wide record shows only what changed. It only hides them from view: they are
+  still compared, and one comes back as soon as a row differs in it. The key and the columns you
+  set to **Don't compare** always show.
 - {icon:filters} clears every filter. It's lit while a filter is on.
+- {icon:compare-columns} **Columns**: tick the columns in the compare. A column you set to **Don't
+  compare** is marked **show only**. Unticking a column removes it from the compare, so the counts
+  change with it.
 - **Search** finds rows, with the same syntax as the [Console's search](/docs/console/#search).
 - The count of rows shown.
 - **Export** (see [Export](#export)).
-- {icon:compare-columns} **Columns**: tick the columns to show. A column you set to **Don't
-  compare** is marked **show only**. A hidden column isn't compared either, so the counts change
-  with it.
 
 Click a column heading to sort.
 
