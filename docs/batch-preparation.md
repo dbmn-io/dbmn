@@ -14,22 +14,22 @@ Run Batch appears in the endpoint footer, and as the {icon:run-batch} icon on th
 ## Overview
 {: #overview }
 
-Batch preparation follows five steps:
+Batch preparation follows four steps:
 
 | Step | Name | Purpose |
 |------|------|---------|
 | 1 | **Source** | Choose how to get data in — upload a file, paste text, or enter data manually |
 | 2 | **Map** | Map source columns to template variables and configure data formats |
 | 3 | **Validate** | Review, edit, add, and validate rows before building requests |
-| 4 | **Review** | See the first requests and how many will be sent, and set Rows per request |
-| 5 | **Execute** | Name the batch, choose error handling and concurrency, and run it |
+| 4 | **Review** | See the requests and how many will be sent, set Rows per request, name the batch, choose error handling and concurrency, and **Execute** |
 
 ### The step bar
 {: #step-bar }
 
-The five steps run across the top of Run Batch. Each one shows what it decided —
-`replenishment.csv · 295 rows`, `6 of 6 mapped`, `295 rows valid`, `3 API calls` — and the
-step you are on is the highlighted one. **Back** and **Next** stay at the bottom left.
+The four steps run along the bottom of Run Batch, beside **Back** and **Next**. Each one shows
+what it decided — `replenishment.csv · 295 rows`, `6 of 6 mapped`, `295 rows valid`,
+`3 API calls` — and the step you are on is the highlighted one. While a file is read or its rows
+are checked, the step fills as the work goes and says what it is doing.
 
 - **Click a step you have done** to go back to it.
 - **Click a later step** to go forward. Every step on the way runs its own checks, exactly as
@@ -41,16 +41,16 @@ step you are on is the highlighted one. **Back** and **Next** stay at the bottom
 
 There are two ways into the batch flow, and they converge at Step 3:
 
-**File / Paste path** (all 5 steps):
+**File / Paste path** (all 4 steps):
 
 ```
-Source → Map → Validate → Review → Execute
+Source → Map → Validate → Review
 ```
 
 **Enter Data path** (skips file loading and mapping):
 
 ```
-Source → Validate → Review → Execute
+Source → Validate → Review
 ```
 
 - **File / Paste**: Upload a file or paste tabular data, then map columns to template variables. The grid in Step 3 is pre-populated with your mapped data.
@@ -137,8 +137,8 @@ moment and ticks off.
   once you click **Next** on it, the mapping is remembered and the next run passes it.
 - **Validate** is passed only when every row passes its checks.
 
-You land on **Review**, so you always see the requests before they go, with **Execute** one
-click away. Anything that needs you (a missing column, a type problem, empty cells, a sort
+You land on **Review**, so you always see the requests before they go, with **Execute** beside
+them. Anything that needs you (a missing column, a type problem, empty cells, a sort
 question) stops on its step. A stop on Validate shows only the rows that need fixing
 (**Filter Errors** is on; **Show All** shows the rest). Click anything while it runs and you take
 over.
@@ -319,12 +319,12 @@ For endpoints with many template variables, the grid scrolls horizontally. Each 
 ## Step 4 — Review
 {: #step-4-review-json }
 
-Step 4 shows what the batch will send, built by the same code that sends it — for a JSON body, URL parameters, or both.
+Step 4 shows what the batch will send, built by the same code that sends it — for a JSON body, URL parameters, or both — and it is where you run it. On the left: **Configure**, **Summary** and **Sending To**; the requests take the rest of the screen. **Execute** is at the bottom left, where **Next** was.
 
 ### Configure
 {: #batch-configuration }
 
-**Configure** appears when there is something to set:
+**Configure** has the batch's own settings — [Name](#batch-name), [Error Handling](#error-handling) and [Processing Mode](#processing-mode), below — and, when there is something to set, how the rows become requests:
 
 | Setting | When | What it does |
 |---|---|---|
@@ -338,13 +338,13 @@ Step 4 shows what the batch will send, built by the same code that sends it — 
 
 Change a setting and the requests below rebuild by themselves: at once for a dropdown, once you stop typing for a number.
 
-**Summary** shows the **API calls** the batch will make, the **Rows** going into them, and the **Size** of the first request. The ⓘ — beside **Grouped by** when the rows are grouped, beside **API calls** otherwise — opens *How your rows become API requests*: your template with each variable marked by what it does, how the rows group into requests, and what each request holds.
+**Summary** shows the **API calls** the batch will make, the **Rows** going into them, the **Size** of the first request, and the **Source** (the file, *Pasted text*, or the run the rows were chained from). The ⓘ — beside **Grouped by** when the rows are grouped, beside **API calls** otherwise — opens *How your rows become API requests*: your template with each variable marked by what it does, how the rows group into requests, and what each request holds.
 
 **Requests** shows every request, or **Request samples** the first five when there are more — each with the input rows behind it and its request: the **Body**, or **Details** (method, URL, query parameters, headers). An endpoint with no body shows its URL. **Show Input / Request** hides or shows those parts of every card.
 
 ### Rows per request — the dial most people miss
 
-One row per request works, and it is the slowest possible way to load data. If the endpoint accepts an array, set **Rows per request** to what the API allows and watch **API calls** fall: 67,000 rows at 100 per request is 670 requests, not 67,000. Threads (Step 5) make a load faster; rows per request make it smaller — fewer connections, less overhead, less load on the API. Turn both up.
+One row per request works, and it is the slowest possible way to load data. If the endpoint accepts an array, set **Rows per request** to what the API allows and watch **API calls** fall: 67,000 rows at 100 per request is 670 requests, not 67,000. Threads (**Processing Mode**) make a load faster; rows per request make it smaller — fewer connections, less overhead, less load on the API. Turn both up.
 
 ### How rows become requests (nested templates)
 {: #nested-grouping }
@@ -387,20 +387,10 @@ The **API calls** count in this step is the number of requests the rule produced
 
 A nested template's rows are sorted by the header fields before they are folded, so the lines of one order sit together whatever order the file had them in. When that happens, Step 4 says so: *Unsorted data detected. Sorted by: …*. A flat template — just a list of records — has nothing to group by, and is sent exactly as loaded.
 
-Click **Next** to proceed to Step 5.
-
----
-
-## Step 5 — Execute
+### Sending To
 {: #step-5-execute-batch }
 
-Step 5 shows the execution summary and lets you start the batch.
-
-| Section | What's there |
-|---|---|
-| **Sending To** | **Environment**, each variable the environment shows in its header (its organisation, say) with its value, and the **Endpoint** as method and full URL |
-| **Source Data** | **Source** (the file and sheet, or *Pasted data*), **Records**, **API Calls**, and **Per Call** for a flat array |
-| **Configure** | **Name**, **Error Handling** and **Processing Mode** — below |
+**Environment**, each variable the environment shows in its header (its organisation, say) with its value, and the **Endpoint** as method and full URL.
 
 ### Name
 {: #batch-name }
@@ -427,7 +417,7 @@ Some failures stop a batch regardless — a `401` or `403`, or a network error �
 ### Execute
 {: #execute }
 
-**Execute** is enabled once you have scrolled to the bottom of the summary. If the active environment is typed **Production**, a confirmation asks you to proceed — see [Environments — Environment Type](/docs/environments/#environment-type).
+**Execute** starts the batch. If the active environment is typed **Production**, a confirmation asks you to proceed — see [Environments — Environment Type](/docs/environments/#environment-type).
 
 The Console opens automatically and results stream in real-time, with live completion, success/error counts, and elapsed time. **Pause** halts the batch after the current request; **Resume** picks up where it left off. The run stays under {icon:nav-history} **History** in the Hub, and every request and response is saved in your [Dobermann workspace](/docs/your-data/#dobermann-workspace).
 

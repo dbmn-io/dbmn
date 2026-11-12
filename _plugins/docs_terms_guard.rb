@@ -35,12 +35,14 @@ module DocsTermsGuard
     [/Review JSON\b/, 'Step 4 is "Review"'],
     # Production's highlight follows the theme (2026-10-14): it is red in only some of them
     [/\b(header|selector)\b[^.]{0,20}\bred\b|\bred\b[^.]{0,20}\b(header|selector)\b|\b(shown|is|are) (in )?red\b/i, 'production is "highlighted as a warning"; the colour comes from the theme'],
-    # Run Batch steps, renamed 2026-10-05 (the step bar): Source, Map, Validate, Review, Execute
+    # Run Batch steps, renamed 2026-10-05 (the step bar): Source, Map, Validate, Review. Execute was
+    # step 5 until 2026-11-12 (vs-dbmn #435): now Review's button, its settings in Review's Configure
     [/\bLoad Data\b/, 'Run Batch step 1 is "Source" (its button is still "Import Data")'],
     [/Map (&|&amp;|and) Transform/, 'Run Batch step 2 is "Map"'],
     [/Review (&|&amp;|and) Edit Data/, 'Run Batch step 3 is "Validate"'],
     [/Review (&|&amp;|and) Configure/, 'Run Batch step 4 is "Review"'],
-    [/Execute Batch\b/, 'Run Batch step 5 is "Execute"'],
+    [/Execute Batch\b/, 'Run Batch has four steps; Execute is the Review step\'s button'],
+    [/\bExecute step\b|\bthe \*\*Execute\*\* step\b|\bon Execute\b|\bStep 5 — Execute|five steps/, 'Run Batch has four steps (Source, Map, Validate, Review); Name, Error Handling and Processing Mode are in Review\'s Configure, and Execute is its button'],
     [/Enable\s+parallel\s+batch\s+processing/i, 'the checkbox is gone; Max Concurrency alone sets how many requests a batch sends at once (Sequential = 1)'],
     [/\bMock Requests?\b/, 'Enable Mock Requests was removed; the Training Ground does that job (the endpoint editor\'s Mock Response tab is a different thing)'],
     [/Sign in to run/, 'nothing needs a DBMN sign-in to run (0.4.0); an account adds storage, Standard Systems and Weekly Usage'],
@@ -51,7 +53,7 @@ module DocsTermsGuard
     [/View Logs|\bRendered\b(?= view)/, 'the Raw tab buttons are "Logs" and "Raw / Render / Text"'],
     [/Copy Batch\b/, 'the Console footer button is "Copy"'],
     [/↻/, 'Review rebuilds its requests by itself; there is no Refresh button'],
-    [/\bLoad Data\b|Map & Transform|Review & Edit Data|Review & Configure|\bExecute Batch\b/, 'the Run Batch steps are Source, Map, Validate, Review, Execute'],
+    [/\bLoad Data\b|Map & Transform|Review & Edit Data|Review & Configure|\bExecute Batch\b/, 'the Run Batch steps are Source, Map, Validate, Review'],
     [/dashed outline/, 'help mode draws a dotted outline'],
     [/Set System…/, 'the API Catalogue Select footer button is "Update" (System, add tags, remove tags)'],
     [/`View: /, 'the view button is named after the active view, with no "View:" prefix'],

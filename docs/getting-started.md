@@ -129,8 +129,7 @@ One request proves the endpoint, the template and the API agree. See [Run API](/
    - `customerName` → `CUSTOMER_NAME`
    - `quantity` → `QUANTITY`
 4. **Validate** — fix anything highlighted in the grid
-5. **Review** — check the first requests and how many **API calls** will be made
-6. **Execute** — name the batch, choose **Error Handling** and **Processing Mode**, and click **Execute**
+5. **Review** — check the first requests and how many **API calls** will be made, name the batch, choose **Error Handling** and **Processing Mode**, and click **Execute**
 
 ### Step 5: Watch it Go
 

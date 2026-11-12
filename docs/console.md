@@ -411,7 +411,7 @@ Every request and response is also saved as JSON in your [Dobermann workspace](/
 
 ### Error Handling setting
 
-Chosen on the **Execute** step, and shown on the Console's Settings tab:
+Chosen in Run Batch's **Review** step (**Configure**), and shown on the Console's Settings tab:
 
 | Setting | Behaviour |
 |---------|-----------|
@@ -439,7 +439,7 @@ A batch member refused with `401` against a DBMN-authenticated environment is re
 
 ### Parallel Processing
 
-Each batch picks a **Processing Mode** on the Execute step, up to the ceiling set per environment (see [Environments — Parallel Processing](/docs/environments/#parallel-processing)). Higher concurrency = faster batches, but more server load.
+Each batch picks a **Processing Mode** in Run Batch's **Review** step, up to the ceiling set per environment (see [Environments — Parallel Processing](/docs/environments/#parallel-processing)). Higher concurrency = faster batches, but more server load.
 
 ### Large Batches
 

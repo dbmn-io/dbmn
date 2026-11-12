@@ -172,7 +172,7 @@ Both are disabled while the endpoint has unsaved changes. **Save Endpoint** (Ctr
 
 **Solutions:**
 - Fix the cause of the first error (usually authentication), then **Resume** or **Reprocess**
-- Next time, choose **Continue processing** on Execute to collect every failure in one run
+- Next time, choose **Continue processing** on **Review** to collect every failure in one run
 
 ### Execution Hangs
 
@@ -197,7 +197,7 @@ Both are disabled while the endpoint has unsaved changes. **Save Endpoint** (Ctr
 
 **Solutions:**
 - Raise **Rows per request** on **Review** — the API's documented maximum is the right number. See [Batch Preparation](/docs/batch-preparation/#step-4-review-json)
-- Raise **Processing Mode** on Execute, within the environment's **Max Concurrency**
+- Raise **Processing Mode** on **Review**, within the environment's **Max Concurrency**
 - Execute during off-peak hours
 
 ### Variables Show Wrong Data

@@ -75,10 +75,10 @@ What the product calls things now. Use these; the guard rejects most of the reti
 | **History** | Executions, Executions sidebar | Rail label. Settings panel is "Transactions" |
 | **Import** / **Export** → one `.dbmn.zip` | Export Workspace, Export Endpoint, Merge/Replace | |
 | **Run API** / **Run Batch** | play icon | Footer buttons and catalogue row icons |
-| Run Batch steps: **Source**, **Map**, **Validate**, **Review**, **Execute** | Load Data, Map & Transform, Review & Edit Data, Review & Configure, Execute Batch, Review JSON | Shown in the **step bar** across the top (renamed 2026-10-05) |
+| Run Batch steps: **Source**, **Map**, **Validate**, **Review**; **Execute** is Review's button | Load Data, Map & Transform, Review & Edit Data, Review & Configure, Execute Batch, Review JSON, the Execute step | Shown in the **step bar** in the footer (renamed 2026-10-05; Execute folded into Review 2026-11-12) |
 | **Import Data** | Read Data | Source button |
 | **Rows per request** | Reps, Maximum Repetitions | Review |
-| **Error Handling**: **Stop on first error** / **Continue processing** (default) | Stop on First Error, Max Error Count, Percentage-Based | Execute, and the Console Settings tab |
+| **Error Handling**: **Stop on first error** / **Continue processing** (default) | Stop on First Error, Max Error Count, Percentage-Based | Review's **Configure**, and the Console Settings tab |
 | **Processing Mode** / **Max Concurrency** | threads | Per batch / per environment ceiling |
 | **Pagination** (Console footer) → **Fetch all pages**, **Get next N pages**, **Next Page** | Configure Pagination, Fetch All, Execute tab | |
 | Console tabs: **Links**, **Input**, **Raw**, **Completed**, **Error**, **Settings** | Execute tab, Request tab | **Links** only on a chained run |
