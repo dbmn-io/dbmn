@@ -23,7 +23,7 @@ project, usually with no warning and a deadline attached.
 
 ## Step 2 — Create the Upload Endpoint
 
-Copy the template below, then in the Hub open {icon:nav-api-catalogue} **API Catalogue**
+Copy the template below, then in the Hub open {icon:nav-api-catalogue} **Endpoints**
 and click {icon:paste-endpoint} **New Endpoint from Clipboard** — the same button you used in Lesson 1.
 
 ```json
@@ -61,7 +61,7 @@ Lesson 3.
 Never point a batch at a file until you've watched a single record land.
 
 Save the endpoint. The footer now shows two buttons, **Run API** and **Run Batch** — in the
-API Catalogue they're the {icon:run-api} and {icon:run-batch} icons on the endpoint's row.
+Endpoints list they're the {icon:run-api} and {icon:run-batch} icons on the endpoint's row.
 **Run Batch** drives the template from a file. **Run API** asks you for each value, one
 field per `{{variable}}`.
 

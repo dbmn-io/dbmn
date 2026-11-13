@@ -55,7 +55,7 @@ you run will go.
 
 ## Step 3 — Your First Request
 
-Copy the template below. Then, in the Hub, open {icon:nav-api-catalogue} **API Catalogue**
+Copy the template below. Then, in the Hub, open {icon:nav-api-catalogue} **Endpoints**
 and click {icon:paste-endpoint} **New Endpoint from Clipboard** — the clipboard button beside
 {icon:add-endpoint} **Add Endpoint**. Dobermann reads the clipboard and fills in the name,
 method and path for you. (Ctrl+V on any new, unsaved endpoint does the same.)
@@ -109,7 +109,7 @@ misbehaves.
 ## Step 5 — Explore the Reference Data
 
 Create an endpoint for each of the following. Copy each template, click
-{icon:paste-endpoint} **New Endpoint from Clipboard** in the API Catalogue, save, then hit **Run API**.
+{icon:paste-endpoint} **New Endpoint from Clipboard** in Endpoints, save, then hit **Run API**.
 
 ```json
 // Name: Get Locations

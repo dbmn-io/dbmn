@@ -15,7 +15,7 @@ review:
   endpoint: My Replenishment Orders
   prompt: >
     Before you load anything, let's look at what you built. In Dobermann, open
-    {icon:nav-api-catalogue} **API Catalogue**, open **My Replenishment Orders** and click
+    {icon:nav-api-catalogue} **Endpoints**, open **My Replenishment Orders** and click
     **Copy to Share** — then paste it below. Same button your team will use; same format
     they'll receive.
   pass: >
@@ -84,7 +84,7 @@ Flat data in, nested data out. That is the job, on every project, forever.
 ## Step 1 — Look Before You Build
 
 Never write a template against an API you haven't looked at. Copy this, open
-{icon:nav-api-catalogue} **API Catalogue**, click {icon:paste-endpoint} **New Endpoint from Clipboard**, save,
+{icon:nav-api-catalogue} **Endpoints**, click {icon:paste-endpoint} **New Endpoint from Clipboard**, save,
 and click **Run API**:
 
 ```json

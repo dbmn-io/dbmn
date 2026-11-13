@@ -61,7 +61,7 @@ hundred and a note saying there are more. That is every API you will ever meet.
 Dobermann has a trick up its sleeve. It will walk the pages for you — and as each page comes
 back, its rows are added to the **Completed** tab. One click, one table, all of it.
 
-Let's see it in action. Copy this, open {icon:nav-api-catalogue} **API Catalogue**, and click
+Let's see it in action. Copy this, open {icon:nav-api-catalogue} **Endpoints**, and click
 {icon:paste-endpoint} **New Endpoint from Clipboard**:
 
 ```json

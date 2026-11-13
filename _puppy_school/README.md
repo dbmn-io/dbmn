@@ -188,7 +188,7 @@ When a step says "click the paste button", the lesson shows the button's icon in
 the learner can find it. The token names the button's *function*, not its picture:
 
 ```text
-open {icon:nav-api-catalogue} **API Catalogue**, then click {icon:paste-endpoint}
+open {icon:nav-api-catalogue} **Endpoints**, then click {icon:paste-endpoint}
 ```
 
 The roles and their SVGs are owned by the extension — `ICON_ROLES` in vs-dbmn
