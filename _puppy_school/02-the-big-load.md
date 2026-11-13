@@ -102,8 +102,7 @@ hand.
 Still on **Review**, check **Rows per request** is `1` and **Rows** shows `67,000`. That
 makes **API calls** `67,000` too: one request per record.
 
-Click **Next**, to **Execute**. Set **Processing Mode** to
-`4 concurrent requests` and hit **Execute**.
+In **Configure**, set **Processing Mode** to `4 concurrent requests` and hit **Execute**.
 
 Watch the counter. Every single record is going out as its own HTTP request — 67,000 of
 them, four at a time. It works. It is also the single most common way people misuse a batch
@@ -122,7 +121,7 @@ Look at what happens to **API calls**. The same 67,000 records now go out
 as **670 requests** instead of 67,000 — because each request carries a hundred records in
 its array instead of one.
 
-At **Execute**, set **Processing Mode** to `16 concurrent requests` and hit
+In **Configure**, set **Processing Mode** to `16 concurrent requests` and hit
 **Execute**.
 
 That's the whole file, done, while you were reading this sentence.

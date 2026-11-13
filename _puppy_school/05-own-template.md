@@ -332,7 +332,7 @@ You're on **Validate**, and every row passes. Click **Next** again, to **Review*
 Every row has the same buyer and the same supplier, so every row belongs to the same order.
 That's the one line from Step 3 at work.
 
-Click **Next**, and **Execute**. One request, one order, a couple of hundred lines.
+Hit **Execute**. One request, one order, a couple of hundred lines.
 
 ## Step 6 — Many Orders, One Chain
 
@@ -375,7 +375,7 @@ walks through **Map** and **Validate** by itself and lands on **Review**:
 A flat table went in, and Dobermann rebuilt the nesting from it. That is the trick the whole
 course has been walking towards. Nested APIs, flat source data, no scripting.
 
-Click **Next**, and **Execute**. Three requests. Boom.
+Hit **Execute**. Three requests. Boom.
 
 ## Step 7 — Prove It Landed
 
