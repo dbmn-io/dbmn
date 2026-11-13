@@ -381,7 +381,7 @@ Some APIs serve several organisations with one sign-in and expect each request t
 
 A new environment on a Standard System that works this way has steps 1 and 2 done already: its headers are in place, written `{{org}}` (the same as `{{ENV:org}}` in an environment's headers), and it has an empty `org` variable in the header. Select the environment, and the header reads `pick org`; click it and **Add…** your first organisation. A run before then stops and asks for one.
 
-Dobermann doesn't look inside your token for organisations, or check the header against it: if the value is wrong, the API says so. Environments from earlier versions keep their headers, and their organisation is already the `org` variable; tick **Header** on it and add its options to switch it from the header.
+Dobermann doesn't look inside your token for organisations, or check the header against it: if the value is wrong, the API says so. An environment from an earlier version that has an organisation is set up on the first start of 0.4.0: its headers get the four Dobermann used to add by itself, **Organization**, **SelectedOrganization**, **Location** and **SelectedLocation**, each `{{ENV:org}}` (a header it already listed is left as it was), and `org` is in the header with that organisation as its one option. **Add…** the others there, and delete any of the four headers the API doesn't need.
 
 The same works for a company, a client or a tenant on any API: `/companies({{ENV:company}})/orders` in a path, `?client={{ENV:client}}` in a query string, or a header.
 
