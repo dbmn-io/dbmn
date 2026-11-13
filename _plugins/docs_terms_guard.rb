@@ -76,6 +76,10 @@ module DocsTermsGuard
     # The URL's path can change after creation; an empty header variable is asked for (vs-dbmn #424, 2026-11-06)
     [/URL is fixed once the environment exists|can't be edited after creation/i, "only the host is fixed; the path changes from the heading's pencil (environments#base-url-variables)"],
     [/without options is never asked for/i, 'an empty header variable, or one the Base URL uses, is asked for before a run (environments#variables)'],
+    # Free and open source from 0.4.0: no licences, trials, plans or limits, and Prod Protect (types
+    # pinned centrally) is gone. Production safeguards come from the environment's own type.
+    [/\bProd Protect(ion)?\b/, 'removed in 0.4.0; an environment is Production when its own type says so (environments#environment-type)'],
+    [/\bfree tier\b|\b30[- ]day trial\b|\bweekly batch limit\b|\b(5|five) batches (a|per) week\b|View Plans|Upgrade \/ Pricing|\bUser License\b|\bLicensed Environments\b|\bfull[- ]licen[cs]e\b/i, 'DBMN is free and open source from 0.4.0: there are no licences, trials, plans or limits'],
   ].freeze
 
   PROTECTED = %r{(<pre\b.*?</pre>|<code\b.*?</code>)}mi.freeze

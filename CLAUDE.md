@@ -72,6 +72,7 @@ What the product calls things now. Use these; the guard rejects most of the reti
 | **Copy to Share** | Share | Endpoint footer |
 | **tags** | folders | Folders were migrated to tags |
 | **System** | | Short lowercase name for one API; on endpoints and environments |
+| **Production** (an environment's own Environment Type) | Prod Protect, Prod Protection, managed environment, licence, trial, plan, Upgrade | Free and open source from 0.4.0: no licences or limits; nothing pins an environment's type or Run in |
 | **History** | Executions, Executions sidebar | Rail label. Settings panel is "Transactions" |
 | **Import** / **Export** → one `.dbmn.zip` | Export Workspace, Export Endpoint, Merge/Replace | |
 | **Run API** / **Run Batch** | play icon | Footer buttons and Endpoints row icons |

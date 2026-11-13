@@ -98,7 +98,7 @@ Part of the path can be a variable, filled from the environment's variable of th
 
 Write it `{{name}}` or `{{ENV:name}}`. The name must match the variable's exactly, case included, and the value is sent exactly as you typed it: `V1` and `v1` are different paths to most servers. Give the variable **Options** and tick **Header** to switch it from the Hub header (see [Variables](#variables)).
 
-A variable can't be part of the host (`https://{{env}}.example.com`). The host is what the environment is: its licence, its [Prod Protect](#prod-protect) setting and its System all go by it, so one environment per host.
+A variable can't be part of the host (`https://{{env}}.example.com`). The host is what the environment is, so one environment per host.
 
 Before a run, a variable the URL uses that has no value is asked for, and the run waits for it.
 
@@ -108,18 +108,12 @@ Before a run, a variable the URL uses that has no value is asked for, and the ru
 Pick a type from the dropdown: Production, Staging, UAT, QA/Testing, Development (the default), Sandbox, Training, Integration, Performance or Local. Type is how environments are grouped, and it drives the production safeguards.
 
 Setting an environment to **Production** turns on two protections automatically — there's no separate setting to enable:
+{: #prod-protect }
 
 - The **Hub header is highlighted as a warning** whenever that environment is active, and the environment is highlighted in the selector, so there's no mistaking what you're connected to.
 - A **confirmation appears before any live execution** — both **Run API** and the final **Execute** step of a batch run. The dialog offers to stop warning for 15, 30 or 60 minutes when doing repeated work; the snooze ends when you reload the window.
 
-If the warnings get in the way, change the environment's type. Unless it's protected — see below.
-
-#### Prod Protect
-{: #prod-protect }
-
-For environments DBMN manages for your organisation, the type is set centrally and the dropdown is read-only — so the production safeguards above cannot be switched off by reclassifying the environment.
-
-[Read about Prod Protect](/docs/prod-protect/)
+Whether an environment is Production is yours to say. If the warnings get in the way, change the environment's type.
 
 #### System
 {: #system }
@@ -210,8 +204,6 @@ If the browser is blocking it, the web app says **Your browser is blocking DBMN 
 **If VS Code closes during a batch,** the requests it was sending at that moment may or may not have reached the API. They're listed under **Errors**: check them before running them again. A batch set to **Stop on first error** stops there; **Resume** it once VS Code is open. Otherwise the batch waits for VS Code and carries on when it's back.
 
 **In DBMN for VS Code and the desktop app** the setting changes nothing: each is a local agent and sends every request itself. The web app can't use the desktop app as its local agent; if you have the desktop app, run from it. An environment set to Local agent and opened in the desktop app signs in there and keeps its secrets there, so enter them once on its **Authentication** tab.
-
-**Managed environments.** Your organisation can require that an environment's requests are never sent from a browser. In the web app, **Run in** then shows **Local agent**, locked, with who set it.
 
 ## Authentication
 {: #authentication }
@@ -426,7 +418,6 @@ See the [OAuth Setup Guide](/docs/oauth-setup/) for detailed configuration help.
 ## Related Topics
 
 - [OAuth Setup Guide](/docs/oauth-setup/) — Detailed OAuth and Google auth configuration
-- [Prod Protect](/docs/prod-protect/) — Centrally pinned environment types
 - [The Hub](/docs/hub/) — The environment selector and Systems
 - [Endpoints](/docs/endpoints/) — Configure and manage API endpoints
 - [Import/Export](/docs/import-export/) — Share environment configurations (credentials stripped by default)

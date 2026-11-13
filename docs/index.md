@@ -23,7 +23,6 @@ Welcome to the Dobermann documentation. Dobermann enables bulk data migration th
 | [Help Mode](/docs/help-mode/) | Press `?` or click the help button: every control links to its page here |
 | [Environments](/docs/environments/) | Configure API connections, authentication, and environment types |
 | [↳ OAuth Setup Guide](/docs/oauth-setup/) | OAuth and Google Service Account configuration |
-| [↳ Prod Protect](/docs/prod-protect/) | Production environment types set centrally and locked |
 | [Endpoints](/docs/endpoints/) | Configure API requests, share with your team |
 | [↳ Sharing Endpoints](/docs/sharing-endpoints/) | Copy an endpoint to share, paste it on the other side |
 | [↳ Template Variables](/docs/template-variables/) | Variable syntax, types, modifiers, and editing |
