@@ -121,7 +121,7 @@ For environments DBMN manages for your organisation, the type is set centrally a
 #### System
 {: #system }
 
-Which API this environment belongs to — `wms`, `erp`, and so on. Endpoints carry the same System, and the API Catalogue can show only the endpoints of the active environment's System. See [The Hub — Systems](/docs/hub/#systems).
+Which API this environment belongs to — `wms`, `erp`, and so on. Endpoints carry the same System, and `@` in the [Endpoints search](/docs/hub/#search) shows only the active environment's System. See [The Hub — Systems](/docs/hub/#systems).
 
 You choose it in the **New environment** dialog, before the URL. **Standard Systems**, set up by DBMN, are listed first, then your own, then **+ Add new System…**. Leave it unpicked and a base URL that matches a Standard System picks it. On a Standard System, the environment's sign-in URLs and token settings come from that System; anything you set on the environment itself still wins.
 

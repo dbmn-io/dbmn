@@ -9,7 +9,7 @@ parent: Documentation
 
 **Run Batch** runs the same endpoint once per row of your data — or once per thousand rows, if the API takes arrays. Load an Excel/CSV file, paste tabular data, or type values directly into the grid. Dobermann walks you through a 5-step flow, from data loading to execution, in a tab of the [Hub](/docs/hub/).
 
-Run Batch appears in the endpoint footer, and as the {icon:run-batch} icon on the endpoint's catalogue row, once the endpoint has `{{template variables}}`. Its sibling, [Run API](/docs/run-api/), sends one request — run that first, so you know the template and the API agree before you point a file at it.
+Run Batch appears in the endpoint footer, and as the {icon:run-batch} icon on the endpoint's row in Endpoints, once the endpoint has `{{template variables}}`. Its sibling, [Run API](/docs/run-api/), sends one request — run that first, so you know the template and the API agree before you point a file at it.
 
 ## Overview
 {: #overview }

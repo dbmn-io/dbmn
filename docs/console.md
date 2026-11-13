@@ -17,7 +17,7 @@ Two things put results in the Console, and both open it for you:
 - **Run API** {icon:run-api} — one request. If the endpoint has `{{template variables}}` it asks for their values first, and you can paste a spreadsheet row to fill them. See [Run API](/docs/run-api/).
 - **Run Batch** {icon:run-batch} — the same endpoint driven from a file, through the 5-step flow: Source → Map → Validate → Review → Execute. It appears once the endpoint has template variables. See [Batch Preparation](/docs/batch-preparation/).
 
-Both live in the endpoint editor's footer and on each endpoint's row in the API Catalogue.
+Both live in the endpoint editor's footer and on each endpoint's row in Endpoints.
 
 ### Execution Queue
 {: #execution-queue }

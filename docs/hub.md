@@ -14,7 +14,7 @@ The Hub has four parts, left to right and top to bottom:
 | Part | What it is |
 |---|---|
 | **Header** | The DBMN mark, the environment selector, and the activity chip |
-| **Rail** | Sections: {icon:nav-environments} Environments, {icon:nav-api-catalogue} API Catalogue, {icon:nav-history} History, {icon:nav-reporting} Reporting, {icon:nav-import} Import, {icon:nav-export} Export, and pinned at the bottom {icon:nav-account} Account and {icon:nav-settings} Settings |
+| **Rail** | Sections: {icon:nav-environments} Environments, {icon:nav-api-catalogue} Endpoints, {icon:nav-history} History, {icon:nav-reporting} Reporting, {icon:nav-import} Import, {icon:nav-export} Export, and pinned at the bottom {icon:nav-account} Account and {icon:nav-settings} Settings |
 | **List panel** | Slides out over the tabs when you click a rail item: your endpoints, your environments, your past runs |
 | **Tabs** | Where things open: endpoint editors, environment editors, Run Batch, and the Console. With no tab open, [Home](#home) |
 
@@ -72,10 +72,12 @@ The theme belongs to the device, or to this VS Code.
 
 ---
 
-## API Catalogue
-{: #api-catalogue }
+<a id="api-catalogue"></a>
 
-Your endpoints. Grouped by the URL path they share by default; **Settings → API Catalogue → Group by** offers `URL`, `System`, `Method` or `None (flat)`.
+## Endpoints
+{: #endpoints }
+
+Your endpoints. Grouped by the URL path they share by default; **Settings → Endpoints → Group by** offers `URL`, `System`, `Method` or `None (flat)`.
 
 | Control | What it does |
 |---|---|
@@ -90,7 +92,7 @@ Each row shows the method, name and path, with {icon:run-api} **Run API** on the
 
 Right-click an endpoint for **Open**, **Run API**, **Run Batch**, **Show history** (History with only its runs) and **Delete**.
 
-Endpoints are not filed in folders. They carry **tags**, and the catalogue is grouped for you. See [Endpoints — Tags](/docs/endpoints/#tags).
+Endpoints are not filed in folders. They carry **tags**, and the list is grouped for you. See [Endpoints — Tags](/docs/endpoints/#tags).
 
 ---
 
@@ -123,7 +125,7 @@ Right-click a row for the actions its Console footer would show for that state: 
 ## Search
 {: #search }
 
-The API Catalogue, History and Reporting have one search box each, and all three read it the same way. What you type is the whole search: change it or delete it right there.
+Endpoints, History and Reporting have one search box each, and all three read it the same way. What you type is the whole search: change it or delete it right there.
 
 | Type | Finds |
 |---|---|
@@ -172,7 +174,7 @@ Sign in to DBMN, see your licence and weekly usage, and find **Puppy School & Ba
 
 | Panel | Settings |
 |---|---|
-| **API Catalogue** | **Group by**. **Recent** on or off. **Manage Tags…** to rename, merge or delete tags across every endpoint. **Stored**: where your endpoints, environments and Systems live, **On this computer only** or **In your DBMN account**; **Save to my account…** moves them to your account, after a copy is exported to a folder you pick. Signed out, it says **On this computer, from your DBMN account**: you keep working on this computer's copy, and your changes go to your account when you sign in again (changed in both places, the newer one is kept and the other saved as a copy). **Remove from this computer** takes the copy off a shared computer. Secrets never leave this computer |
+| **Endpoints** | **Group by**. **Recent** on or off. **Manage Tags…** to rename, merge or delete tags across every endpoint. **Stored**: where your endpoints, environments and Systems live, **On this computer only** or **In your DBMN account**; **Save to my account…** moves them to your account, after a copy is exported to a folder you pick. Signed out, it says **On this computer, from your DBMN account**: you keep working on this computer's copy, and your changes go to your account when you sign in again (changed in both places, the newer one is kept and the other saved as a copy). **Remove from this computer** takes the copy off a shared computer. Secrets never leave this computer |
 | **Transactions** | **Show** and **Group by** for History |
 | **Execution** | **Auto-open console on completion**. **Treat network errors as critical**: timeouts, DNS and connection failures stop a batch at once, whatever its error handling. **Critical HTTP codes**, default `401, 403`, which also stop a batch at once. **Max CSV rows** for batch uploads |
 | **UI** | **Confirm transaction deletion**. **Theme**: see [Theme](#theme) |
@@ -182,7 +184,7 @@ Sign in to DBMN, see your licence and weekly usage, and find **Puppy School & Ba
 ### Systems
 {: #systems }
 
-A **System** is a short name for one API you work with: `wms`, `erp`, `crm`. Environments and endpoints both carry one, and it is how the catalogue knows which endpoints belong with the active environment. A new endpoint inherits the System of the active environment. Names are lowercase letters and digits, up to 16 characters. **Standard Systems** are set up by DBMN and carry the settings for an API many people use, such as how to sign in to it; your own Systems are names only. A new environment picks its System in the **New environment** dialog, and keeps it (see [Environments — System](/docs/environments/#system)). An endpoint's System can be changed in its editor, or created there with **+ Add new System…**. To change many endpoints at once, tick them in **Select** mode and click **Update**.
+A **System** is a short name for one API you work with: `wms`, `erp`, `crm`. Environments and endpoints both carry one, and it is how the list knows which endpoints belong with the active environment. A new endpoint inherits the System of the active environment. Names are lowercase letters and digits, up to 16 characters. **Standard Systems** are set up by DBMN and carry the settings for an API many people use, such as how to sign in to it; your own Systems are names only. A new environment picks its System in the **New environment** dialog, and keeps it (see [Environments — System](/docs/environments/#system)). An endpoint's System can be changed in its editor, or created there with **+ Add new System…**. To change many endpoints at once, tick them in **Select** mode and click **Update**.
 
 ---
 
@@ -207,7 +209,7 @@ The rail's names sit beside its icons on Home. Everywhere else the rail is icons
 ## List panel
 {: #list-panel }
 
-Click {icon:nav-environments} **Environments**, {icon:nav-api-catalogue} **API Catalogue**, {icon:nav-history} **History** or {icon:nav-reporting} **Reporting** in the rail and its list slides out over the tabs. Click the same item again to close it, or another to switch lists. The tabs underneath keep their width.
+Click {icon:nav-environments} **Environments**, {icon:nav-api-catalogue} **Endpoints**, {icon:nav-history} **History** or {icon:nav-reporting} **Reporting** in the rail and its list slides out over the tabs. Click the same item again to close it, or another to switch lists. The tabs underneath keep their width.
 
 The panel closes by itself when you open something from it: an endpoint, an environment, a run, **Add Endpoint**. Searching, filters, **Select** and collapsing a group leave it open. **Esc**, or a click on the dimmed tabs, also closes it. Drag its right edge to make it wider; the Hub remembers the width.
 

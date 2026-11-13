@@ -42,7 +42,7 @@ Or install directly from the [VS Code Marketplace](https://marketplace.visualstu
 
 In the Activity Bar, click **Dobermann** — the icon tooltip now reads "Dobermann". The [Hub](/docs/hub/) opens as an editor tab.
 
-The catalogue will be empty — this is expected. Your data is coming in the next step.
+Endpoints will be empty — this is expected. Your data is coming in the next step.
 
 ## Step 4: Import Your Data
 

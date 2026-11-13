@@ -65,7 +65,7 @@ What the product calls things now. Use these; the guard rejects most of the reti
 | Say | Not | Notes |
 |---|---|---|
 | the **Hub** | sidebar, tree view, panel | One editor tab; the VS Code sidebar closes when it opens |
-| **rail** / **list panel** / **tabs** | | Rail sections: Environments, API Catalogue, History, Reporting, Import, Export; pinned: Account, Settings |
+| **rail** / **list panel** / **tabs** | | Rail sections: Environments, Endpoints (the API Catalogue until 0.4.0), History, Reporting, Import, Export; pinned: Account, Settings |
 | **environment selector** (header) | status bar, right-click → Set as Active | Also **Set as Active** in the environment editor footer |
 | **Add Endpoint**, **Add Environment** | + icon, New Endpoint | |
 | **New Endpoint from Clipboard** / **Paste Endpoint** | Paste | Catalogue button / new-endpoint button |
@@ -74,7 +74,7 @@ What the product calls things now. Use these; the guard rejects most of the reti
 | **System** | | Short lowercase name for one API; on endpoints and environments |
 | **History** | Executions, Executions sidebar | Rail label. Settings panel is "Transactions" |
 | **Import** / **Export** → one `.dbmn.zip` | Export Workspace, Export Endpoint, Merge/Replace | |
-| **Run API** / **Run Batch** | play icon | Footer buttons and catalogue row icons |
+| **Run API** / **Run Batch** | play icon | Footer buttons and Endpoints row icons |
 | Run Batch steps: **Source**, **Map**, **Validate**, **Review**; **Execute** is Review's button | Load Data, Map & Transform, Review & Edit Data, Review & Configure, Execute Batch, Review JSON, the Execute step | Shown in the **step bar** in the footer (renamed 2026-10-05; Execute folded into Review 2026-11-12) |
 | **Import Data** | Read Data | Source button |
 | **Rows per request** | Reps, Maximum Repetitions | Review |

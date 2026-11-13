@@ -106,7 +106,7 @@ No manual headers or token copy/paste required. If your session expires, Doberma
 
 ### 3. Create Endpoints
 
-Use the ready-to-paste templates below. For each one, copy it, open {icon:nav-api-catalogue} **API Catalogue** and click {icon:paste-endpoint} **New Endpoint from Clipboard** — Dobermann fills in the name, method, path, parameters and body. Save, then **Run API**.
+Use the ready-to-paste templates below. For each one, copy it, open {icon:nav-api-catalogue} **Endpoints** and click {icon:paste-endpoint} **New Endpoint from Clipboard** — Dobermann fills in the name, method, path, parameters and body. Save, then **Run API**.
 
 ---
 

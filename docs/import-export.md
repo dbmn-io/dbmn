@@ -19,7 +19,7 @@ Both live on the Hub rail: {icon:nav-export} **Export** and {icon:nav-import} **
 3. Set the **Export Filename** (default `dobermann-export`; `.dbmn.zip` is added)
 4. Click **Export Selected Items** and choose where to save
 
-To export a handful of endpoints from the catalogue instead, turn on **Select** in {icon:nav-api-catalogue} **API Catalogue**, tick them, and click **Export** in the bar that appears.
+To export a handful of endpoints from the list instead, turn on **Select** in {icon:nav-api-catalogue} **Endpoints**, tick them, and click **Export** in the bar that appears.
 
 ### What's in the file
 

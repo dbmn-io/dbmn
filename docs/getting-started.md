@@ -54,7 +54,7 @@ All three prompts are standard VS Code and browser security measures — not bug
 
 ### The Hub
 
-One editor tab with a rail of sections on the left ({icon:nav-environments} Environments, {icon:nav-api-catalogue} API Catalogue, {icon:nav-history} History, Import, Export, {icon:nav-account} Account, {icon:nav-settings} Settings), a list panel beside it, and a tab area where editors and the Console open. The header holds the {icon:env-switcher} **environment selector**: whatever it shows is where every request goes. See [The Hub](/docs/hub/).
+One editor tab with a rail of sections on the left ({icon:nav-environments} Environments, {icon:nav-api-catalogue} Endpoints, {icon:nav-history} History, Import, Export, {icon:nav-account} Account, {icon:nav-settings} Settings), a list panel beside it, and a tab area where editors and the Console open. The header holds the {icon:env-switcher} **environment selector**: whatever it shows is where every request goes. See [The Hub](/docs/hub/).
 
 ### Environments
 
@@ -66,7 +66,7 @@ Endpoints are complete API request configurations — HTTP method, URL path, que
 
 ### Systems
 
-A System is a short name for one API: `wms`, `erp`. Endpoints and environments both carry one, so the catalogue can show you the endpoints that belong with the environment you are connected to. See [The Hub — Systems](/docs/hub/#systems).
+A System is a short name for one API: `wms`, `erp`. Endpoints and environments both carry one, so the Endpoints list can show you the endpoints that belong with the environment you are connected to. See [The Hub — Systems](/docs/hub/#systems).
 
 ### Template Variables
 
@@ -95,7 +95,7 @@ Follow this complete workflow to execute your first API request.
 
 ### Step 2: Create an Endpoint
 
-1. Open {icon:nav-api-catalogue} **API Catalogue** and click {icon:add-endpoint} **Add Endpoint**
+1. Open {icon:nav-api-catalogue} **Endpoints** and click {icon:add-endpoint} **Add Endpoint**
 2. Enter an endpoint name (e.g., "Create Order")
 3. Select the HTTP method (POST)
 4. Enter the path (e.g., `/api/orders`)
@@ -116,13 +116,13 @@ Got an endpoint from a colleague? Click {icon:paste-endpoint} **New Endpoint fro
 
 ### Step 3: Run It
 
-Click **Run API** in the endpoint footer, or the {icon:run-api} icon on the endpoint's row in the API Catalogue. Because this endpoint has `{{template variables}}`, a form asks for one value each — type them, or copy a header row and a data row from your spreadsheet and click {icon:paste-row} **Paste**. Click **Run** and the Console opens with the response.
+Click **Run API** in the endpoint footer, or the {icon:run-api} icon on the endpoint's row in Endpoints. Because this endpoint has `{{template variables}}`, a form asks for one value each — type them, or copy a header row and a data row from your spreadsheet and click {icon:paste-row} **Paste**. Click **Run** and the Console opens with the response.
 
 One request proves the endpoint, the template and the API agree. See [Run API](/docs/run-api/).
 
 ### Step 4: Run a Batch
 
-1. Click **Run Batch** in the endpoint footer (or the {icon:run-batch} icon on its catalogue row). It opens as a tab.
+1. Click **Run Batch** in the endpoint footer (or the {icon:run-batch} icon on its row in Endpoints). It opens as a tab.
 2. **Source** — drop an Excel or CSV file onto the upload area, paste rows on the **Paste Text** tab, or click **Enter Data** to type values directly. Click **Import Data**.
 3. **Map** — columns whose names match your variables map themselves. Point the rest at their columns:
    - `orderId` → `ORDER_ID`

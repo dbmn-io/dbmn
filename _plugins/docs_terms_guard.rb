@@ -23,7 +23,7 @@ module DocsTermsGuard
     [/Manhattan/i, 'never name a customer platform in public copy (CLAUDE.md branding rule)'],
     [/\btree view\b|\bsidebar tree\b|\bEndpoints tree\b|\bEnvironments tree\b/i, 'the Hub: rail → list panel → tabs'],
     [/\bsidebar\b(?! closes)/i, 'the Hub rail or list panel (the VS Code sidebar closes when the Hub opens)'],
-    # API Catalogue rows and History rows have right-click menus (vs-dbmn #444, #314); other Hub lists don't
+    # Endpoints rows and History rows have right-click menus (vs-dbmn #444, #314); other Hub lists don't
     [/right-click (an |the |your )?(environment|folder)\b/i, 'there are no context menus on the Environments list; name the button'],
     # The Hub's search, 2026-11-12 (vs-dbmn #444): one box, the query builder writes it
     [/Search across everything|Search endpoint, path, status, body content/, 'the box is "Search" (see hub#search); the button beside it is "Build a search"'],
@@ -63,7 +63,9 @@ module DocsTermsGuard
     [/\bthe tray\b|\bComparing\*\*, on the left/, 'Compare\'s picks are the four slots across the top of every step'],
     [/One BL to many|Many BL to one|\*\*Many to\s+many\*\*/, 'Match\'s rows are Repeated in C1, Repeated in BL, Repeated in both'],
     [/\{icon:nav-compare\}|\bCompare list\b|rail's Compare\b/, 'the rail item is {icon:nav-reporting} Reporting; a compare is one kind of report'],
-    [/Set System…/, 'the API Catalogue Select footer button is "Update" (System, add tags, remove tags)'],
+    [/Set System…/, 'the Endpoints Select footer button is "Update" (System, add tags, remove tags)'],
+    # The API Catalogue is Endpoints from 0.4.0: the rail item, the list and Settings → Endpoints
+    [/\bAPI Catalogue\b/, 'the rail item and list are {icon:nav-api-catalogue} Endpoints (renamed in 0.4.0); Settings → Endpoints'],
     [/`View: /, 'the view button is named after the active view, with no "View:" prefix'],
     [/\bhelp icons?\b|\(i\) icon|\? icon/i, 'there are no per-control help icons; turn on help mode (help button in the Hub header, or ?)'],
     [/\bPending only\b|\bReprocess Incomplete\b/i, 'Reprocess offers Errors only, Split array errors and All; a paused or cancelled batch is Resumed'],

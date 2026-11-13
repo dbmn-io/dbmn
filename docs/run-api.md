@@ -19,7 +19,7 @@ Its sibling is **Run Batch**, which drives the same endpoint from a file — see
 | From | How |
 |------|-----|
 | **Endpoint editor** | **Run API** in the footer. Disabled while there are unsaved changes — save first, so what runs is what you're looking at. |
-| **API Catalogue** | The {icon:run-api} icon on the endpoint's row. ({icon:run-batch} is Run Batch.) |
+| **Endpoints** | The {icon:run-api} icon on the endpoint's row. ({icon:run-batch} is Run Batch.) |
 
 The request goes to the **active environment**. If that environment is typed Production you're asked to confirm first — see [Environments](/docs/environments/#environment-type).
 
