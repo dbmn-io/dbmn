@@ -14,7 +14,7 @@ The Hub has four parts, left to right and top to bottom:
 | Part | What it is |
 |---|---|
 | **Header** | The DBMN mark, the environment selector, and the activity chip |
-| **Rail** | Sections: {icon:nav-environments} Environments, {icon:nav-api-catalogue} API Catalogue, {icon:nav-history} History, {icon:nav-compare} Compare, {icon:nav-import} Import, {icon:nav-export} Export, and pinned at the bottom {icon:nav-account} Account and {icon:nav-settings} Settings |
+| **Rail** | Sections: {icon:nav-environments} Environments, {icon:nav-api-catalogue} API Catalogue, {icon:nav-history} History, {icon:nav-reporting} Reporting, {icon:nav-import} Import, {icon:nav-export} Export, and pinned at the bottom {icon:nav-account} Account and {icon:nav-settings} Settings |
 | **List panel** | Slides out over the tabs when you click a rail item: your endpoints, your environments, your past runs |
 | **Tabs** | Where things open: endpoint editors, environment editors, Run Batch, and the Console. With no tab open, [Home](#home) |
 
@@ -123,7 +123,7 @@ Right-click a row for the actions its Console footer would show for that state: 
 ## Search
 {: #search }
 
-The API Catalogue, History and the Compare list have one search box each, and all three read it the same way. What you type is the whole search: change it or delete it right there.
+The API Catalogue, History and Reporting have one search box each, and all three read it the same way. What you type is the whole search: change it or delete it right there.
 
 | Type | Finds |
 |---|---|
@@ -134,8 +134,8 @@ The API Catalogue, History and the Compare list have one search box each, and al
 | `#inventory` | that tag (`#"puppy school"` for one with a space) |
 | `@` / `@dbmn` | the active environment's System / that System |
 | `!error` `!paused` | that status (History) |
-| `~` / `~prod` | the active environment / that one (History; in Compare, any of its results) |
-| `24h` `7d` `2w` | since then (History and Compare); `2026-11-01..2026-11-12` between two days |
+| `~` / `~prod` | the active environment / that one (History; in Reporting, any of a compare's results) |
+| `24h` `7d` `2w` | since then (History and Reporting); `2026-11-01..2026-11-12` between two days |
 
 The same kind twice is either of them: `get post` is GET or POST, `#a #b` either tag. Different kinds all apply: `@ get #inventory` is the active System's GET endpoints tagged inventory.
 
@@ -207,7 +207,7 @@ The rail's names sit beside its icons on Home. Everywhere else the rail is icons
 ## List panel
 {: #list-panel }
 
-Click {icon:nav-environments} **Environments**, {icon:nav-api-catalogue} **API Catalogue**, {icon:nav-history} **History** or {icon:nav-compare} **Compare** in the rail and its list slides out over the tabs. Click the same item again to close it, or another to switch lists. The tabs underneath keep their width.
+Click {icon:nav-environments} **Environments**, {icon:nav-api-catalogue} **API Catalogue**, {icon:nav-history} **History** or {icon:nav-reporting} **Reporting** in the rail and its list slides out over the tabs. Click the same item again to close it, or another to switch lists. The tabs underneath keep their width.
 
 The panel closes by itself when you open something from it: an endpoint, an environment, a run, **Add Endpoint**. Searching, filters, **Select** and collapsing a group leave it open. **Esc**, or a click on the dimmed tabs, also closes it. Drag its right edge to make it wider; the Hub remembers the width.
 
@@ -231,5 +231,5 @@ Endpoints, environments, Run Batch, the Console and Compare open as tabs in the 
 - [Environments](/docs/environments/) — Base URL, authentication, concurrency
 - [Endpoints](/docs/endpoints/) — The endpoint editor
 - [Console](/docs/console/) — Results, live progress, export
-- [Compare](/docs/compare/) — The saved compares in the rail's Compare list
+- [Compare](/docs/compare/) — The saved compares, in the rail's Reporting list
 - [Shortcuts](/docs/shortcuts/) — Keyboard shortcuts

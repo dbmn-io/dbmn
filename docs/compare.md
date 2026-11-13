@@ -41,7 +41,8 @@ A compare always starts from a result.
 
 The result you started from is the **Baseline**, **BL**: everything is measured against it. Pick
 another in the **Baseline** column if you'd rather. The others are **C1**, **C2** and **C3**, in the
-order you ticked them. The tray under the list shows the four places as you fill them.
+order you ticked them. The four slots across the top fill as you pick, each result in its own
+colour, and stay there on every step.
 
 Compare reads the results, then opens **Match**. The step bar at the bottom shows how far it has
 got, on the step it leads to. **Back** and **Next**, beside it, move between the steps.
@@ -49,8 +50,8 @@ got, on the step it leads to. **Back** and **Next**, beside it, move between the
 - A run's environment shows beside each result, with any [header values](/docs/environments/#variables)
   it ran with (`DEV 880`, `DEV 840`), so one environment run for two companies is two results you
   can tell apart.
-- A result marked **Incomplete** didn't fetch every page. The records on the pages it missed will
-  show as missing.
+- A result marked **Incomplete** didn't fetch every page: its slot is striped. The records on the
+  pages it missed will show as missing.
 - **Compare** is on the **Completed** tab only, and comes on once the run has ended.
 - With only one result for the endpoint there is nothing to compare: run it again, or run it in
   another environment.
@@ -59,35 +60,66 @@ got, on the step it leads to. **Back** and **Next**, beside it, move between the
 ## Match
 {: #match }
 
-Match decides which record in one result is the same record in another.
+Match decides which record in one result is the same record in another. It opens as soon as you
+click **Next**, while the results are read; the step bar shows how far that has got.
 
-**Comparing**, on the left, lists the results, BL first, and the view. **Back** returns to
-**Select**, to pick a different Baseline or other results.
+Under **Match on**, on the right, tick the columns that identify a record: a business key such as
+`sku` or `itemCode`, or a few columns together. Each column shows a sample value from BL. A database
+id usually won't work: each environment numbers its records for itself. Compare checks the match as
+you tick.
 
-Under **Match on**, tick the columns that identify a record: a business key such as `sku` or
-`itemCode`, or a few columns together. Each column shows a sample value from BL. A database id
-usually won't work: each environment numbers its records for itself. Compare checks the match as
-you tick, and the step bar shows how far it has got.
-
-**How BL matches C1** (or **each result**, with more than one) shows what the key does, over every
-record:
+**How BL matches C1** (or **each result**, with more than one), on the left, shows what the key does
+over every record. It lines up under the slots: each row's picture sits under **BL** (hover it for
+its name), and each result's count sits under that result's slot.
 
 | | |
 |---|---|
 | **One to one** | Records that pair up. These are compared |
+| **Repeated in C1** | One to many: BL has a value once (or not at all) and C1 has it on several records. These are compared too: BL's record against each of C1's |
 | **Only in BL** | In the Baseline and not the other. They show as **Missing C1** in Results |
 | **Only in C1** | In the other and not the Baseline. They show as **Missing BL** in Results |
 
-If the key finds more than one record on either side, a second box lists them under **Match more
-than one record: can't be compared**: **One BL to many C1**, **Many BL to one C1** and **Many to
-many**. Tick another column so each record matches one.
+The Baseline is always the "one". A value on more than one of BL's records stops the compare, in a
+box headed **Match more than one record: can't be compared**: **Repeated in BL** and **Repeated in
+both**. Tick another column so BL holds each value once, or make the other result the Baseline.
 
-Compare goes on only when the key is one to one in every result and pairs at least one record.
+In the repeated rows a cell shows BL's records, the picture, then that result's: `36 ●< 200` is 36
+records in BL and 200 in C1 on the same values. Large counts are shortened (`105K`); hover the cell
+for the exact numbers and how many values they share.
 
-## Compare
+When some values repeat but nothing stops the compare, the verdict says so in amber: BL's record is
+compared with each of them. Go on to **Columns**.
+
+### See the repeated records
+{: #repeated }
+
+Click a count in a repeated row to see those records:
+
+- One row per value, the "one" side's record: BL's for **Repeated in C1**. The toggle at its start
+  (**2 in C1**) opens the other side's records for that value alone, in that result's colour.
+- **Repeated in both** lists the values; opening one shows both sides' records.
+- Values the "one" side doesn't have are missing as well as repeated, so they're left out. Tick
+  **Show the … values BL doesn't have** to list them too.
+- **Open BL in the Console** and **Open C1 in the Console** show a result in full, every field
+  included.
+- **‹** and **›** page through the values, 25 at a time.
+
+When one value is on thousands of records (a user id on every record, say), the window says why that
+can't be a key and lists the values with how many records each side holds.
+
+### The slots' menu
+{: #slots }
+
+From **Match** on, click a slot for its menu: **Make Baseline** (it swaps places with BL, and the key
+is checked again), **Remove from the compare** (the results after it move up a place), and **Open in
+the Console**. On **Results** the menu also has **Hide** and **Show**.
+
+**Back** returns to **Select**, to pick a different Baseline or other results.
+
+## Columns
 {: #compare }
 
-**Which columns do you want compared?** lists the view's columns. For each one:
+**Columns** lists the view's columns: the ones to compare, and the ones only to show. For each one:
 
 - **Show** puts the column in Results.
 - **Compare** says how its values are compared:
@@ -110,6 +142,8 @@ The key columns are always compared strictly.
 It only sets the starting filter. Every row is still counted, and the **Status** filter in Results
 changes it at any time.
 
+Click **Generate** to build Results.
+
 ## Results
 {: #results }
 
@@ -126,11 +160,22 @@ The **Status** column says what Compare found:
 A column's heading shows a count of the rows that differ in it. A cell that differs is marked in its
 result's colour.
 
-The toolbar:
+A value repeated in a result (one to many) is a row for each of that result's records, each compared
+with BL's one record, so one can be **Same** and another **DIFF**. The other results' records for
+the value repeat on every one of those rows. Add `id` as a shown column if you need to tell the rows
+apart.
 
-- **The results.** **BL** first: click it to make another result the Baseline. Click **C1**, **C2**
-  or **C3** to hide a result (it isn't compared while hidden), and again to bring it back.
-  {icon:compare-open-result} opens a result in its own Console.
+**Relationship**, between the key and **Status**, shows how each row's key meets the results, as
+Match's pictures: one to one, one to many, not in every result, not in BL. Hover a picture for its
+name. It appears when the rows don't all have the same relationship.
+
+Across the top, beside the slots (under them, in a narrow window):
+
+- **The slots**, BL first. Click **C1**, **C2** or **C3** for its menu: **Hide** (it isn't compared
+  while hidden) or **Show**, **Make Baseline** (it swaps places with BL), and **Open in the
+  Console**. Click **BL** to make another result the Baseline, or to open it. A striped slot didn't
+  fetch every page; its menu says so. Hiding a result that repeats values folds its extra rows
+  away, as if it weren't in the compare; **Show** brings them back.
 - **Side by side** gives each column one sub-column per result. **Compact** gives each column one
   cell, with the values that differ in pills. Hover over the headings to see which result is which.
 - **All columns** or **Diffs**. **Diffs** hides the compared columns that no row differs in, so a
@@ -141,7 +186,9 @@ The toolbar:
 - {icon:compare-columns} **Columns**: tick the columns in the compare. A column you set to **Don't
   compare** is marked **show only**. Unticking a column removes it from the compare, so the counts
   change with it.
-- **Search** finds rows, with the same syntax as the [Console's search](/docs/console/#search).
+- **Search** finds rows, with the same syntax as the [Console's search](/docs/console/#search),
+  `@column` terms included: `@status=active`, `@quantityOnHand>10`. Type `@` to pick a column.
+  **Status** and **Relationship** aren't searched: their own filters do that.
 - The count of rows shown.
 - {icon:compare-export} **Export** saves to Excel (see [Export](#export)).
 
@@ -154,10 +201,14 @@ Click a column heading to sort.
   remove it, and a radio under **Only**, to see that line alone: **Only** on **DIFF** shows just the
   differences. Click **Only** again on the line that's alone to see every line again. The counts
   say how many rows each line has.
+- **Relationship**: click the arrow beside its picture. It works as **Status** does: **Show**,
+  **Only**, and how many rows each relationship has. **Only** on one to many shows just the
+  repeated rows.
 - **A column's count**: click the count in a column's heading to show only the rows that differ
   there. Click several and you see the rows that differ in all of them.
 
-A filter that's on shows a small {icon:filters} beside it.
+A filter that's on shows a small {icon:filters} beside it. Click it to clear that filter alone,
+without opening its menu.
 
 ### A record in full
 {: #record }
@@ -186,9 +237,11 @@ Values keep their type: text stays text, leading zeros and all, and numbers stay
 {: #saved }
 
 A compare is saved once **Next** on **Select** picks its results, then as you build it: the results, the key, the columns, Strict or Relaxed, which
-rows, and the columns you hid.
+rows, and the columns you hid. Change its results (add C3, say) and **Columns** and **Results** wait
+for **Match** again, even after you close and reopen it, until it has been compared with exactly
+those results.
 
-In the Hub, {icon:nav-compare} **Compare** lists them. Click one to open it on **Select**, with
+In the Hub, {icon:nav-reporting} **Reporting** lists them. Click one to open it on **Select**, with
 everything as saved. Nothing is read until you move on: pick other results if you like, or click
 **Results** in the step bar to go straight there. Compare reads, matches and compares the results
 on the way, and the steps before Results tick as it goes. Right-click a compare for:

@@ -58,6 +58,11 @@ module DocsTermsGuard
     [/↻/, 'Review rebuilds its requests by itself; there is no Refresh button'],
     [/\bLoad Data\b|Map & Transform|Review & Edit Data|Review & Configure|\bExecute Batch\b/, 'the Run Batch steps are Source, Map, Validate, Review'],
     [/dashed outline/, 'help mode draws a dotted outline'],
+    # Compare, 2026-11-13: step 3 is Columns; the picks sit in four slots across the top of every step
+    [/Which columns do you want compared/, 'Compare\'s step 3 is "Columns"'],
+    [/\bthe tray\b|\bComparing\*\*, on the left/, 'Compare\'s picks are the four slots across the top of every step'],
+    [/One BL to many|Many BL to one|\*\*Many to\s+many\*\*/, 'Match\'s rows are Repeated in C1, Repeated in BL, Repeated in both'],
+    [/\{icon:nav-compare\}|\bCompare list\b|rail's Compare\b/, 'the rail item is {icon:nav-reporting} Reporting; a compare is one kind of report'],
     [/Set System…/, 'the API Catalogue Select footer button is "Update" (System, add tags, remove tags)'],
     [/`View: /, 'the view button is named after the active view, with no "View:" prefix'],
     [/\bhelp icons?\b|\(i\) icon|\? icon/i, 'there are no per-control help icons; turn on help mode (help button in the Hub header, or ?)'],

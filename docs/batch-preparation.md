@@ -26,16 +26,17 @@ Batch preparation follows four steps:
 ### The step bar
 {: #step-bar }
 
-The four steps run along the bottom of Run Batch, beside **Back** and **Next**. Each one shows
-what it decided — `replenishment.csv · 295 rows`, `6 of 6 mapped`, `295 rows valid`,
-`3 API calls` — and the step you are on is the highlighted one. While a file is read or its rows
-are checked, the step fills as the work goes and says what it is doing.
+The four steps run along the bottom of Run Batch, beside **Back** and **Next**: each step's name
+over its number, and the step you are on ringed. A finished step shows a tick. Hover a step to see
+what it decided: `replenishment.csv · 295 rows`, `6 of 6 mapped`, `295 rows valid`,
+`3 API calls`. While a file is read or its rows are checked, the step fills as the work goes.
 
 - **Click a step you have done** to go back to it.
 - **Click a later step** to go forward. Every step on the way runs its own checks, exactly as
   **Next** would, so nothing is skipped unchecked. A later step can only be clicked when nothing
-  before it needs you; one that can't says what it **Waits for**.
-- A step that needs you shows **!** and what's wrong: `2 not mapped`, `3 rows need fixing`.
+  before it needs you; hover one that can't to see which step needs you first.
+- A step that needs you shows **!**; the step's own screen says what's wrong, and so does its
+  hover: `2 not mapped`, `3 rows need fixing`.
 
 ### Two Entry Paths
 

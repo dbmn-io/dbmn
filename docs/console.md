@@ -265,6 +265,34 @@ Operators light up in colour as you type — if a `+` or `-` doesn't change colo
 | `"quoted"` | Exact cell value | `"New York"` | only literal "New York" |
 | plain text | Substring (default) | `hello` | "Hello World" |
 
+#### Search one column
+{: #search-columns }
+
+Start a term with `@` and a column's name to search that column alone. Type `@` and the search box
+lists the table's columns; pick one and it lists the operators.
+
+| You type | Rows where the column |
+|---|---|
+| `@status=active` | is `active` (any case; `*` and `?` work as wildcards; `@uom=""` is blank) |
+| `@status!=active` | isn't `active` |
+| `@sku~WOOF` | contains `WOOF` |
+| `@sku!~WOOF` | doesn't contain `WOOF` |
+| `@quantityOnHand>10` | is more than 10. Also `<`, `>=`, `<=`. Numbers compare as numbers, anything else in text order, so dates work too |
+| <code>@uom=EA&#124;CS</code> | is `EA` or `CS`: <code>&#124;</code> means any of them (with `!=` and `!~`, none of them) |
+| `@quantityOnHand=10..90` | is from 10 to 90, both included. Leave an end out for no limit: `10..`. `!=10..90` is outside it |
+
+- A space means and: every `@` term must match, `@status=active @uom=EA`, the same column again
+  too.
+- Words alongside still search every column: `@status=active WOOF`.
+- A comma means either side, as it does between words: `@sku~WOOF, @status=reserved`. A comma
+  always ends a value, so `@uom=EA,CS` is `@uom=EA` or the word `CS` anywhere in the row.
+- Quote a name or a value with spaces: `@"lot number"="A 1"`. A quoted value is searched as it
+  is, `|` and `..` included.
+- A column name the table doesn't have matches no rows.
+
+The column is the one headed with that name (any case). [Compare's](/docs/compare/#results) search
+works the same way.
+
 **Word-boundary rule.** `+` and `-` are operators only at the start of the search, or after whitespace / `,` / another operator. Everywhere else they're literal characters — so `ACAU-ASR3690` matches as-is, hyphens included.
 
 | You type | Parsed as |
