@@ -22,7 +22,7 @@ That last one is the whole job. Everything else is detail.
 ## Where to go next
 
 - **[The full documentation](/docs/)** — everything the course didn't cover: shipments and
-  three-level nesting, OAuth, Prod Protect, sharing endpoints with your team
+  three-level nesting, OAuth, production safeguards, sharing endpoints with your team
 - **[The Training Ground](/docs/playground/)** — it stays open. Keep experimenting; it's
   yours, and `DELETE /my-data` resets it whenever you want a clean slate
 - **Your own API** — the point of all this. Same five moves, someone else's endpoint

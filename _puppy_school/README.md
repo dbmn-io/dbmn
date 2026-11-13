@@ -223,8 +223,9 @@ course needs **all** of these before it is published. Everything in vs-dbmn is o
 Backend — `supabase db push`, then `supabase functions deploy playground --no-verify-jwt`:
 
 - `20260917000001_open_environments.sql` — no licence gate on the Training Ground. Lessons
-  2, 3 and 4 use full-licence features (more than five batches a week, 16 concurrent
-  requests, more than three pages, **Fetch all pages**).
+  2, 3 and 4 use what were full-licence features until 0.4.0 (more than five batches a week,
+  16 concurrent requests, more than three pages, **Fetch all pages**); 0.4.0 has no licences
+  or limits.
 - `20260917000002_playground_product_suppliers.sql` — every product gets a supplier, a
   reorder quantity and a sometimes-blank supplier part number. Lessons 4 and 5.
 - `20260917000004_playground_reference_ownership.sql` — reference records a learner adds
