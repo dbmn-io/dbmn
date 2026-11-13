@@ -88,6 +88,9 @@ The root of the API for this environment.
 #### Variables in the Base URL
 {: #base-url-variables }
 
+Added in v0.4.0
+{: .label .label-green }
+
 Part of the path can be a variable, filled from the environment's variable of that name each time a request goes:
 
 - `https://api.example.com/v2.0/{{tenant}}/{{company}}`: the tenant and company are the environment's `tenant` and `company` variables
@@ -120,6 +123,9 @@ For environments DBMN manages for your organisation, the type is set centrally a
 
 #### System
 {: #system }
+
+Added in v0.4.0
+{: .label .label-green }
 
 Which API this environment belongs to — `wms`, `erp`, and so on. Endpoints carry the same System, and `@` in the [Endpoints search](/docs/hub/#search) shows only the active environment's System. See [The Hub — Systems](/docs/hub/#systems).
 
@@ -174,6 +180,9 @@ With timezone set to `America/New_York`:
 
 #### Run in
 {: #run-in }
+
+Added in v0.4.0
+{: .label .label-green }
 
 Where this environment's requests are sent from. **For now, only the web app uses this setting.** DBMN for VS Code and the desktop app are local agents themselves: they send every request, whatever it says. It's saved with the environment, so all three show it.
 

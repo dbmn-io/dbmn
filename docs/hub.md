@@ -56,6 +56,9 @@ while help mode is on. Press <kbd>Esc</kbd>, or the help button again, to leave.
 ### Theme
 {: #theme }
 
+Added in v0.4.0
+{: .label .label-green }
+
 The {icon:theme-picker} palette button beside the help button shows the themes one at a time,
 each as a Dobermann screen in its own colours. Step through them with the arrows (or the arrow
 keys), or click the theme either side; **Use** (or <kbd>Enter</kbd>) applies the one in the middle.
@@ -124,6 +127,9 @@ Right-click a row for the actions its Console footer would show for that state: 
 
 ## Search
 {: #search }
+
+Added in v0.4.0
+{: .label .label-green }
 
 Endpoints, History and Reporting have one search box each, and all three read it the same way. What you type is the whole search: change it or delete it right there.
 

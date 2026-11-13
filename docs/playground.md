@@ -159,6 +159,9 @@ Paginated inventory listing. Configure this endpoint to demonstrate Dobermann's 
 ### Inventory — Export as JSON Lines (GET)
 {: #inventory-export }
 
+Added in v0.4.0
+{: .label .label-green }
+
 Your whole inventory in one request, streamed back as [JSON Lines](/docs/console/#jsonl): one
 item per line (`application/x-ndjson`), the way bulk-export APIs answer. The `X-Total-Count`
 header says how many lines are coming, so the Console shows a real percentage. Add `limit` to
