@@ -12,6 +12,9 @@ Dobermann sends DBMN usage counts, and only while you are signed in to a DBMN ac
 ## The switch
 {: #the-switch }
 
+Added in v0.4.0
+{: .label .label-green }
+
 **Hub → Account → Weekly Usage → Share usage counts with DBMN**, or the setting `dbmn.telemetry.enabled`. It is on by default for a signed-in account. Off means nothing leaves the machine and nothing is kept waiting to be sent; Weekly Usage then says *Turn on usage sharing to see this*.
 
 Signed out, nothing is sent, whatever the switch says.

@@ -26,6 +26,9 @@ A Dobermann workspace is a **folder on your machine**. This is where all executi
 ## DBMN in the browser
 {: #web-app }
 
+Added in v0.4.0
+{: .label .label-green }
+
 The web app at [app.dbmn.io](https://app.dbmn.io) keeps the same things, in one of two places.
 
 **In the browser.** Until you choose a folder, **Settings → Workspace** reads **History is kept in this browser only**. Runs, their request and response files and the executions database live in the browser's own storage for app.dbmn.io. They survive a reload and a restart, and they are lost if you clear the site's data. DBMN for VS Code does not see them.

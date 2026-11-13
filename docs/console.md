@@ -205,6 +205,9 @@ Everything about the run that isn't a result:
 ## JSON Lines (JSONL) responses
 {: #jsonl }
 
+Added in v0.4.0
+{: .label .label-green }
+
 Some APIs answer with **JSON Lines** (also called JSONL or NDJSON): one JSON record per line
 instead of one JSON document. Bulk exports and data feeds often do, and they usually stream it,
 so a big one takes a while to arrive.
@@ -267,6 +270,9 @@ Operators light up in colour as you type — if a `+` or `-` doesn't change colo
 
 #### Search one column
 {: #search-columns }
+
+Added in v0.4.0
+{: .label .label-green }
 
 Start a term with `@` and a column's name to search that column alone. Type `@` and the search box
 lists the table's columns; pick one and it lists the operators.

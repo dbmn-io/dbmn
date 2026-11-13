@@ -8,6 +8,9 @@ parent: Documentation
 # Compare
 {: #overview }
 
+Added in v0.4.0
+{: .label .label-green }
+
 Is TEST the same as PROD? What changed in the item master since last week? Did the load land the
 way the spreadsheet said?
 
