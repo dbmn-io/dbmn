@@ -41,47 +41,21 @@ permalink: /account/auth-callback.html
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="/account/shared.js"></script>
     <script>
-        // If the user has no license yet, create a 30-day trial and send the welcome notification.
-        // Idempotent — safe to run on every callback. Best-effort: failures are logged, not surfaced.
-        async function ensureTrialAndWelcome(session) {
+        // A first sign-in by email link: tell DBMN a new account exists, once. The account's
+        // email is confirmed by this very click, so "confirmed in the last few minutes" is
+        // the first time; the browser flag stops a reload repeating it. Best-effort.
+        async function welcomeNewAccount(session) {
             try {
-                var existing = await dbmnSupabase
-                    .from('user_licenses')
-                    .select('id')
-                    .eq('user_id', session.user.id)
-                    .limit(1);
-
-                if (existing.error) {
-                    console.warn('License lookup failed:', existing.error);
-                    return;
-                }
-                if (existing.data && existing.data.length > 0) {
-                    return; // Already has a license — not a new user
-                }
-
-                var now = new Date();
-                var trialEnd = new Date(now);
-                trialEnd.setDate(trialEnd.getDate() + 30);
-                var insertResult = await dbmnSupabase
-                    .from('user_licenses')
-                    .insert({
-                        user_id: session.user.id,
-                        license_type: 'trial',
-                        status: 'active',
-                        trial_started_at: now.toISOString(),
-                        trial_ends_at: trialEnd.toISOString()
-                    });
-                if (insertResult.error) {
-                    console.warn('Trial license creation warning:', insertResult.error);
-                }
-
+                var confirmedAt = session.user.email_confirmed_at || session.user.confirmed_at;
+                if (!confirmedAt || Date.now() - new Date(confirmedAt).getTime() > 5 * 60 * 1000) { return; }
+                var flag = 'dbmn-welcomed-' + session.user.id;
                 try {
-                    await callEdgeFunction('send-welcome-email', { email: session.user.email });
-                } catch (emailErr) {
-                    console.warn('Welcome email notification failed:', emailErr);
-                }
+                    if (localStorage.getItem(flag)) { return; }
+                    localStorage.setItem(flag, '1');
+                } catch (storageErr) { /* no storage: send anyway */ }
+                await callEdgeFunction('send-welcome-email', { email: session.user.email });
             } catch (err) {
-                console.warn('ensureTrialAndWelcome error:', err);
+                console.warn('Welcome email notification failed:', err);
             }
         }
 
@@ -107,7 +81,7 @@ permalink: /account/auth-callback.html
                 return;
             }
 
-            await ensureTrialAndWelcome(session);
+            await welcomeNewAccount(session);
 
             if (isVSCodeRedirect()) {
                 document.getElementById('callbackTitle').textContent = 'Signed in';
