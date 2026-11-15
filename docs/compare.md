@@ -26,7 +26,7 @@ Compare reads results you already have in **History**. **Nothing is sent**: no r
 any API, so you can compare production data as often as you like.
 
 > **Compare is in Beta.** It works, it's fast at any size, and it's still settling. Tell us what
-> you find on [GitHub](https://github.com/dbmn-io/dbmn/issues): what's confusing, what's missing,
+> you find on [GitHub](https://github.com/dbmn-io/dobermann/issues): what's confusing, what's missing,
 > what's wrong.
 {: #beta }
 

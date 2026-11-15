@@ -1,3 +1,7 @@
+---
+layout: null
+permalink: /account/checkout-success.html
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +33,7 @@
             <div style="font-size: 3rem; margin-bottom: 1rem;">&#10003;</div>
             <h2 style="color: var(--brand-success); margin-bottom: 0.75rem;">Payment Successful</h2>
             <p style="color: var(--brand-text-muted); margin-bottom: 1.5rem; line-height: 1.6;">
-                Your licence is now active. The VS Code extension will pick up your new licence automatically on its next refresh (within 15 minutes), or you can restart VS Code to apply immediately.
+                Your subscription is now active. Dobermann picks it up within 15 minutes, or restart it to apply now.
             </p>
 
             <div style="display: flex; flex-direction: column; gap: 0.75rem;">
@@ -42,11 +46,7 @@
             </div>
         </div>
 
-        <footer>
-            <a href="/terms.html">Terms</a> &middot; <a href="/privacy.html">Privacy</a>
-            <br>
-            &copy; 2026 DBMN.io
-        </footer>
+{% include site_footer.html %}
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

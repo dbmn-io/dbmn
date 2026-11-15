@@ -1,7 +1,7 @@
 ---
 layout: null
 title: REST API Data Migration Tool — Dobermann
-description: Migrate millions of records through any REST API without writing code. Bulk data loading from CSV/Excel — right from VS Code.
+description: Free and open source. Migrate millions of records through any REST API without writing code. Bulk data loading from CSV/Excel, in your browser or VS Code.
 nav_exclude: true
 permalink: /data-migration
 ---
@@ -100,7 +100,10 @@ permalink: /data-migration
             margin-right: auto;
         }
         .cta {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid transparent;
             background: var(--brand-accent);
             color: var(--brand-accent-text);
             padding: 0.875rem 2rem;
@@ -308,8 +311,9 @@ permalink: /data-migration
         </div>
         <div class="nav-right">
             <a href="/docs/">Docs</a>
-            <a href="/pricing.html">Pricing</a>
-            <span class="theme-picker-anchor"><button type="button" class="site-theme-btn" data-site-theme hidden></button></span>            <a href="/account/" class="nav-cta">Account</a>
+            <a href="/open-source/">Open source</a>
+            <span class="theme-picker-anchor"><button type="button" class="site-theme-btn" data-site-theme hidden></button></span>            <a href="/account/">Account</a>
+            <a href="https://app.dbmn.io" class="nav-cta">Open DBMN</a>
         </div>
     </nav>
 
@@ -379,7 +383,7 @@ permalink: /data-migration
 
     <section class="bottom-cta">
         <h2>Start migrating today</h2>
-        <p>30 days unlimited on signup. No credit card required.</p>
+        <p>Free and open source. Every feature, no limits.</p>
         <div class="buttons">
             <a href="https://marketplace.visualstudio.com/items?itemName=dbmn.dobermann" class="cta">
                 Install for VS Code
@@ -390,15 +394,7 @@ permalink: /data-migration
         </div>
     </section>
 
-    <footer>
-        <div class="footer-links">
-            <a href="/pricing.html">Pricing</a>
-            <a href="/terms.html">Terms</a>
-            <a href="/privacy.html">Privacy</a>
-            <a href="/docs/">Docs</a>
-        </div>
-        &copy; 2026 DBMN.io. Migrate millions of records through any REST API.
-    </footer>
+{% include site_footer.html %}
 
 </body>
 </html>

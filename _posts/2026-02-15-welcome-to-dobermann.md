@@ -21,4 +21,4 @@ Install Dobermann from the [VS Code Marketplace](https://marketplace.visualstudi
 
 ## Community
 
-Have questions or ideas? Visit our [GitHub Discussions](https://github.com/dbmn-io/dbmn/discussions). Found a bug? [Open an issue](https://github.com/dbmn-io/dbmn/issues).
+Have questions or ideas? Visit our [GitHub Discussions](https://github.com/dbmn-io/dobermann/discussions). Found a bug? [Open an issue](https://github.com/dbmn-io/dobermann/issues).

@@ -1,3 +1,7 @@
+---
+layout: null
+permalink: /account/auth-callback.html
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,11 +35,7 @@
             <p id="callbackStatus" style="color: var(--brand-text-muted);"><span class="spinner"></span> Verifying your sign-in link</p>
         </div>
 
-        <footer>
-            <a href="/terms.html">Terms</a> &middot; <a href="/privacy.html">Privacy</a>
-            <br>
-            &copy; 2026 DBMN.io
-        </footer>
+{% include site_footer.html %}
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

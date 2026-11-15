@@ -137,6 +137,8 @@ permalink: /privacy.html
             margin: 0 0.75rem;
         }
         footer a:hover { border-color: var(--brand-text); }
+        .footer-links { margin-bottom: 0.75rem; }
+        .footer-links a { margin: 0 0.75rem; }
     </style>
 </head>
 <body>
@@ -150,22 +152,24 @@ permalink: /privacy.html
         </div>
         <div class="nav-right">
             <a href="/docs/">Docs</a>
-            <a href="/pricing.html">Pricing</a>
+            <a href="/open-source/">Open source</a>
             <span class="theme-picker-anchor"><button type="button" class="site-theme-btn" data-site-theme hidden></button></span>            <a href="/account/">Account</a>
         </div>
     </nav>
 
     <div class="content">
         <h1>Privacy Policy</h1>
+        <!-- DRAFT for the open source release: updated 2026-11-14, NOT yet reviewed by a lawyer.
+             Set the effective date below when this goes live. -->
         <p class="effective-date">Effective date: 1 March 2026</p>
 
         <h2>1. Who We Are</h2>
-        <p>DBMN.io ("we", "us", "our") operates the Dobermann VS Code extension and the dbmn.io website. This policy explains what data we collect, why, and how we protect it.</p>
+        <p>DBMN.io ("we", "us", "our") publishes Dobermann, which is open source, and runs the dbmn.io website, DBMN accounts and the web app at app.dbmn.io. This policy explains what data we collect, why, and how we protect it.</p>
 
         <h2>2. What We Collect</h2>
 
         <h3>Registration Data</h3>
-        <p>When you create an account, we collect:</p>
+        <p>Dobermann for VS Code works without an account, and then we collect nothing. When you create an account, we collect:</p>
         <ul>
             <li>Email address</li>
             <li>Display name</li>
@@ -174,15 +178,14 @@ permalink: /privacy.html
         </ul>
 
         <h3>Usage Data</h3>
-        <p>The extension reports aggregate usage counters to track product health and enforce licence limits. For a complete breakdown, see our <a href="/telemetry.html">Data Transparency</a> page.</p>
+        <p>Usage counts are optional. They are on while you are signed in, which is what your Weekly Usage shows you, and a switch in the app turns them off. For a complete breakdown, see our <a href="/telemetry.html">Data Transparency</a> page.</p>
         <ul>
-            <li>API call counts, batch counts, records processed, export/import counts (per week)</li>
-            <li>Approved Environment URLs you connect to</li>
+            <li>API call counts, batch counts, records processed and run time, as one total per day</li>
             <li>Extension version, VS Code version, OS platform</li>
         </ul>
 
         <h3>Payment Data</h3>
-        <p>Payment processing is handled by <a href="https://stripe.com/privacy" target="_blank" rel="noopener">Stripe</a>. We do not store credit card numbers, CVVs, or full payment details. We receive only a Stripe customer ID and subscription status.</p>
+        <p>If you pay for a hosted service, payment processing is handled by <a href="https://stripe.com/privacy" target="_blank" rel="noopener">Stripe</a>. We do not store credit card numbers, CVVs, or full payment details. We receive only a Stripe customer ID and subscription status.</p>
 
         <div class="highlight-box">
             <strong>What we never collect:</strong>
@@ -191,44 +194,49 @@ permalink: /privacy.html
                 <li>Authentication tokens or credentials</li>
                 <li>CSV, JSON, or Excel file contents</li>
                 <li>User data from your configured API environments</li>
-                <li>Endpoint URLs, headers, or body templates</li>
+                <li>The address of an environment, or the method or path of an API you call</li>
+                <li>Request headers or body templates</li>
+                <li>The names of your saved endpoints</li>
             </ul>
         </div>
-        <p>If your organisation requires zero telemetry, contact us at <a href="mailto:hello@dbmn.io">hello@dbmn.io</a>.</p>
+        <p>To send nothing at all, turn off <strong>Share usage counts with DBMN</strong> in the app, or stay signed out. See <a href="/docs/telemetry/">Usage telemetry</a>.</p>
+
+        <h3>Your Catalogue, If You Keep It In Your Account</h3>
+        <p>You choose where your endpoints, environments and Systems are stored: on your computer only, or in your DBMN account. Kept in your account, they are stored on our backend so you can reach them from another computer or the browser. Secrets (tokens, passwords, keys) are never included.</p>
 
         <h2>3. How We Use Your Data</h2>
         <ul>
             <li><strong>Authentication</strong> &mdash; Verify your identity and manage sessions</li>
-            <li><strong>Licence enforcement</strong> &mdash; Apply correct feature access based on your licence</li>
+            <li><strong>Your account</strong> &mdash; Keep what you chose to store in it, and show you your usage</li>
             <li><strong>Product improvement</strong> &mdash; Understand which features are used to guide development</li>
             <li><strong>Support</strong> &mdash; Diagnose issues when you contact us</li>
-            <li><strong>Billing</strong> &mdash; Process payments and manage subscriptions</li>
+            <li><strong>Billing</strong> &mdash; Process payments for paid hosted services</li>
         </ul>
         <p>We do not sell your data. We do not share your data with third parties except as required for service operation (Supabase for backend, Stripe for payments).</p>
 
         <h2>4. Data Storage &amp; Security</h2>
-        <p>Dobermann uses three local storage layers for your API data and one cloud layer for licence management. <strong>Your API data never leaves your machine.</strong></p>
+        <p>Dobermann uses three local storage layers for your API data and one cloud layer for your account. <strong>Your API data is never sent to us.</strong></p>
 
         <h3>4a. Credentials &mdash; VS Code SecretStorage API</h3>
         <p>Environment tokens, OAuth tokens, and session credentials are stored via VS Code's <a href="https://code.visualstudio.com/api/references/vscode-api#SecretStorage" target="_blank" rel="noopener">SecretStorage API</a>. This uses your <strong>OS-level credential manager</strong> (macOS Keychain, Windows Credential Manager, or Linux libsecret). Credentials are encrypted at rest by the operating system and never touch our servers.</p>
 
         <h3>4b. Execution History &mdash; Local SQLite Database</h3>
-        <p>A SQLite database (<code>.active8/executions.db</code>) ships as part of the extension and stores execution history and batch run metadata (status, record counts, timestamps). It lives entirely on your machine.</p>
+        <p>A SQLite database (<code>.dbmn/executions.db</code> in your Dobermann workspace folder) stores execution history and batch run metadata (status, record counts, timestamps). It lives entirely on your machine.</p>
 
         <h3>4c. Transaction Files &mdash; Local File Storage</h3>
-        <p>Every transaction produces request, response, and log files saved to <code>.active8/results/</code> in your workspace. Files are standard JSON &mdash; fully visible, diffable, and exportable.</p>
+        <p>Every run keeps its requests, responses and logs in your Dobermann workspace folder (<code>~/Dobermann-Workspace</code> by default), organised by environment and endpoint. In the web app they are kept in the browser, or in a folder you pick.</p>
         <div class="highlight-box">
-            <strong>Your API data never leaves your machine.</strong> Every request, response, and log file is saved locally in your workspace as plain JSON files. You can inspect, diff, and audit every transaction Dobermann executes. Nothing is sent to our servers.
+            <strong>Your API data is never sent to us.</strong> Every request, response and log is saved on your computer, where you can open, export and audit it. And because Dobermann is <a href="/open-source/">open source</a>, you can check that for yourself.
         </div>
 
-        <h3>4d. Cloud (Supabase) &mdash; Licence &amp; Telemetry Only</h3>
-        <p>Supabase (PostgreSQL on AWS) stores <strong>only</strong> licence management data and telemetry counters. We use:</p>
+        <h3>4d. Cloud (Supabase) &mdash; Your Account</h3>
+        <p>Supabase (PostgreSQL on AWS) stores your account details, the usage counts, any paid subscription's status, and your endpoints, environments and Systems if you chose to keep them in your account. We use:</p>
         <ul>
             <li>Row-Level Security (RLS) policies to ensure users can only access their own data</li>
             <li>Encrypted connections (TLS) for all data in transit</li>
             <li>Supabase Auth with JWT tokens for session management</li>
         </ul>
-        <p><strong>No API data, credentials, or transaction content is stored in the cloud.</strong></p>
+        <p><strong>No API request or response data, credentials, or run results are stored in the cloud.</strong></p>
 
         <h2>5. Data Retention</h2>
         <ul>
@@ -262,13 +270,6 @@ permalink: /privacy.html
         <p>Questions about privacy? Contact us at <a href="mailto:hello@dbmn.io">hello@dbmn.io</a>.</p>
     </div>
 
-    <footer>
-        <a href="/terms.html">Terms</a>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/telemetry.html">Telemetry</a>
-        <a href="/pricing.html">Pricing</a>
-        <br><br>
-        &copy; 2026 DBMN.io
-    </footer>
+{% include site_footer.html %}
 </body>
 </html>

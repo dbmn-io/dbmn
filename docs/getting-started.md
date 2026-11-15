@@ -160,7 +160,7 @@ If you encounter issues or have questions:
 1. Check the [Troubleshooting](/docs/troubleshooting/) guide
 2. Review relevant documentation sections
 3. Open the run under **History** and read its Raw tab and logs
-4. [Report issues](https://github.com/dbmn-io/dbmn/issues) on GitHub, or email [support@dbmn.io](mailto:support@dbmn.io)
+4. [Report issues](https://github.com/dbmn-io/dobermann/issues) on GitHub, or email [support@dbmn.io](mailto:support@dbmn.io)
 
 ## Related Topics
 

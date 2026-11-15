@@ -74,7 +74,7 @@ Do not run both extensions at the same time — they can conflict with each othe
 
 ## After Migration
 
-- **Sign in to DBMN** — If you had a DBMN account, sign in again from the Account panel to restore your license and account status.
+- **Sign in to DBMN** — If you had a DBMN account, sign in again from the Account panel.
 - **Execution history** — If you kept the same workspace (see Before You Start), your past batch results and transaction logs are already available in the new extension.
 
 ## Troubleshooting
@@ -86,4 +86,4 @@ Uninstall the FlexionTech version (Step 6). Having both installed simultaneously
 The redirect URI changed with the new publisher. Update your OAuth provider's client configuration to use `vscode://dbmn.dobermann/oauth-callback` (was `vscode://FlexionTech.active8/oauth-callback`). Then re-enter your client secret in the environment settings — secrets are never transferred between extensions.
 
 **Need help?**
-[Report an issue](https://github.com/dbmn-io/dbmn/issues) or ask in [GitHub Discussions](https://github.com/dbmn-io/dbmn/discussions).
+[Report an issue](https://github.com/dbmn-io/dobermann/issues) or ask in [GitHub Discussions](https://github.com/dbmn-io/dobermann/discussions).

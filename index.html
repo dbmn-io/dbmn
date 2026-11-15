@@ -1,7 +1,7 @@
 ---
 layout: none
-title: Dobermann — Migrate millions of records through any REST API
-description: Bulk data migration through REST APIs — without writing scripts. Runs in your browser or VS Code, with parallel processing and real-time results.
+title: Dobermann — the API client with database powers
+description: Free and open source. Bulk data migration through REST APIs, without writing scripts. Runs in your browser or VS Code, with parallel processing and real-time results.
 nav_exclude: true
 ---
 <!DOCTYPE html>
@@ -28,8 +28,8 @@ nav_exclude: true
       gtag('js', new Date());
       gtag('config', 'G-BNGNYCFCGM');
     </script>
-    <meta property="og:title" content="Dobermann — Migrate millions of records through any REST API">
-    <meta property="og:description" content="Bulk data migration through REST APIs — without writing scripts. Runs in your browser or VS Code, with parallel processing and real-time results.">
+    <meta property="og:title" content="Dobermann — the API client with database powers">
+    <meta property="og:description" content="Free and open source. Bulk data migration through REST APIs, without writing scripts. Runs in your browser or VS Code, with parallel processing and real-time results.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://dbmn.io/">
     <meta property="og:image" content="https://dbmn.io/images/DBMNLogo.png">
@@ -183,6 +183,88 @@ nav_exclude: true
                 transition: none;
             }
         }
+        .hero-title {
+            font-family: var(--brand-font-heading);
+            font-size: 3rem;
+            line-height: 1.15;
+            margin-bottom: 1.25rem;
+        }
+        .hero-title .accent { color: var(--brand-accent); }
+        .section h2 .accent { color: var(--brand-accent); }
+        .section-lead {
+            text-align: center;
+            color: var(--brand-text-muted);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 680px;
+            margin: -1rem auto 2rem;
+        }
+        .sql-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+        }
+        .sql-card {
+            background: var(--brand-surface);
+            border: 1px solid var(--brand-border);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+        .sql-card code {
+            display: block;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.8rem;
+            color: var(--brand-accent);
+            background: color-mix(in srgb, var(--brand-accent) 10%, transparent);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            margin-bottom: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .sql-card h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
+        .sql-card p { font-size: 0.9rem; color: var(--brand-text-muted); line-height: 1.5; }
+        .pull-quote {
+            text-align: center;
+            font-style: italic;
+            font-size: 1.15rem;
+            margin-top: 2.25rem;
+        }
+        .pull-quote span {
+            display: block;
+            font-style: normal;
+            font-size: 0.85rem;
+            color: var(--brand-text-muted);
+            margin-top: 0.4rem;
+        }
+        .vs-wrap { overflow-x: auto; }
+        .vs-table {
+            width: 100%;
+            min-width: 640px;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.9rem;
+        }
+        .vs-table th, .vs-table td {
+            padding: 0.75rem 0.9rem;
+            text-align: center;
+            border-bottom: 1px solid var(--brand-border);
+            color: var(--brand-text-muted);
+        }
+        .vs-table th { color: var(--brand-text); font-size: 0.85rem; }
+        .vs-table td:first-child, .vs-table th:first-child { text-align: left; color: var(--brand-text); }
+        .vs-table .us {
+            color: var(--brand-text);
+            font-weight: 600;
+            background: color-mix(in srgb, var(--brand-accent) 12%, transparent);
+        }
+        .vs-table thead .us { color: var(--brand-accent); border-radius: 10px 10px 0 0; }
+        .vs-table tbody tr:last-child td { border-bottom: none; }
+        .vs-table tbody tr:last-child .us { border-radius: 0 0 10px 10px; }
+        .try-band .buttons { margin-top: 0.5rem; }
+        .bottom-cta > p { font-size: 1.15rem; }
+
         .hero-video {
             max-width: 900px;
             margin: 0 auto 2rem;
@@ -201,7 +283,10 @@ nav_exclude: true
             justify-content: center;
         }
         .cta {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid transparent;
             background: var(--brand-accent);
             color: var(--brand-accent-text);
             padding: 0.875rem 2rem;
@@ -318,6 +403,30 @@ nav_exclude: true
             line-height: 1.5;
         }
 
+        .steps-label {
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--brand-accent);
+            margin: 0 0 1rem;
+        }
+        .steps + .steps-label { margin-top: 2.5rem; }
+        .steps-foot {
+            text-align: center;
+            color: var(--brand-text-muted);
+            font-size: 1.05rem;
+            margin-top: 2rem;
+        }
+        .steps.swaps { margin-top: 2rem; }
+        .step .swap-old {
+            font-size: 0.8rem;
+            text-decoration: line-through;
+            opacity: 0.7;
+            margin-bottom: 0.6rem;
+        }
+
         /* ── Comparison ── */
         .comparison {
             display: grid;
@@ -367,6 +476,20 @@ nav_exclude: true
             font-size: 0.9rem;
             color: var(--brand-text-muted);
             line-height: 1.5;
+        }
+
+        .soon-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.15rem 0.5rem;
+            border-radius: 20px;
+            margin-left: 0.4rem;
+            vertical-align: middle;
+            background: color-mix(in srgb, var(--brand-accent) 20%, transparent);
+            color: var(--brand-accent);
         }
 
         /* ── Security bar ── */
@@ -474,6 +597,8 @@ nav_exclude: true
             .proof-bar { grid-template-columns: repeat(2, 1fr); }
             .problem-grid { grid-template-columns: 1fr; }
             .steps { grid-template-columns: 1fr; }
+            .sql-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 2.25rem; }
             .comparison { grid-template-columns: 1fr; }
             .use-cases { grid-template-columns: 1fr; }
             .security-grid { grid-template-columns: 1fr; }
@@ -493,25 +618,16 @@ nav_exclude: true
         </div>
         <div class="nav-right">
             <a href="/docs/">Docs</a>
-            <a href="/pricing.html">Pricing</a>
-            <span class="theme-picker-anchor"><button type="button" class="site-theme-btn" data-site-theme hidden></button></span>            <a href="/account/" class="nav-cta">Account</a>
+            <a href="/open-source/">Open source</a>
+            <span class="theme-picker-anchor"><button type="button" class="site-theme-btn" data-site-theme hidden></button></span>            <a href="/account/">Account</a>
+            <a href="https://app.dbmn.io" class="nav-cta">Open DBMN</a>
         </div>
     </nav>
 
     <section class="hero">
-        <span class="hero-badge">30 days unlimited on signup &mdash; no credit card required</span>
-        <div class="hero-rotating">
-            <span class="hero-static">Dobermann is</span>
-            <div class="hero-word-wrapper">
-                <span class="hero-word-sizer" aria-hidden="true">Relentless</span>
-                <span class="hero-word active">Loyal</span>
-                <span class="hero-word">Unleashed</span>
-                <span class="hero-word">Relentless</span>
-                <span class="hero-word">Pedigreed</span>
-                <span class="hero-word">Fearless</span>
-            </div>
-        </div>
-        <p class="hero-tagline">Your database, for REST APIs. Agile migrations, test-data creation, and Excel-to-JSON round-trips &mdash; in the blink of an eye.</p>
+        <span class="hero-badge">D*MN good &mdash; free and open source</span>
+        <h1 class="hero-title">The API client with <span class="accent">database powers</span>.</h1>
+        <p class="hero-tagline">The database you lost when you moved to SaaS, back in your hands. Query it. Bulk load it. Compare it. Safely, with no scripts and no developers.</p>
         <div class="buttons">
             <a href="https://app.dbmn.io" class="cta">
                 Open DBMN
@@ -520,8 +636,7 @@ nav_exclude: true
                 Take the free course &rarr;
             </a>
         </div>
-        <p class="hero-subline">DBMN runs in your browser: nothing to install. Prefer VS Code? <a href="https://marketplace.visualstudio.com/items?itemName=dbmn.dobermann">Install the extension</a>.</p>
-        <p class="hero-subline"><a href="/puppy-school/">Puppy School</a>: five hands-on lessons on a live API, about an hour, a badge for each. Or read the <a href="/docs/getting-started">Getting Started</a> guide.</p>
+        <p class="hero-subline">Runs in your browser with a free account: nothing to install. Prefer VS Code? <a href="https://marketplace.visualstudio.com/items?itemName=dbmn.dobermann">Install the extension</a>, no account needed. Desktop app to download: coming soon.</p>
     </section>
 
     <section class="hero-video">
@@ -544,31 +659,38 @@ nav_exclude: true
             <span class="label">Lines of code required</span>
         </div>
         <div class="proof-stat">
-            <span class="number">Extraction?</span>
-            <span class="label">Even faster.</span>
+            <span class="number">$0</span>
+            <span class="label">Free and open source</span>
         </div>
     </div>
 
     <section class="section">
-        <h2>Working with REST APIs at scale shouldn't need a dev team</h2>
-        <div class="problem-grid">
-            <div class="problem-card">
-                <h3>Scripts break</h3>
-                <p>Auth, pagination, retries, error handling. Every migration, from scratch.</p>
+        <h2>Work with your SaaS data like it's your own.</h2>
+        <p class="section-lead">Your system moved to the cloud, and a simple change became a ticket, a script, or a week of copy and paste. Dobermann does it through the API, in bulk.</p>
+        <div class="sql-grid">
+            <div class="sql-card">
+                <h3>Extract</h3>
+                <p>Run a GET and fetch every page. It lands as a table you can search, sort and save. Not a wall of JSON.</p>
             </div>
-            <div class="problem-card">
-                <h3>API clients don't scale</h3>
-                <p>Postman handles one request beautifully. Try 50,000.</p>
+            <div class="sql-card">
+                <h3>Load</h3>
+                <p>Map a CSV or Excel file to the API and hit go. 50,000 rows, 16 requests at once, every row tracked.</p>
             </div>
-            <div class="problem-card">
-                <h3>ETL is overkill</h3>
-                <p>Six figures and six months. You just need to load data.</p>
+            <div class="sql-card">
+                <h3>Round-trip</h3>
+                <p>Pull the records out, fix them like data, push them straight back. Only the failures need a second look.</p>
+            </div>
+            <div class="sql-card">
+                <h3>Compare <span class="soon-tag">Beta</span></h3>
+                <p>Line up four results of 100,000 rows each on a key and see what differs. Nothing is sent to your API. Combine is coming soon.</p>
             </div>
         </div>
     </section>
 
     <section class="section">
-        <h2>Your database experience, but for REST APIs</h2>
+        <h2>Data in. Data out. <span class="accent">D*MN quick.</span></h2>
+        <p class="section-lead">Built for volume: 16 requests at once, many rows in each request, every row tracked.</p>
+        <p class="steps-label">Data in</p>
         <div class="steps">
             <div class="step">
                 <div class="step-number">1</div>
@@ -583,43 +705,146 @@ nav_exclude: true
             <div class="step">
                 <div class="step-number">3</div>
                 <h3>Load</h3>
-                <p>Hit go. Millions of records. Batching, retries, and logging handled.</p>
+                <p>Hit go. 100,000 records in about six minutes. Batching, retries and logging handled.</p>
+            </div>
+        </div>
+        <p class="steps-label">Data out</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Extract</h3>
+                <p>Every page, fetched in parallel. It lands as a table, not a wall of JSON.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Shape</h3>
+                <p>Search, sort, pick your columns, save the view. No formulas.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Report</h3>
+                <p>Compare, combine, cut it any way you can imagine. DEV against PROD, today against last week.</p>
+            </div>
+        </div>
+        <p class="steps-foot">Your SaaS data, handled like your own database. And safe: reporting only reads what you have already pulled, so it can't change a thing in your system.</p>
+    </section>
+
+    <section class="section">
+        <h2>Excel &#8644; JSON, both ways. No more VLOOKUPs.</h2>
+        <p class="section-lead">The work you used to do in a spreadsheet happens at the source, at sizes that make a spreadsheet give up.</p>
+        <div class="steps swaps">
+            <div class="step">
+                <p class="swap-old">VLOOKUP across two exports</p>
+                <h3>Compare</h3>
+                <p>Line results up on a key and see what is the same, different or missing.</p>
+            </div>
+            <div class="step">
+                <p class="swap-old">Copy, paste, reformat, re-import</p>
+                <h3>Chain</h3>
+                <p>Send one API's results straight into the next API's batch.</p>
+            </div>
+            <div class="step">
+                <p class="swap-old">Hand-building JSON from a sheet</p>
+                <h3>Round-trip</h3>
+                <p>Rows become requests, responses become rows. Excel is there if you want it.</p>
             </div>
         </div>
     </section>
 
     <section class="section">
-        <h2>Excel &#8644; JSON, both ways</h2>
-        <p class="hero-tagline">Pull API data into a spreadsheet, edit it like data, and push it back. Import, export, and round-trip &mdash; no format wrangling, no dev team.</p>
-    </section>
-
-    <section class="section">
-        <h2>Not an API client. Not an ETL platform.</h2>
-        <div class="comparison">
-            <div class="comparison-col without">
-                <h3>Without Dobermann</h3>
-                <ul>
-                    <li>Custom scripts every time</li>
-                    <li>Manual auth token juggling</li>
-                    <li>No batch progress visibility</li>
-                    <li>Hope your overnight load finishes</li>
-                </ul>
-            </div>
-            <div class="comparison-col with">
-                <h3>With Dobermann</h3>
-                <ul>
-                    <li>Visual templates, zero code</li>
-                    <li>Auth handled automatically</li>
-                    <li>Live progress, pause/resume</li>
-                    <li>Row-level tracking and retry</li>
-                </ul>
-            </div>
+        <h2>More than an API client. Less than an ETL project.</h2>
+        <p class="section-lead">Built for 50,000 requests, not one. Without the six-month project.</p>
+        <div class="vs-wrap">
+            <table class="vs-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>API clients</th>
+                        <th>Scripts</th>
+                        <th>ETL platforms</th>
+                        <th class="us">Dobermann</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Load 50,000 rows from a file</td>
+                        <td>One at a time</td>
+                        <td>If you write it</td>
+                        <td>After a project</td>
+                        <td class="us">Map and go</td>
+                    </tr>
+                    <tr>
+                        <td>Pull every page into a table</td>
+                        <td>Page by page</td>
+                        <td>If you write it</td>
+                        <td>Yes</td>
+                        <td class="us">One click</td>
+                    </tr>
+                    <tr>
+                        <td>Compare two environments</td>
+                        <td>No</td>
+                        <td>If you write it</td>
+                        <td>If you build it</td>
+                        <td class="us">Built in</td>
+                    </tr>
+                    <tr>
+                        <td>Pause, resume, retry the failures</td>
+                        <td>No</td>
+                        <td>If you write it</td>
+                        <td>Yes</td>
+                        <td class="us">Built in</td>
+                    </tr>
+                    <tr>
+                        <td>Report on production without touching it</td>
+                        <td>No reporting</td>
+                        <td>If you write it</td>
+                        <td>Yes</td>
+                        <td class="us">Built in, read-only</td>
+                    </tr>
+                    <tr>
+                        <td>Scheduled jobs that run unattended</td>
+                        <td>No</td>
+                        <td>If you write it</td>
+                        <td>Yes, that's the point</td>
+                        <td class="us">No. A person presses go</td>
+                    </tr>
+                    <tr>
+                        <td>Who can run it</td>
+                        <td>Anyone</td>
+                        <td>The developer</td>
+                        <td>The integration team</td>
+                        <td class="us">Anyone on the team</td>
+                    </tr>
+                    <tr>
+                        <td>Time to first load</td>
+                        <td>&mdash;</td>
+                        <td>Days</td>
+                        <td>Months</td>
+                        <td class="us">Minutes</td>
+                    </tr>
+                    <tr>
+                        <td>Cost</td>
+                        <td>Per seat</td>
+                        <td>Developer time</td>
+                        <td>Six figures</td>
+                        <td class="us">Free, open source</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </section>
 
     <section class="section">
         <h2>Built for the jobs that matter</h2>
         <div class="use-cases">
+            <div class="use-case">
+                <h3>System implementations</h3>
+                <p>Stand up a new WMS, ERP, or CRM. Thousands of config records. Hours, not weeks.</p>
+            </div>
+            <div class="use-case">
+                <h3>Data migrations</h3>
+                <p>Move data between systems through REST APIs. No custom dev.</p>
+            </div>
             <div class="use-case">
                 <h3>Bulk operations</h3>
                 <p>Mass updates, corrections, cleanup. Thousands of records in minutes.</p>
@@ -633,75 +858,99 @@ nav_exclude: true
                 <p>Spin up realistic test payloads from a spreadsheet. Populate any environment in minutes.</p>
             </div>
             <div class="use-case">
-                <h3>System implementations</h3>
-                <p>Stand up a new WMS, ERP, or CRM. Thousands of config records. Hours, not weeks.</p>
-            </div>
-            <div class="use-case">
-                <h3>Data migrations</h3>
-                <p>Move data between systems through REST APIs. No custom dev.</p>
+                <h3>Go-live checks</h3>
+                <p>Compare configuration across DEV, UAT and PROD before you cut over. Know what differs.</p>
             </div>
         </div>
     </section>
 
-    <section class="section">
-        <h2>Your data stays on your machine</h2>
+    <section class="section" id="open-source">
+        <h2>Free. Open source. Your data stays yours.</h2>
         <div class="security-grid">
             <div class="security-item">
+                <h3>Every feature, free</h3>
+                <p>No limits on batches, concurrency or pages. No trial that runs out.</p>
+            </div>
+            <div class="security-item">
+                <h3>Open source</h3>
+                <p>AGPL-3.0. Read it, build it, change it. Host the backend yourself if you want to.</p>
+            </div>
+            <div class="security-item">
+                <h3>Built in the open</h3>
+                <p>Issues, ideas and pull requests are welcome.</p>
+            </div>
+            <div class="security-item">
                 <h3>Local-first</h3>
-                <p>Runs entirely in VS Code. No cloud processing.</p>
+                <p>Requests, responses and logs are saved on your computer, not ours.</p>
             </div>
             <div class="security-item">
-                <h3>Secure vault</h3>
-                <p>Credentials in VS Code's encrypted storage.</p>
+                <h3>Secrets stay put</h3>
+                <p>Tokens and passwords never leave your computer.</p>
             </div>
             <div class="security-item">
-                <h3>No cloud sync</h3>
-                <p>Your data never touches our servers.</p>
+                <h3>Open to inspection</h3>
+                <p>See exactly what leaves your machine. Your security team can read the code.</p>
             </div>
         </div>
+        <p class="hero-subline" style="text-align: center;">{% if site.github_live %}<a href="{{ site.github_repo }}">Read the code on GitHub &rarr;</a>{% else %}<a href="/open-source/">What open source means for DBMN &rarr;</a>{% endif %}</p>
     </section>
 
+    {% comment %}Testimonials parked for the 0.4 launch (James, 2026-11-15): they describe the old product.
     <section class="section">
         <h2>Trusted by implementation teams</h2>
         <div class="testimonials">
             <div class="testimonial">
-                <blockquote>"It's incredibly fast — the performance difference is night and day!"</blockquote>
-                <p class="attribution"><strong>Marvin M.</strong>, WMS Implementation Specialist</p>
-            </div>
-            <div class="testimonial">
-                <blockquote>"I feel like I'm working with a database again! The CSV batch processing makes mass data operations feel natural and intuitive."</blockquote>
-                <p class="attribution"><strong>Margaret C.</strong>, Implementation Specialist</p>
-            </div>
-            <div class="testimonial">
                 <blockquote>"We took a 16-hour process that only one person could execute, and turned it into a 20-minute process that multiple team members can run. That's a game-changer for our operations."</blockquote>
                 <p class="attribution"><strong>Callum S.</strong>, Project Director</p>
             </div>
+            <div class="testimonial">
+                <blockquote>"It's incredibly fast — the performance difference is night and day!"</blockquote>
+                <p class="attribution"><strong>Marvin M.</strong>, WMS Implementation Specialist</p>
+            </div>
+        </div>
+    </section>
+    {% endcomment %}
+
+    <section class="section try-band">
+        <h2>Don't take our word for it. Load 67,000 records before lunch.</h2>
+        <p class="section-lead">Puppy School is five hands-on lessons on a live practice API. About an hour, a badge for each, and nothing of yours at risk.</p>
+        <div class="buttons">
+            <a href="/puppy-school/" class="cta">
+                Start Puppy School
+            </a>
+            <a href="/docs/getting-started" class="cta cta-secondary">
+                Or point it at your own API &rarr;
+            </a>
         </div>
     </section>
 
     <section class="bottom-cta">
-        <h2>Cut over with confidence.</h2>
-        <p>Unleash the full potential of your data &mdash; without expensive technical solutions.</p>
-        <span class="hero-badge">30 days unlimited on signup &mdash; no credit card required</span>
+        <div class="hero-rotating">
+            <span class="hero-static">Dobermann is</span>
+            <div class="hero-word-wrapper">
+                <span class="hero-word-sizer" aria-hidden="true">D*MN good</span>
+                <span class="hero-word active">D*MN good</span>
+                <span class="hero-word">Loyal</span>
+                <span class="hero-word">Unleashed</span>
+                <span class="hero-word">Relentless</span>
+                <span class="hero-word">Pedigreed</span>
+                <span class="hero-word">Fearless</span>
+            </div>
+        </div>
+        <p>The API client with database powers. Cut over with confidence.</p>
         <div class="buttons">
             <a href="https://app.dbmn.io" class="cta">
                 Open DBMN
             </a>
-            <a href="/pricing.html" class="cta cta-secondary">
-                See Pricing &rarr;
-            </a>
+            {% if site.github_live %}<a href="{{ site.github_repo }}" class="cta cta-secondary">
+                Star on GitHub &rarr;
+            </a>{% else %}<a href="/open-source/" class="cta cta-secondary">
+                Open source: on GitHub soon &rarr;
+            </a>{% endif %}
         </div>
     </section>
 
-    <footer>
-        <div class="footer-links">
-            <a href="/pricing.html">Pricing</a>
-            <a href="/terms.html">Terms</a>
-            <a href="/privacy.html">Privacy</a>
-            <a href="/docs/">Docs</a>
-        </div>
-        &copy; 2026 DBMN.io. Migrate millions of records through any REST API.
-    </footer>
+{% include site_footer.html %}
 
 <script>
     (function () {

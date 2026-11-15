@@ -129,6 +129,8 @@ permalink: /terms.html
             margin: 0 0.75rem;
         }
         footer a:hover { border-color: var(--brand-text); }
+        .footer-links { margin-bottom: 0.75rem; }
+        .footer-links a { margin: 0 0.75rem; }
     </style>
 </head>
 <body>
@@ -142,7 +144,7 @@ permalink: /terms.html
         </div>
         <div class="nav-right">
             <a href="/docs/">Docs</a>
-            <a href="/pricing.html">Pricing</a>
+            <a href="/open-source/">Open source</a>
             <span class="theme-picker-anchor"><button type="button" class="site-theme-btn" data-site-theme hidden></button></span>            <a href="/account/">Account</a>
         </div>
     </nav>
@@ -151,15 +153,18 @@ permalink: /terms.html
         <h1>Terms of Service</h1>
         <p class="effective-date">Effective date: 1 March 2026</p>
 
+        <!-- DRAFT for the open source release: rewritten 2026-11-14, NOT yet reviewed by a lawyer.
+             Set the effective date above when this goes live. -->
         <h2>1. Acceptance of Terms</h2>
-        <p>By accessing or using the Dobermann VS Code extension ("Service") provided by DBMN.io ("we", "us", "our"), you agree to be bound by these Terms of Service. If you do not agree, do not use the Service.</p>
+        <p>These Terms of Service cover the services DBMN.io ("we", "us", "our") runs for Dobermann: the dbmn.io website, DBMN accounts, the web app at app.dbmn.io, Puppy School and The Training Ground (together, the "Service"). By using the Service you agree to these terms. If you do not agree, do not use the Service.</p>
+        <p>The Dobermann software itself is open source. Your right to use, copy and change it comes from its licence, the <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener">GNU Affero General Public License v3.0</a>, not from these terms. See <a href="/open-source/">Open source</a>.</p>
 
         <h2>2. Service Description</h2>
-        <p>Dobermann is a VS Code extension that enables users to interact with REST APIs at scale. The extension runs locally on your machine and communicates with your configured API endpoints. Our backend services (hosted on Supabase) handle authentication, licensing, and aggregate usage tracking only.</p>
-        <p>The Service does not process, store, or transmit your API request/response data, authentication tokens, CSV/JSON file contents, or any data from your configured environments.</p>
+        <p>Dobermann lets you work with REST APIs at scale, from VS Code or the browser. It talks to the API endpoints you configure. Our backend (hosted on Supabase) handles sign-in, what you choose to keep in your DBMN account, and aggregate usage counts.</p>
+        <p>The Service does not store your API request or response data, your authentication tokens, or the contents of your CSV, JSON or Excel files.</p>
 
-        <h2>3. Registration &amp; Accounts</h2>
-        <p>To use Dobermann, you must register for an account. You agree to:</p>
+        <h2>3. Accounts</h2>
+        <p>Dobermann for VS Code works without an account. The web app, Puppy School and keeping your endpoints and environments in your account need a free DBMN account. If you register, you agree to:</p>
         <ul>
             <li>Provide accurate and complete registration information</li>
             <li>Maintain the security of your account credentials</li>
@@ -167,41 +172,24 @@ permalink: /terms.html
             <li>Accept responsibility for all activity under your account</li>
         </ul>
 
-        <h2>4. Initial Unlimited Access Period</h2>
-        <p>New accounts receive 30 days of unlimited access on signup, with full feature access and no credit card required. After this period, your account reverts to the free tier unless you subscribe to a paid plan or access a licensed environment.</p>
+        <h2>4. Free Use</h2>
+        <p>Dobermann and a DBMN account are free. Every feature of the software is included, with no usage limits. The Training Ground has its own limits, set out in its <a href="/docs/playground/#limits">documentation</a>.</p>
 
-        <h2>5. Pricing &amp; Billing</h2>
-        <p>All prices are in USD. Current pricing is published on our <a href="/pricing.html">Pricing page</a>. Local currency conversion is handled at payment time by the payment processor (Stripe).</p>
-        <ul>
-            <li><strong>Individual Licence</strong> &mdash; $25/month or $250/year. Full access for one user.</li>
-            <li><strong>Environment Licence</strong> &mdash; $250/month or $2,500/year per Approved Environment. Unlimited users.</li>
-            <li><strong>Prod + Non-Prod Bundle</strong> &mdash; $450/month or $4,500/year. Two Approved Environments.</li>
-            <li><strong>Lifetime Individual</strong> &mdash; $500 one-time, limited availability. No expiry.</li>
-        </ul>
-        <p>Annual billing is charged upfront and provides two months free (pay for 10, get 12). Subscriptions auto-renew unless cancelled before the renewal date.</p>
+        <h2>5. Paid Services</h2>
+        <p>Some hosted services are optional and paid. The price is shown before you pay. All prices are in USD; local currency conversion is handled at payment time by the payment processor (Stripe). Subscriptions renew automatically unless cancelled before the renewal date. Annual billing is charged upfront.</p>
 
         <h2>6. Refund Policy</h2>
-        <p>We offer a <strong>30-day refund policy, no questions asked</strong>. If you are not satisfied with the Service, contact us within 30 days of your payment for a full refund. Lifetime licence purchases are also eligible for a 30-day refund.</p>
+        <p>We offer a <strong>30-day refund policy, no questions asked</strong>. If you are not satisfied with a paid service, contact us within 30 days of your payment for a full refund.</p>
 
-        <h2>7. Usage Limits</h2>
-        <p>The free tier (after the initial unlimited access period) is subject to the following limits:</p>
-        <table>
-            <thead>
-                <tr><th>Constraint</th><th>Limit</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>API calls</td><td>10 per week</td></tr>
-                <tr><td>Threading</td><td>Single-threaded only</td></tr>
-                <tr><td>Batch size</td><td>1,000 records max</td></tr>
-            </tbody>
-        </table>
-        <p>Paid plans have no API call, threading, or batch size limits. Individual licences are limited to 2 concurrent VS Code instances per licence.</p>
+        <h2>7. Fair Use</h2>
+        <p>Do not use the Service to break the law, to attack or overload our systems or anyone else's, or to reach systems you are not authorised to use.</p>
 
         <h2>8. Telemetry &amp; Data Collection</h2>
-        <p>Dobermann collects aggregate usage data to improve the product. We <strong>never</strong> collect: API request/response bodies, authentication tokens, CSV/JSON file contents, or user data from your configured environments. If your organisation requires zero telemetry, contact us at <a href="mailto:hello@dbmn.io">hello@dbmn.io</a>. See our <a href="/privacy.html">Privacy Policy</a> for full details.</p>
+        <p>While you are signed in, Dobermann sends aggregate usage counts, and there is a switch to turn them off. We <strong>never</strong> collect: API request/response bodies, authentication tokens, CSV/JSON file contents, or user data from your configured environments. See <a href="/telemetry.html">Data Transparency</a> and our <a href="/privacy.html">Privacy Policy</a> for full details.</p>
 
         <h2>9. Intellectual Property</h2>
-        <p>The Service, including all code, design, documentation, and branding, is the intellectual property of DBMN.io. Your licence to use the Service is limited to the terms described herein. You may not reverse-engineer, decompile, or create derivative works from the Service.</p>
+        <p>The Dobermann software is copyright Flexion Tech Pty Ltd and is licensed to you under the GNU Affero General Public License v3.0. Nothing in these terms limits the rights that licence gives you.</p>
+        <p>The names <em>DBMN</em> and <em>Dobermann</em> and their logos are trademarks of Flexion Tech Pty Ltd, and are not licensed with the software. The hosted Service, this website and the documentation remain our property.</p>
         <p>All data you process through the Service remains your property. We claim no ownership or rights over your data.</p>
 
         <h2>10. Limitation of Liability</h2>
@@ -213,14 +201,12 @@ permalink: /terms.html
         </ul>
 
         <h2>11. Termination</h2>
-        <p>You may cancel your subscription at any time from your account page. Upon cancellation:</p>
+        <p>You may cancel a paid subscription at any time from your account page. Upon cancellation:</p>
         <ul>
-            <li>Your access continues until the end of the current billing period</li>
-            <li>After the billing period ends, your account reverts to the free tier</li>
-            <li>Lifetime licences do not expire and cannot be cancelled (30-day refund still applies)</li>
+            <li>The paid service continues until the end of the current billing period</li>
+            <li>After that it stops. The software and your free account carry on as before</li>
         </ul>
-        <p>We may suspend or terminate your account if you violate these terms or engage in abusive use of the Service.</p>
-
+        <p>You may ask us to delete your account at any time. We may suspend or terminate your account if you violate these terms or engage in abusive use of the Service.</p>
         <h2>12. Governing Law</h2>
         <p>These terms are governed by the laws of Australia. Any disputes arising from or relating to these terms shall be subject to the exclusive jurisdiction of the courts of Australia.</p>
 
@@ -231,12 +217,6 @@ permalink: /terms.html
         <p>Questions about these terms? Contact us at <a href="mailto:hello@dbmn.io">hello@dbmn.io</a>.</p>
     </div>
 
-    <footer>
-        <a href="/terms.html">Terms</a>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/pricing.html">Pricing</a>
-        <br><br>
-        &copy; 2026 DBMN.io
-    </footer>
+{% include site_footer.html %}
 </body>
 </html>

@@ -363,8 +363,8 @@ When reporting issues, include:
 
 ### Reporting Issues
 
-- [GitHub Issues](https://github.com/dbmn-io/dbmn/issues) - Bug reports and feature requests
-- [GitHub Discussions](https://github.com/dbmn-io/dbmn/discussions) - Questions and community help
+- [GitHub Issues](https://github.com/dbmn-io/dobermann/issues) - Bug reports and feature requests
+- [GitHub Discussions](https://github.com/dbmn-io/dobermann/discussions) - Questions and community help
 - [support@dbmn.io](mailto:support@dbmn.io)
 
 ## Related Topics

@@ -1,10 +1,14 @@
+---
+layout: null
+permalink: /account/register.html
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Started - DBMN</title>
-    <meta name="description" content="Register for DBMN — 30 days unlimited on signup">
+    <meta name="description" content="Register for a free DBMN account">
     <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
     <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
     <link rel="stylesheet" href="/css/brand.css">
@@ -27,7 +31,7 @@
     <div class="container">
         <div class="card">
             <h2>Get Started</h2>
-            <p class="step-subtitle">We'll create your account and email you a sign-in link. 30 days of unlimited access on signup. No credit card.</p>
+            <p class="step-subtitle">We'll create your account and email you a sign-in link. It's free.</p>
 
             <div id="alert" class="alert"></div>
 
@@ -70,11 +74,7 @@
             </div>
         </div>
 
-        <footer>
-            <a href="/terms.html">Terms</a> &middot; <a href="/privacy.html">Privacy</a>
-            <br>
-            &copy; 2026 DBMN.io
-        </footer>
+{% include site_footer.html %}
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -176,7 +176,7 @@
                     document.getElementById('passwordToggleRow').style.display = 'none';
                     showAlert(
                         'alert',
-                        'Check your inbox — we sent a sign-in link to ' + email + '. Click it to activate your account and get 30 days of unlimited access.',
+                        'Check your inbox — we sent a sign-in link to ' + email + '. Click it to activate your account.',
                         'success'
                     );
                 } catch (err) {
@@ -230,7 +230,7 @@
                         document.getElementById('magicToggleRow').style.display = 'none';
                         showAlert(
                             'alert',
-                            'We sent a confirmation link to ' + email + '. Click it to activate your account and get 30 days of unlimited access.',
+                            'We sent a confirmation link to ' + email + '. Click it to activate your account.',
                             'success'
                         );
                         return;

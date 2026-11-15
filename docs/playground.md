@@ -558,7 +558,7 @@ The playground handles concurrent requests well. When running batch uploads:
 
 Use the [Stats](#stats) endpoint to check your current usage. Use [Reset](#reset) to clear all your data immediately.
 
-**No licence needed.** Against the Training Ground, every signed-in user gets Dobermann at full power — unlimited batches, up to 16 concurrent requests, unlimited pages and **Fetch all pages** — whether or not you have a licence or a trial. The limits above are the only ones.
+The limits above are the only ones, and they belong to the Training Ground. Dobermann itself has none.
 
 ---
 

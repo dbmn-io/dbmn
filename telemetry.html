@@ -145,6 +145,8 @@ permalink: /telemetry.html
             margin: 0 0.75rem;
         }
         footer a:hover { border-color: var(--brand-text); }
+        .footer-links { margin-bottom: 0.75rem; }
+        .footer-links a { margin: 0 0.75rem; }
     </style>
 </head>
 <body>
@@ -158,7 +160,7 @@ permalink: /telemetry.html
         </div>
         <div class="nav-right">
             <a href="/docs/">Docs</a>
-            <a href="/pricing.html">Pricing</a>
+            <a href="/open-source/">Open source</a>
             <span class="theme-picker-anchor"><button type="button" class="site-theme-btn" data-site-theme hidden></button></span>            <a href="/account/">Account</a>
         </div>
     </nav>
@@ -166,6 +168,20 @@ permalink: /telemetry.html
     <div class="content">
         <h1>Data Transparency</h1>
         <p class="subtitle">Exactly what Dobermann collects, what it doesn't, and how it all works.</p>
+
+        <h2>Everything Here Is Optional</h2>
+        <p>Dobermann works fully with nothing sent. Each step further is your choice.</p>
+        <table>
+            <thead>
+                <tr><th>You choose to</th><th>What leaves your machine</th><th>How to stop</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Stay signed out</td><td>Nothing, apart from the API calls you run</td><td>&mdash;</td></tr>
+                <tr><td>Sign in</td><td>Your email and profile</td><td>Sign out, or ask us to delete your account</td></tr>
+                <tr><td>Keep your catalogue in your account</td><td>Endpoints, environments and Systems. Never secrets</td><td><strong>Settings &rarr; Endpoints &rarr; Stored</strong></td></tr>
+                <tr><td>Share usage counts</td><td>The counts below, one total per day. On when you sign in</td><td><strong>Account &rarr; Weekly Usage &rarr; Share usage counts with DBMN</strong>, or VS Code's own telemetry setting</td></tr>
+            </tbody>
+        </table>
 
         <h2>What We Collect</h2>
         <table>
@@ -185,7 +201,7 @@ permalink: /telemetry.html
                 <tr>
                     <td>Batch run count</td>
                     <td><code>3</code></td>
-                    <td>Dashboard stats, free tier limits</td>
+                    <td>Dashboard stats</td>
                 </tr>
                 <tr>
                     <td>Records processed</td>
@@ -196,11 +212,6 @@ permalink: /telemetry.html
                     <td>Execution time</td>
                     <td><code>8,450ms</code></td>
                     <td>Dashboard stats</td>
-                </tr>
-                <tr>
-                    <td>Environment base URL</td>
-                    <td><code>https://api.example.com</code></td>
-                    <td>Environment licence validation</td>
                 </tr>
                 <tr>
                     <td>Extension version</td>
@@ -219,7 +230,7 @@ permalink: /telemetry.html
                 </tr>
                 <tr>
                     <td>Feature usage flags</td>
-                    <td><code>{"pagination": true}</code></td>
+                    <td><code>{"puppy_school_opened": true}</code></td>
                     <td>Product development</td>
                 </tr>
             </tbody>
@@ -229,10 +240,12 @@ permalink: /telemetry.html
         <div class="highlight-box">
             <strong>None of the following ever leaves your machine:</strong>
             <ul>
+                <li>An environment's address, or an API's method or path</li>
                 <li>Request or response bodies</li>
                 <li>Auth tokens or credentials</li>
                 <li>CSV, JSON, or Excel file contents</li>
-                <li>API endpoint paths, headers, or query parameters</li>
+                <li>Headers, query parameter values, or the values in a path</li>
+                <li>The names of your saved endpoints</li>
                 <li>Individual record data</li>
                 <li>Error message content (only success/failure counts)</li>
             </ul>
@@ -240,7 +253,9 @@ permalink: /telemetry.html
 
         <h2>How It Works</h2>
         <ul>
-            <li>Counters are aggregated locally, per environment, per day</li>
+            <li>Only while you are signed in to a DBMN account</li>
+            <li>Only from DBMN for VS Code. The web app and the desktop app send none</li>
+            <li>Counters are added up on your computer into one total per day, whichever environment or API you ran against</li>
             <li>Flushed to the server every 5 minutes</li>
             <li>The server identifies you via <code>auth.uid()</code> &mdash; no user ID is sent from the client</li>
             <li>Row-Level Security: you can only ever see your own data</li>
@@ -249,24 +264,20 @@ permalink: /telemetry.html
 
         <h2>Your API Data Stays Local</h2>
         <ul>
-            <li>Requests, responses, and logs are saved as plain JSON in <code>.active8/results/</code></li>
+            <li>Requests, responses, and logs are saved in your Dobermann workspace folder (<code>~/Dobermann-Workspace</code> by default)</li>
             <li>Credentials are stored in your OS-level credential manager (Keychain / Windows Credential Manager)</li>
-            <li>Nothing leaves your machine</li>
+            <li>None of it is sent to us</li>
         </ul>
 
         <h2>Need Zero Telemetry?</h2>
-        <p>Available by arrangement &mdash; contact <a href="mailto:hello@dbmn.io">hello@dbmn.io</a>.</p>
+        <p>Turn off <strong>Share usage counts with DBMN</strong> under <strong>Account &rarr; Weekly Usage</strong>, or turn off VS Code's own telemetry setting, or stay signed out: signed out, nothing is sent. See <a href="/docs/telemetry/">Usage telemetry</a>.</p>
+
+        <h2>Check It Yourself</h2>
+        <p>Dobermann is <a href="/open-source/">open source</a>. The exact fields are listed in <code>TELEMETRY.md</code> in the repository, and a test there fails if the code and that file disagree.</p>
 
         <p style="margin-top: 1.5rem;">For the full legal privacy policy, see our <a href="/privacy.html">Privacy Policy</a>.</p>
     </div>
 
-    <footer>
-        <a href="/terms.html">Terms</a>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/telemetry.html">Telemetry</a>
-        <a href="/pricing.html">Pricing</a>
-        <br><br>
-        &copy; 2026 DBMN.io
-    </footer>
+{% include site_footer.html %}
 </body>
 </html>

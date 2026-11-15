@@ -36,7 +36,7 @@ The selector is the main way to set the active environment. The other is the **S
 
 Signed out of DBMN, the header shows **Sign in to DBMN** where the selector was. It opens the same sign-in as [Account](#account): enter your email, and a new address is registered as it signs in. The selector comes back once you are signed in.
 
-If your DBMN sign-in expires, the header shows **DBMN sign-in expired**. Endpoints and batches keep running on your last known licence for up to 4 weeks. Click it to sign in again before then.
+If your DBMN sign-in expires, the header shows **DBMN sign-in expired**. Endpoints and batches keep running. Click it to sign in again.
 
 ### Activity chip
 {: #activity-chip }
@@ -171,7 +171,7 @@ Typing suggests as you go: `#` lists your tags, `@` the Systems, `!` the statuse
 ## Account
 {: #account }
 
-Sign in to DBMN, see your licence and weekly usage, and find **Puppy School & Badges**: the five-lesson course on The Training Ground, with the badges you have earned. **Start Puppy School** opens the course at [dbmn.io/puppy-school](/puppy-school/) in your browser; it reads **Continue** or **Revisit** once you have begun. See [Environments — DBMN authentication](/docs/environments/#dbmn) for what signing in gives your environments.
+Sign in to DBMN, see your weekly usage, and find **Puppy School & Badges**: the five-lesson course on The Training Ground, with the badges you have earned. **Start Puppy School** opens the course at [dbmn.io/puppy-school](/puppy-school/) in your browser; it reads **Continue** or **Revisit** once you have begun. See [Environments — DBMN authentication](/docs/environments/#dbmn) for what signing in gives your environments.
 
 ---
 

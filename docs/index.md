@@ -7,7 +7,7 @@ has_children: true
 
 # Dobermann Documentation
 
-Welcome to the Dobermann documentation. Dobermann enables bulk data migration through REST APIs — load, extract, and migrate millions of records without writing scripts.
+Welcome to the Dobermann documentation. Dobermann enables bulk data migration through REST APIs — load, extract, and migrate millions of records without writing scripts. It is free and [open source](/docs/open-source/).
 
 ## New here? Start with Puppy School
 
@@ -41,7 +41,7 @@ Welcome to the Dobermann documentation. Dobermann enables bulk data migration th
 | [Your Data & Privacy](/docs/your-data/) | Where data is stored and what leaves your machine |
 | [Troubleshooting](/docs/troubleshooting/) | Common issues and solutions |
 | [Changelog](/docs/changelog/) | Release history and what's new |
-| [Pricing](/pricing.html) | Plans and pricing |
+| [Open Source](/docs/open-source/) | The licence, the repository, building it yourself, contributing |
 
 ## What is Dobermann?
 
@@ -56,7 +56,9 @@ Every enterprise system speaks REST. But migrating data through REST APIs still 
 
 ## Installation
 
-Currently available as a VS Code extension:
+Nothing to install: open [app.dbmn.io](https://app.dbmn.io) in your browser and sign in with a free DBMN account.
+
+Or use the VS Code extension, which needs no account:
 
 1. Open VS Code
 2. Go to Extensions (Ctrl+Shift+X / Cmd+Shift+X)
@@ -64,10 +66,13 @@ Currently available as a VS Code extension:
 4. Click Install
 5. Click the Dobermann icon in the Activity Bar — the [Hub](/docs/hub/) opens
 
-Or install directly from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=dbmn.dobermann).
+Or install directly from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=dbmn.dobermann), or [build it from source](/docs/open-source/#build).
+
+A desktop app to download, for Windows, macOS and Linux, is coming soon.
 
 ## Support
 
-- [Report Issues](https://github.com/dbmn-io/dbmn/issues) - Bug reports and feature requests
-- [GitHub Discussions](https://github.com/dbmn-io/dbmn/discussions) - Questions and community help
+- [Report Issues](https://github.com/dbmn-io/dobermann/issues) - Bug reports and feature requests
+- [GitHub Discussions](https://github.com/dbmn-io/dobermann/discussions) - Questions and community help
+- [The source](https://github.com/dbmn-io/dobermann) - Dobermann is open source: read it, build it, contribute
 - [support@dbmn.io](mailto:support@dbmn.io)

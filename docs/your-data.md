@@ -7,9 +7,9 @@ parent: Documentation
 
 # Your Data & Privacy
 
-Everything stays local. Dobermann stores all your API requests, responses, and logs on your machine — there is no cloud storage. Your data never leaves your machine except for the actual API calls you configure and optional aggregate telemetry counters.
+Your run data stays local. Dobermann stores all your API requests, responses, and logs on your machine, and none of it is sent to DBMN. What leaves your machine is the API calls you configure, your endpoints and environments if you keep them in your DBMN account, and optional usage counts.
 
-This is a key differentiator from cloud-based API tools: your configurations, credentials, and execution history remain entirely under your control.
+Dobermann is [open source](/docs/open-source/), so none of this has to be taken on trust: the code that stores and sends is there to read.
 
 ---
 
@@ -106,23 +106,23 @@ The Console's Settings tab links each run to its files.
 
 ### DBMN Sign-in
 
-Signing in to DBMN authenticates you with the DBMN service and checks your licence. Your endpoints, environments and data are not sent.
+Signing in to DBMN authenticates you with the DBMN service. Your endpoints, environments and Systems go to your account only if **Stored** is **In your DBMN account** (see [Settings](/docs/hub/#settings)). Secrets and run data are never sent.
 
-### Telemetry (Aggregate Counters Only)
+### Telemetry (Usage Counts Only)
 
-If you're signed in, minimal aggregate usage counters are sent to DBMN:
+If you're signed in, usage counts are sent to DBMN:
 
 **What's sent:**
-- Call counts, batch run counts, success/failure totals
-- Execution time, date, extension version
-- Environment licence tier (product-level usage only)
+- Call counts, batch run counts, success/failure totals and run time, as one total per day
+- Dobermann's version, VS Code's version and the operating system name
 
 **What's NEVER sent:**
 - Request or response bodies
-- Endpoint configurations, URLs, headers, or tokens
+- An environment's address, or an API's method or path
+- Headers, variable values, tokens, or the names of your saved endpoints
 - Any of your data
 
-Telemetry can be disabled by arrangement.
+It's optional: turn it off with **Share usage counts with DBMN**, or with VS Code's own telemetry setting. Signed out, nothing is sent. See [Usage telemetry](/docs/telemetry/).
 
 ### Puppy School
 
@@ -130,9 +130,8 @@ The course runs against [The Training Ground](/docs/playground/), a DBMN-hosted 
 
 ### Nothing Else
 
-- No cloud sync of configurations
 - No cloud storage of results
-- No analytics beyond aggregate counters
+- No analytics beyond the usage counts
 
 ---
 

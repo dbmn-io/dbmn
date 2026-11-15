@@ -92,6 +92,8 @@ nav_exclude: true
         footer a:hover {
             border-color: var(--brand-text);
         }
+        .footer-links { margin-bottom: 0.75rem; }
+        .footer-links a { margin: 0 0.75rem; }
     </style>
 </head>
 <body>
@@ -108,8 +110,6 @@ nav_exclude: true
         </a>
     </div>
 
-    <footer>
-        &copy; 2026 <a href="https://flexion.tech">Flexion.tech</a>. Making APIs and data easier than ever.
-    </footer>
+{% include site_footer.html %}
 </body>
 </html>
