@@ -11,19 +11,54 @@
 :root {
     --brand-font-heading: 'Cooper Black', Georgia, serif;
     --brand-font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-    --brand-bg-start: #1a1a2e;
-    --brand-bg-end: #16213e;
-    --brand-accent: #0078d4;
-    --brand-text: #fff;
-    --brand-text-muted: #a0a0b0;
-    --brand-text-body: #e0e0e0;
-    --brand-surface: rgba(255, 255, 255, 0.05);
-    --brand-border: rgba(255, 255, 255, 0.1);
-    --brand-link: #fff;
-    --brand-link-underline: rgba(255, 255, 255, 0.4);
+    /* The site's colours: Retro 82 until a theme is picked. assets/js/site-theme.js puts the
+     * picked theme's colours (exported from the app: assets/js/dbmn-themes.js) over these. */
+    --brand-bg-start: #05182e;
+    --brand-bg-end: #05182e;
+    --brand-accent: #faa968;
+    --brand-accent-text: #05182e;
+    --brand-text: #f6dcac;
+    --brand-text-body: #dec89f;
+    --brand-text-muted: #71938a;
+    --brand-surface: #112234;
+    --brand-surface-strong: #1d2c3b;
+    --brand-border: #293541;
+    --brand-link: #f6dcac;
+    --brand-link-underline: #656660;
+    --brand-success: #028391;
+    --brand-info: #3f8f8a;
+    --brand-warning: #faa968;
+    --brand-danger: #f85525;
+    color-scheme: dark;
 }
 
-/* Default link styling — readable on the dark navy gradient without the
+/* The palette button, in a page's nav bar or header (the picker itself: assets/css/theme-picker.css) */
+.site-theme-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--brand-text-muted);
+    cursor: pointer;
+}
+.site-theme-btn[hidden] {
+    display: none;
+}
+.site-theme-btn:hover {
+    color: var(--brand-text);
+    background: var(--brand-surface);
+}
+.site-theme-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Default link styling — readable on the page's background without the
  * browser's old-school royal blue. Any page-specific or scoped rule (nav
  * bars, footers, buttons) still wins via specificity. */
 a {

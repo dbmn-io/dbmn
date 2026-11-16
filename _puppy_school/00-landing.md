@@ -31,11 +31,11 @@ records in any shape it expects, deal with the failures that always happen, and 
 
 ## What you need
 
-- **Visual Studio Code** with the [Dobermann extension](https://marketplace.visualstudio.com/items?itemName=dbmn.dobermann). Prerequisite: **version {dobermann-min-version} or later**
+- **A web browser** — Dobermann runs at [app.dbmn.io](https://app.dbmn.io). Nothing to install
 - **A free DBMN account** — that's the sign-in button below
 - **About an hour**, though the course remembers where you got to, so it doesn't have to be in one sitting
 
-You don't need an API of your own, a licence, or a credit card. Your personal Training Ground is included, and every lesson is free.
+You don't need an API of your own. Your personal Training Ground is included, and every lesson is free.
 
 ## How it works
 

@@ -1,7 +1,7 @@
 ---
 layout: null
 title: REST API Data Migration Tool — Dobermann
-description: Migrate millions of records through any REST API without writing code. Bulk data loading from CSV/Excel — right from VS Code.
+description: Free and open source. Migrate millions of records through any REST API without writing code. Bulk data loading from CSV/Excel, in your browser or VS Code.
 nav_exclude: true
 permalink: /data-migration
 ---
@@ -15,6 +15,11 @@ permalink: /data-migration
     <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
     <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
     <link rel="stylesheet" href="/css/brand.css">
+    <!-- The theme: the app's themes, worn before the page paints, and the picker (assets/js/site-theme.js) -->
+    <link rel="stylesheet" href="/assets/css/theme-picker.css">
+    <script src="/assets/js/dbmn-themes.js"></script>
+    <script src="/assets/js/site-theme.js"></script>
+    <script defer src="/assets/js/theme-picker.js"></script>
     <link rel="canonical" href="https://dbmn.io/data-migration">
     <meta property="og:title" content="REST API Data Migration Tool — Dobermann">
     <meta property="og:description" content="Migrate millions of records through any REST API without writing code. Bulk data loading from CSV/Excel — right from VS Code.">
@@ -62,7 +67,7 @@ permalink: /data-migration
         .nav-right a:hover { color: var(--brand-text); }
         .nav-right .nav-cta {
             background: var(--brand-accent);
-            color: var(--brand-text);
+            color: var(--brand-accent-text);
             padding: 0.5rem 1.25rem;
             border-radius: 6px;
             font-weight: 600;
@@ -70,7 +75,7 @@ permalink: /data-migration
         }
         .nav-right .nav-cta:hover {
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0,120,212,0.3);
+            box-shadow: 0 4px 12px color-mix(in srgb, var(--brand-accent) 30%, transparent);
         }
 
         /* ── Hero ── */
@@ -95,9 +100,12 @@ permalink: /data-migration
             margin-right: auto;
         }
         .cta {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid transparent;
             background: var(--brand-accent);
-            color: var(--brand-text);
+            color: var(--brand-accent-text);
             padding: 0.875rem 2rem;
             border-radius: 8px;
             text-decoration: none;
@@ -107,15 +115,16 @@ permalink: /data-migration
         }
         .cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,120,212,0.3);
+            box-shadow: 0 10px 20px color-mix(in srgb, var(--brand-accent) 30%, transparent);
         }
         .cta-secondary {
+            color: var(--brand-text);
             background: var(--brand-surface);
-            border: 2px solid rgba(255,255,255,0.2);
+            border: 2px solid color-mix(in srgb, var(--brand-text) 20%, transparent);
         }
         .cta-secondary:hover {
-            background: rgba(255,255,255,0.1);
-            box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+            background: color-mix(in srgb, var(--brand-text) 10%, transparent);
+            box-shadow: 0 10px 20px color-mix(in srgb, var(--brand-text) 10%, transparent);
         }
         .buttons {
             display: flex;
@@ -153,8 +162,8 @@ permalink: /data-migration
             font-size: 1.1rem;
             margin-bottom: 1rem;
         }
-        .ps-col.problem h3 { color: #ff6b6b; }
-        .ps-col.solution h3 { color: #5bd77a; }
+        .ps-col.problem h3 { color: var(--brand-danger); }
+        .ps-col.solution h3 { color: var(--brand-success); }
         .ps-col p {
             font-size: 0.9rem;
             color: var(--brand-text-muted);
@@ -181,8 +190,8 @@ permalink: /data-migration
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: rgba(0,120,212,0.2);
-            color: #7ab8ff;
+            background: color-mix(in srgb, var(--brand-accent) 20%, transparent);
+            color: var(--brand-accent);
             font-weight: 700;
             font-size: 1.1rem;
             margin-bottom: 0.75rem;
@@ -212,7 +221,7 @@ permalink: /data-migration
         }
         .feature-item::before {
             content: '\2713';
-            color: #5bd77a;
+            color: var(--brand-success);
             margin-right: 0.5rem;
             font-weight: 700;
         }
@@ -271,7 +280,7 @@ permalink: /data-migration
         footer a {
             color: var(--brand-text);
             text-decoration: none;
-            border-bottom: 1px solid rgba(255,255,255,0.3);
+            border-bottom: 1px solid color-mix(in srgb, var(--brand-text) 30%, transparent);
             transition: border-color 0.2s;
         }
         footer a:hover { border-color: var(--brand-text); }
@@ -302,8 +311,9 @@ permalink: /data-migration
         </div>
         <div class="nav-right">
             <a href="/docs/">Docs</a>
-            <a href="/pricing.html">Pricing</a>
-            <a href="/account/" class="nav-cta">Account</a>
+            <a href="/open-source/">Open source</a>
+            <span class="theme-picker-anchor"><button type="button" class="site-theme-btn" data-site-theme hidden></button></span>            <a href="/account/">Account</a>
+            <a href="https://app.dbmn.io" class="nav-cta">Open DBMN</a>
         </div>
     </nav>
 
@@ -373,7 +383,7 @@ permalink: /data-migration
 
     <section class="bottom-cta">
         <h2>Start migrating today</h2>
-        <p>30 days unlimited on signup. No credit card required.</p>
+        <p>Free and open source. Every feature, no limits.</p>
         <div class="buttons">
             <a href="https://marketplace.visualstudio.com/items?itemName=dbmn.dobermann" class="cta">
                 Install for VS Code
@@ -384,15 +394,7 @@ permalink: /data-migration
         </div>
     </section>
 
-    <footer>
-        <div class="footer-links">
-            <a href="/pricing.html">Pricing</a>
-            <a href="/terms.html">Terms</a>
-            <a href="/privacy.html">Privacy</a>
-            <a href="/docs/">Docs</a>
-        </div>
-        &copy; 2026 DBMN.io. Migrate millions of records through any REST API.
-    </footer>
+{% include site_footer.html %}
 
 </body>
 </html>

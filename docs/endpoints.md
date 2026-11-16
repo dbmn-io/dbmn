@@ -14,25 +14,25 @@ Endpoints are complete API request configurations — everything Dobermann needs
 
 ### Creating an Endpoint
 
-In the Hub, open {icon:nav-api-catalogue} **API Catalogue** and click {icon:add-endpoint} **Add Endpoint**. A blank editor opens in a new tab, with a **Paste Endpoint** button at the top for the times a teammate has sent you one — see [Sharing Endpoints](/docs/sharing-endpoints/). The {icon:paste-endpoint} clipboard button beside **Add Endpoint** does the paste in one step.
+In the Hub, open {icon:nav-api-catalogue} **Endpoints** and click {icon:add-endpoint} **Add Endpoint**. A blank editor opens in a new tab, with a **Paste Endpoint** button at the top for the times a teammate has sent you one — see [Sharing Endpoints](/docs/sharing-endpoints/). The {icon:paste-endpoint} clipboard button beside **Add Endpoint** does the paste in one step.
 
 ### Finding Endpoints
 
-The catalogue groups endpoints for you — by the path they share, by System, or by method (**Settings → API Catalogue → Group by**). Type in **Search across everything…** to filter by name, method, path, description or tag, or use {icon:filters} **Filters** for System, Method and Tags. See [The Hub — API Catalogue](/docs/hub/#api-catalogue).
+Endpoints are grouped for you — by the path they share, by System, or by method (**Settings → Endpoints → Group by**). Search by any words in the endpoint, a method, `#tag` or `@System`; {icon:build-search} **Build a search** writes one for you. See [The Hub — Search](/docs/hub/#search).
 
 ### Recent
 {: #recent }
 
-**Recent**, at the top of the catalogue, pins the five endpoints you last saved or ran, so the ones you are working on today are one click away whatever group they live in. Opening an endpoint to look at it does not move it. Collapse it with its chevron, or turn it off under **Settings → API Catalogue → Recent**. Searching, or filtering by method or tag, hides it: when you are looking for something specific, Recent is just noise.
+**Recent**, at the top of the list, pins the five endpoints you last saved or ran, so the ones you are working on today are one click away whatever group they live in. Opening an endpoint to look at it does not move it. Collapse it with its chevron, or turn it off under **Settings → Endpoints → Recent**. While you search it shows the recent ones that match, so two letters of something you just ran find it.
 
 ### Tags
 {: #tags }
 
-Endpoints carry **tags** rather than living in folders. Type them into the **Tags** field in the editor — `orders`, `migration-q3`, `legacy` — and filter the catalogue by them. **Manage Tags…** in Settings renames, merges or deletes a tag across every endpoint. Tags travel with the endpoint when you share or export it.
+Endpoints carry **tags** rather than living in folders. Type them into the **Tags** field in the editor — `orders`, `migration-q3`, `legacy` — and filter the Endpoints list by them. As you type, the tags already in use are offered, with **New tag** last. **Manage tags…** beside the field, or **Manage Tags…** in Settings, renames, merges or deletes a tag across every endpoint; an editor that's open shows the change at once. Tags travel with the endpoint when you share or export it.
 
 ### Deleting an Endpoint
 
-Open the endpoint and click **Delete** in the footer; click it again to confirm. To act on several at once, turn on **Select** in the catalogue.
+Open the endpoint and click **Delete** in the footer; click it again to confirm. To act on several at once, turn on **Select** in the Endpoints list.
 
 ---
 
@@ -42,10 +42,10 @@ Open the endpoint and click **Delete** in the footer; click it again to confirm.
 
 | Field | Description |
 |-------|-------------|
-| **Endpoint Name** | Appears in the catalogue — make it descriptive |
+| **Endpoint Name** | Appears in the Endpoints list — make it descriptive |
 | **Method** | GET, POST, PUT, PATCH, or DELETE |
 | **Path** | URL path starting with `/` — combined with the active environment's base URL at execution time |
-| **Description** | Optional context. Searchable from the catalogue |
+| **Description** | Optional context. Searchable from the Endpoints list |
 | **Tags** | Free-form labels for filtering |
 | **System** | Which API this endpoint belongs to. A new endpoint inherits the active environment's System. See [The Hub — Systems](/docs/hub/#systems) |
 
@@ -173,7 +173,7 @@ The editor also provides **intelligent autocomplete** as you type inside templat
 
 **Save Endpoint** (Ctrl+S) commits your changes. Dobermann validates the endpoint name, path, and JSON body syntax first — anything wrong is flagged inline so you can fix it before saving.
 
-Once saved, the footer offers two ways to run it. In the API Catalogue the same two actions are the {icon:run-api} and {icon:run-batch} icons on the endpoint's row.
+Once saved, the footer offers two ways to run it. In the Endpoints list the same two actions are the {icon:run-api} and {icon:run-batch} icons on the endpoint's row.
 
 - **Run API** sends one request. If the endpoint has template variables it asks for their values first. See [Run API](/docs/run-api/).
 - **Run Batch** appears once the endpoint has `{{template variables}}` and drives it from a file. See [Batch Preparation](/docs/batch-preparation/).
@@ -236,7 +236,7 @@ The same styled block renders as a clean code section — paste it straight into
 
 Got a shared endpoint from a colleague? Three ways in, all the same result:
 
-- {icon:paste-endpoint} **New Endpoint from Clipboard** in the API Catalogue
+- {icon:paste-endpoint} **New Endpoint from Clipboard** in Endpoints
 - **Paste Endpoint** at the top of a new, unsaved endpoint
 - **Ctrl+V** anywhere on a new, unsaved endpoint
 

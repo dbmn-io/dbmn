@@ -65,24 +65,26 @@ What the product calls things now. Use these; the guard rejects most of the reti
 | Say | Not | Notes |
 |---|---|---|
 | the **Hub** | sidebar, tree view, panel | One editor tab; the VS Code sidebar closes when it opens |
-| **rail** / **list panel** / **tabs** | | Rail sections: Environments, API Catalogue, History, Import, Export; pinned: Account, Settings |
+| **rail** / **list panel** / **tabs** | | Rail sections: Environments, Endpoints (the API Catalogue until 0.4.0), History, Reporting, Import, Export; pinned: Account, Settings |
 | **environment selector** (header) | status bar, right-click → Set as Active | Also **Set as Active** in the environment editor footer |
 | **Add Endpoint**, **Add Environment** | + icon, New Endpoint | |
 | **New Endpoint from Clipboard** / **Paste Endpoint** | Paste | Catalogue button / new-endpoint button |
 | **Copy to Share** | Share | Endpoint footer |
 | **tags** | folders | Folders were migrated to tags |
 | **System** | | Short lowercase name for one API; on endpoints and environments |
+| **Production** (an environment's own Environment Type) | Prod Protect, Prod Protection, managed environment, licence, trial, plan, Upgrade | Free and open source from 0.4.0: no licences or limits; nothing pins an environment's type or Run in |
 | **History** | Executions, Executions sidebar | Rail label. Settings panel is "Transactions" |
 | **Import** / **Export** → one `.dbmn.zip` | Export Workspace, Export Endpoint, Merge/Replace | |
-| **Run API** / **Run Batch** | play icon | Footer buttons and catalogue row icons |
-| Run Batch steps: **Source**, **Map**, **Validate**, **Review**, **Execute** | Load Data, Map & Transform, Review & Edit Data, Review & Configure, Execute Batch, Review JSON | Shown in the **step bar** across the top (renamed 2026-10-05) |
+| **Run API** / **Run Batch** | play icon | Footer buttons and Endpoints row icons |
+| Run Batch steps: **Source**, **Map**, **Validate**, **Review**; **Execute** is Review's button | Load Data, Map & Transform, Review & Edit Data, Review & Configure, Execute Batch, Review JSON, the Execute step | Shown in the **step bar** in the footer (renamed 2026-10-05; Execute folded into Review 2026-11-12) |
 | **Import Data** | Read Data | Source button |
 | **Rows per request** | Reps, Maximum Repetitions | Review |
-| **Error Handling**: **Stop on first error** / **Continue processing** (default) | Stop on First Error, Max Error Count, Percentage-Based | Execute, and the Console Settings tab |
+| **Error Handling**: **Stop on first error** / **Continue processing** (default) | Stop on First Error, Max Error Count, Percentage-Based | Review's **Configure**, and the Console Settings tab |
 | **Processing Mode** / **Max Concurrency** | threads | Per batch / per environment ceiling |
 | **Pagination** (Console footer) → **Fetch all pages**, **Get next N pages**, **Next Page** | Configure Pagination, Fetch All, Execute tab | |
 | Console tabs: **Links**, **Input**, **Raw**, **Completed**, **Error**, **Settings** | Execute tab, Request tab | **Links** only on a chained run |
 | **Chain** (Console toolbar, Completed tab) → **Chain from …**, **Send them to endpoint:** | | Run Batch banner: **Chained from** |
+| **Compare** (Console toolbar, Completed tab; Beta) → steps **Select**, **Match**, **Columns** (its button **Generate**), **Results**; Hub rail **Reporting** (types: Compare, later Query); **Baseline** / **BL**, then **C1**–**C3**; **Strict** / **Relaxed** / **Don't compare**; Status **Same** / **DIFF** / **Missing**; **Side by side** / **Compact** | A/B, Left/Right, Pick step, Differences only, Select all (Status filter) | Starts only from the Console; the Hub's Reporting list reopens saved compares (vs-dbmn #298) |
 | **help mode** (help button at the right end of the Hub header, or <kbd>?</kbd>) | help icon, ? icon, dashed outline | No screen has per-control help icons; help mode covers the Hub and every tab; the outline is **dotted**. Page: `docs/help-mode.md` |
 | **Reprocess**, **Re-run**, **Copy**, **Delete**, **Pause**, **Resume**, **Cancel** | Copy Batch, Rename, Stop | Console footer |
 | **Logs**, **Raw / Render / Text** | View Logs, Rendered | Raw tab |
@@ -90,6 +92,8 @@ What the product calls things now. Use these; the guard rejects most of the reti
 | **The Training Ground** | Playground, Puppy School (for the API) | The API. **Puppy School** is the course |
 | `~/Dobermann-Workspace`, `{environment}/{endpoint}/` | `.active8/results/` | `.active8/` holds only the database |
 | Ctrl+W | Alt+D E, Quick Access | The only VS Code keybinding |
+| header variable: **Options**, **Header** (Variables table), `pick <name>`, **Add…** (header segment) | organisation picker, organisations from the token, `(pick org)` | An organisation is an ordinary environment variable; nothing is read from the token (vs-dbmn #424) |
+| option label: `840 = Brisbane` in **Options**; **Value** and **Label** in **Add…**; a variable in the Base URL's path (`{{version}}`), the path changed from the pencil beside the `System: URL` heading | "the URL is fixed once the environment exists", "a variable without options is never asked for" | Only the host is fixed; an empty header variable, or one the Base URL uses, is asked for before a run (vs-dbmn #424) |
 
 Never name a customer platform, or any vendor whose systems DBMN loads into, in public copy.
 

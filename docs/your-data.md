@@ -7,9 +7,9 @@ parent: Documentation
 
 # Your Data & Privacy
 
-Everything stays local. Dobermann stores all your API requests, responses, and logs on your machine — there is no cloud storage. Your data never leaves your machine except for the actual API calls you configure and optional aggregate telemetry counters.
+Your run data stays local. Dobermann stores all your API requests, responses, and logs on your machine, and none of it is sent to DBMN. What leaves your machine is the API calls you configure, your endpoints and environments if you keep them in your DBMN account, and optional usage counts.
 
-This is a key differentiator from cloud-based API tools: your configurations, credentials, and execution history remain entirely under your control.
+Dobermann is [open source](/docs/open-source/), so none of this has to be taken on trust: the code that stores and sends is there to read.
 
 ---
 
@@ -23,23 +23,54 @@ A Dobermann workspace is a **folder on your machine**. This is where all executi
 
 ---
 
+## DBMN in the browser
+{: #web-app }
+
+Added in v0.4.0
+{: .label .label-green }
+
+The web app at [app.dbmn.io](https://app.dbmn.io) keeps the same things, in one of two places.
+
+**In the browser.** Until you choose a folder, **Settings → Workspace** reads **History is kept in this browser only**. Runs, their request and response files and the executions database live in the browser's own storage for app.dbmn.io. They survive a reload and a restart, and they are lost if you clear the site's data. DBMN for VS Code does not see them.
+
+**In a folder on your computer.** **Use a folder…** keeps History and run results in a folder you pick. A folder that isn't a DBMN workspace yet is set up when you choose **Use this folder**, so a new computer needs nothing but the browser. Pick the folder DBMN for VS Code uses (`~/Dobermann-Workspace` by default) and both write to the same executions database and the same files, so **History** is the same in both. Anything made in the browser before that moves across. The browser asks once whether DBMN may edit files in the folder: choose **Allow**. After a restart it may ask again, and **Settings → Workspace** reads **Reconnect folder** until you do. Only Chrome and Edge can do this: in other browsers the button answers **Using a folder needs Chrome or Edge**, and History stays in the browser.
+
+**Where an environment runs makes no difference.** An environment set to **Run in: Local agent** sends its requests through DBMN for VS Code, but the web app records the run, in whichever of the two places it is using. VS Code itself writes nothing for it. See [Environments — Run in](/docs/environments/#run-in).
+
+### Which browser
+{: #browsers }
+
+| Browser | Run from the browser | **Run in: Local agent** (through DBMN for VS Code) | **Use a folder…** (History shared with VS Code) |
+|---|---|---|---|
+| **Chrome**, **Edge** | yes | yes, after a one-time **Local network access** prompt | yes |
+| **Firefox** | yes | yes | no, History stays in the browser |
+| **Brave** | yes | yes, once Brave's **Localhost access** permission is allowed for app.dbmn.io | no, History stays in the browser |
+| **Safari** | yes | **no**: Safari does not let a secure page reach an app on your computer | no, History stays in the browser |
+
+On a Mac where Safari is the only browser allowed, use the desktop app, which sends every request itself and keeps History in a folder, with no VS Code and no browser involved.
+
+---
+
 ## What's Stored & Where
 
 ### Workspace folder structure
 
 ```
 {your-workspace}/
-├── .active8/
-│   └── executions.db          ← execution metadata (SQLite)
+├── .dbmn/
+│   ├── executions.db          ← History: each run's status, timestamps, counts (SQLite)
+│   └── workspace.json         ← says this folder is a DBMN workspace
 ├── {environment}/
 │   └── {endpoint}/
-│       ├── transaction-{timestamp}.json           ← request
-│       ├── transaction-{timestamp}-response.json  ← response
+│       ├── run-content.dbmn                       ← the requests, responses and logs, compressed
 │       └── batch/{batchId}/
 │           ├── input.csv                          ← the rows you loaded
-│           ├── transaction-001.json
-│           └── transaction-001-response.json
+│           └── run-content.dbmn
 ```
+
+A workspace from an older version has an `.active8` folder: it is renamed `.dbmn` at start-up and
+left as a link, so an older version sharing the folder keeps working. Older runs keep their
+transaction files, one per request and response, and still open in the Console.
 
 The Console's Settings tab links each run to its files.
 
@@ -51,14 +82,16 @@ The Console's Settings tab links each run to its files.
 
 ### Transaction Files (Audit Trail)
 
-- Every API call produces request and response files; a batch keeps its input rows beside them
+- Every API call keeps its request, response and log; a batch keeps its input rows beside them
 - Organised by environment, then endpoint, then batch
-- Human-readable JSON — open in any text editor
+- Kept in one compressed archive per run folder (`run-content.dbmn`), not a file per request: a big
+  workspace takes a fraction of the space. Open a run's Console to read them, or **Export** them
 - Files persist until you delete them — full audit trail. Deleting a run from **History** deletes its files too
 
 ### Configuration (VS Code Storage)
 
-- Endpoints, environments and Systems are stored in VS Code's global state
+- Endpoints, environments and Systems are kept in your DBMN account, or on this computer only if
+  you chose that. See [Settings](/docs/hub/#settings)
 - Credentials (tokens, secrets, service-account keys) are stored in VS Code's **encrypted secret storage**
 - Never written to disk as plain text — and stripped from exports unless you ask. See [Import/Export](/docs/import-export/#credentials)
 
@@ -73,23 +106,23 @@ The Console's Settings tab links each run to its files.
 
 ### DBMN Sign-in
 
-Signing in to DBMN authenticates you with the DBMN service and checks your licence. Your endpoints, environments and data are not sent.
+Signing in to DBMN authenticates you with the DBMN service. Your endpoints, environments and Systems go to your account only if **Stored** is **In your DBMN account** (see [Settings](/docs/hub/#settings)). Secrets and run data are never sent.
 
-### Telemetry (Aggregate Counters Only)
+### Telemetry (Usage Counts Only)
 
-If you're signed in, minimal aggregate usage counters are sent to DBMN:
+If you're signed in, usage counts are sent to DBMN:
 
 **What's sent:**
-- Call counts, batch run counts, success/failure totals
-- Execution time, date, extension version
-- Environment licence tier (product-level usage only)
+- Call counts, batch run counts, success/failure totals and run time, as one total per day
+- Dobermann's version, VS Code's version and the operating system name
 
 **What's NEVER sent:**
 - Request or response bodies
-- Endpoint configurations, URLs, headers, or tokens
+- An environment's address, or an API's method or path
+- Headers, variable values, tokens, or the names of your saved endpoints
 - Any of your data
 
-Telemetry can be disabled by arrangement.
+It's optional: turn it off with **Share usage counts with DBMN**, or with VS Code's own telemetry setting. Signed out, nothing is sent. See [Usage telemetry](/docs/telemetry/).
 
 ### Puppy School
 
@@ -97,9 +130,8 @@ The course runs against [The Training Ground](/docs/playground/), a DBMN-hosted 
 
 ### Nothing Else
 
-- No cloud sync of configurations
 - No cloud storage of results
-- No analytics beyond aggregate counters
+- No analytics beyond the usage counts
 
 ---
 

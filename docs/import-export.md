@@ -19,12 +19,12 @@ Both live on the Hub rail: {icon:nav-export} **Export** and {icon:nav-import} **
 3. Set the **Export Filename** (default `dobermann-export`; `.dbmn.zip` is added)
 4. Click **Export Selected Items** and choose where to save
 
-To export a handful of endpoints from the catalogue instead, turn on **Select** in {icon:nav-api-catalogue} **API Catalogue**, tick them, and click **Export** in the bar that appears.
+To export a handful of endpoints from the list instead, turn on **Select** in {icon:nav-api-catalogue} **Endpoints**, tick them, and click **Export** in the bar that appears.
 
 ### What's in the file
 
 - Endpoints: method, path, description, tags, System, headers, query parameters, body template, and their saved [Console views](/docs/named-views/)
-- Environments: name, type, System, base URL, description, mock setting, authentication method and its configuration, headers and variables
+- Environments: name, type, System, base URL, description, authentication method and its configuration, headers and variables
 - Your Console display settings
 
 Endpoints and environments carry their **System by name**, so a System is recreated on import if the other machine doesn't have it.

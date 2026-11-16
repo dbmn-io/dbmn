@@ -17,7 +17,7 @@ Two things put results in the Console, and both open it for you:
 - **Run API** {icon:run-api} — one request. If the endpoint has `{{template variables}}` it asks for their values first, and you can paste a spreadsheet row to fill them. See [Run API](/docs/run-api/).
 - **Run Batch** {icon:run-batch} — the same endpoint driven from a file, through the 5-step flow: Source → Map → Validate → Review → Execute. It appears once the endpoint has template variables. See [Batch Preparation](/docs/batch-preparation/).
 
-Both live in the endpoint editor's footer and on each endpoint's row in the API Catalogue.
+Both live in the endpoint editor's footer and on each endpoint's row in Endpoints.
 
 ### Execution Queue
 {: #execution-queue }
@@ -66,9 +66,11 @@ The run's details — environment, organisation, endpoint, full request URL, ID,
 
 During a batch execution, the footer offers:
 
-**Pause** — Halts execution after the current request completes. All progress is saved. Click **Resume** to continue from the exact position. Useful for rate limit cooling or reviewing errors mid-run.
+**Pause** — Halts execution once the requests being sent have finished. All progress is saved. Click **Resume** to continue from the exact position. Useful for rate limit cooling or reviewing errors mid-run.
 
-**Cancel** — Stops the batch. A cancelled batch can still be **Resume**d, or its failures reprocessed later.
+**Cancel** — Stops the batch now, cutting off the requests being sent. Those may or may not have reached the API, so on a running batch DBMN asks first: **Keep running**, **Pause instead**, or **Cancel batch**. The cut-off transactions are marked Cancelled, never as errors.
+
+**Resume** — Carries on a paused or cancelled batch from the next row, making the transactions still to come. If Cancel cut any off, Resume sends them again unless you choose **Skip them**. Skip them when a repeat would do something twice: they may already have reached the API.
 
 **Name** — On the Settings tab, rename the batch at any time so it is easy to find in History.
 
@@ -122,7 +124,8 @@ The Raw tab gives you complete visibility into every request and response — th
 
 **Features:**
 - **Transactions** — One card each: status, HTTP code and time, then its input rows, request and response. Expand All / Collapse All in the bar. A long list shows a window of cards with **Scroll for more** at the end
-- **Status** — Show only Pending, Running, Completed, Error or Split transactions, with counts. While the batch runs, the tab opens on **Running**; it goes back to All when the batch finishes unless you picked a status yourself
+- **Status** — Show only Pending, Running, Completed, Error, Test failed or Split transactions, with counts; each transaction counts under one of them. While the batch runs, the tab opens on **Running**; it goes back to All when the batch finishes unless you picked a status yourself
+- **TEST FAILED** — The server answered, but the endpoint's test turned the answer down. The card says which test failed and why, under its header; an error from the server says its HTTP status there instead
 - **Show Input / Request / Response** — Choose what each transaction shows. Input is greyed out when there are no input rows
 - **Full request/response JSON** — Syntax-highlighted, with the parent keys pinned at the top as you scroll
 - **Request Body / Details** — Details shows the endpoint, query parameters and headers. A request with no body (blank or `{}`) shows Details only, and Request starts switched off
@@ -131,6 +134,7 @@ The Raw tab gives you complete visibility into every request and response — th
 - **Logs** — Per-transaction log entries for debugging, in a window you can copy from
 - **Copy All** — The whole transaction to the clipboard
 - **Raw / Render / Text** — For an HTML response, see it as source, as a page, or as plain text
+- **Lines / Pretty** — For a [JSON Lines](#jsonl) response, see it as it came (one record per line) or as one indented JSON array
 - Response count indicator
 
 When a run has **one transaction**, the Raw tab shows it directly — no list to expand. Its search highlights matches in the request and response.
@@ -159,17 +163,21 @@ Shows all successful transactions (2xx responses) in a data table.
 - Response times and status codes
 - Right-click a row to [view its transaction](#view-transaction)
 - Count indicator
+- A [JSON Lines](#jsonl) response gives one row per line
 
 **Use case:** Analyse successful patterns, extract data from responses, verify expected output.
 
 **Chain** in the toolbar sends the rows this tab shows into another endpoint's **Run Batch**. See [Chain](/docs/chain/).
 
+**Compare** (Beta), beside it, lines this result up against up to three other results of the same endpoint: another environment, or the same one last week. It reads them through the view this tab shows. See [Compare](/docs/compare/).
+
 ### Error Tab
 {: #error-tab }
 
-Shows all failed transactions — 4xx client errors, 5xx server errors, network errors, and timeouts.
+Shows all failed transactions — 4xx client errors, 5xx server errors, network errors, timeouts, and answers the endpoint's test turned down.
 
 **Features:**
+- **Reason**, the first column — why each transaction is an error: the test that failed and why, or the HTTP status and message
 - Error messages from the API
 - Request context that caused the error
 - Status codes and response times
@@ -191,6 +199,44 @@ Everything about the run that isn't a result:
 | **Lineage** | Only on a batch copied with an older version of Dobermann: Copied From, Original Environment, Copied At |
 | **Variables** | The values the run used |
 | **Files** | Links to the files saved in your [workspace](/docs/your-data/): **Request** and **Response** for a single run, **CSV** and **Folder** for a batch |
+
+---
+
+## JSON Lines (JSONL) responses
+{: #jsonl }
+
+Added in v0.4.0
+{: .label .label-green }
+
+Some APIs answer with **JSON Lines** (also called JSONL or NDJSON): one JSON record per line
+instead of one JSON document. Bulk exports and data feeds often do, and they usually stream it,
+so a big one takes a while to arrive.
+
+DBMN reads a response as JSON Lines when:
+
+- the API says so: `Content-Type: application/x-ndjson`, `application/jsonl` or
+  `application/x-jsonlines`
+- the URL ends in `.jsonl` or `.ndjson`
+- the body is plainly one JSON object per line, even if it's labelled JSON or text
+
+**One request is still one transaction.** Its lines become records:
+
+- **Completed** shows one row per line, so search, views, Copy, Export and **Chain** work on the
+  records.
+- **Raw** labels the response **RESPONSE (JSONL · 95,121 records)**. **Lines** shows the body as
+  it came; **Pretty** shows the records as one indented array.
+- A line that isn't JSON (often the last line of a feed that broke off) is counted in the label,
+  "· 1 line not JSON", so a short download never goes unnoticed. The good lines are kept.
+
+**While it downloads**, the Console footer counts as the body arrives:
+
+- **Receiving 76,097 / 95,121 records** with a percentage and the time left, when the API says
+  how much is coming (an `X-Total-Count` header, or `Content-Length`)
+- **Receiving 88,809 records** with the MB so far, a moving bar and the download speed, when it
+  doesn't
+- then **100%** and **Processing 95,121 records** while DBMN reads and saves it
+
+To try it, the Training Ground has an [export that answers in JSON Lines](/docs/playground/#inventory-export).
 
 ---
 
@@ -221,6 +267,37 @@ Operators light up in colour as you type — if a `+` or `-` doesn't change colo
 | `?` | Exactly one character | `a?c` | "abc", "a1c" |
 | `"quoted"` | Exact cell value | `"New York"` | only literal "New York" |
 | plain text | Substring (default) | `hello` | "Hello World" |
+
+#### Search one column
+{: #search-columns }
+
+Added in v0.4.0
+{: .label .label-green }
+
+Start a term with `@` and a column's name to search that column alone. Type `@` and the search box
+lists the table's columns; pick one and it lists the operators.
+
+| You type | Rows where the column |
+|---|---|
+| `@status=active` | is `active` (any case; `*` and `?` work as wildcards; `@uom=""` is blank) |
+| `@status!=active` | isn't `active` |
+| `@sku~WOOF` | contains `WOOF` |
+| `@sku!~WOOF` | doesn't contain `WOOF` |
+| `@quantityOnHand>10` | is more than 10. Also `<`, `>=`, `<=`. Numbers compare as numbers, anything else in text order, so dates work too |
+| <code>@uom=EA&#124;CS</code> | is `EA` or `CS`: <code>&#124;</code> means any of them (with `!=` and `!~`, none of them) |
+| `@quantityOnHand=10..90` | is from 10 to 90, both included. Leave an end out for no limit: `10..`. `!=10..90` is outside it |
+
+- A space means and: every `@` term must match, `@status=active @uom=EA`, the same column again
+  too.
+- Words alongside still search every column: `@status=active WOOF`.
+- A comma means either side, as it does between words: `@sku~WOOF, @status=reserved`. A comma
+  always ends a value, so `@uom=EA,CS` is `@uom=EA` or the word `CS` anywhere in the row.
+- Quote a name or a value with spaces: `@"lot number"="A 1"`. A quoted value is searched as it
+  is, `|` and `..` included.
+- A column name the table doesn't have matches no rows.
+
+The column is the one headed with that name (any case). [Compare's](/docs/compare/#results) search
+works the same way.
 
 **Word-boundary rule.** `+` and `-` are operators only at the start of the search, or after whitespace / `,` / another operator. Everywhere else they're literal characters — so `ACAU-ASR3690` matches as-is, hyphens included.
 
@@ -368,7 +445,7 @@ Every request and response is also saved as JSON in your [Dobermann workspace](/
 
 ### Error Handling setting
 
-Chosen on the **Execute** step, and shown on the Console's Settings tab:
+Chosen in Run Batch's **Review** step (**Configure**), and shown on the Console's Settings tab:
 
 | Setting | Behaviour |
 |---------|-----------|
@@ -396,7 +473,7 @@ A batch member refused with `401` against a DBMN-authenticated environment is re
 
 ### Parallel Processing
 
-Each batch picks a **Processing Mode** on the Execute step, up to the ceiling set per environment (see [Environments — Parallel Processing](/docs/environments/#parallel-processing)). Higher concurrency = faster batches, but more server load.
+Each batch picks a **Processing Mode** in Run Batch's **Review** step, up to the ceiling set per environment (see [Environments — Parallel Processing](/docs/environments/#parallel-processing)). Higher concurrency = faster batches, but more server load.
 
 ### Large Batches
 
@@ -462,6 +539,7 @@ One failed request can carry many rows. If the error doesn't say which, the requ
 - [Named Views](/docs/named-views/) — Save column layouts and row-per-X shapes; switch and export instantly
 - [Pagination](/docs/pagination/) — Configure and run paginated API requests
 - [Chain](/docs/chain/) — Send a run's results into another endpoint's Run Batch
+- [Compare](/docs/compare/) — This result against other results of the endpoint, cell by cell
 - [Batch Reprocessing](/docs/batch-reprocessing/) — Re-run failed transactions without re-executing the whole batch
 - [The Hub](/docs/hub/) — History, the activity chip, and execution settings
 - [Endpoints](/docs/endpoints/) — Configuring API requests

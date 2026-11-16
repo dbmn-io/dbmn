@@ -26,6 +26,24 @@ This guide covers common issues, error messages, and solutions for Dobermann. Is
 
 See [Getting Started — First Launch](/docs/getting-started/#first-launch-what-to-expect) for more detail.
 
+### Web App Can't Reach VS Code
+{: #web-app-cant-reach-vs-code }
+
+**Symptoms:**
+- A run on a **Run in: Local agent** environment waits with **Please open VS Code** although VS Code is open
+- **Your browser is blocking DBMN from reaching VS Code**
+- **Safari can't reach DBMN for VS Code**
+- The VS Code icon in the Hub header stays grey
+
+**Check, in order:**
+
+1. **Same account.** DBMN for VS Code must be open and signed in to the same DBMN account as the web app ({icon:nav-account} **Account** in each). A signed-out VS Code is invisible to the web app.
+2. **The browser's permission.** The web app reaches VS Code on your computer, and the browser decides whether a website may. Chrome and Edge: the icon to the left of the address → **Site settings** → **Local network access** → **Allow**, then run again. Brave: `brave://settings/content/localhostAccess`, add app.dbmn.io. Firefox needs nothing.
+3. **Safari.** Safari does not let a secure page reach an app on your computer, and there is no setting for it. Use Chrome, Edge or Firefox for environments that run through VS Code, or the desktop app.
+4. **Still waiting.** Reload the web app tab. The run picks up where it was once VS Code answers.
+
+See [Environments — Run in](/docs/environments/#run-in) and [Your Data — Which browser](/docs/your-data/#browsers).
+
 ### Token Expired
 
 **Symptoms:**
@@ -67,17 +85,11 @@ See [Getting Started — First Launch](/docs/getting-started/#first-launch-what-
 ### Organisation Not Selected
 
 **Symptoms:**
-- Requests fail because the API wanted an organisation header
-- The Hub header reads `(pick org)` after the environment name
+- The API refuses requests because the organisation header is missing or wrong
+- The Hub header reads `pick org` after the environment name
 
 **Solution:**
-Click the {icon:env-switcher} environment selector in the Hub header and choose an organisation under the environment. See [Environments — Organisation Selection](/docs/environments/#organization-selection).
-
-### Sign in to run
-
-**Symptoms:** The Run API and Run Batch buttons read **Sign in to run**.
-
-Dobermann needs a DBMN account to run anything. Open {icon:nav-account} **Account** and sign in. A free account is enough.
+Click the `pick org` segment in the Hub header and choose an organisation, or **Add…** one. With no segment there, the environment has no `org` header variable yet: set one up as in [Environments — Organisation Selection](/docs/environments/#organization-selection), and check its headers carry `{{ENV:org}}`.
 
 ## Endpoint Configuration
 
@@ -160,7 +172,7 @@ Both are disabled while the endpoint has unsaved changes. **Save Endpoint** (Ctr
 
 **Solutions:**
 - Fix the cause of the first error (usually authentication), then **Resume** or **Reprocess**
-- Next time, choose **Continue processing** on Execute to collect every failure in one run
+- Next time, choose **Continue processing** on **Review** to collect every failure in one run
 
 ### Execution Hangs
 
@@ -185,7 +197,7 @@ Both are disabled while the endpoint has unsaved changes. **Save Endpoint** (Ctr
 
 **Solutions:**
 - Raise **Rows per request** on **Review** — the API's documented maximum is the right number. See [Batch Preparation](/docs/batch-preparation/#step-4-review-json)
-- Raise **Processing Mode** on Execute, within the environment's **Max Concurrency**
+- Raise **Processing Mode** on **Review**, within the environment's **Max Concurrency**
 - Execute during off-peak hours
 
 ### Variables Show Wrong Data
@@ -351,8 +363,8 @@ When reporting issues, include:
 
 ### Reporting Issues
 
-- [GitHub Issues](https://github.com/dbmn-io/dbmn/issues) - Bug reports and feature requests
-- [GitHub Discussions](https://github.com/dbmn-io/dbmn/discussions) - Questions and community help
+- [GitHub Issues](https://github.com/dbmn-io/dobermann/issues) - Bug reports and feature requests
+- [GitHub Discussions](https://github.com/dbmn-io/dobermann/discussions) - Questions and community help
 - [support@dbmn.io](mailto:support@dbmn.io)
 
 ## Related Topics

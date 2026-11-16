@@ -15,7 +15,7 @@ review:
   endpoint: My Replenishment Orders
   prompt: >
     Before you load anything, let's look at what you built. In Dobermann, open
-    {icon:nav-api-catalogue} **API Catalogue**, open **My Replenishment Orders** and click
+    {icon:nav-api-catalogue} **Endpoints**, open **My Replenishment Orders** and click
     **Copy to Share** — then paste it below. Same button your team will use; same format
     they'll receive.
   pass: >
@@ -84,7 +84,7 @@ Flat data in, nested data out. That is the job, on every project, forever.
 ## Step 1 — Look Before You Build
 
 Never write a template against an API you haven't looked at. Copy this, open
-{icon:nav-api-catalogue} **API Catalogue**, click {icon:paste-endpoint} **New Endpoint from Clipboard**, save,
+{icon:nav-api-catalogue} **Endpoints**, click {icon:paste-endpoint} **New Endpoint from Clipboard**, save,
 and click **Run API**:
 
 ```json
@@ -332,7 +332,7 @@ You're on **Validate**, and every row passes. Click **Next** again, to **Review*
 Every row has the same buyer and the same supplier, so every row belongs to the same order.
 That's the one line from Step 3 at work.
 
-Click **Next**, and **Execute**. One request, one order, a couple of hundred lines.
+Hit **Execute**. One request, one order, a couple of hundred lines.
 
 ## Step 6 — Many Orders, One Chain
 
@@ -375,7 +375,7 @@ walks through **Map** and **Validate** by itself and lands on **Review**:
 A flat table went in, and Dobermann rebuilt the nesting from it. That is the trick the whole
 course has been walking towards. Nested APIs, flat source data, no scripting.
 
-Click **Next**, and **Execute**. Three requests. Boom.
+Hit **Execute**. Three requests. Boom.
 
 ## Step 7 — Prove It Landed
 

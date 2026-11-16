@@ -1,0 +1,324 @@
+---
+layout: null
+title: Free and open source - Dobermann
+description: Dobermann is free and open source under the AGPL-3.0. Every feature, no limits. Read the code, build it yourself, get involved.
+nav_exclude: true
+permalink: /open-source/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <meta name="description" content="{{ page.description }}">
+    <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
+    <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
+    <link rel="stylesheet" href="/css/brand.css">
+    <!-- The theme: the app's themes, worn before the page paints, and the picker (assets/js/site-theme.js) -->
+    <link rel="stylesheet" href="/assets/css/theme-picker.css">
+    <script src="/assets/js/dbmn-themes.js"></script>
+    <script src="/assets/js/site-theme.js"></script>
+    <script defer src="/assets/js/theme-picker.js"></script>
+    <link rel="canonical" href="https://dbmn.io/open-source/">
+    <meta property="og:title" content="{{ page.title }}">
+    <meta property="og:description" content="{{ page.description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dbmn.io/open-source/">
+    <meta property="og:image" content="https://dbmn.io/images/DBMNLogo.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--brand-font-body);
+            background: linear-gradient(135deg, var(--brand-bg-start) 0%, var(--brand-bg-end) 100%);
+            min-height: 100vh;
+            color: var(--brand-text);
+            padding: 0;
+        }
+
+        /* ── Nav bar ── */
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 2rem;
+            border-bottom: 1px solid var(--brand-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(135deg, var(--brand-bg-start) 0%, var(--brand-bg-end) 100%);
+        }
+        .nav-left a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--brand-text);
+        }
+        .nav-left img { width: 36px; height: 36px; object-fit: contain; }
+        .nav-left h1 { font-family: var(--brand-font-heading); font-size: 1.25rem; margin: 0; }
+        .nav-right { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-right a {
+            color: var(--brand-text-muted);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+        .nav-right a:hover { color: var(--brand-text); }
+        .nav-right .nav-cta {
+            background: var(--brand-accent);
+            color: var(--brand-accent-text);
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-right .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px color-mix(in srgb, var(--brand-accent) 30%, transparent);
+        }
+
+        /* ── Hero ── */
+        .os-hero {
+            text-align: center;
+            padding: 3rem 2rem 1rem;
+        }
+        .os-hero h1 {
+            font-family: var(--brand-font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .os-hero p {
+            font-size: 1.15rem;
+            color: var(--brand-text-muted);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        
+        .os-hero .hero-badge {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1.25rem;
+            background: color-mix(in srgb, var(--brand-accent) 20%, transparent);
+            color: var(--brand-accent);
+        }
+        .buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid transparent;
+            background: var(--brand-accent);
+            color: var(--brand-accent-text);
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cta:hover { transform: translateY(-2px); box-shadow: 0 10px 20px color-mix(in srgb, var(--brand-accent) 30%, transparent); }
+        .cta-secondary {
+            color: var(--brand-text);
+            background: var(--brand-surface);
+            border: 2px solid color-mix(in srgb, var(--brand-text) 20%, transparent);
+        }
+        .cta-soon { opacity: 0.75; cursor: default; }
+        .cta-soon:hover { transform: none; box-shadow: none; }
+
+        .section { max-width: 1000px; margin: 0 auto; padding: 2.5rem 2rem; }
+        .section h2 { font-family: var(--brand-font-heading); font-size: 1.75rem; text-align: center; margin-bottom: 1.5rem; }
+        .section > p.lead { text-align: center; color: var(--brand-text-muted); max-width: 640px; margin: -0.75rem auto 1.5rem; line-height: 1.6; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+        .grid.two { grid-template-columns: repeat(2, 1fr); }
+        @media (max-width: 760px) { .grid, .grid.two { grid-template-columns: 1fr; } }
+        .card {
+            background: var(--brand-surface);
+            border: 1px solid var(--brand-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .card h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
+        .card p, .card li { font-size: 0.9rem; color: var(--brand-text-muted); line-height: 1.55; }
+        .card ul { list-style: none; }
+        .card li { padding: 0.2rem 0 0.2rem 1.4rem; position: relative; }
+        .card li::before { content: '\2713'; position: absolute; left: 0; color: var(--brand-success); font-weight: 700; }
+        .card a, .faq a { color: var(--brand-accent); text-decoration: none; }
+        .card a:hover, .faq a:hover { text-decoration: underline; }
+        .soon-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.15rem 0.5rem;
+            border-radius: 20px;
+            margin-left: 0.4rem;
+            vertical-align: middle;
+            background: color-mix(in srgb, var(--brand-accent) 20%, transparent);
+            color: var(--brand-accent);
+        }
+        .faq { max-width: 720px; margin: 0 auto; }
+        .faq h3 { font-size: 1rem; margin: 1.5rem 0 0.4rem; }
+        .faq p { font-size: 0.9rem; color: var(--brand-text-muted); line-height: 1.6; }
+
+/* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: var(--brand-text);
+            text-decoration: none;
+            border-bottom: 1px solid color-mix(in srgb, var(--brand-text) 30%, transparent);
+            transition: border-color 0.2s;
+        }
+        footer a:hover { border-color: var(--brand-text); }
+        .footer-links {
+            margin-bottom: 0.75rem;
+        }
+        .footer-links a {
+            margin: 0 0.75rem;
+        }
+
+            </style>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="nav-left">
+            <a href="/">
+                <img src="/images/DBMNLogo.png" alt="DBMN">
+                <h1>DBMN</h1>
+            </a>
+        </div>
+        <div class="nav-right">
+            <a href="/docs/">Docs</a>
+            <a href="/open-source/">Open source</a>
+            <span class="theme-picker-anchor"><button type="button" class="site-theme-btn" data-site-theme hidden></button></span>            <a href="/account/">Account</a>
+            <a href="https://app.dbmn.io" class="nav-cta">Open DBMN</a>
+        </div>
+    </nav>
+
+    <section class="os-hero">
+        <span class="hero-badge">AGPL-3.0</span>
+        <h1>Free and open source</h1>
+        <p>Dobermann is free, with every feature. The code is open, so you can read it, build it and change it.</p>
+        <div class="buttons">
+            {% if site.github_live %}<a href="{{ site.github_repo }}" class="cta">View on GitHub</a>{% else %}<span class="cta cta-secondary cta-soon">GitHub repository: coming soon</span>{% endif %}
+            <a href="https://app.dbmn.io" class="cta cta-secondary">Open DBMN</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="grid">
+            <div class="card">
+                <h3>Every feature, free</h3>
+                <p>No limits on batches, concurrency or pages.</p>
+            </div>
+            <div class="card">
+                <h3>Nothing hidden</h3>
+                <p>Read the code and see exactly what leaves your machine, and what never does.</p>
+            </div>
+            <div class="card">
+                <h3>Yours to run</h3>
+                <p>Build it yourself. Host the backend yourself. Fork it if we ever let you down.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>What is open</h2>
+        <div class="grid two">
+            <div class="card">
+                <h3>In the repository</h3>
+                <ul>
+                    <li>The app: VS Code extension and web app, one code base</li>
+                    <li>The engine: Run API, Run Batch, pagination, Chain, Compare</li>
+                    <li>The backend the app needs, ready to host yourself</li>
+                    <li>The telemetry code, and the list of every field it sends</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Free with a DBMN account</h3>
+                <ul>
+                    <li>Your endpoints and environments, kept in your account</li>
+                    <li>DBMN in the browser at <a href="https://app.dbmn.io">app.dbmn.io</a>. A desktop app to download is coming soon</li>
+                    <li><a href="/puppy-school/">Puppy School</a> and The Training Ground</li>
+                    <li>Weekly Usage and Standard Systems</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Coming soon</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>The repository <span class="soon-tag">Soon</span></h3>
+                <p>{% if site.github_live %}It's live: <a href="{{ site.github_repo }}">{{ site.github_repo | remove: "https://" }}</a>.{% else %}The code goes public at <strong>{{ site.github_repo | remove: "https://" }}</strong> with the next release.{% endif %}</p>
+            </div>
+            <div class="card">
+                <h3>Reporting: Query <span class="soon-tag">Soon</span></h3>
+                <p>Blend the results you already have into one report. <a href="/docs/compare/">Compare</a> is there today, in Beta.</p>
+            </div>
+            <div class="card">
+                <h3>Hosted extras <span class="soon-tag">Later</span></h3>
+                <p>Run results kept in the cloud, and features for teams. Optional and paid. The app stays free.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Get involved</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Report and suggest</h3>
+                <p>Found a bug or missing something? {% if site.github_live %}<a href="{{ site.github_repo }}/issues">Open an issue</a>.{% else %}Email <a href="mailto:support@dbmn.io">support@dbmn.io</a> until the issue tracker opens.{% endif %}</p>
+            </div>
+            <div class="card">
+                <h3>Contribute</h3>
+                <p>Pull requests are welcome under a contributor agreement. Start with <code>CONTRIBUTING.md</code> in the repository.</p>
+            </div>
+            <div class="card">
+                <h3>Security</h3>
+                <p>Found a vulnerability? Tell us privately first. <code>SECURITY.md</code> in the repository says how.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Questions</h2>
+        <div class="faq">
+            <h3>Is it really free?</h3>
+            <p>Yes. Every feature, with no limits and no end date.</p>
+
+            <h3>Do I need an account?</h3>
+            <p>Not in VS Code. A free DBMN account keeps your endpoints and environments in one place, and is needed for the web app and Puppy School.</p>
+
+            <h3>What does AGPL-3.0 mean for me?</h3>
+            <p>Use Dobermann freely, at home or at work. If you change it and offer it to other people, share your changes under the same terms.</p>
+
+            <h3>Can I use the names?</h3>
+            <p>The code is open. The names <em>DBMN</em> and <em>Dobermann</em> and the logo are trademarks: a fork needs its own name.</p>
+
+            <h3>What does it send home?</h3>
+            <p>Usage counts are optional: on when you sign in, with one switch to turn them off. Signed out, nothing is sent. Never your data. See <a href="/telemetry.html">Data Transparency</a>.</p>
+
+            <h3>How does DBMN make money?</h3>
+            <p>From optional hosted services. The app itself stays free and open.</p>
+
+            <h3>I already pay for DBMN</h3>
+            <p>Nothing changes without a word from us first. Manage your subscription from your <a href="/account/">Account</a>, or email <a href="mailto:hello@dbmn.io">hello@dbmn.io</a>.</p>
+        </div>
+    </section>
+
+{% include site_footer.html %}
+</body>
+</html>

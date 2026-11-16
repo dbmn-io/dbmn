@@ -85,7 +85,7 @@ Click the cell, change `-50` to `50`, and click **Next**. The check passes and y
 On **Review**, set **Rows per request** to `10`; the requests rebuild as you type. A thousand
 records go out as a hundred requests of ten.
 
-On **Execute**, check **Error Handling** is on **Continue processing**. **Stop on
+In **Configure**, check **Error Handling** is on **Continue processing**. **Stop on
 first error** would abandon the whole run at the first bad request.
 
 Hit **Execute**. Ninety-nine requests succeed. One fails.

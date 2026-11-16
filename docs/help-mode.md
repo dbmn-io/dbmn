@@ -34,7 +34,7 @@ Every documented control gets a **dotted outline**, and the pointer becomes a he
 - **Click an outlined control** and its section opens here, in your browser. The control does not do its normal job.
 - **Other buttons and links do nothing** while help mode is on, so you cannot run or save something by accident while looking for help.
 - Clicks on plain text and empty space pass through as usual.
-- In a list of repeated rows (the catalogue, History, a results table) only the first row on screen is outlined; the link is the same for every row.
+- In a list of repeated rows (Endpoints, History, a results table) only the first row on screen is outlined; the link is the same for every row.
 
 ---
 
@@ -45,7 +45,7 @@ Help mode is one state for the whole Hub. Turn it on anywhere and it is on every
 
 | Surface | Covered |
 |---|---|
-| The Hub itself | Header, rail, API Catalogue, Environments, History, Import, Export, Account, Settings |
+| The Hub itself | Header, rail, Endpoints, Environments, History, Import, Export, Account, Settings |
 | Endpoint editor | Every section and footer button |
 | Environment editor | Every tab, field group and footer button |
 | Run Batch | The step bar, each step's controls, the footer |

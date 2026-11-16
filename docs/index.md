@@ -7,7 +7,7 @@ has_children: true
 
 # Dobermann Documentation
 
-Welcome to the Dobermann documentation. Dobermann enables bulk data migration through REST APIs — load, extract, and migrate millions of records without writing scripts.
+Welcome to the Dobermann documentation. Dobermann enables bulk data migration through REST APIs — load, extract, and migrate millions of records without writing scripts. It is free and [open source](/docs/open-source/).
 
 ## New here? Start with Puppy School
 
@@ -23,7 +23,6 @@ Welcome to the Dobermann documentation. Dobermann enables bulk data migration th
 | [Help Mode](/docs/help-mode/) | Press `?` or click the help button: every control links to its page here |
 | [Environments](/docs/environments/) | Configure API connections, authentication, and environment types |
 | [↳ OAuth Setup Guide](/docs/oauth-setup/) | OAuth and Google Service Account configuration |
-| [↳ Prod Protect](/docs/prod-protect/) | Production environment types set centrally and locked |
 | [Endpoints](/docs/endpoints/) | Configure API requests, share with your team |
 | [↳ Sharing Endpoints](/docs/sharing-endpoints/) | Copy an endpoint to share, paste it on the other side |
 | [↳ Template Variables](/docs/template-variables/) | Variable syntax, types, modifiers, and editing |
@@ -34,6 +33,7 @@ Welcome to the Dobermann documentation. Dobermann enables bulk data migration th
 | [↳ Pagination](/docs/pagination/) | Configure and run paginated API requests |
 | [↳ Chain](/docs/chain/) | Send a run's results into another endpoint's Run Batch, and trace the link |
 | [↳ Batch Reprocessing](/docs/batch-reprocessing/) | Re-run only failed transactions from a previous batch |
+| [Compare](/docs/compare/) | A result against up to three others, cell by cell: environments, or one environment over time (Beta) |
 | [Import/Export](/docs/import-export/) | Share configurations with your team |
 | [The Training Ground](/docs/playground/) | The practice API behind Puppy School: endpoints, data, limits |
 | [Shortcuts](/docs/shortcuts/) | Keyboard shortcuts |
@@ -41,7 +41,7 @@ Welcome to the Dobermann documentation. Dobermann enables bulk data migration th
 | [Your Data & Privacy](/docs/your-data/) | Where data is stored and what leaves your machine |
 | [Troubleshooting](/docs/troubleshooting/) | Common issues and solutions |
 | [Changelog](/docs/changelog/) | Release history and what's new |
-| [Pricing](/pricing.html) | Plans and pricing |
+| [Open Source](/docs/open-source/) | The licence, the repository, building it yourself, contributing |
 
 ## What is Dobermann?
 
@@ -52,10 +52,13 @@ Every enterprise system speaks REST. But migrating data through REST APIs still 
 - **Environment Management** — Manage connections, authentication (DBMN, JWT, OAuth, Google Service Account), and per-environment variables
 - **Batch Execution** — Process thousands of rows with parallel processing and live progress
 - **Live Results** — Watch results stream in as your batch executes, then shape them with Named Views and export
+- **Compare** — Line up saved results from DEV, UAT and PROD, or from last week and today, and see cell by cell what changed
 
 ## Installation
 
-Currently available as a VS Code extension:
+Nothing to install: open [app.dbmn.io](https://app.dbmn.io) in your browser and sign in with a free DBMN account.
+
+Or use the VS Code extension, which needs no account:
 
 1. Open VS Code
 2. Go to Extensions (Ctrl+Shift+X / Cmd+Shift+X)
@@ -63,10 +66,13 @@ Currently available as a VS Code extension:
 4. Click Install
 5. Click the Dobermann icon in the Activity Bar — the [Hub](/docs/hub/) opens
 
-Or install directly from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=dbmn.dobermann).
+Or install directly from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=dbmn.dobermann), or [build it from source](/docs/open-source/#build).
+
+A desktop app to download, for Windows, macOS and Linux, is coming soon.
 
 ## Support
 
-- [Report Issues](https://github.com/dbmn-io/dbmn/issues) - Bug reports and feature requests
-- [GitHub Discussions](https://github.com/dbmn-io/dbmn/discussions) - Questions and community help
+- [Report Issues](https://github.com/dbmn-io/dobermann/issues) - Bug reports and feature requests
+- [GitHub Discussions](https://github.com/dbmn-io/dobermann/discussions) - Questions and community help
+- [The source](https://github.com/dbmn-io/dobermann) - Dobermann is open source: read it, build it, contribute
 - [support@dbmn.io](mailto:support@dbmn.io)

@@ -29,8 +29,8 @@ note_to_reviewer: >
   file's rendered output, the page, or its scripts; the verify.* copy above is deliberately
   answer-free, and so are the findings the function returns. This replaces the old export
   telemetry dependency (recordExport was never wired up). No Excel upload — paste covers it.
-  "Fetch all pages" and 16 concurrent requests are full-licence features. Decision
-  2026-09-17: no gate on the Training Ground — every signed-in user gets full access there
+  "Fetch all pages" and 16 concurrent requests were full-licence features until 0.4.0, which
+  has no licences or limits. Decision 2026-09-17: no gate on the Training Ground — every signed-in user gets full access there
   (vs-dbmn migration 20260917000001_open_environments.sql, must be deployed first).
   The search counts in Step 4 are MEASURED by vs-dbmn `npm run test:e2e:lessons`, which plays
   a learner through Lessons 1-4 on a local stack and runs these searches through
@@ -61,7 +61,7 @@ hundred and a note saying there are more. That is every API you will ever meet.
 Dobermann has a trick up its sleeve. It will walk the pages for you — and as each page comes
 back, its rows are added to the **Completed** tab. One click, one table, all of it.
 
-Let's see it in action. Copy this, open {icon:nav-api-catalogue} **API Catalogue**, and click
+Let's see it in action. Copy this, open {icon:nav-api-catalogue} **Endpoints**, and click
 {icon:paste-endpoint} **New Endpoint from Clipboard**:
 
 ```json

@@ -127,6 +127,8 @@ Reference values from your active environment using the `ENV:` prefix:
 - ENV variables **don't** appear in the data entry grid during Run Batch
 - They're resolved automatically from your active environment's variable list
 - If a variable is missing, execution fails with a clear error
+- In a path, a query parameter or a header, type `{{` to pick from a list: the environment's variables as `ENV:name`, the automatic `A8:` values, and the names the endpoint already uses
+- An environment's own headers take `{{ENV:name}}` too, so the same spelling works everywhere
 
 Set environment variables on the environment's **Headers & Variables** tab — see [Environments — Variables](/docs/environments/#variables).
 

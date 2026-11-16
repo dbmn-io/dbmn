@@ -99,14 +99,14 @@ In the Hub, open {icon:nav-account} **Account** and sign in, or register for a f
 2. Set the **Name** to: `DBMN Puppy School`
 3. Set the **Base URL** to: `https://api.dbmn.io/functions/v1/playground`
 4. On the **Authentication** tab, select **DBMN** — Dobermann injects your DBMN token automatically at execution time
-5. Under **Execution Settings**, tick **Enable parallel batch processing** and set **Max Concurrency** to **Extreme Parallel** if you want to try 16 concurrent requests
+5. Under **Execution Settings**, set **Max Concurrency** to **Extreme Parallel** if you want to try 16 concurrent requests
 6. Click **Save Environment**, then pick it in the {icon:env-switcher} environment selector at the top of the Hub
 
 No manual headers or token copy/paste required. If your session expires, Dobermann prompts you to sign in again before execution.
 
 ### 3. Create Endpoints
 
-Use the ready-to-paste templates below. For each one, copy it, open {icon:nav-api-catalogue} **API Catalogue** and click {icon:paste-endpoint} **New Endpoint from Clipboard** — Dobermann fills in the name, method, path, parameters and body. Save, then **Run API**.
+Use the ready-to-paste templates below. For each one, copy it, open {icon:nav-api-catalogue} **Endpoints** and click {icon:paste-endpoint} **New Endpoint from Clipboard** — Dobermann fills in the name, method, path, parameters and body. Save, then **Run API**.
 
 ---
 
@@ -154,6 +154,24 @@ Paginated inventory listing. Configure this endpoint to demonstrate Dobermann's 
 // QueryParam: page: {{A8:PAGE:0:totalCount}} [enabled]
 // QueryParam: size: {{A8:SIZE:100:pageSize}} [enabled]
 // QueryParam: order: desc [enabled]
+```
+
+### Inventory — Export as JSON Lines (GET)
+{: #inventory-export }
+
+Added in v0.4.0
+{: .label .label-green }
+
+Your whole inventory in one request, streamed back as [JSON Lines](/docs/console/#jsonl): one
+item per line (`application/x-ndjson`), the way bulk-export APIs answer. The `X-Total-Count`
+header says how many lines are coming, so the Console shows a real percentage. Add `limit` to
+take fewer, and any of the list's filters (`status`, `locationGln`, …) to narrow it.
+
+```javascript
+// Name: Puppy School — Export Inventory (JSONL)
+// Method: GET
+// Path: /inventory/export
+// QueryParam: limit: 20000 [enabled]
 ```
 
 ### Inventory — Get by ID (GET)
@@ -540,7 +558,7 @@ The playground handles concurrent requests well. When running batch uploads:
 
 Use the [Stats](#stats) endpoint to check your current usage. Use [Reset](#reset) to clear all your data immediately.
 
-**No licence needed.** Against the Training Ground, every signed-in user gets Dobermann at full power — unlimited batches, up to 16 concurrent requests, unlimited pages and **Fetch all pages** — whether or not you have a licence or a trial. The limits above are the only ones.
+The limits above are the only ones, and they belong to the Training Ground. Dobermann itself has none.
 
 ---
 

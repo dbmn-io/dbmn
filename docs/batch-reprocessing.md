@@ -10,26 +10,26 @@ grand_parent: Documentation
 
 When a batch finishes with errors, you don't need to re-run the entire batch. Dobermann lets you reprocess only the transactions that failed — keeping completed results intact and saving time.
 
+Reprocess is for a batch that has finished. A paused or cancelled batch has rows still to send: [**Resume**](/docs/console/#batch-controls) it instead.
+
 ---
 
 ## Quick Start
 
 1. Run a batch from the [Console](/docs/console/)
 2. Once the batch finishes (or finishes with errors), click **Reprocess** at the bottom of the Console
-3. Choose what to reprocess (errors only, incomplete, etc.) and click **Continue**
+3. Choose what to reprocess (errors only, split array errors or all) and click **Continue**
 4. Dobermann resets the selected transactions and re-executes them in the same batch
 
 ---
 
 ## Reprocess Options
 
-When you click **Reprocess**, the **Reprocess Batch** window offers five options:
+When you click **Reprocess**, the **Reprocess Batch** window offers three options:
 
 | Option | What it reprocesses |
 |--------|-------------------|
-| **Incomplete** | All non-completed transactions (errors + pending) |
 | **Errors only** | Only transactions that returned an error response |
-| **Pending only** | Only transactions still in pending status |
 | **Split array errors** | Splits failed array transactions into individual elements (see [Split Reprocess](#split-reprocess) below). Not offered for a paginated batch |
 | **All** | Every transaction including completed ones — a full do-over (asks you to confirm) |
 

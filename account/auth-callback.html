@@ -1,3 +1,7 @@
+---
+layout: null
+permalink: /account/auth-callback.html
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +12,11 @@
     <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
     <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
     <link rel="stylesheet" href="/css/brand.css">
+    <!-- The theme: the app's themes, worn before the page paints, and the picker (assets/js/site-theme.js) -->
+    <link rel="stylesheet" href="/assets/css/theme-picker.css">
+    <script src="/assets/js/dbmn-themes.js"></script>
+    <script src="/assets/js/site-theme.js"></script>
+    <script defer src="/assets/js/theme-picker.js"></script>
     <link rel="stylesheet" href="/account/shared.css">
 </head>
 <body>
@@ -16,66 +25,37 @@
             <img src="/images/DBMNLogo.png" alt="DBMN">
             <h1>DBMN</h1>
         </a>
+        <div class="header-right header-theme"><span class="theme-picker-anchor"><button type="button" class="site-theme-btn" data-site-theme hidden></button></span></div>
     </header>
 
     <div class="container">
         <div class="card">
             <h2 id="callbackTitle">Signing you in...</h2>
             <div id="alert" class="alert"></div>
-            <p id="callbackStatus" style="color: #a0a0b0;"><span class="spinner"></span> Verifying your sign-in link</p>
+            <p id="callbackStatus" style="color: var(--brand-text-muted);"><span class="spinner"></span> Verifying your sign-in link</p>
         </div>
 
-        <footer>
-            <a href="/terms.html">Terms</a> &middot; <a href="/privacy.html">Privacy</a>
-            <br>
-            &copy; 2026 DBMN.io
-        </footer>
+{% include site_footer.html %}
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="/account/shared.js"></script>
     <script>
-        // If the user has no license yet, create a 30-day trial and send the welcome notification.
-        // Idempotent — safe to run on every callback. Best-effort: failures are logged, not surfaced.
-        async function ensureTrialAndWelcome(session) {
+        // A first sign-in by email link: tell DBMN a new account exists, once. The account's
+        // email is confirmed by this very click, so "confirmed in the last few minutes" is
+        // the first time; the browser flag stops a reload repeating it. Best-effort.
+        async function welcomeNewAccount(session) {
             try {
-                var existing = await dbmnSupabase
-                    .from('user_licenses')
-                    .select('id')
-                    .eq('user_id', session.user.id)
-                    .limit(1);
-
-                if (existing.error) {
-                    console.warn('License lookup failed:', existing.error);
-                    return;
-                }
-                if (existing.data && existing.data.length > 0) {
-                    return; // Already has a license — not a new user
-                }
-
-                var now = new Date();
-                var trialEnd = new Date(now);
-                trialEnd.setDate(trialEnd.getDate() + 30);
-                var insertResult = await dbmnSupabase
-                    .from('user_licenses')
-                    .insert({
-                        user_id: session.user.id,
-                        license_type: 'trial',
-                        status: 'active',
-                        trial_started_at: now.toISOString(),
-                        trial_ends_at: trialEnd.toISOString()
-                    });
-                if (insertResult.error) {
-                    console.warn('Trial license creation warning:', insertResult.error);
-                }
-
+                var confirmedAt = session.user.email_confirmed_at || session.user.confirmed_at;
+                if (!confirmedAt || Date.now() - new Date(confirmedAt).getTime() > 5 * 60 * 1000) { return; }
+                var flag = 'dbmn-welcomed-' + session.user.id;
                 try {
-                    await callEdgeFunction('send-welcome-email', { email: session.user.email });
-                } catch (emailErr) {
-                    console.warn('Welcome email notification failed:', emailErr);
-                }
+                    if (localStorage.getItem(flag)) { return; }
+                    localStorage.setItem(flag, '1');
+                } catch (storageErr) { /* no storage: send anyway */ }
+                await callEdgeFunction('send-welcome-email', { email: session.user.email });
             } catch (err) {
-                console.warn('ensureTrialAndWelcome error:', err);
+                console.warn('Welcome email notification failed:', err);
             }
         }
 
@@ -101,7 +81,7 @@
                 return;
             }
 
-            await ensureTrialAndWelcome(session);
+            await welcomeNewAccount(session);
 
             if (isVSCodeRedirect()) {
                 document.getElementById('callbackTitle').textContent = 'Signed in';

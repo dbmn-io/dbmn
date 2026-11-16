@@ -37,6 +37,11 @@
     <link rel="icon" type="image/svg+xml" href="{{ "/images/dbmn-mark.svg" | relative_url }}">
     <link rel="icon" type="image/png" href="{{ "/images/DBMNLogo.png" | relative_url }}">
     <link rel="stylesheet" href="/css/brand.css">
+    <!-- The theme: the app's themes, worn before the page paints, and the picker (assets/js/site-theme.js) -->
+    <link rel="stylesheet" href="/assets/css/theme-picker.css">
+    <script src="/assets/js/dbmn-themes.js"></script>
+    <script src="/assets/js/site-theme.js"></script>
+    <script defer src="/assets/js/theme-picker.js"></script>
     <link rel="stylesheet" href="/account/shared.css">
     <link rel="stylesheet" href="/puppy-school/course.css">
 </head>
@@ -50,6 +55,7 @@
             <a href="/puppy-school/" class="ps-header-link">Puppy School</a>
             <a href="/account/index.html" class="ps-header-link" data-when="signed-in" hidden>Account</a>
             <a href="/account/login.html" class="ps-header-link" data-login-link data-when="signed-out" hidden>Sign in</a>
+            <span class="theme-picker-anchor"><button type="button" class="site-theme-btn" data-site-theme hidden></button></span>
         </div>
     </header>
 

@@ -23,7 +23,10 @@ module DocsTermsGuard
     [/Manhattan/i, 'never name a customer platform in public copy (CLAUDE.md branding rule)'],
     [/\btree view\b|\bsidebar tree\b|\bEndpoints tree\b|\bEnvironments tree\b/i, 'the Hub: rail → list panel → tabs'],
     [/\bsidebar\b(?! closes)/i, 'the Hub rail or list panel (the VS Code sidebar closes when the Hub opens)'],
-    [/right-click (an |the |your )?(environment|endpoint|folder|run)\b/i, 'there are no context menus on Hub lists; name the button'],
+    # Endpoints rows and History rows have right-click menus (vs-dbmn #444, #314); other Hub lists don't
+    [/right-click (an |the |your )?(environment|folder)\b/i, 'there are no context menus on the Environments list; name the button'],
+    # The Hub's search, 2026-11-12 (vs-dbmn #444): one box, the query builder writes it
+    [/Search across everything|Search endpoint, path, status, body content/, 'the box is "Search" (see hub#search); the button beside it is "Build a search"'],
     [/\bAlt\+D\b|Quick Access/, 'removed; the only VS Code keybinding is Ctrl+W in the Hub'],
     [/\.active8\/(results|batches)/, 'files are saved under {workspace}/{environment}/{endpoint}/ (see your-data)'],
     [/Dobermann: (Export|Import) Workspace|Import Endpoint\b|Export Endpoint\b|Export Folder\b/, 'Hub → Import / Export, one .dbmn.zip'],
@@ -33,12 +36,19 @@ module DocsTermsGuard
     [/\bRead Data\b/, 'the Source step\'s button is "Import Data"'],
     [/\bReps\b|Maximum Repetitions|maxRepetitions/, 'the Review setting is "Rows per request"'],
     [/Review JSON\b/, 'Step 4 is "Review"'],
-    # Run Batch steps, renamed 2026-10-05 (the step bar): Source, Map, Validate, Review, Execute
+    # Production's highlight follows the theme (2026-10-14): it is red in only some of them
+    [/\b(header|selector)\b[^.]{0,20}\bred\b|\bred\b[^.]{0,20}\b(header|selector)\b|\b(shown|is|are) (in )?red\b/i, 'production is "highlighted as a warning"; the colour comes from the theme'],
+    # Run Batch steps, renamed 2026-10-05 (the step bar): Source, Map, Validate, Review. Execute was
+    # step 5 until 2026-11-12 (vs-dbmn #435): now Review's button, its settings in Review's Configure
     [/\bLoad Data\b/, 'Run Batch step 1 is "Source" (its button is still "Import Data")'],
     [/Map (&|&amp;|and) Transform/, 'Run Batch step 2 is "Map"'],
     [/Review (&|&amp;|and) Edit Data/, 'Run Batch step 3 is "Validate"'],
     [/Review (&|&amp;|and) Configure/, 'Run Batch step 4 is "Review"'],
-    [/Execute Batch\b/, 'Run Batch step 5 is "Execute"'],
+    [/Execute Batch\b/, 'Run Batch has four steps; Execute is the Review step\'s button'],
+    [/\bExecute step\b|\bthe \*\*Execute\*\* step\b|\bon Execute\b|\bStep 5 — Execute|five steps/, 'Run Batch has four steps (Source, Map, Validate, Review); Name, Error Handling and Processing Mode are in Review\'s Configure, and Execute is its button'],
+    [/Enable\s+parallel\s+batch\s+processing/i, 'the checkbox is gone; Max Concurrency alone sets how many requests a batch sends at once (Sequential = 1)'],
+    [/\bMock Requests?\b/, 'Enable Mock Requests was removed; the Training Ground does that job (the endpoint editor\'s Mock Response tab is a different thing)'],
+    [/Sign in to run/, 'nothing needs a DBMN sign-in to run (0.4.0); an account adds storage, Standard Systems and Weekly Usage'],
     [/Share button|clicks? \*\*Share\*\*|the \*\*Share\*\*/, 'the footer button is "Copy to Share"'],
     [/More Actions/, 'footer buttons; "More" only holds the overflow'],
     [/\bExecutions sidebar\b|\bhistory sidebar\b|Executions in the sidebar/i, '{icon:nav-history} History on the Hub rail'],
@@ -46,11 +56,30 @@ module DocsTermsGuard
     [/View Logs|\bRendered\b(?= view)/, 'the Raw tab buttons are "Logs" and "Raw / Render / Text"'],
     [/Copy Batch\b/, 'the Console footer button is "Copy"'],
     [/↻/, 'Review rebuilds its requests by itself; there is no Refresh button'],
-    [/\bLoad Data\b|Map & Transform|Review & Edit Data|Review & Configure|\bExecute Batch\b/, 'the Run Batch steps are Source, Map, Validate, Review, Execute'],
+    [/\bLoad Data\b|Map & Transform|Review & Edit Data|Review & Configure|\bExecute Batch\b/, 'the Run Batch steps are Source, Map, Validate, Review'],
     [/dashed outline/, 'help mode draws a dotted outline'],
-    [/Set System…/, 'the API Catalogue Select footer button is "Update" (System, add tags, remove tags)'],
+    # Compare, 2026-11-13: step 3 is Columns; the picks sit in four slots across the top of every step
+    [/Which columns do you want compared/, 'Compare\'s step 3 is "Columns"'],
+    [/\bthe tray\b|\bComparing\*\*, on the left/, 'Compare\'s picks are the four slots across the top of every step'],
+    [/One BL to many|Many BL to one|\*\*Many to\s+many\*\*/, 'Match\'s rows are Repeated in C1, Repeated in BL, Repeated in both'],
+    [/\{icon:nav-compare\}|\bCompare list\b|rail's Compare\b/, 'the rail item is {icon:nav-reporting} Reporting; a compare is one kind of report'],
+    [/Set System…/, 'the Endpoints Select footer button is "Update" (System, add tags, remove tags)'],
+    # The API Catalogue is Endpoints from 0.4.0: the rail item, the list and Settings → Endpoints
+    [/\bAPI Catalogue\b/, 'the rail item and list are {icon:nav-api-catalogue} Endpoints (renamed in 0.4.0); Settings → Endpoints'],
     [/`View: /, 'the view button is named after the active view, with no "View:" prefix'],
     [/\bhelp icons?\b|\(i\) icon|\? icon/i, 'there are no per-control help icons; turn on help mode (help button in the Hub header, or ?)'],
+    [/\bPending only\b|\bReprocess Incomplete\b/i, 'Reprocess offers Errors only, Split array errors and All; a paused or cancelled batch is Resumed'],
+    # An organisation is an ordinary environment variable (vs-dbmn #424, 2026-10-30)
+    [/(organi[sz]ations?|locations?|options|the list)[^.]{0,40}\bfrom (the|your) token\b/i, 'nothing is read from the token: an organisation is an ordinary variable whose Options you type (environments#organization-selection)'],
+    [/\(pick \w+\)/, 'the header segment reads `pick <name>`, with no brackets'],
+    [/At the foot of the list, \*\*Edit\*\*/, 'each environment in the selector has its own pencil; the foot has only New environment…'],
+    # The URL's path can change after creation; an empty header variable is asked for (vs-dbmn #424, 2026-11-06)
+    [/URL is fixed once the environment exists|can't be edited after creation/i, "only the host is fixed; the path changes from the heading's pencil (environments#base-url-variables)"],
+    [/without options is never asked for/i, 'an empty header variable, or one the Base URL uses, is asked for before a run (environments#variables)'],
+    # Free and open source from 0.4.0: no licences, trials, plans or limits, and Prod Protect (types
+    # pinned centrally) is gone. Production safeguards come from the environment's own type.
+    [/\bProd Protect(ion)?\b/, 'removed in 0.4.0; an environment is Production when its own type says so (environments#environment-type)'],
+    [/\bfree tier\b|\b30[- ]day trial\b|\bweekly batch limit\b|\b(5|five) batches (a|per) week\b|View Plans|Upgrade \/ Pricing|\bUser License\b|\bLicensed Environments\b|\bfull[- ]licen[cs]e\b/i, 'DBMN is free and open source from 0.4.0: there are no licences, trials, plans or limits'],
   ].freeze
 
   PROTECTED = %r{(<pre\b.*?</pre>|<code\b.*?</code>)}mi.freeze

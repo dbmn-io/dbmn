@@ -63,7 +63,7 @@
     gap: 0.3rem;
 }
 
-.ps-lesson-trick { color: #f2b632; }
+.ps-lesson-trick { color: var(--brand-warning); }
 .ps-lesson-trick svg { width: 1.05em; height: 1.05em; }
 
 .ps-lesson-title {
@@ -84,7 +84,7 @@
 .ps-step {
     margin-bottom: 2rem;
     padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid color-mix(in srgb, var(--brand-text) 6%, transparent);
 }
 
 .ps-step:last-of-type {
@@ -124,7 +124,7 @@
 .ps-config-table td {
     padding: 0.5rem 0.75rem;
     text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid color-mix(in srgb, var(--brand-text) 6%, transparent);
 }
 
 .ps-config-table th {
@@ -140,7 +140,7 @@
 }
 
 .ps-config-table code {
-    background: rgba(255, 255, 255, 0.08);
+    background: color-mix(in srgb, var(--brand-text) 8%, transparent);
     padding: 0.15rem 0.4rem;
     border-radius: 3px;
     font-size: 0.85rem;
@@ -149,14 +149,14 @@
 /* Code blocks */
 .ps-code {
     background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid color-mix(in srgb, var(--brand-text) 8%, transparent);
     border-radius: 6px;
     padding: 1rem;
     margin: 1rem 0;
     overflow-x: auto;
     font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
     font-size: 0.85rem;
-    color: #e0e0e0;
+    color: var(--brand-text-body);
     line-height: 1.5;
     white-space: pre;
 }
@@ -176,8 +176,8 @@
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: color-mix(in srgb, var(--brand-text) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--brand-text) 15%, transparent);
     border-radius: 4px;
     color: var(--brand-text-muted);
     font-size: 0.75rem;
@@ -187,19 +187,19 @@
 }
 
 .ps-copy-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: color-mix(in srgb, var(--brand-text) 20%, transparent);
     color: var(--brand-text);
 }
 
 .ps-copy-btn.copied {
-    background: rgba(52, 199, 89, 0.2);
-    border-color: rgba(52, 199, 89, 0.3);
-    color: #34c759;
+    background: color-mix(in srgb, var(--brand-success) 20%, transparent);
+    border-color: color-mix(in srgb, var(--brand-success) 30%, transparent);
+    color: var(--brand-success);
 }
 
 /* Inline path/code */
 .ps-path {
-    background: rgba(255, 255, 255, 0.08);
+    background: color-mix(in srgb, var(--brand-text) 8%, transparent);
     padding: 0.15rem 0.4rem;
     border-radius: 3px;
     font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
@@ -227,13 +227,14 @@
     width: 6px;
     height: 6px;
     background: var(--brand-accent);
+    color: var(--brand-accent-text);
     border-radius: 50%;
     flex-shrink: 0;
 }
 
 /* Philosophy / Dig Deeper callouts */
 .ps-callout {
-    background: rgba(0, 120, 212, 0.08);
+    background: color-mix(in srgb, var(--brand-accent) 8%, transparent);
     border-left: 3px solid var(--brand-accent);
     border-radius: 0 6px 6px 0;
     padding: 1rem 1.25rem;
@@ -277,7 +278,7 @@
     width: 45%;
     max-width: 320px;
     clear: right;
-    background: rgba(255, 255, 255, 0.055);
+    background: color-mix(in srgb, var(--brand-text) 5.5%, transparent);
     border: 1px solid var(--brand-border);
     border-radius: 8px;
     padding: 0.9rem 1.1rem;
@@ -374,8 +375,8 @@
 
 .ps-checkpoint .ps-incomplete-list {
     text-align: left;
-    background: rgba(255, 69, 58, 0.08);
-    border: 1px solid rgba(255, 69, 58, 0.2);
+    background: color-mix(in srgb, var(--brand-danger) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--brand-danger) 20%, transparent);
     border-radius: 6px;
     padding: 1rem 1.25rem;
     margin: 1rem auto 1.5rem auto;
@@ -383,7 +384,7 @@
 }
 
 .ps-incomplete-list li {
-    color: #ff6b6b;
+    color: var(--brand-danger);
     font-size: 0.875rem;
     padding: 0.25rem 0;
     list-style: none;
@@ -422,27 +423,30 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
+    background: color-mix(in srgb, var(--brand-text) 15%, transparent);
     transition: background 0.3s, transform 0.3s;
 }
 
 .ps-progress-dot.completed {
-    background: #34c759;
+    background: var(--brand-success);
+    color: var(--brand-bg-start);
 }
 
 .ps-progress-dot.current {
     background: var(--brand-accent);
+    color: var(--brand-accent-text);
     transform: scale(1.3);
 }
 
 .ps-progress-line {
     width: 40px;
     height: 2px;
-    background: rgba(255, 255, 255, 0.1);
+    background: color-mix(in srgb, var(--brand-text) 10%, transparent);
 }
 
 .ps-progress-line.completed {
-    background: #34c759;
+    background: var(--brand-success);
+    color: var(--brand-bg-start);
 }
 
 .ps-progress-label {
@@ -496,6 +500,7 @@
     width: 6px;
     height: 6px;
     background: var(--brand-accent);
+    color: var(--brand-accent-text);
     border-radius: 50%;
     flex-shrink: 0;
     margin-top: 0.5rem;
@@ -583,18 +588,18 @@
     justify-content: center;
     font-size: 0.8rem;
     font-weight: 600;
-    border: 2px solid rgba(255, 255, 255, 0.18);
+    border: 2px solid color-mix(in srgb, var(--brand-text) 18%, transparent);
     color: var(--brand-text-muted);
     transition: background 0.2s ease, border-color 0.2s ease;
 }
 /* The dot carries the lesson's trick (the glyph on its badge), in the dot's own colour. */
 .ps-rail-dot svg { width: 16px; height: 16px; }
 .ps-rail-trick { display: block; font-size: 0.66rem; opacity: 0.7; }
-.ps-rail-item.is-complete .ps-rail-trick { color: #f2b632; opacity: 1; }
+.ps-rail-item.is-complete .ps-rail-trick { color: var(--brand-warning); opacity: 1; }
 .ps-rail-item[aria-current="page"] { color: var(--brand-text); }
 .ps-rail-item[aria-current="page"] .ps-rail-dot { border-color: var(--brand-accent); color: var(--brand-text); }
 .ps-rail-item.is-next .ps-rail-dot { border-color: var(--brand-accent); }
-.ps-rail-item.is-complete .ps-rail-dot { background: #34c759; border-color: #34c759; color: #0b1a10; }
+.ps-rail-item.is-complete .ps-rail-dot { background: var(--brand-success); border-color: var(--brand-success); color: var(--brand-bg-start); }
 .ps-rail-item:hover .ps-rail-label { color: var(--brand-text); }
 
 /* Not yet earned. The <a> has already had its href removed in JS, so this only has to stop
@@ -623,28 +628,28 @@
 .ps-content li { margin-bottom: 0.4rem; }
 .ps-content strong { color: var(--brand-text); }
 .ps-content :not(pre) > code {
-    background: rgba(255, 255, 255, 0.08);
+    background: color-mix(in srgb, var(--brand-text) 8%, transparent);
     padding: 0.12rem 0.38rem;
     border-radius: 3px;
     font-size: 0.85em;
 }
-.ps-content hr { border: none; border-top: 1px solid rgba(255, 255, 255, 0.08); margin: 2rem 0; }
+.ps-content hr { border: none; border-top: 1px solid color-mix(in srgb, var(--brand-text) 8%, transparent); margin: 2rem 0; }
 .ps-content .highlight, .ps-content .highlighter-rouge { background: none; margin: 0; }
 .ps-content pre.ps-code { white-space: pre; }
 .ps-table-wrap { overflow-x: auto; }
 .ps-step { margin-top: 2rem; }
 .ps-step.ps-bonus {
-    border: 1px dashed rgba(242, 182, 50, 0.45);
+    border: 1px dashed color-mix(in srgb, var(--brand-warning) 45%, transparent);
     border-radius: 8px;
     padding: 1.25rem 1.25rem 0.5rem;
 }
-.ps-step.ps-bonus .ps-step-label { color: #f2b632; }
+.ps-step.ps-bonus .ps-step-label { color: var(--brand-warning); }
 
 blockquote.ps-callout {
     margin: 1.25rem 0;
     padding: 1rem 1.25rem;
     border-left: 3px solid var(--brand-accent);
-    background: rgba(0, 120, 212, 0.08);
+    background: color-mix(in srgb, var(--brand-accent) 8%, transparent);
     border-radius: 0 6px 6px 0;
 }
 blockquote.ps-callout p:last-child { margin-bottom: 0; }
@@ -657,7 +662,7 @@ blockquote.ps-callout p:last-child { margin-bottom: 0; }
 .ps-checkpoint-panel {
     margin-top: 2.5rem;
     padding-top: 1.75rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid color-mix(in srgb, var(--brand-text) 10%, transparent);
 }
 .ps-checkpoint-panel h2 { font-size: 1.25rem; color: var(--brand-text); margin: 0 0 0.5rem; }
 .ps-checkpoint-criteria { color: var(--brand-text-body); margin: 0; }
@@ -665,13 +670,13 @@ blockquote.ps-callout p:last-child { margin-bottom: 0; }
     margin-top: 1.25rem;
     padding: 1.1rem 1.25rem;
     border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid color-mix(in srgb, var(--brand-text) 12%, transparent);
+    background: color-mix(in srgb, var(--brand-text) 3%, transparent);
 }
 .ps-checkpoint-result h3 { margin: 0 0 0.5rem; color: var(--brand-text); }
-.ps-checkpoint-result.is-pass, .ps-widget-result.is-pass { border-color: rgba(52, 199, 89, 0.5); background: rgba(52, 199, 89, 0.08); }
-.ps-checkpoint-result.is-fail, .ps-widget-result.is-fail { border-color: rgba(255, 159, 10, 0.5); background: rgba(255, 159, 10, 0.07); }
-.ps-checkpoint-result.is-error { border-color: rgba(255, 69, 58, 0.5); }
+.ps-checkpoint-result.is-pass, .ps-widget-result.is-pass { border-color: color-mix(in srgb, var(--brand-success) 50%, transparent); background: color-mix(in srgb, var(--brand-success) 8%, transparent); }
+.ps-checkpoint-result.is-fail, .ps-widget-result.is-fail { border-color: color-mix(in srgb, var(--brand-warning) 50%, transparent); background: color-mix(in srgb, var(--brand-warning) 7%, transparent); }
+.ps-checkpoint-result.is-error { border-color: color-mix(in srgb, var(--brand-danger) 50%, transparent); }
 .ps-onward { display: inline-block; width: auto; margin-top: 1rem; text-decoration: none; }
 .ps-incomplete-list, .ps-findings { margin: 0.75rem 0 0 1.25rem; padding: 0; }
 .ps-incomplete-list li, .ps-findings li { margin-bottom: 0.5rem; color: var(--brand-text-body); }
@@ -689,7 +694,7 @@ blockquote.ps-callout p:last-child { margin-bottom: 0; }
     width: 100%;
     box-sizing: border-box;
     background: rgba(0, 0, 0, 0.35);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid color-mix(in srgb, var(--brand-text) 15%, transparent);
     border-radius: 6px;
     color: var(--brand-text);
     padding: 0.7rem 0.8rem;
@@ -699,12 +704,12 @@ blockquote.ps-callout p:last-child { margin-bottom: 0; }
 .ps-name-input { font-family: inherit; font-size: 1rem; max-width: 460px; }
 .ps-widget-note, .ps-cta-progress { font-size: 0.8rem; color: var(--brand-text-muted); margin: 0.75rem 0 0; }
 .ps-findings-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; margin: 1rem 0 0; }
-.ps-findings-error { color: #ff9f0a; }
-.ps-findings-warn { color: #ffd60a; }
+.ps-findings-error { color: var(--brand-warning); }
+.ps-findings-warn { color: var(--brand-warning); }
 .ps-findings-tip { color: var(--brand-text-muted); }
 .ps-finding-message { display: block; color: var(--brand-text); }
 .ps-finding-hint { display: block; font-size: 0.85rem; color: var(--brand-text-muted); }
-.ps-form-error { color: #ff9f0a; font-size: 0.875rem; }
+.ps-form-error { color: var(--brand-warning); font-size: 0.875rem; }
 .ps-link-button {
     background: none; border: none; padding: 0; margin-top: 0.75rem; cursor: pointer;
     color: var(--brand-text-muted); font-size: 0.8rem; text-decoration: underline;
@@ -721,7 +726,7 @@ blockquote.ps-callout p:last-child { margin-bottom: 0; }
 .ps-trick-earned-art { width: 64px; height: 64px; flex: none; line-height: 0; }
 .ps-trick-earned-art svg { width: 100%; height: 100%; }
 .ps-trick-earned-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--brand-text-muted); }
-.ps-trick-earned-name { font-family: var(--brand-font-heading); font-size: 1.15rem; color: #f2b632; }
+.ps-trick-earned-name { font-family: var(--brand-font-heading); font-size: 1.15rem; color: var(--brand-warning); }
 
 /* Graduation: the certificate leads the page. The card is wider here so the certificate has
  * room; the prose around it keeps a readable measure. */
@@ -731,18 +736,18 @@ body.ps-kind-graduation .ps-content > :not(.ps-grad-hero) { max-width: 760px; }
 .ps-grad-hero {
     margin: 1.75rem 0 2.5rem;
     padding: 2rem 2rem 1.75rem;
-    border: 2px solid #f2b632;
+    border: 2px solid var(--brand-warning);
     border-radius: 12px;
     background:
-        radial-gradient(ellipse at top, rgba(242, 182, 50, 0.16), transparent 60%),
+        radial-gradient(ellipse at top, color-mix(in srgb, var(--brand-warning) 16%, transparent), transparent 60%),
         rgba(0, 0, 0, 0.22);
-    box-shadow: 0 0 0 6px rgba(242, 182, 50, 0.08), 0 20px 60px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--brand-warning) 8%, transparent), 0 20px 60px rgba(0, 0, 0, 0.45);
     text-align: center;
 }
 .ps-grad-heading {
     font-family: var(--brand-font-heading);
     font-size: 2rem !important;
-    color: #f2b632 !important;
+    color: var(--brand-warning) !important;
     margin: 1.5rem 0 0.25rem !important;
     letter-spacing: 0.01em;
 }
@@ -751,13 +756,13 @@ body.ps-kind-graduation .ps-content > :not(.ps-grad-hero) { max-width: 760px; }
 /* The badge cluster: the graduate badge big, the five lesson badges small under it. */
 .ps-grad-badges { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
 .ps-grad-badges .dbmn-badge { border: none; padding: 0; gap: 0.5rem; }
-.ps-grad-logo .dbmn-badge-art { width: 170px; height: 170px; filter: drop-shadow(0 10px 28px rgba(242, 182, 50, 0.35)); }
+.ps-grad-logo .dbmn-badge-art { width: 170px; height: 170px; filter: drop-shadow(0 10px 28px color-mix(in srgb, var(--brand-warning) 35%, transparent)); }
 .ps-grad-logo .dbmn-badge-name {
     font-family: var(--brand-font-heading);
     font-size: 1.35rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: #f2b632;
+    color: var(--brand-warning);
 }
 .ps-grad-lessons { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.5rem; }
 .ps-grad-lesson .dbmn-badge-art { width: 40px; height: 40px; }
@@ -773,7 +778,7 @@ body.ps-kind-graduation .ps-content > :not(.ps-grad-hero) { max-width: 760px; }
     margin: 1.25rem 0 0.5rem;
     border-radius: 6px;
     overflow: hidden;
-    box-shadow: 0 0 0 1px rgba(242, 182, 50, 0.35), 0 16px 50px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--brand-warning) 35%, transparent), 0 16px 50px rgba(0, 0, 0, 0.55);
 }
 .ps-certificate svg { display: block; width: 100%; height: auto; }
 

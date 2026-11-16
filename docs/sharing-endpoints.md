@@ -30,7 +30,7 @@ Paste it wherever your team communicates. The recipient sees the full endpoint c
 
 ### Step 2 — Paste
 
-The recipient copies the shared text, opens Dobermann, and in {icon:nav-api-catalogue} **API Catalogue** clicks {icon:paste-endpoint} **New Endpoint from Clipboard**. A new endpoint opens with everything filled in:
+The recipient copies the shared text, opens Dobermann, and in {icon:nav-api-catalogue} **Endpoints** clicks {icon:paste-endpoint} **New Endpoint from Clipboard**. A new endpoint opens with everything filled in:
 
 - Endpoint name, HTTP method, and path
 - Description and tags

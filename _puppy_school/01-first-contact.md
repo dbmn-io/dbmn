@@ -13,10 +13,10 @@ checkpoint:
   fail: Did the dog eat your homework? Looks like you haven't fetched all the reference data yet.
 ---
 
-## Step 1 — Install and Sign In
+## Step 1 — Open Dobermann
 
-Click the Dobermann icon in your VS Code activity bar. The **Hub** opens: Dobermann's one window,
-with its sections down the left.
+Open [app.dbmn.io](https://app.dbmn.io). If it asks you to sign in, use the same account you used
+to get here. The **Hub** opens: Dobermann's one window, with its sections down the left.
 
 > **Lost at any point? Press ?**
 >
@@ -24,17 +24,6 @@ with its sections down the left.
 > or press **?** when you're not typing, and every documented control gets a dotted outline. Click
 > one and its page on dbmn.io opens. **Esc** leaves. Whenever a step here names a button you can't
 > place, that's the way to find it.
-
-Not installed yet? [Get it from the VS Code Marketplace.](https://marketplace.visualstudio.com/items?itemName=dbmn.dobermann)
-
-> **Prerequisite: Dobermann {dobermann-min-version} or later**
->
-> Check in the **Extensions** view (Ctrl+Shift+X): the version is next to **Dobermann**.
-> On something older? Click **Update** first. Some steps use features older versions don't
-> have.
-
-Sign in with the same account you used to get here. No account yet? Open {icon:nav-account}
-**Account** in the Hub and register there — it takes a minute. Once you're in, you're ready.
 
 ## Step 2 — Create Your Environment
 
@@ -47,7 +36,7 @@ In the Hub, open {icon:nav-environments} **Environments** and add a new one:
 |---|---|
 | Name | `DBMN Puppy School` |
 | Base URL | `https://api.dbmn.io/functions/v1/playground` |
-| System | `dbmn`: pick **+ Add new System…** and name it |
+| System | `dbmn`, under **Standard Systems** |
 | Authentication | `DBMN` |
 
 > **Auth you never type**
@@ -56,9 +45,8 @@ In the Hub, open {icon:nav-environments} **Environments** and add a new one:
 > at runtime, across every endpoint in this environment.
 {: .ps-boxout}
 
-One more setting while you're here. Under **Execution Settings**, tick **Enable parallel
-batch processing** and set **Max Concurrency** to **Extreme Parallel — 16 concurrent
-requests**. You'll find out why in Lesson 2.
+One more setting while you're here. Under **Execution Settings**, set **Max Concurrency**
+to **Extreme Parallel — 16 concurrent requests**. You'll find out why in Lesson 2.
 
 Click **Save Environment**. Then tell Dobermann to use it: at the top of the Hub, click the
 environment selector {icon:env-switcher} — it reads `No environment` until you've picked
@@ -67,7 +55,7 @@ you run will go.
 
 ## Step 3 — Your First Request
 
-Copy the template below. Then, in the Hub, open {icon:nav-api-catalogue} **API Catalogue**
+Copy the template below. Then, in the Hub, open {icon:nav-api-catalogue} **Endpoints**
 and click {icon:paste-endpoint} **New Endpoint from Clipboard** — the clipboard button beside
 {icon:add-endpoint} **Add Endpoint**. Dobermann reads the clipboard and fills in the name,
 method and path for you. (Ctrl+V on any new, unsaved endpoint does the same.)
@@ -121,7 +109,7 @@ misbehaves.
 ## Step 5 — Explore the Reference Data
 
 Create an endpoint for each of the following. Copy each template, click
-{icon:paste-endpoint} **New Endpoint from Clipboard** in the API Catalogue, save, then hit **Run API**.
+{icon:paste-endpoint} **New Endpoint from Clipboard** in Endpoints, save, then hit **Run API**.
 
 ```json
 // Name: Get Locations

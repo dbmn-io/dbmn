@@ -1,13 +1,22 @@
+---
+layout: null
+permalink: /account/register.html
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Started - DBMN</title>
-    <meta name="description" content="Register for DBMN — 30 days unlimited on signup">
+    <meta name="description" content="Register for a free DBMN account">
     <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
     <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
     <link rel="stylesheet" href="/css/brand.css">
+    <!-- The theme: the app's themes, worn before the page paints, and the picker (assets/js/site-theme.js) -->
+    <link rel="stylesheet" href="/assets/css/theme-picker.css">
+    <script src="/assets/js/dbmn-themes.js"></script>
+    <script src="/assets/js/site-theme.js"></script>
+    <script defer src="/assets/js/theme-picker.js"></script>
     <link rel="stylesheet" href="/account/shared.css">
 </head>
 <body>
@@ -16,12 +25,13 @@
             <img src="/images/DBMNLogo.png" alt="DBMN">
             <h1>DBMN</h1>
         </a>
+        <div class="header-right header-theme"><span class="theme-picker-anchor"><button type="button" class="site-theme-btn" data-site-theme hidden></button></span></div>
     </header>
 
     <div class="container">
         <div class="card">
             <h2>Get Started</h2>
-            <p class="step-subtitle">We'll create your account and email you a sign-in link. 30 days of unlimited access on signup. No credit card.</p>
+            <p class="step-subtitle">We'll create your account and email you a sign-in link. It's free.</p>
 
             <div id="alert" class="alert"></div>
 
@@ -64,11 +74,7 @@
             </div>
         </div>
 
-        <footer>
-            <a href="/terms.html">Terms</a> &middot; <a href="/privacy.html">Privacy</a>
-            <br>
-            &copy; 2026 DBMN.io
-        </footer>
+{% include site_footer.html %}
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -96,28 +102,10 @@
             hideAlert('alert');
         }
 
-        // Post-signup side effects: trial license + welcome email notification.
-        // Best-effort — failures are logged but not surfaced (registration succeeds either way).
-        async function createTrialAndNotify(user, email) {
+        // After sign-up: tell DBMN a new account exists. Best-effort: a failure is logged,
+        // never shown (registration has succeeded either way).
+        async function notifyNewAccount(user, email) {
             if (!user) return;
-
-            try {
-                var now = new Date();
-                var trialEnd = new Date(now);
-                trialEnd.setDate(trialEnd.getDate() + 30);
-                await dbmnSupabase
-                    .from('user_licenses')
-                    .insert({
-                        user_id: user.id,
-                        license_type: 'trial',
-                        status: 'active',
-                        trial_started_at: now.toISOString(),
-                        trial_ends_at: trialEnd.toISOString()
-                    });
-            } catch (err) {
-                console.warn('License creation warning:', err);
-            }
-
             try {
                 await callEdgeFunction('send-welcome-email', { email: email });
             } catch (emailErr) {
@@ -170,7 +158,7 @@
                     document.getElementById('passwordToggleRow').style.display = 'none';
                     showAlert(
                         'alert',
-                        'Check your inbox — we sent a sign-in link to ' + email + '. Click it to activate your account and get 30 days of unlimited access.',
+                        'Check your inbox — we sent a sign-in link to ' + email + '. Click it to activate your account.',
                         'success'
                     );
                 } catch (err) {
@@ -216,7 +204,7 @@
                     }
 
                     var user = signUpResult.data.user;
-                    await createTrialAndNotify(user, email);
+                    await notifyNewAccount(user, email);
 
                     // Email confirmation required (no session yet) — show inbox prompt
                     if (user && !signUpResult.data.session) {
@@ -224,7 +212,7 @@
                         document.getElementById('magicToggleRow').style.display = 'none';
                         showAlert(
                             'alert',
-                            'We sent a confirmation link to ' + email + '. Click it to activate your account and get 30 days of unlimited access.',
+                            'We sent a confirmation link to ' + email + '. Click it to activate your account.',
                             'success'
                         );
                         return;

@@ -1,5 +1,13 @@
 title: DBMN.io
-description: Migrate millions of records through any REST API — right from VS Code.
+description: Migrate millions of records through any REST API — in your browser or in VS Code.
+
+# The open source repository. PLACEHOLDER until the repository is public:
+#   github_repo  the address every page links to (docs pages write it out in full:
+#                grep -rn "github.com/dbmn-io/dobermann" to find them all)
+#   github_live  false = the landing pages say "on GitHub soon" and link to /open-source/
+#                true  = they link straight to github_repo
+github_repo: "https://github.com/dbmn-io/dobermann"
+github_live: false
 url: https://dbmn.io
 baseurl: ""
 
@@ -21,15 +29,21 @@ logo: "/images/DBMNLogo.png"
 aux_links:
   "Puppy School":
     - "/puppy-school/"
+  "Open the app":
+    - "https://app.dbmn.io"
+  # The desktop app is not downloadable yet (code signing): the link goes to the
+  # Installation section, which says so. Point it at the download when there is one.
+  "Download (coming soon)":
+    - "/docs/#installation"
   "VS Code Marketplace":
     - "https://marketplace.visualstudio.com/items?itemName=dbmn.dobermann"
   "GitHub":
-    - "https://github.com/dbmn-io/dbmn"
+    - "https://github.com/dbmn-io/dobermann"
 
 aux_links_new_tab: true
 
 # Footer
-footer_content: "&copy; 2026 DBMN.io. Migrate millions of records through any REST API."
+footer_content: "&copy; 2026 DBMN.io. Free and open source (AGPL-3.0). Migrate millions of records through any REST API."
 
 # Back to top link
 back_to_top: true

@@ -121,7 +121,7 @@ The renderers rely on these, so keep to them:
   Aim for 60-150 words; a step over ~200 is a wall and should be split. Lesson 3 is the
   worked example: twelve steps, ~1,450 words.
 - **Never write "Step" inside a step.** The Run Batch loader has its own numbered screens;
-  call them by name (Source, Map, Validate, Review, Execute) so the lesson's own numbering is
+  call them by name (Source, Map, Validate, Review) so the lesson's own numbering is
   the only one on the page.
 - **End a step with what the learner should see**, so they can check themselves before
   moving on.
@@ -188,7 +188,7 @@ When a step says "click the paste button", the lesson shows the button's icon in
 the learner can find it. The token names the button's *function*, not its picture:
 
 ```text
-open {icon:nav-api-catalogue} **API Catalogue**, then click {icon:paste-endpoint}
+open {icon:nav-api-catalogue} **Endpoints**, then click {icon:paste-endpoint}
 ```
 
 The roles and their SVGs are owned by the extension — `ICON_ROLES` in vs-dbmn
@@ -223,8 +223,9 @@ course needs **all** of these before it is published. Everything in vs-dbmn is o
 Backend — `supabase db push`, then `supabase functions deploy playground --no-verify-jwt`:
 
 - `20260917000001_open_environments.sql` — no licence gate on the Training Ground. Lessons
-  2, 3 and 4 use full-licence features (more than five batches a week, 16 concurrent
-  requests, more than three pages, **Fetch all pages**).
+  2, 3 and 4 use what were full-licence features until 0.4.0 (more than five batches a week,
+  16 concurrent requests, more than three pages, **Fetch all pages**); 0.4.0 has no licences
+  or limits.
 - `20260917000002_playground_product_suppliers.sql` — every product gets a supplier, a
   reorder quantity and a sometimes-blank supplier part number. Lessons 4 and 5.
 - `20260917000004_playground_reference_ownership.sql` — reference records a learner adds
