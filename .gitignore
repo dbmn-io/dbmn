@@ -1,2 +1,7 @@
 _site/
 Gemfile.lock
+.jekyll-cache/
+.jekyll-metadata
+vendor/
+.bundle/
+Gemfile.local*
