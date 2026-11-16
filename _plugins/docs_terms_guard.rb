@@ -21,6 +21,8 @@ module DocsTermsGuard
   # [pattern, what to write instead]
   RETIRED = [
     [/Manhattan/i, 'never name a customer platform in public copy (CLAUDE.md branding rule)'],
+    # Payment pages retired 2026-11-16: nothing to buy, no paying users
+    [/\bcheckout\b|\bManage Subscription\b|\bpaid subscription\b/i, 'nothing to buy: Dobermann is free and open source (the payment pages are retired)'],
     [/\btree view\b|\bsidebar tree\b|\bEndpoints tree\b|\bEnvironments tree\b/i, 'the Hub: rail → list panel → tabs'],
     [/\bsidebar\b(?! closes)/i, 'the Hub rail or list panel (the VS Code sidebar closes when the Hub opens)'],
     # Endpoints rows and History rows have right-click menus (vs-dbmn #444, #314); other Hub lists don't

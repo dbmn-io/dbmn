@@ -43,7 +43,6 @@ layout: null
         <div class="card" id="dashboardCard" style="display: none;">
             <div class="account-head">
                 <h2 id="greeting">Account</h2>
-                <span id="licenseBadge" class="license-badge"></span>
             </div>
 
             <div id="alert" class="alert"></div>
@@ -126,18 +125,6 @@ layout: null
                     <div class="stat-value" id="totalRunTime">-</div>
                     <div class="stat-label">Run time</div>
                 </div>
-            </div>
-
-            <!-- Subscription: shown only to someone who pays for a hosted service -->
-            <div id="subscriptionSection" style="display: none;">
-            <hr class="divider">
-            <h3 class="section-title">Subscription</h3>
-            <div id="licenseDetails"></div>
-            </div>
-
-            <!-- Manage Subscription (shown for active paid subscribers only) -->
-            <div id="manageSubscription" style="display: none; margin-top: 0.75rem;">
-                <button id="manageSubBtn" class="btn btn-secondary" style="width: 100%;">Manage Subscription</button>
             </div>
 
             <hr class="divider">
@@ -250,7 +237,6 @@ layout: null
                     .maybeSingle();   // a new account has no profile row yet
 
                 var profile = profileResult.data;
-                var license = licenseData.license;
                 var usage = licenseData.usage;
 
                 // Update UI
@@ -263,68 +249,6 @@ layout: null
                 document.getElementById('memberSince').textContent = since
                     ? new Date(since).toLocaleDateString()
                     : 'Unknown';
-
-                // Badge: only for someone who pays. The app itself is free for everyone.
-                var badge = document.getElementById('licenseBadge');
-                var paid = license.isLifetime || license.licenseType === 'user' || license.licenseType === 'environment';
-                if (paid) {
-                    badge.textContent = 'Subscriber';
-                    badge.className = 'license-badge license-user';
-                } else {
-                    badge.style.display = 'none';
-                }
-
-                // License details section
-                var detailsEl = document.getElementById('licenseDetails');
-                var detailsHtml = '';
-
-                if (license.isLifetime) {
-                    detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">Type</span><span class="license-detail-value">Individual, no expiry</span></div>';
-                } else if (license.licenseType === 'user') {
-                    detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">Type</span><span class="license-detail-value">Individual</span></div>';
-                    if (license.subscriptionEndsAt) {
-                        var subLabel = license.cancelAtPeriodEnd ? 'Cancels on' : 'Renews on';
-                        var subStyle = license.cancelAtPeriodEnd ? ' style="color: var(--brand-danger);"' : '';
-                        detailsHtml += '<div class="license-detail-row"><span class="license-detail-label">' + subLabel + '</span><span class="license-detail-value"' + subStyle + '>' + new Date(license.subscriptionEndsAt).toLocaleDateString() + '</span></div>';
-                    }
-                }
-
-                // Environments on a subscription
-                var envUrls = license.licensedEnvironmentUrls || [];
-                if (envUrls.length > 0) {
-                    detailsHtml += '<div class="license-detail-row" style="flex-direction: column; align-items: flex-start;"><span class="license-detail-label">Environments</span>';
-                    detailsHtml += '<ul class="env-url-list">';
-                    envUrls.forEach(function(url) { detailsHtml += '<li>' + url + '</li>'; });
-                    detailsHtml += '</ul></div>';
-                }
-
-                detailsEl.innerHTML = detailsHtml;
-
-                if (paid || envUrls.length > 0) {
-                    document.getElementById('subscriptionSection').style.display = 'block';
-                }
-
-                // Show "Manage Subscription" for active paid subscribers (not free/trial/lifetime)
-                if ((license.licenseType === 'user' || license.licenseType === 'environment') && !license.isLifetime) {
-                    document.getElementById('manageSubscription').style.display = 'block';
-                    document.getElementById('manageSubBtn').addEventListener('click', async function() {
-                        var btn = this;
-                        btn.disabled = true;
-                        btn.textContent = 'Redirecting...';
-                        try {
-                            var result = await callEdgeFunction('create-portal-session', null, 'POST');
-                            if (result.url) {
-                                window.location.href = result.url;
-                            } else {
-                                throw new Error(result.error || 'Failed to create portal session');
-                            }
-                        } catch (err) {
-                            btn.disabled = false;
-                            btn.textContent = 'Manage Subscription';
-                            showAlert('alert', 'Could not open subscription portal: ' + err.message, 'error');
-                        }
-                    });
-                }
 
                 // Telemetry stats (weekly + alltime)
                 var stats = licenseData.telemetryStats;

@@ -1,55 +1,23 @@
 ---
 layout: null
+title: Free and open source - Dobermann
+nav_exclude: true
 permalink: /account/checkout-success.html
+sitemap: false
 ---
 <!DOCTYPE html>
+<!-- Dobermann is free and open source and there is nothing to buy: the old payment page is
+     retired (James, 2026-11-16). The address forwards so an old link does not dead-end. -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Successful - DBMN</title>
-    <meta name="description" content="Your Dobermann subscription is active">
-    <link rel="icon" type="image/svg+xml" href="/images/dobermannOutline.svg">
-    <link rel="icon" type="image/png" href="/images/DBMNLogo.png">
-    <link rel="stylesheet" href="/css/brand.css">
-    <!-- The theme: the app's themes, worn before the page paints, and the picker (assets/js/site-theme.js) -->
-    <link rel="stylesheet" href="/assets/css/theme-picker.css">
-    <script src="/assets/js/dbmn-themes.js"></script>
-    <script src="/assets/js/site-theme.js"></script>
-    <script defer src="/assets/js/theme-picker.js"></script>
-    <link rel="stylesheet" href="/account/shared.css">
+    <title>{{ page.title }}</title>
+    <meta name="robots" content="noindex">
+    <link rel="canonical" href="https://dbmn.io/open-source/">
+    <meta http-equiv="refresh" content="0; url=/open-source/">
+    <script>location.replace('/open-source/');</script>
 </head>
 <body>
-    <header class="site-header">
-        <a href="/">
-            <img src="/images/DBMNLogo.png" alt="DBMN">
-            <h1>DBMN</h1>
-        </a>
-        <div class="header-right header-theme"><span class="theme-picker-anchor"><button type="button" class="site-theme-btn" data-site-theme hidden></button></span></div>
-    </header>
-
-    <div class="container">
-        <div class="card" style="text-align: center;">
-            <div style="font-size: 3rem; margin-bottom: 1rem;">&#10003;</div>
-            <h2 style="color: var(--brand-success); margin-bottom: 0.75rem;">Payment Successful</h2>
-            <p style="color: var(--brand-text-muted); margin-bottom: 1.5rem; line-height: 1.6;">
-                Your subscription is now active. Dobermann picks it up within 15 minutes, or restart it to apply now.
-            </p>
-
-            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                <a href="/account/" class="btn btn-primary" style="display: block;">View Account Dashboard</a>
-                <a href="vscode://" class="btn btn-secondary" style="display: block;">Return to VS Code</a>
-            </div>
-
-            <div class="link-text" style="margin-top: 1.5rem;">
-                Questions? <a href="mailto:hello@dbmn.io">Contact us</a>
-            </div>
-        </div>
-
-{% include site_footer.html %}
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="/account/shared.js"></script>
+    <p><a href="/open-source/">Dobermann is free and open source</a>.</p>
 </body>
 </html>
