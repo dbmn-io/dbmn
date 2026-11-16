@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-only
+// Copyright (C) 2026 Flexion Tech Pty Ltd
 /**
  * The theme picker: the palette button opens a stage of themes, one at a time. The theme in the
  * middle is a DBMN screen in its colours (the Hub with a Console open, as a Run API leaves it);
@@ -10,7 +12,9 @@
  * the page gives the menu (the theme list, what is current, each theme's preview colours) and
  * is told the pick. VS Code never gives a menu, so there the button stays hidden.
  *
- * A first visit gets a hint beside the button, once; closing it or following it ends it.
+ * A first visit gets a hint beside the button, once. Closing it or following it ends it, and so
+ * does a click anywhere else, or 15 seconds: it sits over the top of the page (the tab strip, in
+ * the app) and must never be in the way of what the user came to do.
  *
  *   const picker = ThemePicker.create({ button, onPick(id), onHintDone(), icons: { close, prev, next, palette }, logo });
  *   picker.update(menu, { hint: true });
@@ -271,10 +275,19 @@
         }
         if (typeof ResizeObserver === 'function') new ResizeObserver(scale).observe(track);
 
+        const HINT_SECONDS = 15;
+        let hintTimer = 0;
+        /** A press anywhere but the hint ends it (capture: before whatever was pressed acts). */
+        function pressedElsewhere(event) {
+            if (hint && !(event.target instanceof Node && hint.contains(event.target))) endHint();
+        }
+
         function endHint() {
             if (!hint) return;
             hint.remove();
             hint = null;
+            clearTimeout(hintTimer);
+            document.removeEventListener('pointerdown', pressedElsewhere, true);
             if (config.onHintDone) config.onHintDone();
         }
 
@@ -297,6 +310,8 @@
             dismiss.addEventListener('click', endHint);
             hint.append(open, dismiss);
             button.insertAdjacentElement('afterend', hint);
+            hintTimer = setTimeout(endHint, HINT_SECONDS * 1000);
+            document.addEventListener('pointerdown', pressedElsewhere, true);
         }
 
         function openPicker() {
