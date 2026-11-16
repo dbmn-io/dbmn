@@ -247,7 +247,7 @@ layout: null
                     .from('user_profiles')
                     .select('*')
                     .eq('id', user.id)
-                    .single();
+                    .maybeSingle();   // a new account has no profile row yet
 
                 var profile = profileResult.data;
                 var license = licenseData.license;
@@ -259,8 +259,9 @@ layout: null
                     : 'Account';
 
                 document.getElementById('userEmail').textContent = user.email;
-                document.getElementById('memberSince').textContent = profile?.registered_at
-                    ? new Date(profile.registered_at).toLocaleDateString()
+                var since = profile?.registered_at || user.created_at;
+                document.getElementById('memberSince').textContent = since
+                    ? new Date(since).toLocaleDateString()
                     : 'Unknown';
 
                 // Badge: only for someone who pays. The app itself is free for everyone.
