@@ -105,6 +105,7 @@ exclude:
   - .jekyll-cache
   - .git
   - CLAUDE.md
+  - README.md
   - _puppy_school/README.md
   # Internal production notes — never part of the public site
   - docs/internal
