@@ -261,10 +261,6 @@ permalink: /open-source/
         <h2>Coming soon</h2>
         <div class="grid">
             <div class="card">
-                <h3>The repository <span class="soon-tag">Soon</span></h3>
-                <p>{% if site.github_live %}It's live: <a href="{{ site.github_repo }}">{{ site.github_repo | remove: "https://" }}</a>.{% else %}The code goes public at <strong>{{ site.github_repo | remove: "https://" }}</strong> with the next release.{% endif %}</p>
-            </div>
-            <div class="card">
                 <h3>Reporting: Query <span class="soon-tag">Soon</span></h3>
                 <p>Blend the results you already have into one report. <a href="/docs/compare/">Compare</a> is there today, in Beta.</p>
             </div>
@@ -284,7 +280,7 @@ permalink: /open-source/
             </div>
             <div class="card">
                 <h3>Contribute</h3>
-                <p>Pull requests are welcome under a contributor agreement. Start with <code>CONTRIBUTING.md</code> in the repository.</p>
+                <p>Pull requests are welcome under a contributor agreement. Start with <a href="{{ site.github_repo }}/blob/main/CONTRIBUTING.md"><code>CONTRIBUTING.md</code></a> in the repository.</p>
             </div>
             <div class="card">
                 <h3>Security</h3>

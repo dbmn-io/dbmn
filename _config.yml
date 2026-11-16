@@ -7,7 +7,7 @@ description: Migrate millions of records through any REST API — in your browse
 #   github_live  false = the landing pages say "on GitHub soon" and link to /open-source/
 #                true  = they link straight to github_repo
 github_repo: "https://github.com/dbmn-io/dobermann"
-github_live: false
+github_live: true
 url: https://dbmn.io
 baseurl: ""
 
