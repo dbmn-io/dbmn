@@ -184,9 +184,6 @@ permalink: /privacy.html
             <li>Extension version, VS Code version, OS platform</li>
         </ul>
 
-        <h3>Payment Data</h3>
-        <p>If you pay for a hosted service, payment processing is handled by <a href="https://stripe.com/privacy" target="_blank" rel="noopener">Stripe</a>. We do not store credit card numbers, CVVs, or full payment details. We receive only a Stripe customer ID and subscription status.</p>
-
         <div class="highlight-box">
             <strong>What we never collect:</strong>
             <ul style="margin-bottom: 0;">
@@ -210,9 +207,8 @@ permalink: /privacy.html
             <li><strong>Your account</strong> &mdash; Keep what you chose to store in it, and show you your usage</li>
             <li><strong>Product improvement</strong> &mdash; Understand which features are used to guide development</li>
             <li><strong>Support</strong> &mdash; Diagnose issues when you contact us</li>
-            <li><strong>Billing</strong> &mdash; Process payments for paid hosted services</li>
         </ul>
-        <p>We do not sell your data. We do not share your data with third parties except as required for service operation (Supabase for backend, Stripe for payments).</p>
+        <p>We do not sell your data. We do not share your data with third parties except as required for service operation (Supabase for the backend).</p>
 
         <h2>4. Data Storage &amp; Security</h2>
         <p>Dobermann uses three local storage layers for your API data and one cloud layer for your account. <strong>Your API data is never sent to us.</strong></p>
@@ -230,7 +226,7 @@ permalink: /privacy.html
         </div>
 
         <h3>4d. Cloud (Supabase) &mdash; Your Account</h3>
-        <p>Supabase (PostgreSQL on AWS) stores your account details, the usage counts, any paid subscription's status, and your endpoints, environments and Systems if you chose to keep them in your account. We use:</p>
+        <p>Supabase (PostgreSQL on AWS) stores your account details, the usage counts, and your endpoints, environments and Systems if you chose to keep them in your account. We use:</p>
         <ul>
             <li>Row-Level Security (RLS) policies to ensure users can only access their own data</li>
             <li>Encrypted connections (TLS) for all data in transit</li>
@@ -243,7 +239,6 @@ permalink: /privacy.html
             <li><strong>Account data</strong> &mdash; Retained while your account is active. Deleted within 30 days of account deletion request.</li>
             <li><strong>Usage tracking</strong> &mdash; Weekly counters retained for 12 months, then aggregated and anonymised.</li>
             <li><strong>Telemetry events</strong> &mdash; Daily aggregates retained for 12 months, then deleted.</li>
-            <li><strong>Payment records</strong> &mdash; Retained as required by tax and financial regulations.</li>
         </ul>
 
         <h2>6. Your Rights</h2>

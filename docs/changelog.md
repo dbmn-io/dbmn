@@ -3,6 +3,7 @@ title: Changelog
 layout: default
 nav_order: 99
 parent: Documentation
+search_exclude: true
 ---
 
 # Changelog
